@@ -3,23 +3,26 @@
     padding: 0;
     font-family: Arial;
     font-size: 13px;
+    box-sizing: border-box;
 }
 body{
-     background: snow;
+    background: snow;
     display: flex;
     justify-content: center;
-    box-sizing: border-box;
+
 }
 li{
     list-style-type: none;
 }
 .auction{
+
     width: 90%;
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
     box-shadow: 0 0 11px 0 rgba(0,0,0,0.75);
-
+    z-index: 99;
     background-image: url("../img/background.png");
+    max-width: 1024px;
 }
 header{
     display: flex;
@@ -107,6 +110,11 @@ nav p input{
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 20px 0;
+    cursor: pointer;
+}
+.hot_lot_wrapper:hover{
+    transform: scale(1.1);
+    transition: 100ms;
 }
 .cont_img{
     width: 100%;
@@ -147,20 +155,50 @@ footer{
 
 /*******************registration*******************/
 
-
-
-.test{
+.enter_form{
+    max-width: 960px;
+    margin: 150px auto;
+    display: none;
+    z-index: 100;
     width: 89%;
     height: 400px;
     position: fixed;
-    top: 150px;
-    left: 74px;
-    background: gray;
-    border-radius: 5px;
+    background-color: #f2f2f2;
+    border-radius: 1px;
+    overflow: auto;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
 }
-.dis_none{
+#dis_none{
     display: none;
 }
 .blur{
-    filter: blur(3px);
+    filter: blur(1px);
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/************************animation*************************/
+
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
 }
