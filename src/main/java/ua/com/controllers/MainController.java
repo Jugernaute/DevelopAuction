@@ -28,7 +28,7 @@ public class MainController {
 
    @GetMapping("/")
     public String home(){
-        return "homepage";
+        return "home";
     }
 
     @GetMapping("/save")
@@ -103,7 +103,7 @@ public class MainController {
 //            subCategory.setCommonCategory(one1);
 //        }
 
-        return "homepage";
+        return "home";
     }
 
 };
