@@ -19,11 +19,7 @@ public class Secundomir {
         TimerRun timerRun = new TimerRun();
         Timer timer=new Timer();
         timerRun.calculateTime(seconds);
-//        System.out.println(timerRun.getSec());
-//        final Timer timer = new Timer();
 
-
-//                final Timer timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
