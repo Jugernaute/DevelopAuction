@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Auction</title>
-    <link rel="stylesheet" href="style/style.css">
-    <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../js/script.js" defer></script>
 </head>
 <body>
     <div class="reg dis_none">
@@ -15,7 +15,7 @@
         <div class="auction">
             <header>
                 <div class="wrapper">
-                    <div class="logo"><img src="img/logo.png"></div>
+                    <div class="logo"><img src="../img/logo.png"></div>
                     <nav>
                         <p>Пошук: <input type="search"></p>
                         <ul class="menu">
@@ -40,7 +40,7 @@
             </section>
             <section class="hot_lot">
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
+                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
@@ -123,10 +123,10 @@
             <footer>
                 <div class="about"></div>
                 <div class="social">
-                    <img src="img/twitter.png" height="32" width="33" alt="twitter"/>
-                    <img src="img/google.png"height="32" width="31" alt="googe"/>
-                    <img src="img/facebook.png" height="31" width="31" alt="facebook"/>
-                    <img src="img/linkedin.png" height="31" width="31" alt="linkedin"/>
+                    <img src="../img/twitter.png" height="32" width="33" alt="twitter"/>
+                    <img src="../img/google.png" height="32" width="31" alt="googe"/>
+                    <img src="../img/facebook.png" height="31" width="31" alt="facebook"/>
+                    <img src="../img/linkedin.png" height="31" width="31" alt="linkedin"/>
                 </div>
                 <div class="addres"></div>
             </footer>

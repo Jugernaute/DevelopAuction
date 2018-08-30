@@ -33,6 +33,7 @@ public class MainController {
 
     @GetMapping("/save")
     String xxx(){
+
         CommonCategory pobutova_tehnika = new CommonCategory("Pobutova tehnika");
         CommonCategory electronics= new CommonCategory("Electronics");
         CommonCategory telephonia= new CommonCategory("Telephonia");
@@ -102,7 +103,7 @@ public class MainController {
 //            subCategory.setCommonCategory(one1);
 //        }
 
-        return "home";
+        return "homepage";
     }
 
 };
