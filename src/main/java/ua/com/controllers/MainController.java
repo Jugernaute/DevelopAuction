@@ -28,7 +28,7 @@ public class MainController {
 
    @GetMapping("/")
     public String home(){
-        return "home";
+        return "homepage";
     }
 
     @GetMapping("/save")
