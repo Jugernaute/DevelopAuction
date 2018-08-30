@@ -160,7 +160,7 @@ footer{
 
 .enter_form{
     max-width: 960px;
-    margin: 150px auto;
+    margin: 100px auto;
     display: none;
     z-index: 100;
     width: 89%;
@@ -263,7 +263,7 @@ input[type=submit] {
 .registration_form{
     max-width: 560px;
     display: none;
-    margin: 150px auto;
+    margin: 100px auto;
     z-index: 100;
     width: 89%;
     position: fixed;

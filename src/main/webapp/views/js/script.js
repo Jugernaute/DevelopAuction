@@ -16,10 +16,15 @@
         $('.auction').addClass('blur');
     });
 
+    $('.cancelbtn').on('click',function () {
+        regForm.css('display', 'none');
+        auction.removeClass('blur');
+    });
+
     $('.close').on('click',function () { // close login & registr form
         loginForm.css('display', 'none');
         regForm.css('display', 'none');
-        $('.auction').removeClass('blur');
+        auction.removeClass('blur');
     });
 
     $('.btn_alt_reg').on('click', function () { //open reg form from login form
