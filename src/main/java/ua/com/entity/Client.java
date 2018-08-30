@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-//        (exclude = {"subCategory"})
+        (exclude = {"productListOfClient"})
 @EqualsAndHashCode
 @Entity
 public class Client {
@@ -25,7 +25,7 @@ public class Client {
     @OneToMany(
             cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER,
-            mappedBy = "owner")
+            mappedBy = "client")
     private List<Product> productListOfClient = new ArrayList<Product>();
 
 

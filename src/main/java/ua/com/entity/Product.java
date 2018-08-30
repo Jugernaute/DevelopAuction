@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-//        (exclude = {"subCategory"})
+        (exclude = {"subCategory","client"})
 @EqualsAndHashCode
 
 @Entity
@@ -35,4 +35,7 @@ public class Product {
         cascade = CascadeType.MERGE)
         private SubCategory subCategory;
 
+    @ManyToOne(fetch = FetchType.LAZY,
+    cascade = CascadeType.MERGE)
+    private Client client;
 }
