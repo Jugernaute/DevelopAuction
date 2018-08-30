@@ -3,16 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Auction</title>
+    <script src="https://use.fontawesome.com/a3f7924682.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <script src="js/script.js" defer></script>
 </head>
 <body>
+
     <div class="enter_form">
-            <div class="test">
-                <div class="modal-content">
+        <div class="modal-content">
+            <div class="close_cont">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
             </div>
+            <form class="login_form" action="#">
+                <div class="col_login">
+                    <a href="#" class="fb btn">
+                        <i class="fa fa-facebook fa-fw"></i> Увійти за допомогою Facebook
+                    </a>
+                    <a href="#" class="twitter btn">
+                        <i class="fa fa-twitter fa-fw"></i> Увійти за допомогою Twitter
+                    </a>
+                    <a href="#" class="google btn">
+                        <i class="fa fa-google fa-fw"></i> Увійти за допомогою Google+
+                    </a>
+                </div>
+                <div class="line">
+                </div>
+                <div class="col_login">
+                    <input class="input_login" type="text" name="username" placeholder="Username" required>
+                    <input class="input_login" type="password" name="password" placeholder="Password" required>
+                    <input class="input_login" type="submit" value="Увійти">
+                </div>
+            </form>
+            <div class="login_bottom">
+                <div class="col_login">
+                    <a href="#" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
+                </div>
+                <div class="col_login">
+                    <a href="#" style="color:white" class="btn">Забули пароль?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="registration_form">
+        <div class="reg_container">
+            <form class="reg_form" action="#">
+                <div class="close_cont">
+                    <span class="close">&times;</span>
+                </div>
+                <h1>Реєстрація</h1>
+                <p>Заповніть форму щоб створити акаунт</p>
+                <hr>
+                <h3>Email</h3>
+                <input type="email" placeholder="Ведіть пошту" name="Email" required>
+                <h3>Пароль</h3>
+                <input type="password" placeholder="Введіть пароль" name="psw" required>
+                <h3>Повторіть пароль</h3>
+                <input type="password" placeholder="Повторіть пароль" name="psw-repeat" required>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
+                </label>
+                <p>Створюючи акаунт ви погоджуйтесь з <a href="#">правилами ресурсу</a>.</p>
+                <div class="reg_btn">
+                    <button type="button" class="cancelbtn">Скасувати</button>
+                    <button type="submit" class="signupbtn">Зареєструватися</button>
+                </div>
+            </form>
         </div>
     </div>
         <div class="auction">
