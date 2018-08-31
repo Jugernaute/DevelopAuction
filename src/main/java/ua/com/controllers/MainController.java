@@ -2,17 +2,17 @@ package ua.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.dao.CommonCategoryDao;
-//import ua.com.dao.ProductDao;
 import ua.com.dao.ProductDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.CommonCategory;
 import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
 
-import java.util.Collections;
+
 import java.util.List;
 
 @Controller
@@ -29,6 +29,13 @@ public class MainController {
    @GetMapping("/")
     public String home(){
         return "home";
+    }
+
+    @GetMapping("/commonCategory")
+    public  String common(Model model){
+        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
+        model.addAttribute("common", commonCategoryList);
+        return "list";
     }
 
     @GetMapping("/save")
