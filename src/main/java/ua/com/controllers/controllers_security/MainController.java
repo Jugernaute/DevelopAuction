@@ -40,20 +40,11 @@ public class MainController {
             return "home" ;
         }
 
-     @GetMapping("/go_login")
-         public String gologin (){
-             return "home" ;
-         }
-
     @GetMapping("/error")
         public String error (){
             return "error" ;
         }
 
-    @GetMapping("/registration")
-        public String registration (){
-            return "registration" ;
-        }
 
 
         @Autowired
