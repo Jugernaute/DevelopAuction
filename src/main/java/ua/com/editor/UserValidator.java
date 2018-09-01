@@ -1,22 +1,22 @@
-package ua.com.security.config;
+package ua.com.editor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ua.com.security.entity.Customer;
+import ua.com.entity.User;
 
 
 @Component
-public class CustomerValidator implements Validator {
+public class UserValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
-        return aClass.equals(Customer.class);
+        return aClass.equals(User.class);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        Customer customer = (Customer) o;
-        if(customer.getPassword().length()<3){
+        User user = (User) o;
+        if(user.getPassword().length()<3){
             errors.rejectValue("password","message_pw.length.error");
           }
     }

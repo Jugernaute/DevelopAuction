@@ -9,10 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import ua.com.security.config.CustomerValidator;
-import ua.com.security.editor.CustomerEditor;
-import ua.com.security.entity.Customer;
-import ua.com.security.services.CustomerService;
+import org.springframework.web.bind.annotation.RequestParam;
+import ua.com.editor.UserValidator;
+import ua.com.editor.UserEditor;
+import ua.com.entity.User;
+import ua.com.service.UserService;
 
 
 import java.util.List;
@@ -23,11 +24,6 @@ public class MainController {
 
     @Autowired
     private Environment environment;
-
-    @GetMapping("/login")
-        public String login  (){
-            return "home" ;
-        }
 
     @GetMapping("/")
         public String start (){
@@ -61,19 +57,18 @@ public class MainController {
 
 
         @Autowired
-        private CustomerService customerService;
-//        @Autowired
-//        private PasswordEncoder passwordEncoder;
+        private UserService userService;
         @Autowired
-        private CustomerEditor customerEditor;
+        private UserEditor userEditor;
         @Autowired
-        CustomerValidator customerValidator;
+        UserValidator userValidator;
     @PostMapping("/save")
-        public String  save (Customer customer,
+        public String  save (User user,
+//                             @RequestParam String psw_repeat,
                              BindingResult result,
                              Model model){
 
-        customerValidator.validate(customer,result);
+        userValidator.validate(user,result);
         if(result.hasErrors()){
             List<ObjectError> allErrors = result.getAllErrors();
             String errorMessage = "";
@@ -85,8 +80,8 @@ public class MainController {
 
             return "registration";
         }
-        customerEditor.setValue(customer);
-        customerService.save(customer);
+        userEditor.setValue(user);
+        userService.save(user);
         return "home";
         }
 

@@ -1,4 +1,4 @@
-package ua.com.security.entity;
+package ua.com.entity;
 
 public enum Role {
     ROLE_USER, ROLE_ADMIN

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories({"ua.com.dao","ua.com.security.dao"})
+@EnableJpaRepositories({"ua.com.dao"})
 @EnableTransactionManagement
 public class DataConfig {
 
@@ -46,10 +46,10 @@ public class DataConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(dataSource());
         factory.setJpaVendorAdapter(vendorAdapter());
-        factory.setPackagesToScan("ua.com.entity","ua.com.security.entity");
+        factory.setPackagesToScan("ua.com.entity");
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
         factory.setJpaProperties(properties);
         return factory;

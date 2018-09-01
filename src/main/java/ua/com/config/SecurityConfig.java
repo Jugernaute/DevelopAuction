@@ -1,4 +1,5 @@
-package ua.com.security.config;
+package ua.com.config;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,15 +16,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@EnableWebSecurity
 @ComponentScan("ua.com.*")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Qualifier("customerServiceImpl")
     @Autowired
-    UserDetailsService userDetailsService;
+    @Qualifier("userServiceImpl")
+    private UserDetailsService userDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -38,34 +39,45 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
+
     private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryConfigurer() {
-        return new InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder>();
+        return new InMemoryUserDetailsManagerConfigurer<>();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth,
-                                AuthenticationProvider provider) throws Exception {
-
-        inMemoryConfigurer()
-                .withUser("admin")
-                .password("{noop}admin")
-                .authorities("ADMIN")
-                .and()
-                .configure(auth);
+                                AuthenticationProvider provider)  {
+        try {
+            inMemoryConfigurer()
+                    .withUser("admin")
+                    .password("{noop}admin")
+                    .authorities("ADMIN")
+                    .and()
+                    .configure(auth);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         auth.authenticationProvider(provider);
 
     }
 
     @Override
-    public void configure(HttpSecurity security) throws Exception {
-    security.authorizeRequests()
-            .antMatchers("/").permitAll()
-            .antMatchers("/user/**").hasRole("user")
-            .antMatchers("/admin/**").hasRole("admin")
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .successForwardUrl("/ok")
-            .failureForwardUrl("/error");
-}
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .successForwardUrl("/ok")
+                .failureUrl("/login-error")
+                .and()
+                .logout()
+                .logoutRequestMatcher( new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .and()
+                .csrf().disable();
+    }
 }

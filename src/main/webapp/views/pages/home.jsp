@@ -15,7 +15,7 @@
             <div class="close_cont">
                 <span class="close">&times;</span>
             </div>
-            <form class="login_form" action="/login" method="get">
+            <form class="login_form" action="/login" method="post">
                 <div class="col_login">
                     <a href="#" class="fb btn">
                         <i class="fa fa-facebook fa-fw"></i> Увійти за допомогою Facebook
@@ -47,6 +47,9 @@
     </div>
     <div class="registration_form">
         <div class="reg_container">
+
+<%-- форма реєстрації--%>
+
             <form class="reg_form" action="save" method="post">
                 <div class="close_cont">
                     <span class="close">&times;</span>
@@ -55,12 +58,12 @@
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
                 <h3>Email</h3>
-                <%--<input type="email" placeholder="Ведіть пошту" name="Email" required>--%>
+                <input type="email" placeholder="Ще не працює!!" name="Email" required>
                 <input type="text" name="username" placeholder="username">
                 <h3>Пароль</h3>
                 <input type="password" placeholder="Введіть пароль" name="password" required>
                 <h3>Повторіть пароль</h3>
-                <%--<input type="password" placeholder="Повторіть пароль" name="psw-repeat" required>--%>
+                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -70,6 +73,8 @@
                     <button type="submit" class="signupbtn">Зареєструватися</button>
                 </div>
             </form>
+<%--end form registration--%>
+
         </div>
     </div>
         <div class="auction">
@@ -98,17 +103,7 @@
                     </ul>
                 </div>
             </section>
-            <%--//мої вставка форми для перевірки секюріті--%>
-            <%--<form action="registration" name="" method="get">--%>
-            <p> if you are have not login, you must be <a href="registration">registration</a></p>
-            <%--</form>--%>
-            <%--<p>if you are have not login, you must be  <a th:href="@{/registration}">registration</a> </p>--%>
-            <%--<form action="login" method="get">--%>
-                <%--<input name="username" placeholder="username">--%>
-                <%--<input name="password" placeholder="password">--%>
-                <%--<input type="submit" value="login">--%>
-            <%--</form>--%>
-            <%--// кінець вставки--%>
+
             <section class="hot_lot">
                 <div class="hot_lot_wrapper">
                     <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
