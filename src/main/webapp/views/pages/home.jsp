@@ -73,8 +73,11 @@
                 </c:if>
 
 
-                <%--<h3>Повторіть пароль</h3>--%>
-                <%--<input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>--%>
+                <h3>Повторіть пароль</h3>
+                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
+
+                <%--<p><c:out value="${psw_error}"/></p>--%>
+
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -97,7 +100,7 @@
                         <ul class="menu">
                             <li class="enter"><a href="#">Вхід</a></li>
                             <li class="registation"><a href="#registration">Реєстрація</a></li>
-                            <li class="sell"><a href="#">Продати</a></li>
+                            <li class="sell"><a href="goToSale">Продати</a></li>
                             <li class="favorits"><a href="#">Обрані</a></li>
                             <li class="cart"><a href="#">Корзина</a></li>
                         </ul>
