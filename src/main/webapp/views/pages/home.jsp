@@ -1,4 +1,5 @@
-<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -15,6 +16,8 @@
             <div class="close_cont">
                 <span class="close">&times;</span>
             </div>
+
+<%--форма логінації--%>
             <form class="login_form" action="/login" method="post">
                 <div class="col_login">
                     <a href="#" class="fb btn">
@@ -35,9 +38,10 @@
                     <input class="input_login" type="submit" value="Увійти">
                 </div>
             </form>
+<%--end form logination--%>
             <div class="login_bottom">
                 <div class="col_login">
-                    <a href="#" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
+                    <a name="registration" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
                 </div>
                 <div class="col_login">
                     <a href="#" style="color:white" class="btn">Забули пароль?</a>
@@ -46,6 +50,7 @@
         </div>
     </div>
     <div class="registration_form">
+        <%--<a name="registration"></a>--%>
         <div class="reg_container">
 
 <%-- форма реєстрації--%>
@@ -58,12 +63,18 @@
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
                 <h3>Email</h3>
-                <input type="email" placeholder="Ще не працює!!" name="Email" required>
+                <%--<input type="email" placeholder="Ще не працює!!" name="Email" required>--%>
                 <input type="text" name="username" placeholder="username">
                 <h3>Пароль</h3>
                 <input type="password" placeholder="Введіть пароль" name="password" required>
-                <h3>Повторіть пароль</h3>
-                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
+
+                <c:if test="${error!=null}">
+                   <p><c:out value="${error}"/></p>
+                </c:if>
+
+
+                <%--<h3>Повторіть пароль</h3>--%>
+                <%--<input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>--%>
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -85,7 +96,7 @@
                         <p>Пошук: <input type="search"></p>
                         <ul class="menu">
                             <li class="enter"><a href="#">Вхід</a></li>
-                            <li class="registation"><a href="#">Реєстрація</a></li>
+                            <li class="registation"><a href="#registration">Реєстрація</a></li>
                             <li class="sell"><a href="#">Продати</a></li>
                             <li class="favorits"><a href="#">Обрані</a></li>
                             <li class="cart"><a href="#">Корзина</a></li>
