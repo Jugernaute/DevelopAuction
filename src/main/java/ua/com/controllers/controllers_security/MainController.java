@@ -9,13 +9,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.editor.UserValidator;
 import ua.com.editor.UserEditor;
 import ua.com.entity.User;
 import ua.com.service.UserService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -53,6 +53,7 @@ public class MainController {
         private UserEditor userEditor;
         @Autowired
         UserValidator userValidator;
+
     @PostMapping("/save")
         public String  save (User user,
 //                             @RequestParam String psw_repeat,
@@ -65,12 +66,12 @@ public class MainController {
             String errorMessage = "";
             for (ObjectError error : allErrors) {
                 errorMessage+=" "+environment.getProperty(error.getCode());
-
             }
-              model.addAttribute("error",errorMessage);
+            model.addAttribute("error",errorMessage);
 
-            return "registration";
+            return "home";
         }
+
         userEditor.setValue(user);
         userService.save(user);
         return "home";
