@@ -40,6 +40,10 @@ public class MainController {
             return "home" ;
         }
 
+    @PostMapping("/home1")
+    public String home1 (){
+        return "home1" ;
+    }
     @GetMapping("/error")
         public String error (){
             return "error" ;
@@ -76,5 +80,11 @@ public class MainController {
         userService.save(user);
         return "home";
         }
+
+
+
+
+
+
 
 }

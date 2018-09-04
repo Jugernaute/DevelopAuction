@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-public class MainController {
+public class MainControllerTest {
 
     @Autowired
     SubCategoryDao subCategoryDao;
@@ -29,12 +29,12 @@ public class MainController {
     @Autowired
     AuctionDao auctionDao;
 
-    @GetMapping("/")
-    public String commonCategory(Model model) {
-        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
-        model.addAttribute("commonCategoryList", commonCategoryList);
-        return "home1";
-    }
+//    @GetMapping("/")
+//    public String commonCategory(Model model) {
+//        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
+//        model.addAttribute("commonCategoryList", commonCategoryList);
+//        return "home1";
+//    }
 
     @PostMapping("/saveCommonCategory")
     public String commonCategoryCreate(@RequestParam String nameCommonCategory) {
@@ -111,12 +111,13 @@ public class MainController {
     }
 
     @PostMapping("/joinBuyerToAuction")
-    public String changeProduct(@RequestParam int id_Client,
-                                @RequestParam int id_Auction) {
+    public String changeProduct(
+            @RequestParam int id_Client,
+            @RequestParam int id_Auction) {
         Auction auction = auctionDao.findOne(id_Auction);
         Client client = clientDao.findOne(id_Client);
         boolean add1 = auction.getByersList().add(client);
-        if (add1){
+        if (add1) {
             clientDao.save(client);
         } else System.out.println("error1");
         auctionDao.save(auction);

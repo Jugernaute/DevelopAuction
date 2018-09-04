@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString(exclude = {"subCategory", "auction", "client", "manufacturer"})
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"subCategory", "auction", "client", "manufacturer"})
 
 @Entity
 public class Product {

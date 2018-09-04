@@ -11,6 +11,13 @@
     <title>Title</title>
 </head>
 <body>
-you are login!!!!!!!!!!!
+<p>you are login!!!!!!!!!!!</p>
+<a href="home1.jsp">перехід на мою сторінку</a>
+
+<form action="/home1" method="post">
+    <input type="submit" value="go to home1">
+</form>
+
+
 </body>
 </html>

@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString(exclude = {"byersList", "product"})
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"byersList", "product"})
 
 @Entity
 public class Auction {
