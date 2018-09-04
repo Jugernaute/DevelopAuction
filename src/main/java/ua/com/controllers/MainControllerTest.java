@@ -118,9 +118,8 @@ public class MainControllerTest {
         Client client = clientDao.findOne(id_Client);
         boolean add1 = auction.getByersList().add(client);
         if (add1) {
-            clientDao.save(client);
+            auctionDao.save(auction);
         } else System.out.println("error1");
-        auctionDao.save(auction);
         boolean add = client.getAuctionList().add(auction);
         if (add) {
             clientDao.save(client);
