@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -14,7 +16,9 @@
             <div class="close_cont">
                 <span class="close">&times;</span>
             </div>
-            <form class="login_form" action="#">
+
+<%--форма логінації--%>
+            <form class="login_form" action="/login" method="post">
                 <div class="col_login">
                     <a href="#" class="fb btn">
                         <i class="fa fa-facebook fa-fw"></i> Увійти за допомогою Facebook
@@ -34,9 +38,10 @@
                     <input class="input_login" type="submit" value="Увійти">
                 </div>
             </form>
+<%--end form logination--%>
             <div class="login_bottom">
                 <div class="col_login">
-                    <a href="#" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
+                    <a name="registration" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
                 </div>
                 <div class="col_login">
                     <a href="#" style="color:white" class="btn">Забули пароль?</a>
@@ -45,8 +50,12 @@
         </div>
     </div>
     <div class="registration_form">
+        <%--<a name="registration"></a>--%>
         <div class="reg_container">
-            <form class="reg_form" action="#">
+
+<%-- форма реєстрації--%>
+
+            <form class="reg_form" action="save" method="post">
                 <div class="close_cont">
                     <span class="close">&times;</span>
                 </div>
@@ -54,11 +63,18 @@
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
                 <h3>Email</h3>
-                <input type="email" placeholder="Ведіть пошту" name="Email" required>
+                <%--<input type="email" placeholder="Ще не працює!!" name="Email" required>--%>
+                <input type="text" name="username" placeholder="username">
                 <h3>Пароль</h3>
-                <input type="password" placeholder="Введіть пароль" name="psw" required>
-                <h3>Повторіть пароль</h3>
-                <input type="password" placeholder="Повторіть пароль" name="psw-repeat" required>
+                <input type="password" placeholder="Введіть пароль" name="password" required>
+
+                <c:if test="${error!=null}">
+                   <p><c:out value="${error}"/></p>
+                </c:if>
+
+
+                <%--<h3>Повторіть пароль</h3>--%>
+                <%--<input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>--%>
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -68,6 +84,8 @@
                     <button type="submit" class="signupbtn">Зареєструватися</button>
                 </div>
             </form>
+<%--end form registration--%>
+
         </div>
     </div>
         <div class="auction">
@@ -78,7 +96,7 @@
                         <p>Пошук: <input type="search"></p>
                         <ul class="menu">
                             <li class="enter"><a href="#">Вхід</a></li>
-                            <li class="registation"><a href="#">Реєстрація</a></li>
+                            <li class="registation"><a href="#registration">Реєстрація</a></li>
                             <li class="sell"><a href="#">Продати</a></li>
                             <li class="favorits"><a href="#">Обрані</a></li>
                             <li class="cart"><a href="#">Корзина</a></li>
@@ -96,6 +114,7 @@
                     </ul>
                 </div>
             </section>
+
             <section class="hot_lot">
                 <div class="hot_lot_wrapper">
                     <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
