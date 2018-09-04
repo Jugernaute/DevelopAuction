@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString (exclude = {"subCategoryList"})
@@ -22,7 +23,9 @@ public class CommonCategory {
     }
 
     @OneToMany(
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
+            //persist, merge, refresh, - save Subcategory to base without problem
+            //detach - don't work
             cascade = CascadeType.PERSIST,
             mappedBy = "commonCategory"
     )

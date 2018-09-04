@@ -7,6 +7,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString  (exclude = {"commonCategory","products"})
@@ -22,11 +23,12 @@ public class SubCategory {
         this.nameSubCategory = nameSubCategory;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.EAGER,
+                //merge - work
                 cascade = {CascadeType.MERGE})
     private CommonCategory commonCategory;
 
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.EAGER,
     cascade = CascadeType.PERSIST,
     mappedBy = "subCategory")
     private List<Product>products;
