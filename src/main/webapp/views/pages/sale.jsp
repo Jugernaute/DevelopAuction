@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<%--<c:out value="${user}"></c:out>--%>
 <form action="createAuctionItem" method="post">
     <h1>Створення аукціонного товару</h1>
     <p><a href="goToCabinet">Перейти в кабінет</a> </p>

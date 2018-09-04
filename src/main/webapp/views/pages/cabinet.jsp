@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<c:set var="user" scope="session" value="${user}"></c:set>
 <h1>Сторінка Користувача</h1>
 <br>
 <p><a href="/goToSale">Продати</a></p>
