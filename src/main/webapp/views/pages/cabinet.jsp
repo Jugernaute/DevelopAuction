@@ -18,7 +18,7 @@
 
 <hr>
 <p>дані користувача :</p>
-<p> username :${user.getUsername}</p>
+<p> username :${user}</p>
 
 
 </body>

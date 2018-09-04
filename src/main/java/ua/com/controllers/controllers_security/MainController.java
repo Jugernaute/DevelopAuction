@@ -112,7 +112,7 @@ public class MainController {
                               Model model){
             UserDetails userDetails = userService.loadUserByUsername(username);
 //            String username1 = userDetails.getUsername();
-            model.addAttribute("user",userDetails);
+            model.addAttribute("user",userDetails.getUsername());
 
             return "cabinet" ;
             }
