@@ -27,4 +27,5 @@ public class UserServiceImpl implements UserService {
     public UserDetails findByUserId(int id) {
         return userDao.findByUserId(id);
     }
+
 }

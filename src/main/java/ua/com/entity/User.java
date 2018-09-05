@@ -19,9 +19,11 @@ public class User implements UserDetails {
     private int userId;
     @Column(unique = true)
     private String username;
+    private String userNick;
     private String email;
     private String password;
     private String phone;
+
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
@@ -48,7 +50,6 @@ public class User implements UserDetails {
         return isAccountNonLocked;
     }
 
-
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
@@ -59,6 +60,13 @@ public class User implements UserDetails {
         return isEnabled;
     }
 
+    public String getUserNick() {
+        return userNick;
+    }
+
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
+    }
 
     public Role getRole() {
         return role;
