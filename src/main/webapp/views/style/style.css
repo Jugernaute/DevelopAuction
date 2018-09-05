@@ -55,6 +55,7 @@ nav{
 }
 .menu li a{
     text-decoration: none;
+    color: black;
 }
 .menu li a:hover{
     border-bottom: 2px solid #EA6C25;
@@ -94,6 +95,7 @@ nav p input{
 .products_list li a{
     text-transform: uppercase;
     text-decoration: none;
+    color: black;
 }
 .products_list li a:hover{
     border-bottom: 2px solid #EA6C25;

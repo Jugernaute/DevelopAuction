@@ -27,6 +27,10 @@
         regForm.css('display', 'none');
         auction.removeClass('blur');
         $(this).parent().parent().find('input').val('');
+        $(this).parent().parent().find('#psw-must-have').css({
+            'font-weight': 'normal',
+            'color' : 'black'
+        })
     });
 
     $('.btn_alt_reg').on('click', function () { //open reg form from login form
