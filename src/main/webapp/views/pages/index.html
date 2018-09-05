@@ -31,7 +31,10 @@
                 <div class="col_login">
                     <input class="input_login" type="text" name="username" placeholder="Username" required>
                     <input class="input_login" type="password" name="password" placeholder="Password" required>
-                    <input class="input_login" type="submit" value="Увійти">
+                    <label>
+                        <input type="checkbox" name="remember" style="margin-bottom:15px"> Запам’ятати
+                    </label>
+                    <button class="input_login" type="submit" value="Увійти">Увійти</button>
                 </div>
             </form>
             <div class="login_bottom">
@@ -60,14 +63,16 @@
                 <h3>Повторіть пароль</h3>
                 <input type="password" placeholder="Повторіть пароль" name="psw-repeat" required>
                 <label>
-                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
+                    <input type="checkbox" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
-                <p>Створюючи акаунт ви погоджуйтесь з <a href="#">правилами ресурсу</a>.</p>
+                <p id="psw-must-have">Пароль повинен містити:<br> Мінімум 1 велику букву, 1 маленьку букву ,1 цифру, від 6 до 20 символів</p>
+                <p><b>Створюючи акаунт ви погоджуйтесь з <a href="#">правилами ресурсу</a>.</b></p>
                 <div class="reg_btn">
                     <button type="button" class="cancelbtn">Скасувати</button>
                     <button type="submit" class="signupbtn">Зареєструватися</button>
                 </div>
             </form>
+
         </div>
     </div>
         <div class="auction">

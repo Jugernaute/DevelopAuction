@@ -207,7 +207,7 @@ footer{
     margin: auto;
     padding: 0 50px;
 }
-input[type=submit] {
+button[type=submit] {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
@@ -326,8 +326,6 @@ hr {
 .reg_btn button:hover {
     opacity:1;
 }
-
-
 
 
 
