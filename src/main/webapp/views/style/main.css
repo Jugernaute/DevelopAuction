@@ -149,11 +149,22 @@ footer{
     display: flex;
     align-items: center;
 }
-.social img{
+#facebook,
+#google,
+#twitter,
+#linkedin{
+    height: 32px;
     margin: 0 5px;
     cursor: pointer;
-    border-radius: 50%;
+    overflow: hidden;
 }
+#facebook img,
+#google img,
+#twitter img,
+#linkedin img{
+    margin-top: -38px;
+}
+
 .social img:active{
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
 }
@@ -265,7 +276,7 @@ button[type=submit] {
 .registration_form{
     max-width: 560px;
     display: none;
-    margin: 100px auto;
+    margin: 50px auto;
     z-index: 100;
     width: 89%;
     position: fixed;
