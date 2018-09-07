@@ -19,18 +19,17 @@ public class User implements UserDetails {
     private int userId;
     @Column(unique = true)
     private String username;
-    private String userNick;
     private String email;
     private String password;
     private String phone;
-
+    private String randomKey;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
+    private boolean isEnabled = false;
 
 
     @Override
@@ -38,6 +37,14 @@ public class User implements UserDetails {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(role.name()));
         return authorities;
+    }
+
+    public String getRandomKey() {
+        return randomKey;
+    }
+
+    public void setRandomKey(String randomKey) {
+        this.randomKey = randomKey;
     }
 
     @Override
@@ -58,14 +65,6 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
-    }
-
-    public String getUserNick() {
-        return userNick;
-    }
-
-    public void setUserNick(String userNick) {
-        this.userNick = userNick;
     }
 
     public Role getRole() {

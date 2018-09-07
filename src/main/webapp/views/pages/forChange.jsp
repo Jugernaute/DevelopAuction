@@ -13,7 +13,7 @@
 </head>
 <body>
 <c:set var="userNick" scope="session" value="${userNick}"></c:set>
-<h1>Користувач - ${user}</h1>
+<h1>Користувач - ${user.getUsername()}</h1>
 <p>повернутись в особистий <a href="goToCabinet">кабінет</a></p>
 <hr>
 <p>Ваш текущий логин: ${userNick}</p>

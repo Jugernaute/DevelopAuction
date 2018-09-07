@@ -63,7 +63,7 @@
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
                 <h3>Email</h3>
-                <%--<input type="email" placeholder="Ще не працює!!" name="Email" required>--%>
+                <input type="email" placeholder="email" name="email" required>
                 <input type="text" name="username" placeholder="username">
                 <h3>Пароль</h3>
                 <input type="password" placeholder="Введіть пароль" name="password" required>

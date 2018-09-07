@@ -31,14 +31,34 @@
 <ol>
     <li>Настройки учетной записи</li>
     <ul>
-        <li>Логін(нік).......................  <a href="change_Login">(змінити)</a> </li>
-        <li>Е-мейл...........................  <a href="change_Email">(змінити)</a></li>
-        <li>Пароль...........................  <a href="change_Password">(змінити)</a></li>
-        <li>Сторінка про мене................  <a href="change_Login">(змінити)</a></li>
-        <li>Телефон..........................  <a href="change_Phone">(змінити)</a></li>
+        <li>Логін(нік).......................${user.getUsername()}  </li>
+        <li>Е-мейл...........................${user.getEmail()}  </li>
+        <form action="change_Email" method="post">
+            <input type="email" placeholder="new Email" name="email" required>
+            <button type="submit" class="save">save change</button>
+        </form>
+        <li>Пароль...........................</li>
+        <form action="change_Password" method="post">
+            <input type="password" placeholder="old password" name="password" required><br>
+            <input type="password" placeholder="new password" name="password" required><br>
+            <input type="password" placeholder="new password" name="password" required><br>
+            <button type="submit" class="save">save change</button>
+        </form>
+        <li>Сторінка про мене................  </li>
+            <form action="change_AboutMe" method="post">
+                <input type="text" placeholder="не працює ще" name="description" required>
+                <button type="submit" class="save">save change</button>
+            </form>
+        <li>Телефон.......................... ${user.getPhone()} </li>
+            <form action="change_Phone" method="post">
+                <input type="text" placeholder="new phone" name="phone" required>
+                <button type="submit" class="save">save change</button>
+            </form>
     </ul>
 </ol>
+<%--<div class="rest" style="width: 200px; height: 50px; border: solid #170c0b">--%>
 
+</div>
 
 </body>
 </html>

@@ -24,8 +24,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails findByUserId(int id) {
+    public User findByUserId(int id) {
         return userDao.findByUserId(id);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    @Override
+    public User findByRandomKey(String randomKey) {
+        return userDao.findByRandomKey(randomKey);
+    }
+
 
 }
