@@ -43,32 +43,29 @@ public class ControllerChange {
     }
 
     @PostMapping("/change_Password")
-    private String changePassword(@RequestParam String oldPassword,
+    private String changePassword( User user,
+            @RequestParam String oldPassword,
                                   @RequestParam String newPassword,
                                   @RequestParam String repeatPassword,
-                                  Model model
-                                  /*BindingResult result*/){
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.findByUsername(name);
-        System.out.println(user);
-//        userValidator.validatePasswordChange(user, oldPassword, result);
-//        if(result.hasErrors()){
-//            List<ObjectError> allErrors = result.getAllErrors();
-//            String errors="";
-//            System.out.println(errors);
-//            for (ObjectError error : allErrors) {
-//               errors+=" "+environment.getProperty(error.getCode());
-//            }
-//            model.addAttribute("errors",errors);
-//        }
+                                  Model model,
+                                  BindingResult result){
+//        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+//        User user = userService.findByUsername(name);
+        System.out.println(user.getUsername());
 
-//        userValidator.validate(user,result);
-        if(newPassword.equals(repeatPassword) && oldPassword.equals(user.getPassword())){
-            user.setPassword(newPassword);
-        }else{
+        if(oldPassword.equals(user.getPassword())){
+            userValidator.validate(user, result);
+            if(result.hasErrors()){
+                List<ObjectError> allErrors = result.getAllErrors();
+                String errors="";
+                for (ObjectError error : allErrors) {
+                    errors+=" "+environment.getProperty(error.getCode());
+                }
+                model.addAttribute("errors",errors);
+            }
+        } else{
             model.addAttribute("errors","your password isn't validate");
         }
-
         model.addAttribute("user",user);
         return "cabinet";
     }
