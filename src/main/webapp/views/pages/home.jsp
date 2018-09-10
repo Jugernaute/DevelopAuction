@@ -41,7 +41,7 @@
 <%--end form logination--%>
             <div class="login_bottom">
                 <div class="col_login">
-                    <a name="registration" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
+                    <a href="#registration" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
                 </div>
                 <div class="col_login">
                     <a href="#" style="color:white" class="btn">Забули пароль?</a>
@@ -49,12 +49,10 @@
             </div>
         </div>
     </div>
+
+    <%-- форма реєстрації--%>
     <div class="registration_form">
-        <%--<a name="registration"></a>--%>
         <div class="reg_container">
-
-<%-- форма реєстрації--%>
-
             <form class="reg_form" action="save" method="post">
                 <div class="close_cont">
                     <span class="close">&times;</span>
@@ -72,11 +70,8 @@
                    <p><c:out value="${error}"/></p>
                 </c:if>
 
-
                 <h3>Повторіть пароль</h3>
                 <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
-
-
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -86,10 +81,12 @@
                     <button type="submit" class="signupbtn">Зареєструватися</button>
                 </div>
             </form>
-<%--end form registration--%>
-
         </div>
     </div>
+
+    <%--end form registration--%>
+
+
         <div class="auction">
             <header>
                 <div class="wrapper">

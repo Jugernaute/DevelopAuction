@@ -26,9 +26,6 @@ import ua.com.method.Mail;
 import ua.com.method.RandomStr;
 import ua.com.service.UserService;
 
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -74,7 +71,7 @@ public class MainController {
     @Autowired
         private UserEditor userEditor;
     @Autowired
-        UserValidator userValidator;
+        private UserValidator userValidator;
     @Autowired
         private AuctionItemsDao auctionItemsDao;
     @Autowired

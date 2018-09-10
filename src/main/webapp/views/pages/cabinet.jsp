@@ -8,6 +8,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<script src="https://use.fontawesome.com/a3f7924682.js"></script>
+<link rel="stylesheet" href="../style/stylePasha.css">
+<script src="../js/script.js" defer></script>
 <head>
     <title>Title</title>
 </head>
@@ -39,11 +42,36 @@
         </form>
         <li>Пароль...........................</li>
         <form action="change_Password" method="post">
-            <input type="password" placeholder="old password" name="password" required><br>
-            <input type="password" placeholder="new password" name="password" required><br>
-            <input type="password" placeholder="new password" name="password" required><br>
+            <input type="password" placeholder="old password" name="oldPassword" required><br>
+            <input type="password" placeholder="new password" name="newPassword" required><br>
+            <input type="password" placeholder="new password" name="repeatPassword" required><br>
+            <c:forEach items="${errors}" var="item">
+                ${item}<br>
+            </c:forEach>
             <button type="submit" class="save">save change</button>
         </form>
+
+
+        <div class = "forgot_div">
+            <p ><a href="#">forgot password?</a> </p>
+        </div>
+        <p>message will be send to your email, than enter the key from message </p>
+        <form action="sendKey"  method="post">
+            <button type="submit" id="sendKey">send key</button>
+        </form>
+        <%--<div class="forgot_psw_css" >--%>
+        <form action="forgot_psw" class="enterKeyfromEmail_inp" method="post">
+            <input type="text"  placeholder="enter key" name="key" required>
+            <button type="submit" >enter</button>
+        </form>
+        <%--</div>--%>
+        ${key}
+        <form action="enterKey" method="post">
+            <input type="text" name="key" placeholder="enter key" required>
+            <input type="submit" value="enter">
+        </form>
+
+
         <li>Сторінка про мене................  </li>
             <form action="change_AboutMe" method="post">
                 <input type="text" placeholder="не працює ще" name="description" required>
@@ -59,6 +87,6 @@
 <%--<div class="rest" style="width: 200px; height: 50px; border: solid #170c0b">--%>
 
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
