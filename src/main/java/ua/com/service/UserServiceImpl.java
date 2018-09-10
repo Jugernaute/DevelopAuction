@@ -22,4 +22,21 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         userDao.save(user);
     }
+
+    @Override
+    public User findByUserId(int id) {
+        return userDao.findByUserId(id);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    @Override
+    public User findByRandomKey(String randomKey) {
+        return userDao.findByRandomKey(randomKey);
+    }
+
+
 }

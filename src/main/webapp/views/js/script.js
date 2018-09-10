@@ -4,6 +4,9 @@
     let regForm = $('.registration_form');
     let auction = $('.auction');
 
+
+
+
     $('.enter').on('click', function (e) {// animation for login form
         loginForm.css('display', 'block');
         regForm.css('display', 'none');
@@ -32,7 +35,33 @@
         regForm.css('display', 'block');
     })
 
+    // pasha change
 
+    // let forgot = $('.forgot_psw_css');
+    // let enterKey = $('.enterKeyfromEmail_inp');
+    // let enterKey_btn = $('.enterKeyfromEmail_btn');
+    //
+    // $('.forgot_div').on('click', function () { // for change password if forgot
+    //     forgot.css('display','block')
+    // });
+    // $('.sendKey').on('click', function () {
+    //     enterKey.css('display', 'block');
+    //     // enterKey_btn.css('display', 'block');
+    // });
 
-
+    // $('.sendKey').on('click', function (){
+    //         $.ajax({
+    //             url: 'http://localhost:8080/sendKey' ,
+    //             type: 'POST',
+    //             // data:
+    //
+    //             success: function(result){
+    //                 console.log("ok all")
+    //             },
+    //             error: function (error) {
+    //                 console.log("jjhk")
+    //             }
+    //         });
+    //
+    //     });
 

@@ -1,48 +1,32 @@
 //package ua.com.controllers.controllers_security;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.PropertySource;
-//import org.springframework.core.env.Environment;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.validation.ObjectError;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RestController;
-//import ua.com.dao.UserDao;
-//import ua.com.editor.UserValidator;
-//import ua.com.entity.User;
 //
-//import java.util.List;
-//@PropertySource("classpath:validation.properties")
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.*;
+//import ua.com.entity.User;
+//import ua.com.method.Mail;
+//import ua.com.method.RandomStr;
+//import ua.com.service.UserService;
+//
 //@RestController
 //public class MyRestController {
+//    @Autowired
+//    private UserService userService;
+//    @Autowired
+//    private Mail mail;
 //
+//    @PostMapping("/sendKey")
+//    public String userSave(Model model) {
+//        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+//        String s = RandomStr.randomKey();
+//        User user = userService.findByUsername(name);
+//        user.setRandomKey(s);
+//        String email = user.getEmail();
+//        String subjectForgotPassword = "Підтвердження дій для зміни пароля";
+//        String text = "Your key for change password: "+ s;
+//        mail.sendMail(email,subjectForgotPassword,text);
+//        return "cabinet";
+//    }
 //
-//        @Autowired
-//        public Environment environment;
-//        @Autowired
-//        public UserDao userDao;
-//        @Autowired
-//        public UserValidator userValidator;
-//
-//
-//        @PostMapping("/Save")
-//        public List<User> userSave (@RequestBody User user,
-//                                    BindingResult result,
-//                                    Model model){
-//            userValidator.validate(user,result);
-//            String errors="";
-//            if (result.hasErrors()) {
-//                List<ObjectError> allErrors = result.getAllErrors();
-//                for (ObjectError error : allErrors) {
-//                    errors+=" "+environment.getProperty(error.getCode());
-//                    System.out.println(errors);
-//                }
-//                model.addAttribute("errors",errors);
-//                return userDao.findAll();
-//            }
-//            userDao.save(user);
-//            return userDao.findAll();
-//        }
 //}

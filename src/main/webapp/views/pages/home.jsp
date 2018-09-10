@@ -41,7 +41,7 @@
 <%--end form logination--%>
             <div class="login_bottom">
                 <div class="col_login">
-                    <a name="registration" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
+                    <a href="#registration" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
                 </div>
                 <div class="col_login">
                     <a href="#" style="color:white" class="btn">Забули пароль?</a>
@@ -49,12 +49,10 @@
             </div>
         </div>
     </div>
+
+    <%-- форма реєстрації--%>
     <div class="registration_form">
-        <%--<a name="registration"></a>--%>
         <div class="reg_container">
-
-<%-- форма реєстрації--%>
-
             <form class="reg_form" action="save" method="post">
                 <div class="close_cont">
                     <span class="close">&times;</span>
@@ -63,7 +61,7 @@
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
                 <h3>Email</h3>
-                <%--<input type="email" placeholder="Ще не працює!!" name="Email" required>--%>
+                <input type="email" placeholder="email" name="email" required>
                 <input type="text" name="username" placeholder="username">
                 <h3>Пароль</h3>
                 <input type="password" placeholder="Введіть пароль" name="password" required>
@@ -72,9 +70,8 @@
                    <p><c:out value="${error}"/></p>
                 </c:if>
 
-
-                <%--<h3>Повторіть пароль</h3>--%>
-                <%--<input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>--%>
+                <h3>Повторіть пароль</h3>
+                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -84,10 +81,12 @@
                     <button type="submit" class="signupbtn">Зареєструватися</button>
                 </div>
             </form>
-<%--end form registration--%>
-
         </div>
     </div>
+
+    <%--end form registration--%>
+
+
         <div class="auction">
             <header>
                 <div class="wrapper">
@@ -97,7 +96,7 @@
                         <ul class="menu">
                             <li class="enter"><a href="#">Вхід</a></li>
                             <li class="registation"><a href="#registration">Реєстрація</a></li>
-                            <li class="sell"><a href="#">Продати</a></li>
+                            <li class="sell"><a href="goToSale">Продати</a></li>
                             <li class="favorits"><a href="#">Обрані</a></li>
                             <li class="cart"><a href="#">Корзина</a></li>
                         </ul>

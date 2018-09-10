@@ -5,6 +5,10 @@ import ua.com.entity.User;
 
 
 public interface UserService extends UserDetailsService {
+
     void save(User user);
+    User findByUserId(int userId);
+    User findByUsername (String username);
+    User findByRandomKey(String randomKey);
 
     }

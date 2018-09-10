@@ -1,13 +1,16 @@
 package ua.com.entity;
 
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ua.com.entity.Enums.Role;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 public class User implements UserDetails {
@@ -19,12 +22,14 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private String phone;
+    private String randomKey;
+
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
+    private boolean isEnabled = false;
 
 
     @Override
@@ -32,6 +37,14 @@ public class User implements UserDetails {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(role.name()));
         return authorities;
+    }
+
+    public String getRandomKey() {
+        return randomKey;
+    }
+
+    public void setRandomKey(String randomKey) {
+        this.randomKey = randomKey;
     }
 
     @Override
@@ -44,7 +57,6 @@ public class User implements UserDetails {
         return isAccountNonLocked;
     }
 
-
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
@@ -54,7 +66,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
-
 
     public Role getRole() {
         return role;

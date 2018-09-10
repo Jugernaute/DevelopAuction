@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
   User: User
-  Date: 31.08.2018
+  Date: 05.09.2018
   Time: 20:58
   To change this template use File | Settings | File Templates.
 --%>
@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>Вибачте, але ви не зареєстровані</p>
+ <p>Ви повинні перейти по ссилці реєстрації з вашої пошти</p>
 </body>
 </html>
