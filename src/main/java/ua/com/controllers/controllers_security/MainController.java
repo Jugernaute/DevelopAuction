@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.editor.UserValidator;
 import ua.com.editor.UserEditor;
-import ua.com.entity.User;
-import ua.com.service.UserService;
+import ua.com.entity.*;
+import ua.com.service.user.UserService;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -76,5 +75,13 @@ public class MainController {
         userService.save(user);
         return "home";
         }
+
+
+        /////////////////////////////////////
+
+    @GetMapping("/save")
+    public String home(Model model){
+        return "save";
+    }
 
 }

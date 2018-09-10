@@ -1,4 +1,4 @@
-package ua.com.service;
+package ua.com.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,5 +21,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         userDao.save(user);
+    }
+
+    @Override
+    public void deleteBuId(int id) {
+        userDao.delete(id);
     }
 }

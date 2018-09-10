@@ -26,7 +26,7 @@ public class DataConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setPassword("Andreus110576");
         dataSource.setUrl("jdbc:mysql://localhost:3306/auction?createDatabaseIfNotExist=true");
         return dataSource;
 
@@ -49,7 +49,7 @@ public class DataConfig {
         factory.setPackagesToScan("ua.com.entity");
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
 
         factory.setJpaProperties(properties);
         return factory;
