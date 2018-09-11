@@ -137,37 +137,6 @@ nav input{
     margin: 10px 0 5px 0;
 }
 
-/*************footer*******************/
-
-footer{
-    display: flex;
-    justify-content: space-between;
-    background: #CFCFCF;
-    height: 70px;
-}
-.social{
-    display: flex;
-    align-items: center;
-}
-#facebook,
-#google,
-#twitter,
-#linkedin{
-    height: 32px;
-    margin: 0 5px;
-    cursor: pointer;
-    overflow: hidden;
-}
-#facebook img,
-#google img,
-#twitter img,
-#linkedin img{
-    margin-top: -38px;
-}
-
-.social img:active{
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
-}
 
 /*******************Enter*******************/
 
@@ -276,7 +245,7 @@ button[type=submit] {
 .registration_form{
     max-width: 560px;
     display: none;
-    margin: 50px auto;
+    margin: 10px auto;
     z-index: 100;
     width: 89%;
     position: fixed;
@@ -303,7 +272,7 @@ button[type=submit] {
 .reg_container form h1{
     font-size: 26px;
 }
-input[type=email], input[type=password]{
+input[type=email], input[type=password], input[type=text]{
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -340,7 +309,37 @@ hr {
     opacity:1;
 }
 
+/*************footer*******************/
 
+footer{
+    display: flex;
+    justify-content: space-between;
+    background: #CFCFCF;
+    height: 70px;
+}
+.social{
+    display: flex;
+    align-items: center;
+}
+#facebook,
+#google,
+#twitter,
+#linkedin{
+    height: 32px;
+    margin: 0 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+#facebook img,
+#google img,
+#twitter img,
+#linkedin img{
+    margin-top: -38px;
+}
+
+.social img:active{
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+}
 
 
 
