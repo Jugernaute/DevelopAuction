@@ -2,7 +2,7 @@
 
     let loginForm = $('.enter_form');
     let regForm = $('.registration_form');
-    let auction = $('.auction');
+    let auction = $('.lot');
 
     $('.enter').on('click', function (e) {// animation for login form
         loginForm.css('display', 'block');
@@ -13,7 +13,7 @@
     $('.registation').on('click', function () { //animation for registaration form
         regForm.css('display', 'block');
         loginForm.css('display', 'none');
-        $('.auction').addClass('blur');
+        $('.lot').addClass('blur');
     });
 
     $('.cancelbtn').on('click',function () {

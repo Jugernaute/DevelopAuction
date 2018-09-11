@@ -2,6 +2,6 @@ package ua.com.entity;
 
 
 
-public enum TypeClient {
+public enum TypeUser {
     SELLER, BUYER
 }

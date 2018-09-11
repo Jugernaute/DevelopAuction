@@ -18,7 +18,6 @@ public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Manufacturer;
-
     private String nameManufacturer;
 
     @OneToMany(fetch = FetchType.LAZY,
@@ -29,8 +28,4 @@ public class Manufacturer {
     public Manufacturer(String nameManufacturer) {
         this.nameManufacturer = nameManufacturer;
     }
-
-
-
-
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.*;
 //import ua.com.dao.ProductDao;
 import ua.com.entity.*;
+import ua.com.service.UserService;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class MainControllerTest {
@@ -25,9 +25,19 @@ public class MainControllerTest {
     @Autowired
     ManufacturerDao manufacturerDao;
     @Autowired
-    ClientDao clientDao;
+    LotDao lotDao;
     @Autowired
-    AuctionDao auctionDao;
+    BetDao betDao;
+    @Autowired
+    UserDao userDao;
+    @Autowired
+    DeliveryDao deliveryDao;
+    @Autowired
+    PaymentDao paymentDao;
+    @Autowired
+    private UserService userService;
+
+
 
 //    @GetMapping("/")
 //    public String commonCategory(Model model) {
@@ -43,15 +53,16 @@ public class MainControllerTest {
         return "home1";
     }
 
-    @GetMapping("/home1")
-    public String comCatList(Model model) {
-        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
-        model.addAttribute("commonCategoryList", commonCategoryList);
-        return "home1";
-    }
+//    @GetMapping("/home1")
+//    public String comCatList(Model model) {
+//        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
+//        model.addAttribute("commonCategoryList", commonCategoryList);
+//        return "home1";
+//    }
 
     @PostMapping("/saveSubCategory")
-    public String subCategoryCreate(@RequestParam String nameSubCategory, @RequestParam int id_CommonCategory) {
+    public String subCategoryCreate(@RequestParam String nameSubCategory,
+                                    @RequestParam int id_CommonCategory) {
         CommonCategory commonCategory = commonCategoryDao.findOne(id_CommonCategory);
         SubCategory subCategory = new SubCategory(nameSubCategory);
         subCategory.setCommonCategory(commonCategory);
@@ -66,12 +77,11 @@ public class MainControllerTest {
         return "home1";
     }
 
-    @PostMapping("/saveClient")
-    public String createClient(@RequestParam String nameClient,
-                               @RequestParam String surNameClient,
-                               @RequestParam String emailClient) {
-        Client client = new Client(nameClient, surNameClient, emailClient);
-        clientDao.save(client);
+    @PostMapping("/saveUser1")
+    public String createUser(@RequestParam String username,
+                               @RequestParam int userBalance) {
+        User user = new User(username, userBalance);
+        userService.save(user);
         return "home1";
     }
 
@@ -79,53 +89,87 @@ public class MainControllerTest {
     @PostMapping("/saveProduct")
     public String createProduct(@RequestParam String nameProduct,
                                 @RequestParam String modelProduct,
-                                @RequestParam int priceProduct,
                                 @RequestParam String descriptionProduct,
                                 @RequestParam int id_SubCategory,
                                 @RequestParam int id_Manufacturer,
-                                @RequestParam int id_Client) {
-        Product product = new Product(nameProduct, modelProduct, descriptionProduct, priceProduct);
+                                @RequestParam int id_User) {
         SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
         Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
-        System.out.println(manufacturer);
-        Client clientOwner = clientDao.findOne(id_Client);
-        clientOwner.getTypeOfClients().add(TypeClient.SELLER);
-        clientDao.save(clientOwner);
-        product.setSubCategory(subCategory);
-        product.setManufacturer(manufacturer);
-        product.setClient(clientOwner);
+        User user = userDao.findOne(id_User);
+        Product product = new Product(nameProduct, modelProduct,
+                descriptionProduct, subCategory, user, manufacturer);
         productDao.save(product);
+
         return "home1";
     }
 
-    @PostMapping("/createAuction")
-    public String createAction(@RequestParam String dataStartAuction,
-                               @RequestParam String dataCloseAuction,
-                               @RequestParam int id_Product) {
+    @PostMapping("/createDelivery")
+    public String createDelivery(@RequestParam String methodDelivery) {
+        Delivery delivery = new Delivery(methodDelivery);
+        deliveryDao.save(delivery);
+        return "home1";
+    }
+
+    @PostMapping("/createPayment")
+    public String createPayment(@RequestParam String methodPayment) {
+        Payment payment = new Payment(methodPayment);
+        paymentDao.save(payment);
+        return "home1";
+    }
+
+    @PostMapping("/createLot")
+    public String createAction(@RequestParam String dataStartLot,
+                               @RequestParam String dataEndLot,
+                               @RequestParam int id_Product,
+                               @RequestParam int startPrice,
+                               @RequestParam int hotPrice,
+                               @RequestParam int idDelivery,
+                               @RequestParam int idPayment) {
         Product product = productDao.findOne(id_Product);
-        Auction auction = new Auction(dataStartAuction, dataCloseAuction, product);
-        auctionDao.save(auction);
-        product.setAuction(auction);
-        productDao.save(product);
+        Delivery delivery = deliveryDao.findOne(idDelivery);
+        Payment payment = paymentDao.findOne(idPayment);
+        Lot lot = new Lot(dataStartLot, dataEndLot, startPrice, hotPrice);
+        lot.setDelivery(delivery);
+        lot.setPayment(payment);
+        lot.setProduct(product);
+        lotDao.save(lot);
         return "home1";
     }
 
-    @PostMapping("/joinBuyerToAuction")
-    public String changeProduct(
-            @RequestParam int id_Client,
-            @RequestParam int id_Auction) {
-        Auction auction = auctionDao.findOne(id_Auction);
-        Client client = clientDao.findOne(id_Client);
-        boolean add1 = auction.getByersList().add(client);
-        if (add1) {
-            auctionDao.save(auction);
-        } else System.out.println("error1");
-        boolean add = client.getAuctionList().add(auction);
-        if (add) {
-            clientDao.save(client);
-        } else System.out.println("error");
+    @PostMapping("/createBet")
+    public String createBet(@RequestParam int sum_of_the_bet,
+                            @RequestParam int id_Lot,
+                            @RequestParam int id_User) {
+        Bet bet = new Bet(sum_of_the_bet);
+        Lot lot = lotDao.getOne(id_Lot);
+        User user = userDao.getOne(id_User);
+        bet.setUser(user);
+        bet.setLot(lot);
+        betDao.save(bet);
         return "home1";
+
     }
+
+
+
+
+
+//    @PostMapping("/joinBuyerToAuction")
+//    public String changeProduct(
+//            @RequestParam int id_Client,
+//            @RequestParam int id_Auction) {
+//        Lot lot = auctionDao.findOne(id_Auction);
+//        Client client = clientDao.findOne(id_Client);
+//        boolean add1 = lot.getByersList().add(client);
+//        if (add1) {
+//            auctionDao.save(lot);
+//        } else System.out.println("error1");
+//        boolean add = client.getLotList().add(lot);
+//        if (add) {
+//            clientDao.save(client);
+//        } else System.out.println("error");
+//        return "home1";
+//    }
 
 //   @GetMapping("/")
 //    public String home(){

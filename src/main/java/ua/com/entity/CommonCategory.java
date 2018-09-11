@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString (exclude = {"subCategoryList"})
-@EqualsAndHashCode
+@EqualsAndHashCode (exclude = {"subCategoryList"})
 
 @Entity
 
@@ -23,9 +23,7 @@ public class CommonCategory {
     }
 
     @OneToMany(
-            fetch = FetchType.EAGER,
-            //persist, merge, refresh, - save Subcategory to base without problem
-            //detach - don't work
+            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
             mappedBy = "commonCategory"
     )

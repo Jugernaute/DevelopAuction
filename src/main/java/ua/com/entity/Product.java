@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@ToString(exclude = {"subCategory", "auction", "client", "manufacturer"})
-@EqualsAndHashCode(exclude = {"subCategory", "auction", "client", "manufacturer"})
+@ToString(exclude = {"subCategory", "lot", "userOwner", "manufacturer"})
+@EqualsAndHashCode(exclude = {"subCategory", "lot", "userOwner", "manufacturer"})
 
 @Entity
 public class Product {
@@ -21,31 +21,37 @@ public class Product {
     private String nameProduct;
     private String modelProduct;
     private String descriptionProduct;
-    private int priceProduct;
-
-    public Product(String nameProduct, String modelProduct, String descriptionProduct, int priceProduct) {
-        this.nameProduct = nameProduct;
-        this.modelProduct = modelProduct;
-        this.descriptionProduct = descriptionProduct;
-        this.priceProduct = priceProduct;
-    }
+    private String linkOnImageProduct;
+    @Enumerated(EnumType.STRING)
+    private StateProduct stateProduct;
 
 
-    @ManyToOne(fetch = FetchType.EAGER,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private SubCategory subCategory;
 
 
-    @ManyToOne(fetch = FetchType.EAGER,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
-    private Client client;
+    private User userOwner;
 
-    @ManyToOne(fetch = FetchType.EAGER,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Manufacturer manufacturer;
 
-    @OneToOne(fetch = FetchType.EAGER,
-    cascade = CascadeType.PERSIST)
-    private Auction auction;
+    @OneToOne(fetch = FetchType.LAZY,
+    cascade = CascadeType.PERSIST,
+    mappedBy = "product")
+    private Lot lot;
 
+    public Product(String nameProduct, String modelProduct,
+                   String descriptionProduct, SubCategory subCategory,
+                   User userOwner, Manufacturer manufacturer) {
+        this.nameProduct = nameProduct;
+        this.modelProduct = modelProduct;
+        this.descriptionProduct = descriptionProduct;
+        this.subCategory = subCategory;
+        this.userOwner = userOwner;
+        this.manufacturer = manufacturer;
+    }
 }

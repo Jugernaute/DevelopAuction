@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString  (exclude = {"commonCategory","products"})
-@EqualsAndHashCode
+@EqualsAndHashCode (exclude = {"commonCategory","products"})
 
 @Entity
 public class SubCategory {
@@ -19,18 +19,19 @@ public class SubCategory {
     private int id_SubCategory;
     private String nameSubCategory;
 
+    @ManyToOne(fetch = FetchType.LAZY,
+                cascade = {CascadeType.MERGE})
+    private CommonCategory commonCategory;
+
+    @OneToMany(fetch = FetchType.LAZY,
+    cascade = CascadeType.PERSIST,
+    mappedBy = "subCategory")
+    private List<Product>products;
+
+
     public SubCategory(String nameSubCategory) {
         this.nameSubCategory = nameSubCategory;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER,
-                //merge - work
-                cascade = {CascadeType.MERGE})
-    private CommonCategory commonCategory;
-
-    @OneToMany(fetch = FetchType.EAGER,
-    cascade = CascadeType.PERSIST,
-    mappedBy = "subCategory")
-    private List<Product>products;
 
 }

@@ -88,7 +88,7 @@
 
         </div>
     </div>
-        <div class="auction">
+        <div class="lot">
             <header>
                 <div class="wrapper">
                     <div class="logo"><img src="../img/logo.png"></div>
