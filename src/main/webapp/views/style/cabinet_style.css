@@ -1,0 +1,40 @@
+.options{
+    margin: 50px ;
+}
+.options-list{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    border-left: 1px solid gray;
+}
+.options-list li{
+    text-transform: uppercase;
+    height: 100%;
+    width: 100%;
+    border: 1px solid gray;
+    text-align: center;
+    padding-top: 18px;
+    cursor: pointer;
+    border-left: none;
+
+}
+.options-list li:hover{
+    background: #b3b3b3;
+}
+
+.option-list-show{
+    height: 600px;
+    width: 100%;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+.hidden{
+    display: none;
+}
+.option-list-show div{
+    padding: 20px 20px;
+}
