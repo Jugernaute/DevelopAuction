@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
 import ua.com.entity.User;
 import ua.com.method.Mail;
@@ -30,6 +33,10 @@ public class ControllerChange {
     private UserValidator userValidator;
     @Autowired
     private Mail mail;
+    @Autowired
+    private UserEditor userEditor;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @PostMapping("/change_Email")
@@ -44,16 +51,20 @@ public class ControllerChange {
 
     @PostMapping("/change_Password")
     private String changePassword( User user,
-            @RequestParam String oldPassword,
-                                  @RequestParam String newPassword,
+                                  @RequestParam String password,
+                                  @RequestParam String oldPassword,
                                   @RequestParam String repeatPassword,
                                   Model model,
                                   BindingResult result){
-//        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-//        User user = userService.findByUsername(name);
-        System.out.println(user.getUsername());
-
-        if(oldPassword.equals(user.getPassword())){
+        String property = environment.getProperty("message_pw.length.error");
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User users = userService.findByUsername(name);
+//        System.out.println(user.getPassword());
+//        System.out.println(password+" password");
+//        System.out.println(oldPassword+" oldPassword");
+//        System.out.println(repeatPassword+" repeatPassword");
+        if(passwordEncoder.matches(oldPassword, users.getPassword())
+                && password.equals(repeatPassword)) {
             userValidator.validate(user, result);
             if(result.hasErrors()){
                 List<ObjectError> allErrors = result.getAllErrors();
@@ -62,11 +73,20 @@ public class ControllerChange {
                     errors+=" "+environment.getProperty(error.getCode());
                 }
                 model.addAttribute("errors",errors);
+
+            }else{
+                model.addAttribute("errors","ви змінили пароль");
             }
-        } else{
-            model.addAttribute("errors","your password isn't validate");
         }
-        model.addAttribute("user",user);
+        else{
+            model.addAttribute("error",property);
+        }
+        model.addAttribute("user",users);
+        userEditor.setValue(user);
+
+        String a = "pasha";
+        String encode = passwordEncoder.encode(a);
+        passwordEncoder.matches(a, encode);
         return "cabinet";
     }
 
@@ -81,19 +101,6 @@ public class ControllerChange {
         return "cabinet";
     }
 
-    @PostMapping("sendKey")
-    private String forgot_pw(){
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        String s = RandomStr.randomKey();
-        User user = userService.findByUsername(name);
-        user.setRandomKey(s);
-        String email = user.getEmail();
-        String subjectForgotPassword = "Підтвердження дій для зміни пароля";
-        String text = "Your key for change password: "+ s;
-        mail.sendMail(email,subjectForgotPassword,text);
-        userService.save(user);
-        return "cabinet";
-    }
 
     @PostMapping("forgot_psw")
     private String enterKey(@RequestParam String key,

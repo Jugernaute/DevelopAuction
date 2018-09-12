@@ -62,7 +62,7 @@
                 <hr>
                 <h3>Email</h3>
                 <input type="email" placeholder="email" name="email" required>
-                <input type="text" name="username" placeholder="username">
+                <input type="text" name="username" placeholder="username" required>
                 <h3>Пароль</h3>
                 <input type="password" placeholder="Введіть пароль" name="password" required>
 

@@ -84,6 +84,7 @@ public class MainController {
                              @RequestParam String email,
                              BindingResult result,
                              Model model){
+
         userValidator.validate(user,result);
         if(result.hasErrors()){
             List<ObjectError> allErrors = result.getAllErrors();
@@ -119,9 +120,12 @@ public class MainController {
     public String activate(@PathVariable String key,
                            Model model) {
         User user = userService.findByRandomKey(key);
-        user.setRandomKey(null);
-        user.setEnabled(true);
-        userService.save(user);
+        if(!(user ==null)){
+            user.setRandomKey(null);
+            user.setEnabled(true);
+            userService.save(user);
+        }
+
         model.addAttribute("user",user);
         return "cabinet";
     }

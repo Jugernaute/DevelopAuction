@@ -40,14 +40,68 @@
             <input type="email" placeholder="new Email" name="email" required>
             <button type="submit" class="save">save change</button>
         </form>
+
+<%--<script>--%>
+        <%--$save.click(function () {--%>
+        <%--$target.empty();--%>
+        <%--let name = $('#username').val();--%>
+        <%--let user = JSON.stringify(name);--%>
+
+        <%--$.ajax({--%>
+        <%--url: 'http://localhost:8080/userSave',--%>
+        <%--type: 'PUT',--%>
+        <%--data: user,--%>
+        <%--contentType: 'application/json',--%>
+
+        <%--error: function (err) {--%>
+        <%--// console.log(err)--%>
+        <%--},--%>
+
+        <%--success:function (result) {--%>
+
+        <%--$(result).each(function (index, object) {--%>
+        <%--let $div = $('<div/>',{text:object.name, id:object._id});--%>
+        <%--$target.append($div);--%>
+        <%--})--%>
+        <%--}--%>
+        <%--});--%>
+
+<%--</script>--%>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <li>Пароль...........................</li>
         <form action="change_Password" method="post">
-            <input type="password" placeholder="old password" name="oldPassword" required><br>
-            <input type="password" placeholder="new password" name="newPassword" required><br>
-            <input type="password" placeholder="new password" name="repeatPassword" required><br>
-            <c:forEach items="${errors}" var="item">
+            <input type="password" placeholder="старий пароль" name="oldPassword" required><br>
+            <input type="password" placeholder="новий пароль" name="password" required><br>
+            <input type="password" placeholder="повторіть пароль" name="repeatPassword" required><br>
+
+            <c:choose>
+                <c:when test="${errors!=null}">
+                    <c:forEach items="${errors}" var="item">
+                    ${item}<br>
+                    </c:forEach>
+                    ${error=null}
+                </c:when>
+                <c:otherwise>
+
+                </c:otherwise>
+            </c:choose>
+
+            <c:forEach items="${error}" var="item">
                 ${item}<br>
             </c:forEach>
+
             <button type="submit" class="save">save change</button>
         </form>
 
@@ -56,20 +110,22 @@
             <p ><a href="#">forgot password?</a> </p>
         </div>
         <p>message will be send to your email, than enter the key from message </p>
-        <form action="sendKey"  method="post">
-            <button type="submit" id="sendKey">send key</button>
+        <form action="sendKeys"  method="post">
+            <button type="submit" class="sendKey">send key</button>
         </form>
-        <%--<div class="forgot_psw_css" >--%>
+
+        <div class="forgot_psw_css" >
         <form action="forgot_psw" class="enterKeyfromEmail_inp" method="post">
             <input type="text"  placeholder="enter key" name="key" required>
             <button type="submit" >enter</button>
         </form>
-        <%--</div>--%>
-        ${key}
-        <form action="enterKey" method="post">
-            <input type="text" name="key" placeholder="enter key" required>
-            <input type="submit" value="enter">
-        </form>
+        </div>
+
+        <%--${key}--%>
+        <%--<form action="enterKey" method="post">--%>
+            <%--<input type="text" name="key" placeholder="enter key" required>--%>
+            <%--<input type="submit" value="enter">--%>
+        <%--</form>--%>
 
 
         <li>Сторінка про мене................  </li>
