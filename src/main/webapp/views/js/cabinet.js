@@ -12,7 +12,7 @@
 
         }
         if ($(this).attr('id') === 'sell') {
-            $('.sell').toggleClass('hidden');
+            $('.sell-item').toggleClass('hidden');
         } else if ($(this).attr('id') === 'buy') {
             $('.buy').toggleClass('hidden');
         } else if ($(this).attr('id') === 'history') {
