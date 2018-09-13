@@ -35,7 +35,10 @@
                 <div class="col_login">
                     <input class="input_login" type="text" name="username" placeholder="Username" required>
                     <input class="input_login" type="password" name="password" placeholder="Password" required>
-                    <input class="input_login" type="submit" value="Увійти">
+                    <label>
+                        <input type="checkbox" name="remember" style="margin-bottom:15px"> Запам’ятати
+                    </label>
+                    <button class="input_login" type="submit" value="Увійти">Увійти</button>
                 </div>
             </form>
 <%--end form logination--%>
@@ -71,7 +74,8 @@
                 </c:if>
 
                 <h3>Повторіть пароль</h3>
-                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
+                <input type="password" placeholder="Повторіть пароль" name="psw-repeat" required>
+                <p id="psw-must-have">Пароль повинен містити:<br> Мінімум 1 велику букву, 1 маленьку букву ,1 цифру, від 3 до 20 символів</p>
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запам’ятати
                 </label>
@@ -204,10 +208,18 @@
             <footer>
                 <div class="about"></div>
                 <div class="social">
-                    <img src="../img/twitter.png" height="32" width="33" alt="twitter"/>
-                    <img src="../img/google.png" height="32" width="31" alt="googe"/>
-                    <img src="../img/facebook.png" height="31" width="31" alt="facebook"/>
-                    <img src="../img/linkedin.png" height="31" width="31" alt="linkedin"/>
+                    <div id="twitter">
+                        <img src="../img/twitter.png" alt="twitter"/>
+                    </div>
+                    <div id="google">
+                        <img src="../img/google.png" alt="googe"/>
+                    </div>
+                    <div id="facebook">
+                        <img src="../img/facebook.png" alt="facebook"/>
+                    </div>
+                    <div id="linkedin">
+                        <img src="../img/linkedin.png" alt="linkedin"/>
+                    </div>
                 </div>
                 <div class="addres"></div>
             </footer>
