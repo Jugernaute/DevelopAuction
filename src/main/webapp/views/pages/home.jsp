@@ -59,13 +59,13 @@
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
                 <h3>Логін</h3>
-                <input type="text" placeholder="Ведіть логін" name="Login" required>
+                <input type="text" placeholder="Ведіть логін" name="username" required>
                 <h3>Email</h3>
-                <input type="email" placeholder="Ведіть пошту" name="Email" required>
+                <input type="email" placeholder="Ведіть пошту" name="email" required>
                 <h3>Пароль</h3>
-                <input type="password" placeholder="Введіть пароль" name="psw" required>
+                <input type="password" placeholder="Введіть пароль" name="password" required>
                 <h3>Повторіть пароль</h3>
-                <input type="password" placeholder="Повторіть пароль" name="psw-repeat" required>
+                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
                 <p id="psw-must-have">Пароль повинен містити:<br> Мінімум 1 велику букву, 1 маленьку букву ,1 цифру, від 3 до 20 символів</p>
                 <label>
                     <input type="checkbox" name="remember" style="margin-bottom:15px"> Запам’ятати
@@ -88,7 +88,7 @@
                         <ul class="menu">
                             <li class="enter"><a href="#">Вхід</a></li>
                             <li class="registation"><a href="#">Реєстрація</a></li>
-                            <li class="sell"><a href="sell.html">Продати</a></li>
+                            <li class="sell"><a href="sell.jsp">Продати</a></li>
                             <li class="favorits"><a href="#">Обрані</a></li>
                             <li class="cart"><a href="#">Корзина</a></li>
                         </ul>

@@ -39,24 +39,24 @@
         regForm.css('display', 'block');
     });
     
-    $('.signupbtn').on('click', function (event) {      //password validation
-        let psw = $(this).parent().parent().find('input[name="psw"]');
-        let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
-        var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
-        if (psw.val() != pswRepeat.val()){
-            pswRepeat.val('');
-            pswRepeat.prop('placeholder',"ПАРОЛІ НЕ ЗБІГАЮТЬСЯ!!!")
-            event.preventDefault();
-        } else if (!psw.val().match(passw)){
-            psw.focus();
-            psw.val('');
-            $(this).parent().parent().find('#psw-must-have').css({
-                    'font-weight': 'bold',
-                    'color' : 'red'
-                });
-            event.preventDefault();
-        }
-    });
+    // $('.signupbtn').on('click', function (event) {      //password validation
+    //     let psw = $(this).parent().parent().find('input[name="psw"]');
+    //     let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
+    //     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
+    //     if (psw.val() != pswRepeat.val()){
+    //         pswRepeat.val('');
+    //         pswRepeat.prop('placeholder',"ПАРОЛІ НЕ ЗБІГАЮТЬСЯ!!!")
+    //         event.preventDefault();
+    //     } else if (!psw.val().match(passw)){
+    //         psw.focus();
+    //         psw.val('');
+    //         $(this).parent().parent().find('#psw-must-have').css({
+    //                 'font-weight': 'bold',
+    //                 'color' : 'red'
+    //             });
+    //         event.preventDefault();
+    //     }
+    // });
 
     //social network animation
 

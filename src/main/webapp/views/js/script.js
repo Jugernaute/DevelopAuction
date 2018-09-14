@@ -1,8 +1,8 @@
 
 
-    let loginForm = $('.enter_form');
-    let regForm = $('.registration_form');
-    let auction = $('.auction');
+   // let loginForm = $('.enter_form');
+   // let regForm = $('.registration_form');
+   // let auction = $('.auction');
     let sendKey = $('.sendKey');
 
 

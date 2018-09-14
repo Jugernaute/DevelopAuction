@@ -127,7 +127,7 @@ public class MainController {
         }
 
         model.addAttribute("user",user);
-        return "cabinet";
+        return "home";
     }
 
 
@@ -137,12 +137,11 @@ public class MainController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String name = auth.getName(); //get logged in username
             auctionItemsDao.save(auctionItems);
-            return "sale";
+            return "sell";
         }
 
         @PostMapping("/ok")
-            public String ok (@RequestParam String username,
-                              Model model){
+            public String ok (Model model){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String name = auth.getName(); //get logged in username
             User user = userService.findByUsername(name);
