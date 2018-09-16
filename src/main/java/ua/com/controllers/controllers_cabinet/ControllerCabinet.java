@@ -22,71 +22,12 @@ import java.util.List;
 @Controller
 @PropertySource("classpath:validation.properties")
 public class ControllerCabinet {
-
-    @Autowired
-    private Environment environment;
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserValidator userValidator;
-    @Autowired
-    private Mail mail;
-    @Autowired
-    private UserEditor userEditor;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
 
-//    @PostMapping("/change_Email")
-//    private String changeEmail(@RequestParam String email,
-//                               Model model){
-//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//        user.setEmail(email);
-//        userService.save(user);
-//        model.addAttribute("user",user);
-//        return "cabinet";
-//    }
 
-//    @PostMapping("/change_Password")
-//    private String changePassword( User user,
-//                                  @RequestParam String password,
-//                                  @RequestParam String oldPassword,
-//                                  @RequestParam String repeatPassword,
-//                                  Model model,
-//                                  BindingResult result){
-//        String property = environment.getProperty("message_pw.length.error");
-//        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-//        User users = userService.findByUsername(name);
-////        System.out.println(user.getPassword());
-////        System.out.println(password+" password");
-////        System.out.println(oldPassword+" oldPassword");
-////        System.out.println(repeatPassword+" repeatPassword");
-//        if(passwordEncoder.matches(oldPassword, users.getPassword())
-//                && password.equals(repeatPassword)) {
-//            userValidator.validate(user, result);
-//            if(result.hasErrors()){
-//                List<ObjectError> allErrors = result.getAllErrors();
-//                String errors="";
-//                for (ObjectError error : allErrors) {
-//                    errors+=" "+environment.getProperty(error.getCode());
-//                }
-//                model.addAttribute("errors",errors);
-//
-//            }else{
-//                model.addAttribute("errors","ви змінили пароль");
-//            }
-//        }
-//        else{
-//            model.addAttribute("error",property);
-//        }
-//        model.addAttribute("user",users);
-//        userEditor.setValue(user);
-//
-//        String a = "pasha";
-//        String encode = passwordEncoder.encode(a);
-//        passwordEncoder.matches(a, encode);
-//        return "cabinet";
-//    }
+
 
     @PostMapping("change_Phone")
     private String changePone(@RequestParam String phone,
@@ -99,18 +40,5 @@ public class ControllerCabinet {
         return "cabinet";
     }
 
-//
-//    @PostMapping("forgot_psw")
-//    private String enterKey(@RequestParam String key,
-//                            Model model){
-//        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-//        User user = userService.findByUsername(name);
-//        if(user.getRandomKey().equals(key)){
-//            model.addAttribute("key","your key is validate, enter new password now");
-//            return "cabinet";
-//        }else{
-//            model.addAttribute("key","your key is not validate");
-//            return "error";
-//        }
-//    }
+
 }

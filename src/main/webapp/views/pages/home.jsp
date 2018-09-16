@@ -49,23 +49,24 @@
             </div>
         </div>
     </div>
-    <div class="registration_form">
-        <div class="reg_container">
-            <form class="reg_form" action="save"  method="post">
-                <div class="close_cont">
+    <div class="registration_form ">
+        <div class=" reg_container">
+            <form class="reg_form" <%--action="registration"  method="post"--%>>
+                <div class=" close_cont">
                     <span class="close">&times;</span>
                 </div>
                 <h1>Реєстрація</h1>
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
+                <a class="resultRegistration"></a>
                 <h3>Логін</h3>
-                <input type="text" placeholder="Ведіть логін" name="username" required>
+                <input class="enterUsername" type="text" placeholder="Ведіть логін" name="username" required>
                 <h3>Email</h3>
-                <input type="email" placeholder="Ведіть пошту" name="email" required>
+                <input class="enterEmail" type="email" placeholder="Ведіть пошту" name="email" required>
                 <h3>Пароль</h3>
-                <input type="password" placeholder="Введіть пароль" name="password" required>
+                <input class="enterPassword" type="password" placeholder="Введіть пароль" name="password" required>
                 <h3>Повторіть пароль</h3>
-                <input type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
+                <input class="enterRepeatpassword" type="password" placeholder="Повторіть пароль" name="psw_repeat" required>
                 <p id="psw-must-have">Пароль повинен містити:<br> Мінімум 1 велику букву, 1 маленьку букву ,1 цифру, від 3 до 20 символів</p>
                 <label>
                     <input type="checkbox" name="remember" style="margin-bottom:15px"> Запам’ятати
@@ -82,7 +83,7 @@
         <div class="auction">
             <header>
                 <div class="wrapper">
-                    <div class="logo"><a href="home.jsp"><img src="../img/logo.png"></a></div>
+                    <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
                     <nav>
                         <p>Пошук: <input type="search"></p>
                         <ul class="menu">

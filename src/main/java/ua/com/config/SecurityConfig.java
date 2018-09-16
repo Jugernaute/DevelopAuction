@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             inMemoryConfigurer()
                     .withUser("admin")
-                    .password("{noop}admin")
+                    .password("admin")
                     .authorities("ADMIN")
                     .and()
                     .configure(auth);
