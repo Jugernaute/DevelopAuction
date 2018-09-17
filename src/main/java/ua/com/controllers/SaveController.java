@@ -3,10 +3,8 @@ package ua.com.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ua.com.dao.*;
 import ua.com.entity.*;
 import ua.com.service.bet.BetService;
 import ua.com.service.commonCategory.CommonCategoryService;
@@ -42,23 +40,44 @@ public class SaveController {
     @Autowired
     private SubCategoryService subCategoryService;
 
+    @Autowired
+    private LotDao lotDao;
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private DeliveryDao deliveryDao;
+    @Autowired
+    private PaymentDao paymentDao;
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private ManufacturerDao manufacturerDao;
+    @Autowired
+    private SubCategoryDao subCategoryDao;
+    @Autowired
+    private CommonCategoryDao commonCategoryDao;
+
     @PostMapping("/user")
-    public String saveUser1(User user){
+    public String saveUser(User user){
         userService.save(user);
         return "save";
     }
 
+    @PostMapping("/delete/user")
+    public String deleteUser(User user){
+        userService.deleteBuId(1);
+        return "delete";
+    }
+
     @PostMapping("/bet")
-    public String saveBet(Bet bet){
-        betService.save(bet);
+    public String saveBet(@RequestParam int idLot, @RequestParam int userId, Bet bet){
+        Lot lot = lotDao.findOne(idLot);
+        User user = userDao.findOne(userId);
+        betService.save(bet.setLot(lot).setUser(user));
         return "save";
     }
 
-    @PostMapping("/commonCategory")
-    public String saveCommonCategory(CommonCategory commonCategory){
-        commonCategoryService.save(commonCategory);
-        return "save";
-    }
+
 
     @PostMapping("/delivery")
     public String saveDelivery(Delivery delivery){
@@ -67,8 +86,11 @@ public class SaveController {
     }
 
     @PostMapping("/lot")
-    public String saveLot(Lot lot){
-        lotService.save(lot);
+    public String saveLot(@RequestParam int idDelivery, @RequestParam int idPayment, @RequestParam int idProduct, Lot lot){
+        Delivery delivery = deliveryDao.findOne(idDelivery);
+        Payment payment = paymentDao.findOne(idPayment);
+        Product product = productDao.findOne(idProduct);
+        lotService.save(lot.setDelivery(delivery).setPayment(payment).setProduct(product));
         return "save";
     }
 
@@ -85,16 +107,28 @@ public class SaveController {
     }
 
     @PostMapping("/product")
-    public String saveProduct(Product product){
-        productService.save(product);
+    public String saveProduct(@RequestParam int idManufacturer, @RequestParam int idSubCategory, @RequestParam int userId, Product product){
+        Manufacturer manufacturer = manufacturerDao.findOne(idManufacturer);
+        SubCategory subCategory = subCategoryDao.findOne(idSubCategory);
+        User user = userDao.findOne(userId);
+        productService.save(product.setSubCategory(subCategory).setManufacturer(manufacturer).setUserOwner(user));
         return "save";
     }
 
-    @PostMapping("/sudCategory")
-    public String saveSubCategory(SubCategory subCategory){
-        System.out.println("sub");
-        subCategoryService.save(subCategory);
-        System.out.println("new sub");
+    @PostMapping("/commonCategory")
+    public String saveCommonCategory(CommonCategory commonCategory){
+        commonCategoryService.save(commonCategory);
         return "save";
+    }
+
+    @PostMapping("/subCategory")
+    public String saveSubCategory(@RequestParam int idCommonCategory, SubCategory subCategory){
+        CommonCategory commonCategory = commonCategoryDao.findOne(idCommonCategory);
+        subCategoryService.save(subCategory.setCommonCategory(commonCategory));
+        return "save";
+    }
+    @ModelAttribute("userModel")
+    public User user(){
+        return new User();
     }
 }

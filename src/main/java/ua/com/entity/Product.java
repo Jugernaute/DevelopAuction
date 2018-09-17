@@ -4,19 +4,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
-//@ToString
-//        (exclude = {"subCategory"})
-//@EqualsAndHashCode
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id_Product;
+        private int idProduct;
 
         private String nameProduct;
         private String modelProduct;
@@ -25,19 +18,21 @@ public class Product {
         private StateProduct stateProduct;
 
         @ManyToOne(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = {CascadeType.MERGE})
         private SubCategory subCategory;
 
         @ManyToOne(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = CascadeType.MERGE)
         private User userOwner;
 
         @OneToOne(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+                mappedBy = "product"
+                )
         private Lot lot;
 
         @ManyToOne(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = CascadeType.MERGE)
         private Manufacturer manufacturer;
 
     public Product() {
@@ -55,12 +50,21 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public int getId_Product() {
-        return id_Product;
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 
-    public Product setId_Product(int id_Product) {
-        this.id_Product = id_Product;
+    public Product setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+        return this;
+    }
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public Product setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
         return this;
     }
 
@@ -109,21 +113,12 @@ public class Product {
         return this;
     }
 
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public Product setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
-        return this;
-    }
-
-    public User getUser1Owner() {
+    public User getUserOwner() {
         return userOwner;
     }
 
-    public Product setUser1Owner(User user1Owner) {
-        this.userOwner = user1Owner;
+    public Product setUserOwner(User userOwner) {
+        this.userOwner = userOwner;
         return this;
     }
 
@@ -149,9 +144,8 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Product product = (Product) o;
-        return id_Product == product.id_Product &&
+        return idProduct == product.idProduct &&
                 Objects.equals(nameProduct, product.nameProduct) &&
                 Objects.equals(modelProduct, product.modelProduct) &&
                 Objects.equals(linkOnImageProduct, product.linkOnImageProduct) &&
@@ -166,13 +160,13 @@ public class Product {
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), id_Product, nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, stateProduct, subCategory, userOwner, lot, manufacturer);
+        return Objects.hash(idProduct, nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, stateProduct, subCategory, userOwner, lot, manufacturer);
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id_Product=" + id_Product +
+                "idProduct=" + idProduct +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", modelProduct='" + modelProduct + '\'' +
                 ", linkOnImageProduct='" + linkOnImageProduct + '\'' +

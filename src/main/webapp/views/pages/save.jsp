@@ -36,6 +36,9 @@
     <input type="text" name="dataEndLot" placeholder="dataEndLot"/>
     <input type="text" name="startPrice" placeholder="startPrice"/>
     <input type="text" name="hotPrise" placeholder="hotPrise"/>
+    <input type="text" name="idDelivery" placeholder="idDelivery"/>
+    <input type="text" name="idPayment" placeholder="idPayment"/>
+    <input type="text" name="idProduct" placeholder="idProduct"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Product</h3>
@@ -44,13 +47,17 @@
     <input type="text" name="modelProduct" placeholder="modelProduct"/>
     <input type="text" name="linkOnImageProduct" placeholder="linkOnImageProduct"/>
     <input type="text" name="descriptionProduct" placeholder="descriptionProduct"/>
-    <input type="text" name="stateProduct" placeholder="stateProduct"/>
+    <input type="text" name="idManufacturer" placeholder="idManufacturer"/>
+    <input type="text" name="idSubCategory" placeholder="idSubCategory"/>
+    <input type="text" name="userId" placeholder="userId"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Bet</h3>
 <form action="/save/bet" method="post">
-    <input type="text" name="sum_of_the_bet" placeholder="sum_of_the_bet"/>
+    <input type="text" name="sumOfTheBet" placeholder="sumOfTheBet"/>
     <input type="text" name="stapeBet" placeholder="stapeBet"/>
+    <input type="text" name="idLot" placeholder="idLot"/>
+    <input type="text" name="userId" placeholder="userId"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>CommonCategory</h3>
@@ -63,9 +70,11 @@
     <input type="text" name="methodDelivery" placeholder="methodDelivery"/>
     <input type="submit" name="" placeholder="">
 </form>
+
 <h3>SubCategory</h3>
 <form action="/save/subCategory" method="post">
     <input type="text" name="nameSubCategory" placeholder="nameSubCategory"/>
+    <input type="text" name="idCommonCategory" placeholder="idCommonCategory"/>
     <input type="submit" name="" placeholder="">
 </form>
 

@@ -31,11 +31,11 @@ public class User implements UserDetails {
     private String userPostAdress;
 
     @OneToMany(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = CascadeType.PERSIST)
     private List<Product> listUserProduct;
 
     @OneToMany(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = CascadeType.PERSIST)
     private List<Bet> listUserBet;
 
     public User() {

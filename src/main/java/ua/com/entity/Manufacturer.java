@@ -10,11 +10,11 @@ public class Manufacturer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_Manufacturer;
+    private int idManufacturer;
     private String nameManufacturer;
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.PERSIST
           )
     private List<Product> listManufacturerProduct = new ArrayList<>();
 
@@ -26,12 +26,12 @@ public class Manufacturer {
         this.listManufacturerProduct = listManufacturerProduct;
     }
 
-    public int getId_Manufacturer() {
-        return id_Manufacturer;
+    public int getIdManufacturer() {
+        return idManufacturer;
     }
 
-    public Manufacturer setId_Manufacturer(int id_Manufacturer) {
-        this.id_Manufacturer = id_Manufacturer;
+    public Manufacturer setIdManufacturer(int idManufacturer) {
+        this.idManufacturer = idManufacturer;
         return this;
     }
 
@@ -58,7 +58,7 @@ public class Manufacturer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manufacturer that = (Manufacturer) o;
-        return id_Manufacturer == that.id_Manufacturer &&
+        return idManufacturer == that.idManufacturer &&
                 Objects.equals(nameManufacturer, that.nameManufacturer) &&
                 Objects.equals(listManufacturerProduct, that.listManufacturerProduct);
     }
@@ -66,13 +66,13 @@ public class Manufacturer {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Manufacturer, nameManufacturer, listManufacturerProduct);
+        return Objects.hash(idManufacturer, nameManufacturer, listManufacturerProduct);
     }
 
     @Override
     public String toString() {
         return "Manufacturer{" +
-                "id_Manufacturer=" + id_Manufacturer +
+                "idManufacturer=" + idManufacturer +
                 ", nameManufacturer='" + nameManufacturer + '\'' +
                 '}';
     }

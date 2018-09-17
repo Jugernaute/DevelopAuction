@@ -1,6 +1,7 @@
 package ua.com.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -8,27 +9,27 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_Delivery;
+    private int idDelivery;
     private String methodDelivery;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Lot lot;
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    private List<Lot> listLot;
 
     public Delivery() {
     }
 
-    public Delivery(String methodDelivery, Lot lot) {
+    public Delivery(String methodDelivery, List<Lot> listLot) {
         this.methodDelivery = methodDelivery;
-        this.lot = lot;
+        this.listLot = listLot;
     }
 
-    public int getId_Delivery() {
-        return id_Delivery;
+    public int getIdDelivery() {
+        return idDelivery;
     }
 
-    public Delivery setId_Delivery(int id_Delivery) {
-        this.id_Delivery = id_Delivery;
+    public Delivery setIdDelivery(int idDelivery) {
+        this.idDelivery = idDelivery;
         return this;
     }
 
@@ -41,12 +42,12 @@ public class Delivery {
         return this;
     }
 
-    public Lot getLot() {
-        return lot;
+    public List<Lot> getListLot() {
+        return listLot;
     }
 
-    public Delivery setLot(Lot lot) {
-        this.lot = lot;
+    public Delivery setListLot(List<Lot> listLot) {
+        this.listLot = listLot;
         return this;
     }
 
@@ -55,21 +56,21 @@ public class Delivery {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Delivery delivery = (Delivery) o;
-        return id_Delivery == delivery.id_Delivery &&
+        return idDelivery == delivery.idDelivery &&
                 Objects.equals(methodDelivery, delivery.methodDelivery) &&
-                Objects.equals(lot, delivery.lot);
+                Objects.equals(listLot, delivery.listLot);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Delivery, methodDelivery, lot);
+        return Objects.hash(idDelivery, methodDelivery, listLot);
     }
 
     @Override
     public String toString() {
         return "Delivery{" +
-                "id_Delivery=" + id_Delivery +
+                "idDelivery=" + idDelivery +
                 ", methodDelivery='" + methodDelivery + '\'' +
                 '}';
     }

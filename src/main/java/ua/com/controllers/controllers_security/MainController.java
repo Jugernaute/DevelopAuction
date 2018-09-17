@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.editor.UserValidator;
 import ua.com.editor.UserEditor;
@@ -84,4 +85,13 @@ public class MainController {
         return "save";
     }
 
+    @GetMapping("/delete")
+    public String delete(Model model){
+        return "delete";
+    }
+
+    @ModelAttribute("userModel")
+    public User user(){
+        return new User();
+    }
 }

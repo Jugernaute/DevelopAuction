@@ -12,32 +12,37 @@ import java.util.Objects;
 public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_Lot;
+    private int idLot;
     private String dataStartLot;
     private String dataEndLot;
     private int startPrice;
     private int hotPrise;
 
     @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.MERGE)
     private Product product;
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             mappedBy = "lot")
     private List<Bet> listLotBet;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "lot")
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE)
     private Delivery delivery;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "lot")
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE})
     private Payment payment;
 
     public Lot() {
+    }
+
+    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrise) {
+        this.dataStartLot = dataStartLot;
+        this.dataEndLot = dataEndLot;
+        this.startPrice = startPrice;
+        this.hotPrise = hotPrise;
     }
 
     public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrise, Product product, List<Bet> listLotBet, Delivery delivery, Payment payment) {
@@ -51,12 +56,12 @@ public class Lot {
         this.payment = payment;
     }
 
-    public int getId_Lot() {
-        return id_Lot;
+    public int getIdLot() {
+        return idLot;
     }
 
-    public Lot setId_Lot(int id_Lot) {
-        this.id_Lot = id_Lot;
+    public Lot setIdLot(int idLot) {
+        this.idLot = idLot;
         return this;
     }
 
@@ -137,7 +142,7 @@ public class Lot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lot lot = (Lot) o;
-        return id_Lot == lot.id_Lot &&
+        return idLot == lot.idLot &&
                 startPrice == lot.startPrice &&
                 hotPrise == lot.hotPrise &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
@@ -151,15 +156,15 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrise, product, listLotBet, delivery, payment);
+        return Objects.hash(idLot, dataStartLot, dataEndLot, startPrice, hotPrise, product, listLotBet, delivery, payment);
     }
 
     @Override
     public String toString() {
         return "Lot{" +
-                "id_Lot=" + id_Lot +
-                ", dataStartLot=" + dataStartLot +
-                ", dataEndLot=" + dataEndLot +
+                "idLot=" + idLot +
+                ", dataStartLot='" + dataStartLot + '\'' +
+                ", dataEndLot='" + dataEndLot + '\'' +
                 ", startPrice=" + startPrice +
                 ", hotPrise=" + hotPrise +
                 '}';

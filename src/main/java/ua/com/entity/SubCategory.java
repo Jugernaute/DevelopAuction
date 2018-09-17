@@ -6,31 +6,30 @@ import lombok.*;
 import java.util.List;
 import java.util.Objects;
 
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
-//@ToString  (exclude = {"commonCategory","products"})
-//@EqualsAndHashCode
 
 @Entity
 public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_SubCategory;
+    private int idSubCategory;
 
     private String nameSubCategory;
 
 
     @ManyToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.ALL)
+               cascade = {CascadeType.MERGE})
     private CommonCategory commonCategory;
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+            cascade = {CascadeType.PERSIST})
     private List<Product> listSubCategoryProduct;
 
+
     public SubCategory() {
+    }
+
+    public SubCategory(String nameSubCategory) {
+        this.nameSubCategory = nameSubCategory;
     }
 
     public SubCategory(String nameSubCategory, CommonCategory commonCategory, List<Product> listSubCategoryProduct) {
@@ -39,21 +38,12 @@ public class SubCategory {
         this.listSubCategoryProduct = listSubCategoryProduct;
     }
 
-    public int getId_SubCategory() {
-        return id_SubCategory;
+    public List<Product> getListSubCategoryProduct() {
+        return listSubCategoryProduct;
     }
 
-    public SubCategory setId_SubCategory(int id_SubCategory) {
-        this.id_SubCategory = id_SubCategory;
-        return this;
-    }
-
-    public String getNameSubCategory() {
-        return nameSubCategory;
-    }
-
-    public SubCategory setNameSubCategory(String nameSubCategory) {
-        this.nameSubCategory = nameSubCategory;
+    public SubCategory setListSubCategoryProduct(List<Product> listSubCategoryProduct) {
+        this.listSubCategoryProduct = listSubCategoryProduct;
         return this;
     }
 
@@ -66,12 +56,21 @@ public class SubCategory {
         return this;
     }
 
-    public List<Product> getListSubCategoryProduct() {
-        return listSubCategoryProduct;
+    public int getIdSubCategory() {
+        return idSubCategory;
     }
 
-    public SubCategory setListSubCategoryProduct(List<Product> listSubCategoryProduct) {
-        this.listSubCategoryProduct = listSubCategoryProduct;
+    public SubCategory setIdSubCategory(int idSubCategory) {
+        this.idSubCategory = idSubCategory;
+        return this;
+    }
+
+    public String getNameSubCategory() {
+        return nameSubCategory;
+    }
+
+    public SubCategory setNameSubCategory(String nameSubCategory) {
+        this.nameSubCategory = nameSubCategory;
         return this;
     }
 
@@ -80,7 +79,7 @@ public class SubCategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubCategory that = (SubCategory) o;
-        return id_SubCategory == that.id_SubCategory &&
+        return idSubCategory == that.idSubCategory &&
                 Objects.equals(nameSubCategory, that.nameSubCategory) &&
                 Objects.equals(commonCategory, that.commonCategory) &&
                 Objects.equals(listSubCategoryProduct, that.listSubCategoryProduct);
@@ -89,13 +88,13 @@ public class SubCategory {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_SubCategory, nameSubCategory, commonCategory, listSubCategoryProduct);
+        return Objects.hash(idSubCategory, nameSubCategory, commonCategory, listSubCategoryProduct);
     }
 
-    @Override()
+    @Override
     public String toString() {
         return "SubCategory{" +
-                "id_SubCategory=" + id_SubCategory +
+                "idSubCategory=" + idSubCategory +
                 ", nameSubCategory='" + nameSubCategory + '\'' +
                 '}';
     }

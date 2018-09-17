@@ -6,19 +6,13 @@ import java.util.List;
 import java.util.Objects;
 
 import lombok.*;
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
-//@ToString (exclude = {"subCategoryList"})
-//@EqualsAndHashCode
 
 @Entity
 
 public class CommonCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_CommonCategory;
+    private int idCommonCategory;
     private String nameCommonCategory;
 
     public CommonCategory(String nameCommonCategory) {
@@ -27,10 +21,11 @@ public class CommonCategory {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
+            cascade = {CascadeType.MERGE},
             mappedBy = "commonCategory"
     )
     List<SubCategory> listSubCategorie = new ArrayList<>();
+
 
     public CommonCategory() {
     }
@@ -40,12 +35,21 @@ public class CommonCategory {
         this.listSubCategorie = listSubCategorie;
     }
 
-    public int getId_CommonCategory() {
-        return id_CommonCategory;
+    public List<SubCategory> getListSubCategorie() {
+        return listSubCategorie;
     }
 
-    public CommonCategory setId_CommonCategory(int id_CommonCategory) {
-        this.id_CommonCategory = id_CommonCategory;
+    public CommonCategory setListSubCategorie(List<SubCategory> listSubCategorie) {
+        this.listSubCategorie = listSubCategorie;
+        return this;
+    }
+
+    public int getIdCommonCategory() {
+        return idCommonCategory;
+    }
+
+    public CommonCategory setIdCommonCategory(int idCommonCategory) {
+        this.idCommonCategory = idCommonCategory;
         return this;
     }
 
@@ -58,21 +62,12 @@ public class CommonCategory {
         return this;
     }
 
-    public List<SubCategory> getListSubCategorie() {
-        return listSubCategorie;
-    }
-
-    public CommonCategory setListSubCategorie(List<SubCategory> listSubCategorie) {
-        this.listSubCategorie = listSubCategorie;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommonCategory that = (CommonCategory) o;
-        return id_CommonCategory == that.id_CommonCategory &&
+        return idCommonCategory == that.idCommonCategory &&
                 Objects.equals(nameCommonCategory, that.nameCommonCategory) &&
                 Objects.equals(listSubCategorie, that.listSubCategorie);
     }
@@ -80,13 +75,13 @@ public class CommonCategory {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_CommonCategory, nameCommonCategory, listSubCategorie);
+        return Objects.hash(idCommonCategory, nameCommonCategory, listSubCategorie);
     }
 
     @Override
     public String toString() {
         return "CommonCategory{" +
-                "id_CommonCategory=" + id_CommonCategory +
+                "idCommonCategory=" + idCommonCategory +
                 ", nameCommonCategory='" + nameCommonCategory + '\'' +
                 '}';
     }
