@@ -137,12 +137,12 @@ public class User implements UserDetails {
 
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "userOwner")
     private List<Product> productListOfUser;
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             mappedBy = "user")
    private List<Bet>listUserBet;
 

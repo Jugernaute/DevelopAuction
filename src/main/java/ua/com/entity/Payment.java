@@ -3,13 +3,14 @@ package ua.com.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@ToString(exclude = "lot")
+@ToString(exclude = "lotListPayment")
 @EqualsAndHashCode
 
 @Entity
@@ -18,10 +19,10 @@ public class Payment {
     private int id_Payment;
     private String methodPayment;
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
             mappedBy = "payment")
-    private Lot lot;
+    private List<Lot>lotListPayment;
 
     public Payment(String methodPayment) {
         this.methodPayment = methodPayment;

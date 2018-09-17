@@ -1,4 +1,4 @@
-package ua.com.service;
+package ua.com.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

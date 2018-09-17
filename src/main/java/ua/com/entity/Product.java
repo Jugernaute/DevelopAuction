@@ -40,7 +40,7 @@ public class Product {
     private Manufacturer manufacturer;
 
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.PERSIST,
+    cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
     mappedBy = "product")
     private Lot lot;
 

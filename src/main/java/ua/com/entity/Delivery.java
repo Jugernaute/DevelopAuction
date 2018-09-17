@@ -3,13 +3,14 @@ package ua.com.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@ToString(exclude = "lot")
+@ToString(exclude = "lotListDelivery")
 @EqualsAndHashCode
 
 @Entity
@@ -18,10 +19,10 @@ public class Delivery {
     private int id_Delivery;
     private String methodDelivery;
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
     mappedBy = "delivery")
-    private Lot lot;
+    private List<Lot> lotListDelivery;
 
     public Delivery(String methodDelivery) {
         this.methodDelivery = methodDelivery;

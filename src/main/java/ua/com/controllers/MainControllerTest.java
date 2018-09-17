@@ -2,16 +2,13 @@ package ua.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.*;
 //import ua.com.dao.ProductDao;
 import ua.com.entity.*;
-import ua.com.service.UserService;
-
-import java.util.List;
+import ua.com.service.user.UserService;
 
 @Controller
 public class MainControllerTest {
@@ -38,20 +35,20 @@ public class MainControllerTest {
     private UserService userService;
 
 
-
-//    @GetMapping("/")
-//    public String commonCategory(Model model) {
-//        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
-//        model.addAttribute("commonCategoryList", commonCategoryList);
-//        return "home1";
-//    }
-
     @PostMapping("/saveCommonCategory")
     public String commonCategoryCreate(@RequestParam String nameCommonCategory) {
         CommonCategory commonCategory = new CommonCategory(nameCommonCategory);
         commonCategoryDao.save(commonCategory);
         return "home1";
     }
+
+//    @GetMapping("/commonCategoryView")
+//    public String commonCategory(Model model) {
+//        List<CommonCategory> commonCategoryList = commonCategoryDao.findAll();
+//        model.addAttribute("commonCategoryList", commonCategoryList);
+//       return "home1";
+//   }
+
 
 //    @GetMapping("/home1")
 //    public String comCatList(Model model) {
@@ -79,7 +76,7 @@ public class MainControllerTest {
 
     @PostMapping("/saveUser1")
     public String createUser(@RequestParam String username,
-                               @RequestParam int userBalance) {
+                             @RequestParam int userBalance) {
         User user = new User(username, userBalance);
         userService.save(user);
         return "home1";
@@ -102,6 +99,13 @@ public class MainControllerTest {
 
         return "home1";
     }
+
+    @GetMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam int idProduct) {
+        productDao.delete(idProduct);
+        return "home1";
+    }
+
 
     @PostMapping("/createDelivery")
     public String createDelivery(@RequestParam String methodDelivery) {
@@ -136,6 +140,12 @@ public class MainControllerTest {
         return "home1";
     }
 
+    @GetMapping("/deleteLot")
+    public String deleteLot(@RequestParam int idLot) {
+        lotDao.delete(idLot);
+        return "home1";
+    }
+
     @PostMapping("/createBet")
     public String createBet(@RequestParam int sum_of_the_bet,
                             @RequestParam int id_Lot,
@@ -150,7 +160,17 @@ public class MainControllerTest {
 
     }
 
+    @GetMapping("/deleteBet")
+    public String deleteBet(@RequestParam int idBet) {
+        betDao.delete(idBet);
+        return "home1";
+    }
 
+    @GetMapping("/deleteUser")
+    public String deleteUser(@RequestParam int idUser) {
+        userDao.delete(idUser);
+        return "home1";
+    }
 
 
 

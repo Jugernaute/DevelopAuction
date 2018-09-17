@@ -27,12 +27,13 @@ public class Lot {
 
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "lot")
     List<Bet> listLotBet;
 
+    //@Column(nullable = false)
     @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Product product;
 
 

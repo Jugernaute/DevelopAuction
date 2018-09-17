@@ -1,4 +1,4 @@
-package ua.com.service;
+package ua.com.service.user;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ua.com.entity.User;

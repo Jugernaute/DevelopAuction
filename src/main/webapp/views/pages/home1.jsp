@@ -19,8 +19,7 @@
 </form>
 
 
-
-<h3>Create Subcategory  (буде створювати та заповнювати адмін)</h3>
+<h3>Create Subcategory (буде створювати та заповнювати адмін)</h3>
 <form action="/saveSubCategory" method="post">
     <input type="text" name="nameSubCategory" placeholder="nameSubCategory">
     <input type="text" name="id_CommonCategory" placeholder="id_CommonCategory">
@@ -47,9 +46,9 @@
 
 <h3>Create Client</h3>
 <form action="/saveUser1" method="post">
-<input type="text" name="username" placeholder="username">
-<input type="text" name="userBalance" placeholder="userBalance">
-<input type="submit" value="save User">
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="userBalance" placeholder="userBalance">
+    <input type="submit" value="save User">
 </form>
 
 
@@ -64,6 +63,12 @@
     <input type="submit" value="save Product">
 </form>
 
+<h3>Delet Product (видалення продукту до початку аукціону)</h3>
+<form action="/deleteProduct" method="get">
+    <input type="text" name="idProduct" placeholder="idProduct"><br>
+    <input type="submit" value="delete Product">
+</form>
+
 <h3>Create Lot</h3>
 <form action="/createLot" method="post">
     <input type="text" name="dataStartLot" placeholder="dataStartLot">
@@ -73,9 +78,17 @@
     <input type="text" name="hotPrice" placeholder="hotPrice">
     <input type="text" name="idDelivery" placeholder="idDelivery">
     <input type="text" name="idPayment" placeholder="idPayment">
-
     <input type="submit" value="Create new Lot">
 </form>
+
+<h3>Delete Lot </h3>
+<p>(видалення лоту без ставок, лот створений продавцем)</p>
+<p>Лот видаляється продукт лишається</p>
+<form action="/deleteLot" method="get">
+    <input type="text" name="idLot" placeholder="idLot"><br>
+    <input type="submit" value="delete Lot">
+</form>
+
 
 <h3>Create the Bet (робить покупець)</h3>
 <form action="/createBet" method="post">
@@ -83,6 +96,20 @@
     <input type="text" name="id_User" placeholder="id_User">
     <input type="text" name="sum_of_the_bet" placeholder="sum_of_the_bet">
     <input type="submit" value="Join to Auction">
+</form>
+
+<h3>Delete Bet </h3>
+<p>(видалення ставки)</p>
+<p>ставка видаляється, лот і продукт лишаються</p>
+<form action="/deleteBet" method="get">
+    <input type="text" name="idBet" placeholder="idBet"><br>
+    <input type="submit" value="delete Bet">
+</form>
+
+<h3>Delet User</h3>
+<form action="/deleteUser" method="get">
+    <input type="text" name="idUser" placeholder="idUser"><br>
+    <input type="submit" value="delete User">
 </form>
 
 
