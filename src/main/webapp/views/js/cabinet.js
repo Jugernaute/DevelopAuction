@@ -53,7 +53,7 @@
     let userEmail = $('.userEmail');
 
     (saveChangeEmail).on('click', function (event){
-        event.preventDefault();
+        // event.preventDefault();
         let email = $('.changeEmail').val();
         userEmail.empty();
         $.ajax({
@@ -96,6 +96,60 @@
 
         })
     });
+
+    $('#settings').on('click', function () {
+        userEmail.empty();
+        $('.resultUserPhone').empty();
+        $('.resultUserName').empty();
+        $.ajax({
+            url: 'http://localhost:8080/getCurrent_Email_Phone_Username',
+            type: 'get',
+            success: function (result) {
+                let array = [];
+                $.each(result, function(key, value) {
+                    array.push(value);
+                });
+                console.log(array[1]);
+                    userEmail.append(array[0]);
+                    $('.resultUserPhone').append(array[1]);
+                    $('.resultUserName').append(array[2]);
+
+            }
+        });
+    });
+
+
+    $('.inputChangePhone').keyup(function(){
+        if($(this).val().length > 0) {
+            $('.saveChangePhone').removeAttr('disabled');
+        } else {
+            $('.saveChangePhone').attr('disabled','disable');
+        }
+    });
+
+
+    $('.saveChangePhone').on('click', function (event) {
+        let val = $('.inputChangePhone').val();
+        $('.resultUserPhone').empty();
+
+       $.ajax({
+           url: 'http://localhost:8080/changeUserPhone',
+           type: 'put',
+           data: val,
+
+           success: function (result) {
+
+                   $('.resultUserPhone').append(result)
+
+           },
+           error: function (error) {
+               // console.log(error)
+           }
+       })
+    });
+
+
+
   //     ------------------------------------------        pasha end
 
 

@@ -16,7 +16,7 @@ import ua.com.method.Mail;
 import ua.com.method.RandomStr;
 import ua.com.service.UserService;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @PropertySource("classpath:validation.properties")
@@ -89,5 +89,30 @@ public class RestControllerCabinet {
         String subjectForgotPassword = "Підтвердження дій для зміни пароля";
         String text = "Your key for change password: "+ s;
         mail.sendMail(email,subjectForgotPassword,text);
+    }
+
+    @GetMapping("/getCurrent_Email_Phone_Username")
+    public List getCurrentEmail(){
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User byUsername = userService.findByUsername(name);
+        List list = new ArrayList();
+        list.add(byUsername.getEmail());
+        list.add(byUsername.getPhone());
+        list.add(byUsername.getUsername());
+        return list;
+    }
+
+    @PutMapping("/changeUserPhone")
+    private String changePone(@RequestBody String phone
+                              ){
+
+        if(phone.length()<5){
+            return "false phone";
+        }
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(name);
+        user.setPhone(phone);
+        userService.save(user);
+        return user.getPhone();
     }
 }

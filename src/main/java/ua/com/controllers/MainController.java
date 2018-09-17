@@ -32,12 +32,12 @@ public class MainController{
         return "home";
     }
 
-    @PostMapping("/createAuctionItem")
-    private String createAuctionItem(AuctionItems auctionItems){
-        LocalDateTime dateNow = LocalDateTime.now();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
-        auctionItemsDao.save(auctionItems);
-        return "sell";
-    }
+//    @PostMapping("/createAuctionItem")
+//    private String createAuctionItem(AuctionItems auctionItems){
+//        LocalDateTime dateNow = LocalDateTime.now();
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName(); //get logged in username
+//        auctionItemsDao.save(auctionItems);
+//        return "sell";
+//    }
 }

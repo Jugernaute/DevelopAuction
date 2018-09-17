@@ -61,7 +61,7 @@ public class ControllerSecurity {
             userService.save(user);
         }
 
-        model.addAttribute("user",user);
+//        model.addAttribute("user",user);
         return "home";
     }
 

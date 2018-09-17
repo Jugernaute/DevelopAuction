@@ -14,12 +14,12 @@
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="home.jsp"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/logout"><img src="../img/logo.png"></a></div>
             <nav>
                 <p>Пошук: <input type="search"></p>
                 <ul class="menu">
 
-                    <li class="user-id"><a href="#">userID</a></li>
+                    <li class="user-id"><a href="goToCabinet">${user.getUsername()}</a></li>
                     <li class="sell"><a href="#">Продати</a></li>
                     <li class="favorits"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>
