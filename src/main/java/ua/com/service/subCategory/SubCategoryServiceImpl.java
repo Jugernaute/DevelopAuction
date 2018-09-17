@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.SubCategory;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class SubCategoryServiceImpl implements SubCategoryService {
@@ -22,5 +24,15 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public void deleteById(int id) {
         subCategoryDao.delete(id);
+    }
+
+    @Override
+    public SubCategory findOne(int id) {
+        return subCategoryDao.findOne(id);
+    }
+
+    @Override
+    public List<SubCategory> findAll() {
+        return subCategoryDao.findAll();
     }
 }

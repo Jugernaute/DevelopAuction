@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.LotDao;
 import ua.com.entity.Lot;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class LotServiceImpl implements LotService {
@@ -23,5 +25,15 @@ public class LotServiceImpl implements LotService {
     public void deleteById(int id) {
         lotDao.delete(id);
 
+    }
+
+    @Override
+    public Lot findOne(int id) {
+        return lotDao.findOne(id);
+    }
+
+    @Override
+    public List<Lot> findAll() {
+        return lotDao.findAll();
     }
 }

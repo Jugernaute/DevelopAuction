@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.BetDao;
 import ua.com.entity.Bet;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class BetServiceImpl implements BetService {
@@ -25,5 +27,15 @@ public class BetServiceImpl implements BetService {
     public void deleteById(int id) {
         betDao.delete(id);
 
+    }
+
+    @Override
+    public Bet findOne(int id) {
+        return betDao.findOne(id);
+    }
+
+    @Override
+    public List<Bet> findAll() {
+        return betDao.findAll();
     }
 }

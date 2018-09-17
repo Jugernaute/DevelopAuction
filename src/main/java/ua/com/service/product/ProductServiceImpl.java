@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.ProductDao;
 import ua.com.entity.Product;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
@@ -22,6 +24,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(int id) {
         productDao.delete(id);
+    }
+
+    @Override
+    public Product findOne(int id) {
+        return productDao.findOne(id);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return productDao.findAll();
     }
 
 

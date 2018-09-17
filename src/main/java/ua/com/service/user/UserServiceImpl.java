@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ua.com.dao.UserDao;
 import ua.com.entity.User;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,5 +28,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteBuId(int id) {
         userDao.delete(id);
+    }
+
+    @Override
+    public User findOne(int id) {
+        return userDao.findOne(id);
+    }
+
+    @Override
+    public List<User> findAll(int id) {
+        return userDao.findAll();
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.ManufacturerDao;
 import ua.com.entity.Manufacturer;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ManufacturerServiceImpl implements ManufacturerService {
@@ -22,5 +24,15 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public void deleteById(int id) {
         manufacturerDao.delete(id);
+    }
+
+    @Override
+    public Manufacturer findOne(int id) {
+        return manufacturerDao.findOne(id);
+    }
+
+    @Override
+    public List<Manufacturer> findAll() {
+        return manufacturerDao.findAll();
     }
 }

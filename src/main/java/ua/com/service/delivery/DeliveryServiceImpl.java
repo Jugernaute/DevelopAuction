@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.DeliveryDao;
 import ua.com.entity.Delivery;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class DeliveryServiceImpl implements DeliveryService {
@@ -23,5 +25,15 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public void deleteById(int id) {
         deliveryDao.delete(id);
+    }
+
+    @Override
+    public Delivery findOne(int id) {
+        return deliveryDao.findOne(id);
+    }
+
+    @Override
+    public List<Delivery> findAll() {
+        return deliveryDao.findAll();
     }
 }
