@@ -80,7 +80,7 @@
 
         </div>
     </div>
-        <div class="auction">
+        <div class="lot">
             <header>
                 <div class="wrapper">
                     <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>

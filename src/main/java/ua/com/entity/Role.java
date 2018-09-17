@@ -1,4 +1,4 @@
 package ua.com.entity;
 
-public class User {
+public enum Role {
 }

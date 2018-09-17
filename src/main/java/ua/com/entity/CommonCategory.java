@@ -5,10 +5,11 @@ import java.util.List;
 import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString (exclude = {"subCategoryList"})
-@EqualsAndHashCode
+@EqualsAndHashCode (exclude = {"subCategoryList"})
 
 @Entity
 
