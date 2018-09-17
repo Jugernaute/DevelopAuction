@@ -14,7 +14,7 @@ import ua.com.editor.UserValidator;
 import ua.com.entity.User;
 import ua.com.method.Mail;
 import ua.com.method.RandomStr;
-import ua.com.service.UserService;
+import ua.com.service.user.UserService;
 
 import java.util.*;
 

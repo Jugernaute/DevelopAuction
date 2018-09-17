@@ -7,6 +7,7 @@
     <title>Auction</title>
     <script src="https://use.fontawesome.com/a3f7924682.js"></script>
     <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="../style/style.css">
     <script src="../js/main.js" defer></script>
 </head>
 <body>
@@ -80,7 +81,7 @@
 
         </div>
     </div>
-        <div class="lot">
+        <div class="auction">
             <header>
                 <div class="wrapper">
                     <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>

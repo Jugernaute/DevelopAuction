@@ -2,7 +2,6 @@ package ua.com.controllers.controllers_security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,7 @@ import ua.com.editor.UserValidator;
 import ua.com.entity.User;
 import ua.com.method.Mail;
 import ua.com.method.RandomStr;
-import ua.com.service.UserService;
+import ua.com.service.user.UserService;
 
 import java.util.List;
 

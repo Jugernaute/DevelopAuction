@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.dao.AuctionItemsDao;
 import ua.com.entity.User;
-import ua.com.service.UserService;
+import ua.com.service.user.UserService;
 
 @Controller
 @PropertySource("classpath:validation.properties")
