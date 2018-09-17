@@ -15,7 +15,6 @@ li{
     list-style-type: none;
 }
 .auction{
-
     width: 90%;
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
@@ -150,7 +149,6 @@ footer{
 .social img{
     margin: 0 5px;
     cursor: pointer;
-    border-radius: 50%;
 }
 .social img:active{
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);

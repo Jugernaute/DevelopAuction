@@ -1,16 +1,14 @@
 package ua.com.entity;
 
-import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.com.entity.Enums.Role;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
 
 @Entity
 public class User implements UserDetails {
@@ -23,14 +21,16 @@ public class User implements UserDetails {
     private String password;
     private String phone;
     private String randomKey;
-
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = false;
-
+    private boolean isEnabled = true;
+    private String firstNameUser;
+    private String surNameUser;
+    private int userBalance;
+    private String userPostAddress;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -57,6 +57,7 @@ public class User implements UserDetails {
         return isAccountNonLocked;
     }
 
+
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
@@ -66,6 +67,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
 
     public Role getRole() {
         return role;
@@ -131,5 +133,98 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(
+            targetClass = TypeUser.class,
+            fetch = FetchType.EAGER)
+    @CollectionTable(name = "type_user",
+            joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "type")
+    private Set<TypeUser> typeOfUser;
+
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "userOwner")
+    private List<Product> productListOfUser;
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
+            mappedBy = "user")
+   private List<Bet>listUserBet;
+
+    public User() {
+    }
+
+    public User(String username, int userBalance) {
+        this.username = username;
+        this.userBalance = userBalance;
+    }
+
+    public User(String username, int userBalance,
+                List<Product> productListOfUser,
+                List<Bet> listUserBet) {
+        this.username = username;
+        this.userBalance = userBalance;
+        this.productListOfUser = productListOfUser;
+        this.listUserBet = listUserBet;
+    }
+
+    public String getFirstNameUser() {
+        return firstNameUser;
+    }
+
+    public void setFirstNameUser(String firstNameUser) {
+        this.firstNameUser = firstNameUser;
+    }
+
+    public String getSurNameUser() {
+        return surNameUser;
+    }
+
+    public void setSurNameUser(String surNameUser) {
+        this.surNameUser = surNameUser;
+    }
+
+    public int getUserBalance() {
+        return userBalance;
+    }
+
+    public void setUserBalance(int userBalance) {
+        this.userBalance = userBalance;
+    }
+
+    public String getUserPostAddress() {
+        return userPostAddress;
+    }
+
+    public void setUserPostAddress(String userPostAddress) {
+        this.userPostAddress = userPostAddress;
+    }
+
+    public Set<TypeUser> getTypeOfUser() {
+        return typeOfUser;
+    }
+
+    public void setTypeOfUser(Set<TypeUser> typeOfUser) {
+        this.typeOfUser = typeOfUser;
+    }
+
+    public List<Product> getProductListOfUser() {
+        return productListOfUser;
+    }
+
+    public void setProductListOfUser(List<Product> productListOfUser) {
+        this.productListOfUser = productListOfUser;
+    }
+
+    public List<Bet> getListUserBet() {
+        return listUserBet;
+    }
+
+    public void setListUserBet(List<Bet> listUserBet) {
+        this.listUserBet = listUserBet;
     }
 }

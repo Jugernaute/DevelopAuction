@@ -18,6 +18,8 @@ public class UserEditor  extends PropertyEditorSupport{
     public void setValue(Object value) {
         User user = (User) value;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+
+
+    }
 
 }

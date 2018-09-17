@@ -24,13 +24,5 @@ public class UserValidator implements Validator {
         }
     }
 
-//    public  void validatePasswordChange(Object o, String oldPassword, Errors errors) {
-//        User user = (User) o;
-//        if (!oldPassword.equals(user.getPassword())) {
-//            errors.rejectValue("oldPassword", "message_pw.change.error");//відправити відповідь до поля зміни стаого пароля
-//            System.out.println("hello");
-//        }
-
-
     }
-//}
+

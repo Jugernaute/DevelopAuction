@@ -1,4 +1,4 @@
-package ua.com.service;
+package ua.com.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByRandomKey(String randomKey) {
         return userDao.findByRandomKey(randomKey);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 
 

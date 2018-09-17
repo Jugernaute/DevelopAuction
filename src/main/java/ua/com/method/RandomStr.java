@@ -7,7 +7,7 @@ public class RandomStr {
     public static String randomKey() {
         String randomNum = String.valueOf((long) (Math.random() * 1000000000000000000L));
 
-        int randomLength = randomNum.length()-1;
+        int randomLength = randomNum.length()-2;
 
         Random randomOfLength = new Random();
         int numOfLength = randomOfLength.nextInt(19);

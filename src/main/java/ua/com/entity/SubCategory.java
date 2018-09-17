@@ -7,20 +7,17 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString  (exclude = {"commonCategory","products"})
-@EqualsAndHashCode
+@EqualsAndHashCode (exclude = {"commonCategory","products"})
 
 @Entity
 public class SubCategory {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_SubCategory;
     private String nameSubCategory;
-
-    public SubCategory(String nameSubCategory) {
-        this.nameSubCategory = nameSubCategory;
-    }
 
     @ManyToOne(fetch = FetchType.LAZY,
                 cascade = {CascadeType.MERGE})
@@ -30,5 +27,11 @@ public class SubCategory {
     cascade = CascadeType.PERSIST,
     mappedBy = "subCategory")
     private List<Product>products;
+
+
+    public SubCategory(String nameSubCategory) {
+        this.nameSubCategory = nameSubCategory;
+    }
+
 
 }
