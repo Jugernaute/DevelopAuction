@@ -1,10 +1,8 @@
 package ua.com.entity;
 
-import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.com.entity.Enums.Role;
 
 import javax.persistence.*;
 import java.util.Collection;
