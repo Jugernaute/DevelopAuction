@@ -11,7 +11,7 @@
     <script src="../js/main.js" defer></script>
 </head>
 <body>
-
+<a href="qwe">regina</a>
     <div class="enter_form">
         <div class="modal-content">
             <div class="close_cont">

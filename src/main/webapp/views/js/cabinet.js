@@ -48,7 +48,9 @@
 
     optionList.first().css('border-bottom', 'none');
 
-    // ne vudalyatu!!!!!     -----------                pasha start
+                                         // ne vudalyatu!!!!!     -----------                pasha start
+
+                                         //            change email
     let saveChangeEmail = $('.saveChangeEmail');
     let userEmail = $('.userEmail');
 
@@ -70,8 +72,10 @@
             }
         });
 
-        // sendKey.toggleClass('sendKey');
-    });
+});                 //.............................*change email end*/
+
+
+                                        //          change password
 
     saveChangePassword.on('click',function (event) {
         event.preventDefault();
@@ -88,14 +92,98 @@
 
             success: function (result) {
                 resultChangePassword.append(result);
-                console.log(result)
             },
             error: function (error) {
 
             }
 
         })
+    });                 //..............................*change password       end*/
+
+
+                        //                             change phone
+
+    $('.saveChangePhone').on('click', function (event) {
+        let val = $('.inputChangePhone').val();
+        $('.resultUserPhone').empty();
+
+        $.ajax({
+            url: 'http://localhost:8080/changeUserPhone',
+            type: 'put',
+            data: val,
+
+            success: function (result) {
+
+                $('.resultUserPhone').append(result)
+
+            },
+            error: function (error) {
+            }
+        })
+    });                 //............................ change phone end
+
+//------------------        save first name     start
+    $('.saveFirstName').on('click',function () {
+        let val = $('.inputFirstName').val();
+        $('.resultFirstName').empty();
+        $.ajax({
+            url: 'http://localhost:8080/saveFirstName',
+            type: 'put',
+            data: val,
+            dataType: 'text',
+
+            success: function (result) {
+                $('.resultFirstName').append(result)
+            },
+            error: function (error) {
+              console.log(error)
+            }
+        })
     });
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxx save first name end
+
+    //................................save surname start
+    $('.saveSurName').on('click',function () {
+        let val = $('.inputSurNameUser').val();
+        $('.resultSurName').empty();
+        $.ajax({
+            url: 'http://localhost:8080/saveSurName',
+            type: 'put',
+            data: val,
+            dataType: 'text',
+
+            success: function (result) {
+                $('.resultSurName').append(result)
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    });
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx save surname end
+
+
+    //.....................................save postAddress  start
+     $('.savePostAddress').on('click',function () {
+        let val = $('.inputPostAddress').val();
+        $('.resultPostAddress').empty();
+        $.ajax({
+            url: 'http://localhost:8080/savePostAddress',
+            type: 'put',
+            data: val,
+            dataType: 'text',
+
+            success: function (result) {
+                $('.resultPostAddress').append(result)
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    });
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   save postAddress end
+
+                        //                  заповнення сторінки користувача полями з БД     start
 
     $('#settings').on('click', function () {
         userEmail.empty();
@@ -105,18 +193,30 @@
             url: 'http://localhost:8080/getCurrent_Email_Phone_Username',
             type: 'get',
             success: function (result) {
-                let array = [];
-                $.each(result, function(key, value) {
-                    array.push(value);
-                });
-                console.log(array[1]);
-                    userEmail.append(array[0]);
-                    $('.resultUserPhone').append(array[1]);
-                    $('.resultUserName').append(array[2]);
 
+                $.each(result, function(key, value) {
+                    if(key==="username"){
+                        $('.resultUserName').append(value);
+                    }
+                    if(key==="email"){
+                        userEmail.append(value);
+                    }
+                    if(key==="phone"){
+                        $('.resultUserPhone').append(value);
+                    }
+                    if(key==="firstname"){
+                        $('.resultFirstName').append(value);
+                    }
+                    if (key==="surname"){
+                        $('.resultSurName').append(value);
+                    }
+                    if(key==="postadsress"){
+                        $('.resultPostAddress').append(value);
+                    }
+                });
             }
         });
-    });
+    });             //................................заповнення сторінки користувача полями з БД       end
 
 
     $('.inputChangePhone').keyup(function(){
@@ -127,29 +227,31 @@
         }
     });
 
+    $('.inputFirstName').keyup(function(){
+        if($(this).val().length > 0) {
+            $('.saveFirstName ').removeAttr('disabled');
+        } else {
+            $('.saveFirstName ').attr('disabled','disable');
+        }
+    });
 
-    $('.saveChangePhone').on('click', function (event) {
-        let val = $('.inputChangePhone').val();
-        $('.resultUserPhone').empty();
+    $('.inputSurNameUser').keyup(function(){
+        if($(this).val().length > 0) {
+            $('.saveSurName ').removeAttr('disabled');
+        } else {
+            $('.saveSurName ').attr('disabled','disable');
+        }
+    });
 
-       $.ajax({
-           url: 'http://localhost:8080/changeUserPhone',
-           type: 'put',
-           data: val,
-
-           success: function (result) {
-
-                   $('.resultUserPhone').append(result)
-
-           },
-           error: function (error) {
-               // console.log(error)
-           }
-       })
+    $('.inputPostAddress').keyup(function(){
+        if($(this).val().length > 0) {
+            $('.savePostAddress ').removeAttr('disabled');
+        } else {
+            $('.savePostAddress ').attr('disabled','disable');
+        }
     });
 
 
 
-  //     ------------------------------------------        pasha end
 
 

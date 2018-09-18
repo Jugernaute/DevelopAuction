@@ -39,7 +39,10 @@ public class ControllerSecurity {
     }
 
 
-
+    @GetMapping("/qwe")
+    public String qwe(){
+        return "qwe";
+    }
 
     @Autowired
     private UserService userService;
@@ -56,18 +59,12 @@ public class ControllerSecurity {
             user.setEnabled(true);
             userService.save(user);
         }
-
-//        model.addAttribute("user",user);
         return "home";
     }
 
 
         @PostMapping("/ok")
-            public String ok (Model model){
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getName(); //get logged in username
-            User user = userService.findByUsername(name);
-            model.addAttribute("user",user);
+            public String ok (){
             return "cabinet";
             }
 

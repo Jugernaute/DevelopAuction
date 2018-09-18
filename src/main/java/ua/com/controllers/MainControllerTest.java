@@ -39,7 +39,7 @@ public class MainControllerTest {
     public String commonCategoryCreate(@RequestParam String nameCommonCategory) {
         CommonCategory commonCategory = new CommonCategory(nameCommonCategory);
         commonCategoryDao.save(commonCategory);
-        return "home1";
+        return "qwe";
     }
 
 //    @GetMapping("/commonCategoryView")
@@ -64,14 +64,14 @@ public class MainControllerTest {
         SubCategory subCategory = new SubCategory(nameSubCategory);
         subCategory.setCommonCategory(commonCategory);
         subCategoryDao.save(subCategory);
-        return "home1";
+        return "qwe";
     }
 
     @PostMapping("/saveManufacturer")
     public String createManufacturer(@RequestParam String nameManufacturer) {
         Manufacturer manufacturer = new Manufacturer(nameManufacturer);
         manufacturerDao.save(manufacturer);
-        return "home1";
+        return "qwe";
     }
 
     @PostMapping("/saveUser1")
@@ -79,7 +79,7 @@ public class MainControllerTest {
                              @RequestParam int userBalance) {
         User user = new User(username, userBalance);
         userService.save(user);
-        return "home1";
+        return "qwe";
     }
 
 
@@ -97,7 +97,7 @@ public class MainControllerTest {
                 descriptionProduct, subCategory, user, manufacturer);
         productDao.save(product);
 
-        return "home1";
+        return "qwe";
     }
 
     @GetMapping("/deleteProduct")
@@ -111,7 +111,7 @@ public class MainControllerTest {
     public String createDelivery(@RequestParam String methodDelivery) {
         Delivery delivery = new Delivery(methodDelivery);
         deliveryDao.save(delivery);
-        return "home1";
+        return "qwe";
     }
 
     @PostMapping("/createPayment")

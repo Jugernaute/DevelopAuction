@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>cabinet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/stylePasha.css">
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
     <script src="../js/script.js" defer></script>
+    <script src="../js/sell.js" defer></script>
 </head>
 <body>
 <div class="auction">
@@ -49,7 +51,62 @@
                 <li id="mesagges">Повідомлення</li>
             </ul>
         <div class="option-list-show">
-            <div class="sell-item">Продаж</div>
+            <div class="sell-item">
+
+                <label class="sell-category">
+
+
+                </label>
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p style="float: left">Категорія*</p>
+                        </div>
+                        <div class="col-xs-10">
+                            <button class="btn_Category">Вибрати</button>
+                            <div class="categoryStaticList">
+                                <ul class="categoryHandleList">
+                                    <li>
+                                        <select size="10" class="form" name="selectFirst" id="sellFromSelectFirst">
+                                            <option value="00001">Telephone, smartphone</option>
+                                            <option value="00002">Pobutova tehnika</option>
+                                            <option value="00003">Sport</option>
+                                            <option value="00004">Auto</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select size="10" class="form" name="selectSecond" id="sellFromSelectSecond">
+                                            <option value="00100">Telephone</option>
+                                            <option value="00101">Smartphone</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select size="10" class="form" name="selectThird" id="sellFromSelectThrid">
+                                            <option value="01000">Asus</option>
+                                            <option value="01001">Samsung</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                        </div>
+                        <%--<div class="col-sm-6">--%>
+                            <%--One of three columns--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
             <div class="buy hidden">Купівля</div>
             <div class="history hidden">History</div>
             <div class="settings hidden">
@@ -71,23 +128,42 @@
                             <input class="password" type="password" placeholder="новий пароль" name="password" required><br>
                             <input class="repeatPassword" type="password" placeholder="повторіть пароль" name="repeatPassword" required><br>
 
-                            <a class="resultChangePassword"></a><br>
+                            <span class="resultChangePassword"></span><br>
 
                             <button type="submit" class="saveChangePassword">save change</button>
 <%--// change password    end--%>
 
                         <li>Сторінка про мене................  </li>
-                        <form action="change_AboutMe" method="post">
+
                             <input type="text" placeholder="не працює ще" name="description" required>
                             <button type="submit" class="save">save change</button>
-                        </form>
-                        <li>Телефон.......................... <a class="resultUserPhone"></a> </li>
-<%--// change phone      start--%>
-                        <%--<form>--%>
-                        <input class="inputChangePhone" type="text" placeholder="new phone" name="phone" required>
+
+                        <li>Телефон.......................... <span class="resultUserPhone"></span> </li>
+<%-- change phone      start--%>
+
+                        <input class="inputChangePhone" type="text" placeholder="new phone" name="phone">
                         <button class="saveChangePhone" type="submit" disabled="disable">save change</button>
-                        <%--</form>--%>
-<%--// change phone      end--%>
+
+<%-- change phone      end--%>
+
+<%--set firstname user       start--%>
+                        <li>Ваше імя........................<span class="resultFirstName"></span> </li>
+                        <input class="inputFirstName" type="text" placeholder="ввести імя" name="firstNameUser">
+                        <button class="saveFirstName" type="submit" disabled="disable">save name</button>
+<%--set firstname user       end--%>
+
+<%--set surname user       start--%>
+                        <li>Ваша фамілія.....................<span class="resultSurName"></span> </li>
+                        <input class="inputSurNameUser" type="text" placeholder="ввести фамілію" name="surNameUser">
+                        <button class="saveSurName" type="submit" disabled="disable">save surname</button>
+<%--set surname user       end--%>
+
+<%--set adress user       start--%>
+                        <li>Ваш поштовий адрес......................<span class="resultPostAddress"></span> </li>
+                        <input class="inputPostAddress" type="text" placeholder="ввести поштовий адрес" name="userPostAddress">
+                        <button class="savePostAddress" type="submit" disabled="disable">save adress</button>
+<%--set adress user       end--%>
+
                     </ul>
                 </ol>
 
@@ -97,6 +173,7 @@
             <div class="balans hidden">balans</div>
             <div class="mesagges hidden">masegges</div>
         <%--</div>--%>
+
     </section>
 
 

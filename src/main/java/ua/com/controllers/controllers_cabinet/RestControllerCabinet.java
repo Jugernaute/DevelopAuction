@@ -92,13 +92,16 @@ public class RestControllerCabinet {
     }
 
     @GetMapping("/getCurrent_Email_Phone_Username")
-    public List getCurrentEmail(){
+    public Map<String, String> getCurrentEmail(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User byUsername = userService.findByUsername(name);
-        List list = new ArrayList();
-        list.add(byUsername.getEmail());
-        list.add(byUsername.getPhone());
-        list.add(byUsername.getUsername());
+        Map<String,String>list = new LinkedHashMap<>();
+        list.put("email",byUsername.getEmail());
+        list.put("phone",byUsername.getPhone());
+        list.put("username",byUsername.getUsername());
+        list.put("firstname",byUsername.getFirstNameUser());
+        list.put("surname",byUsername.getSurNameUser());
+        list.put("postadsress",byUsername.getUserPostAddress());
         return list;
     }
 
@@ -114,5 +117,44 @@ public class RestControllerCabinet {
         user.setPhone(phone);
         userService.save(user);
         return user.getPhone();
+    }
+
+    @PutMapping("/saveFirstName")
+    private String saveFirstName(@RequestBody String firstNameUser
+    ){
+        if(firstNameUser.length()<2){
+            return "false name";
+        }
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(name);
+        user.setFirstNameUser(firstNameUser);
+        userService.save(user);
+        return user.getFirstNameUser();
+    }
+
+    @PutMapping("/saveSurName")
+    private String saveSurName(@RequestBody String surNameUser
+    ){
+        if(surNameUser.length()<2){
+            return "false name";
+        }
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(name);
+        user.setSurNameUser(surNameUser);
+        userService.save(user);
+        return user.getSurNameUser();
+    }
+
+    @PutMapping("/savePostAddress")
+    private String savePostAddress(@RequestBody String userPostAddress
+    ){
+        if(userPostAddress.length()<2){
+            return "false name";
+        }
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(name);
+        user.setUserPostAddress(userPostAddress);
+        userService.save(user);
+        return user.getUserPostAddress();
     }
 }
