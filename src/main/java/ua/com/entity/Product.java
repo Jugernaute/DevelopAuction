@@ -1,4 +1,5 @@
 package ua.com.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,25 +18,35 @@ public class Product {
         private String descriptionProduct;
         private StateProduct stateProduct;
 
+
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
                 cascade = {CascadeType.MERGE})
         private SubCategory subCategory;
 
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
                 cascade = CascadeType.MERGE)
         private User userOwner;
 
+        @JsonIgnore
         @OneToOne(fetch = FetchType.LAZY,
                 cascade = {CascadeType.MERGE, CascadeType.PERSIST},
                 mappedBy = "product"
                 )
         private Lot lot;
 
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
                 cascade = CascadeType.MERGE)
         private Manufacturer manufacturer;
 
     public Product() {
+    }
+
+    public Product(String nameProduct, String modelProduct) {
+        this.nameProduct = nameProduct;
+        this.modelProduct = modelProduct;
     }
 
     public Product(String nameProduct, String modelProduct, String linkOnImageProduct, String descriptionProduct, StateProduct stateProduct, SubCategory subCategory, User userOwner, Lot lot, Manufacturer manufacturer) {

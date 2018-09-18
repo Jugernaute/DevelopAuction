@@ -90,6 +90,11 @@ public class MainController {
         return "delete";
     }
 
+    @GetMapping("/restp")
+    public String restp(){
+        return "restp";
+    }
+
     @ModelAttribute("userModel")
     public User user(){
         return new User();
