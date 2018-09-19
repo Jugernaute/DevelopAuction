@@ -13,6 +13,8 @@ import ua.com.dao.AuctionItemsDao;
 import ua.com.entity.User;
 import ua.com.service.user.UserService;
 
+import javax.naming.Context;
+
 @Controller
 @PropertySource("classpath:validation.properties")
 public class ControllerSecurity {
@@ -64,7 +66,10 @@ public class ControllerSecurity {
 
 
         @PostMapping("/ok")
-            public String ok (){
+            public String ok (Model model){
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = userService.findByUsername(name);
+            model.addAttribute("user",user);
             return "cabinet";
             }
 

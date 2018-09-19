@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface ManufacturerService {
 
-    List<Manufacturer> findAllManufacturer();
+    List<Manufacturer> findAll();
 
-    Manufacturer getManufacturerById(int idManufacturer);
-
-    void addManufacturer(Manufacturer manufacturer);
-
-    void updateManufacturer(Manufacturer manufacturer);
-
-    void deleteManufacturerByIb(int idManufacturer);
+//    Manufacturer getManufacturerById(int idManufacturer);
+//
+//    void addManufacturer(Manufacturer manufacturer);
+//
+//    void updateManufacturer(Manufacturer manufacturer);
+//
+//    void deleteManufacturerByIb(int idManufacturer);
 
 }

@@ -53,14 +53,8 @@
         <div class="option-list-show">
             <div class="sell-item">
 
-                <label class="sell-category">
 
-
-                </label>
-
-
-                <div class="container">
-                    <div class="row">
+                    <%--<div class="row">--%>
                         <div class="col-xs-2">
                             <p style="float: left">Категорія*</p>
                         </div>
@@ -70,42 +64,46 @@
                                 <ul class="categoryHandleList">
                                     <li>
                                         <select size="10" class="form" name="selectFirst" id="sellFromSelectFirst">
-                                            <option value="00001">Telephone, smartphone</option>
-                                            <option value="00002">Pobutova tehnika</option>
-                                            <option value="00003">Sport</option>
-                                            <option value="00004">Auto</option>
+                                            <%--<option class="result"></option>--%>
+
                                         </select>
                                     </li>
                                     <li>
                                         <select size="10" class="form" name="selectSecond" id="sellFromSelectSecond">
-                                            <option value="00100">Telephone</option>
-                                            <option value="00101">Smartphone</option>
+
                                         </select>
                                     </li>
                                     <li>
                                         <select size="10" class="form" name="selectThird" id="sellFromSelectThrid">
-                                            <option value="01000">Asus</option>
-                                            <option value="01001">Samsung</option>
+
                                         </select>
                                     </li>
                                 </ul>
+                            </div>
                         </div>
-                        <%--<div class="col-sm-6">--%>
-                            <%--One of three columns--%>
-                        <%--</div>--%>
                     <%--</div>--%>
-                </div>
+
+<br>
+                        <div class="row" style="margin-top: 45px">
+                            <div class="col-xs-2">
+                                <p style="float: right">Назва*</p>
+                            </div>
+                                <div class="col-xs-10">
+                                    <input class="descrProduct" id="inputProduct" name="nameProduct" placeholder="введіть назву продукту">
+                                </div>
+                        </div>
+<br>
+                        <div class="row" style="margin-top: 45px">
+                            <div class="col-xs-2">
+                                <p style="float: right">Фотографія*</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="file">
+                            </div>
+                        </div>
 
 
-
-
-
-
-
-
-
-
-
+            </div>
             </div>
             <div class="buy hidden">Купівля</div>
             <div class="history hidden">History</div>
@@ -166,13 +164,10 @@
 
                     </ul>
                 </ol>
-
-
-            </div>
             </div>
             <div class="balans hidden">balans</div>
             <div class="mesagges hidden">masegges</div>
-        <%--</div>--%>
+
 
     </section>
 
