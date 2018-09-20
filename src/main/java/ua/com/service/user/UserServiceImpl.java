@@ -45,5 +45,13 @@ public class UserServiceImpl implements UserService {
         return userDao.findByEmail(email);
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
 
+    @Override
+    public User findByRandomKey(String randomKey) {
+        return userDao.findByRandomKey(randomKey);
+    }
 }

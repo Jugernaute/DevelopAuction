@@ -13,5 +13,7 @@ public interface UserService extends UserDetailsService {
     User findOne(int id);
     List<User> findAll(int id);
     User findByEmail(String email);
+    User findByUsername(String username);
+    User findByRandomKey(String randomKey);
 
     }
