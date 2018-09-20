@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int idProduct;
+        private int id_Product;
 
         private String nameProduct;
         private String modelProduct;
@@ -70,12 +70,12 @@ public class Product {
         return this;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public int getId_Product() {
+        return id_Product;
     }
 
-    public Product setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
+    public Product setId_Product(int id_Product) {
+        this.id_Product = id_Product;
         return this;
     }
 
@@ -156,7 +156,7 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return idProduct == product.idProduct &&
+        return id_Product == product.id_Product &&
                 Objects.equals(nameProduct, product.nameProduct) &&
                 Objects.equals(modelProduct, product.modelProduct) &&
                 Objects.equals(linkOnImageProduct, product.linkOnImageProduct) &&
@@ -171,13 +171,13 @@ public class Product {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idProduct, nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, stateProduct, subCategory, userOwner, lot, manufacturer);
+        return Objects.hash(id_Product, nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, stateProduct, subCategory, userOwner, lot, manufacturer);
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "idProduct=" + idProduct +
+                "id_Product=" + id_Product +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", modelProduct='" + modelProduct + '\'' +
                 ", linkOnImageProduct='" + linkOnImageProduct + '\'' +

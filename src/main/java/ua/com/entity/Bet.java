@@ -9,8 +9,8 @@ public class Bet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int idBet;
-    private int sumOfTheBet;
+    private int id_Bet;
+    private int sum_of_the_bet;
     private int stapeBet;
 
     @ManyToOne(fetch = FetchType.LAZY,
@@ -24,33 +24,33 @@ public class Bet {
     public Bet() {
     }
 
-    public Bet(int sumOfTheBet, int stapeBet) {
-        this.sumOfTheBet = sumOfTheBet;
+    public Bet(int sum_of_the_bet, int stapeBet) {
+        this.sum_of_the_bet = sum_of_the_bet;
         this.stapeBet = stapeBet;
     }
 
-    public Bet(int sumOfTheBet, int stapeBet, Lot lot, User user) {
-        this.sumOfTheBet = sumOfTheBet;
+    public Bet(int sum_of_the_bet, int stapeBet, Lot lot, User user) {
+        this.sum_of_the_bet = sum_of_the_bet;
         this.stapeBet = stapeBet;
         this.lot = lot;
         this.user = user;
     }
 
-    public int getIdBet() {
-        return idBet;
+    public int getId_Bet() {
+        return id_Bet;
     }
 
-    public Bet setIdBet(int idBet) {
-        this.idBet = idBet;
+    public Bet setId_Bet(int id_Bet) {
+        this.id_Bet = id_Bet;
         return this;
     }
 
-    public int getSumOfTheBet() {
-        return sumOfTheBet;
+    public int getSum_of_the_bet() {
+        return sum_of_the_bet;
     }
 
-    public Bet setSumOfTheBet(int sumOfTheBet) {
-        this.sumOfTheBet = sumOfTheBet;
+    public Bet setSum_of_the_bet(int sum_of_the_bet) {
+        this.sum_of_the_bet = sum_of_the_bet;
         return this;
     }
 
@@ -86,8 +86,8 @@ public class Bet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bet bet = (Bet) o;
-        return idBet == bet.idBet &&
-                sumOfTheBet == bet.sumOfTheBet &&
+        return id_Bet == bet.id_Bet &&
+                sum_of_the_bet == bet.sum_of_the_bet &&
                 stapeBet == bet.stapeBet &&
                 Objects.equals(lot, bet.lot) &&
                 Objects.equals(user, bet.user);
@@ -96,16 +96,15 @@ public class Bet {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idBet, sumOfTheBet, stapeBet, lot, user);
+        return Objects.hash(id_Bet, sum_of_the_bet, stapeBet, lot, user);
     }
 
     @Override
     public String toString() {
         return "Bet{" +
-                "idBet=" + idBet +
-                ", sumOfTheBet=" + sumOfTheBet +
+                "id_Bet=" + id_Bet +
+                ", sum_of_the_bet=" + sum_of_the_bet +
                 ", stapeBet=" + stapeBet +
-                ", lot=" + lot +
                 '}';
     }
 }

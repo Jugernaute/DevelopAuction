@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPayment;
+    private int id_Payment;
     private String mathodPayment;
 
     @JsonIgnore
@@ -26,12 +26,12 @@ public class Payment {
         this.listLot = listLot;
     }
 
-    public int getIdPayment() {
-        return idPayment;
+    public int getId_Payment() {
+        return id_Payment;
     }
 
-    public Payment setIdPayment(int idPayment) {
-        this.idPayment = idPayment;
+    public Payment setId_Payment(int id_Payment) {
+        this.id_Payment = id_Payment;
         return this;
     }
 
@@ -58,7 +58,7 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return idPayment == payment.idPayment &&
+        return id_Payment == payment.id_Payment &&
                 Objects.equals(mathodPayment, payment.mathodPayment) &&
                 Objects.equals(listLot, payment.listLot);
     }
@@ -66,13 +66,13 @@ public class Payment {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idPayment, mathodPayment, listLot);
+        return Objects.hash(id_Payment, mathodPayment, listLot);
     }
 
     @Override
     public String toString() {
         return "Payment{" +
-                "idPayment=" + idPayment +
+                "id_Payment=" + id_Payment +
                 ", mathodPayment='" + mathodPayment + '\'' +
                 '}';
     }

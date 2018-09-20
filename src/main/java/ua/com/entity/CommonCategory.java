@@ -13,7 +13,7 @@ import lombok.*;
 public class CommonCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCommonCategory;
+    private int id_CommonCategory;
     private String nameCommonCategory;
 
     public CommonCategory(String nameCommonCategory) {
@@ -46,12 +46,12 @@ public class CommonCategory {
         return this;
     }
 
-    public int getIdCommonCategory() {
-        return idCommonCategory;
+    public int getId_CommonCategory() {
+        return id_CommonCategory;
     }
 
-    public CommonCategory setIdCommonCategory(int idCommonCategory) {
-        this.idCommonCategory = idCommonCategory;
+    public CommonCategory setId_CommonCategory(int id_CommonCategory) {
+        this.id_CommonCategory = id_CommonCategory;
         return this;
     }
 
@@ -69,7 +69,7 @@ public class CommonCategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommonCategory that = (CommonCategory) o;
-        return idCommonCategory == that.idCommonCategory &&
+        return id_CommonCategory == that.id_CommonCategory &&
                 Objects.equals(nameCommonCategory, that.nameCommonCategory) &&
                 Objects.equals(listSubCategorie, that.listSubCategorie);
     }
@@ -77,13 +77,13 @@ public class CommonCategory {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idCommonCategory, nameCommonCategory, listSubCategorie);
+        return Objects.hash(id_CommonCategory, nameCommonCategory, listSubCategorie);
     }
 
     @Override
     public String toString() {
         return "CommonCategory{" +
-                "idCommonCategory=" + idCommonCategory +
+                "id_CommonCategory=" + id_CommonCategory +
                 ", nameCommonCategory='" + nameCommonCategory + '\'' +
                 '}';
     }

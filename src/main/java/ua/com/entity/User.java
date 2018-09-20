@@ -28,8 +28,8 @@ public class User implements UserDetails {
 
     private String firstname;
     private String surname;
-    private int balans;
-    private String userPostAdress;
+    private int userBalans;
+    private String userPostAddress;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
@@ -43,16 +43,23 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String firstname, String surname, int balans, String userPostAdress, List<Product> listUserProduct, List<Bet> listUserBet) {
+    public User(String firstname, String surname, int userBalans, String userPostAddress) {
         this.firstname = firstname;
         this.surname = surname;
-        this.balans = balans;
-        this.userPostAdress = userPostAdress;
+        this.userBalans = userBalans;
+        this.userPostAddress = userPostAddress;
+    }
+
+    public User(String firstname, String surname, int userBalans, String userPostAddress, List<Product> listUserProduct, List<Bet> listUserBet) {
+        this.firstname = firstname;
+        this.surname = surname;
+        this.userBalans = userBalans;
+        this.userPostAddress = userPostAddress;
         this.listUserProduct = listUserProduct;
         this.listUserBet = listUserBet;
     }
 
-    public User(String username, String email, String password, String phone, Role role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, String firstname, String surname, int balans, String userPostAdress, List<Product> listUserProduct, List<Bet> listUserBet) {
+    public User(String username, String email, String password, String phone, Role role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, String firstname, String surname, int userBalans, String userPostAddress, List<Product> listUserProduct, List<Bet> listUserBet) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -64,8 +71,8 @@ public class User implements UserDetails {
         this.isEnabled = isEnabled;
         this.firstname = firstname;
         this.surname = surname;
-        this.balans = balans;
-        this.userPostAdress = userPostAdress;
+        this.userBalans = userBalans;
+        this.userPostAddress = userPostAddress;
         this.listUserProduct = listUserProduct;
         this.listUserBet = listUserBet;
     }
@@ -88,21 +95,21 @@ public class User implements UserDetails {
         return this;
     }
 
-    public int getBalans() {
-        return balans;
+    public int getUserBalans() {
+        return userBalans;
     }
 
-    public User setBalans(int balans) {
-        this.balans = balans;
+    public User setUserBalans(int userBalans) {
+        this.userBalans = userBalans;
         return this;
     }
 
-    public String getUserPostAdress() {
-        return userPostAdress;
+    public String getUserPostAddress() {
+        return userPostAddress;
     }
 
-    public User setUserPostAdress(String userPostAdress) {
-        this.userPostAdress = userPostAdress;
+    public User setUserPostAddress(String userPostAddress) {
+        this.userPostAddress = userPostAddress;
         return this;
     }
 
@@ -134,7 +141,7 @@ public class User implements UserDetails {
                 isAccountNonLocked == user.isAccountNonLocked &&
                 isCredentialsNonExpired == user.isCredentialsNonExpired &&
                 isEnabled == user.isEnabled &&
-                balans == user.balans &&
+                userBalans == user.userBalans &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
@@ -142,7 +149,7 @@ public class User implements UserDetails {
                 role == user.role &&
                 Objects.equals(firstname, user.firstname) &&
                 Objects.equals(surname, user.surname) &&
-                Objects.equals(userPostAdress, user.userPostAdress) &&
+                Objects.equals(userPostAddress, user.userPostAddress) &&
                 Objects.equals(listUserProduct, user.listUserProduct) &&
                 Objects.equals(listUserBet, user.listUserBet);
     }
@@ -150,10 +157,8 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, username, email, password, phone, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstname, surname, balans, userPostAdress, listUserProduct, listUserBet);
+        return Objects.hash(userId, username, email, password, phone, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstname, surname, userBalans, userPostAddress, listUserProduct, listUserBet);
     }
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

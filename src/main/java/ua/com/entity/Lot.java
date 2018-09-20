@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idLot;
+    private int id_Lot;
     private String dataStartLot;
     private String dataEndLot;
     private int startPrice;
@@ -61,12 +61,12 @@ public class Lot {
         this.payment = payment;
     }
 
-    public int getIdLot() {
-        return idLot;
+    public int getId_Lot() {
+        return id_Lot;
     }
 
-    public Lot setIdLot(int idLot) {
-        this.idLot = idLot;
+    public Lot setId_Lot(int id_Lot) {
+        this.id_Lot = id_Lot;
         return this;
     }
 
@@ -147,7 +147,7 @@ public class Lot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lot lot = (Lot) o;
-        return idLot == lot.idLot &&
+        return id_Lot == lot.id_Lot &&
                 startPrice == lot.startPrice &&
                 hotPrise == lot.hotPrise &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
@@ -161,13 +161,13 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idLot, dataStartLot, dataEndLot, startPrice, hotPrise, product, listLotBet, delivery, payment);
+        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrise, product, listLotBet, delivery, payment);
     }
 
     @Override
     public String toString() {
         return "Lot{" +
-                "idLot=" + idLot +
+                "id_Lot=" + id_Lot +
                 ", dataStartLot='" + dataStartLot + '\'' +
                 ", dataEndLot='" + dataEndLot + '\'' +
                 ", startPrice=" + startPrice +

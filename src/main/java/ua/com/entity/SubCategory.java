@@ -13,7 +13,7 @@ import java.util.Objects;
 public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idSubCategory;
+    private int id_SubCategory;
 
     private String nameSubCategory;
 
@@ -59,12 +59,12 @@ public class SubCategory {
         return this;
     }
 
-    public int getIdSubCategory() {
-        return idSubCategory;
+    public int getId_SubCategory() {
+        return id_SubCategory;
     }
 
-    public SubCategory setIdSubCategory(int idSubCategory) {
-        this.idSubCategory = idSubCategory;
+    public SubCategory setId_SubCategory(int id_SubCategory) {
+        this.id_SubCategory = id_SubCategory;
         return this;
     }
 
@@ -82,7 +82,7 @@ public class SubCategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubCategory that = (SubCategory) o;
-        return idSubCategory == that.idSubCategory &&
+        return id_SubCategory == that.id_SubCategory &&
                 Objects.equals(nameSubCategory, that.nameSubCategory) &&
                 Objects.equals(commonCategory, that.commonCategory) &&
                 Objects.equals(listSubCategoryProduct, that.listSubCategoryProduct);
@@ -91,13 +91,13 @@ public class SubCategory {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idSubCategory, nameSubCategory, commonCategory, listSubCategoryProduct);
+        return Objects.hash(id_SubCategory, nameSubCategory, commonCategory, listSubCategoryProduct);
     }
 
     @Override
     public String toString() {
         return "SubCategory{" +
-                "idSubCategory=" + idSubCategory +
+                "id_SubCategory=" + id_SubCategory +
                 ", nameSubCategory='" + nameSubCategory + '\'' +
                 '}';
     }

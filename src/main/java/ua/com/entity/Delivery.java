@@ -11,7 +11,7 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idDelivery;
+    private int id_Delivery;
     private String methodDelivery;
 
     @JsonIgnore
@@ -31,12 +31,12 @@ public class Delivery {
         this.listLot = listLot;
     }
 
-    public int getIdDelivery() {
-        return idDelivery;
+    public int getId_Delivery() {
+        return id_Delivery;
     }
 
-    public Delivery setIdDelivery(int idDelivery) {
-        this.idDelivery = idDelivery;
+    public Delivery setId_Delivery(int id_Delivery) {
+        this.id_Delivery = id_Delivery;
         return this;
     }
 
@@ -63,7 +63,7 @@ public class Delivery {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Delivery delivery = (Delivery) o;
-        return idDelivery == delivery.idDelivery &&
+        return id_Delivery == delivery.id_Delivery &&
                 Objects.equals(methodDelivery, delivery.methodDelivery) &&
                 Objects.equals(listLot, delivery.listLot);
     }
@@ -71,13 +71,13 @@ public class Delivery {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idDelivery, methodDelivery, listLot);
+        return Objects.hash(id_Delivery, methodDelivery, listLot);
     }
 
     @Override
     public String toString() {
         return "Delivery{" +
-                "idDelivery=" + idDelivery +
+                "id_Delivery=" + id_Delivery +
                 ", methodDelivery='" + methodDelivery + '\'' +
                 '}';
     }

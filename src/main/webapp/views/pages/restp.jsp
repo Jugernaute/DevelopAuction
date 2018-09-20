@@ -28,7 +28,7 @@
 <button id="adddelivery">addDelivery</button>
 
 <button id="allbet">allbet</button>
-<input type="text" id="sumOfTheBet" placeholder="">
+<input type="text" id="sum_of_the_bet" placeholder="">
 <input type="text" id="stapeBet" placeholder="">
 <input type="text" id="idLot" placeholder="">
 <%--<input type="text" id="userId" placeholder="">--%>
@@ -63,8 +63,8 @@
 <button id="allUser">allUser</button>
 <input type="text" id="firstname" placeholder="">
 <input type="text" id="surname" placeholder="">
-<input type="text" id="balans" placeholder="">
-<input type="text" id="userPostAdress" placeholder="">
+<input type="text" id="userBalans" placeholder="">
+<input type="text" id="userPostAddress" placeholder="">
 <button id="addUser">addUser</button>
 
 <div id="conversationDiv"></div>
@@ -81,13 +81,13 @@
         let $x1 = $('#surname');
         let surname = $x1.val();
         $x1.val(' ');
-        let $x2 = $('#balans');
-        let balans = $x2.val();
+        let $x2 = $('#userBalans');
+        let userBalans = $x2.val();
         $x2.val(' ');
-        let $x3 = $('#userPostAdress');
-        let userPostAdress = $x3.val();
+        let $x3 = $('#userPostAddress');
+        let userPostAddress = $x3.val();
         $x3.val(' ');
-        let user = JSON.stringify({firstname, surname, balans, userPostAdress});
+        let user = JSON.stringify({firstname, surname, userBalans, userPostAddress});
         $.ajax({
             url : '/addUser',
             type : 'put',
@@ -101,12 +101,12 @@
         $("#conversationDiv").empty();
 
         $.ajax({
-            url : '/allUsert',
+            url : '/allUser',
             type : 'get',
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let user = $('<div/>', {text : obj.firstname + ' ' + obj.surname + ' ' + obj.balans + ' ' + obj.userPostAdress});
+                    let user = $('<div/>', {text : obj.firstname + ' ' + obj.surname + ' ' + obj.userBalans + ' ' + obj.userPostAddress});
                     user.appendTo('#conversationDiv');
                 }
             },
@@ -316,8 +316,8 @@
     $('#addbet').click(function () {
         $("#conversationDiv").empty();
 
-        let $input = $('#sumOfTheBet');
-        let sumOfTheBet = $input.val();
+        let $input = $('#sum_of_the_bet');
+        let sum_of_the_bet = $input.val();
         $input.val(' ');
         let $input1 = $('#stapeBet');
         let stapeBet = $input1.val();
@@ -328,7 +328,7 @@
         let $input3 = $('#userId');
         let userId = $input3.val();
         $input3.val(' ');
-        let bet = JSON.stringify({sumOfTheBet, stapeBet, idLot, userId});
+        let bet = JSON.stringify({sum_of_the_bet, stapeBet, idLot, userId});
         $.ajax({
             url : '/addBet',
             type : 'put',
@@ -346,7 +346,7 @@
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let bet = $('<div/>', {text : obj.sumOfTheBet + ' ' + obj.stapeBet + ' ' + obj.idLot + ' ' + obj.userId});
+                    let bet = $('<div/>', {text : obj.sum_of_the_bet + ' ' + obj.stapeBet + ' ' + obj.idLot + ' ' + obj.userId});
                     bet.appendTo('#conversationDiv');
                 }
             },

@@ -12,7 +12,7 @@ public class Manufacturer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idManufacturer;
+    private int id_Manufacturer;
     private String nameManufacturer;
 
     @JsonIgnore
@@ -29,12 +29,12 @@ public class Manufacturer {
         this.listManufacturerProduct = listManufacturerProduct;
     }
 
-    public int getIdManufacturer() {
-        return idManufacturer;
+    public int getId_Manufacturer() {
+        return id_Manufacturer;
     }
 
-    public Manufacturer setIdManufacturer(int idManufacturer) {
-        this.idManufacturer = idManufacturer;
+    public Manufacturer setId_Manufacturer(int id_Manufacturer) {
+        this.id_Manufacturer = id_Manufacturer;
         return this;
     }
 
@@ -61,7 +61,7 @@ public class Manufacturer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manufacturer that = (Manufacturer) o;
-        return idManufacturer == that.idManufacturer &&
+        return id_Manufacturer == that.id_Manufacturer &&
                 Objects.equals(nameManufacturer, that.nameManufacturer) &&
                 Objects.equals(listManufacturerProduct, that.listManufacturerProduct);
     }
@@ -69,13 +69,13 @@ public class Manufacturer {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idManufacturer, nameManufacturer, listManufacturerProduct);
+        return Objects.hash(id_Manufacturer, nameManufacturer, listManufacturerProduct);
     }
 
     @Override
     public String toString() {
         return "Manufacturer{" +
-                "idManufacturer=" + idManufacturer +
+                "id_Manufacturer=" + id_Manufacturer +
                 ", nameManufacturer='" + nameManufacturer + '\'' +
                 '}';
     }
