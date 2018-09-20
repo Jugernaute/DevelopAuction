@@ -1,5 +1,7 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +13,7 @@ public class Payment {
     private int idPayment;
     private String mathodPayment;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST} )
     private List<Lot> listLot;

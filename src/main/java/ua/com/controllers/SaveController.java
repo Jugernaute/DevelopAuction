@@ -87,13 +87,7 @@ public class SaveController {
         return "save";
     }
 
-    @PostMapping("/lot")
-    public String saveLot(@RequestParam int idDelivery, @RequestParam int idPayment, @RequestParam int idProduct, Lot lot){
-        Delivery delivery = deliveryDao.findOne(idDelivery);
-        Payment payment = paymentDao.findOne(idPayment);
-        Product product = productDao.findOne(idProduct);
-        lotService.save(lot.setDelivery(delivery).setPayment(payment).setProduct(product));
-        return "save";
+    public SaveController() {
     }
 
     @PostMapping("/manufacturer")

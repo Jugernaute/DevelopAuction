@@ -21,17 +21,17 @@ public class Product {
 
         @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
-                cascade = {CascadeType.MERGE})
+                cascade = {CascadeType.MERGE, CascadeType.DETACH})
         private SubCategory subCategory;
 
         @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
-                cascade = CascadeType.MERGE)
+                cascade = {CascadeType.MERGE, CascadeType.DETACH})
         private User userOwner;
 
         @JsonIgnore
         @OneToOne(fetch = FetchType.LAZY,
-                cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+                cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
                 mappedBy = "product"
                 )
         private Lot lot;

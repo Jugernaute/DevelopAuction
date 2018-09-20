@@ -1,5 +1,6 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,10 +31,11 @@ public class User implements UserDetails {
     private int balans;
     private String userPostAdress;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
                 cascade = CascadeType.PERSIST)
     private List<Product> listUserProduct;
-
+@JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
                 cascade = CascadeType.PERSIST)
     private List<Bet> listUserBet;
@@ -42,6 +44,24 @@ public class User implements UserDetails {
     }
 
     public User(String firstname, String surname, int balans, String userPostAdress, List<Product> listUserProduct, List<Bet> listUserBet) {
+        this.firstname = firstname;
+        this.surname = surname;
+        this.balans = balans;
+        this.userPostAdress = userPostAdress;
+        this.listUserProduct = listUserProduct;
+        this.listUserBet = listUserBet;
+    }
+
+    public User(String username, String email, String password, String phone, Role role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, String firstname, String surname, int balans, String userPostAdress, List<Product> listUserProduct, List<Bet> listUserBet) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
         this.firstname = firstname;
         this.surname = surname;
         this.balans = balans;

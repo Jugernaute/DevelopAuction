@@ -1,5 +1,7 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -12,11 +14,16 @@ public class Delivery {
     private int idDelivery;
     private String methodDelivery;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     private List<Lot> listLot;
 
     public Delivery() {
+    }
+
+    public Delivery(String methodDelivery) {
+        this.methodDelivery = methodDelivery;
     }
 
     public Delivery(String methodDelivery, List<Lot> listLot) {

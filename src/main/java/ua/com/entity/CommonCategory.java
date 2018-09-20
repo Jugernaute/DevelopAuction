@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class CommonCategory {
         this.nameCommonCategory = nameCommonCategory;
     }
 
+    @JsonIgnore
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE},

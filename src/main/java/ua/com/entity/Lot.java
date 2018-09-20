@@ -1,5 +1,6 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.scene.chart.PieChart;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,19 +19,23 @@ public class Lot {
     private int startPrice;
     private int hotPrise;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Product product;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
             mappedBy = "lot")
     private List<Bet> listLotBet;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Delivery delivery;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE})
     private Payment payment;

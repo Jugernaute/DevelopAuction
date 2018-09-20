@@ -1,6 +1,8 @@
 package ua.com.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.List;
@@ -15,11 +17,12 @@ public class SubCategory {
 
     private String nameSubCategory;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
                cascade = {CascadeType.MERGE})
     private CommonCategory commonCategory;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST})
     private List<Product> listSubCategoryProduct;

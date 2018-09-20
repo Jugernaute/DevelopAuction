@@ -1,5 +1,7 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Manufacturer {
     private int idManufacturer;
     private String nameManufacturer;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST
           )
