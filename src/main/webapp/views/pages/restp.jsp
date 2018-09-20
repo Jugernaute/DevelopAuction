@@ -101,7 +101,7 @@
         $("#conversationDiv").empty();
 
         $.ajax({
-            url : '/allUser',
+            url : '/allUsert',
             type : 'get',
             contentType : 'application/json',
             success : function (result) {
