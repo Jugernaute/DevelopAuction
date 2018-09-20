@@ -4,14 +4,13 @@ package ua.com.controllers.controllers_lot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ua.com.dao.CommonCategoryDao;
-import ua.com.dao.ManufacturerDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.CommonCategory;
 import ua.com.entity.Manufacturer;
 import ua.com.entity.SubCategory;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.manufacturer.ManufacturerService;
-import ua.com.service.subcategory.SubcategoryService;
+import ua.com.service.subcategory.SubСategoryService;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class RestControllerLot {
     @Autowired
     private SubCategoryDao subCategoryDao;
     @Autowired
-    private SubcategoryService subcategoryService;
+    private SubСategoryService subСategoryService;
     @Autowired
     private ManufacturerService manufacturerService;
     @Autowired

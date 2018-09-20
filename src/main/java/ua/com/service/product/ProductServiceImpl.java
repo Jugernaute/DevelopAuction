@@ -1,38 +1,40 @@
 package ua.com.service.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.ProductDao;
 import ua.com.entity.Product;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
-
     @Autowired
-    ProductDao productDao;
+    private ProductDao productDao;
 
     @Override
-    public List<Product> findAllProduct() {
+    public void save(Product product) {
+        if (product != null){
+        productDao.save(product);
+    }
+    }
+
+    @Override
+    public void deleteById(int id) {
+        productDao.delete(id);
+    }
+
+    @Override
+    public Product findOne(int id) {
+        return productDao.findOne(id);
+    }
+
+    @Override
+    public List<Product> findAll() {
         return productDao.findAll();
     }
 
-    @Override
-    public Product getProductById(int idProduct) {
-        return productDao.findOne(idProduct);
-    }
 
-    @Override
-    public void addProduct(Product product) {
-        productDao.save(product);
-    }
-
-    @Override
-    public void updateProduct(Product product) {
-        productDao.save(product);
-    }
-
-    @Override
-    public void deleteProductByIb(int idProduct) {
-        productDao.delete(idProduct);
-    }
 }

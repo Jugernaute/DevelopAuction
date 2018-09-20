@@ -4,7 +4,7 @@ import ua.com.entity.SubCategory;
 
 import java.util.List;
 
-public interface SubcategoryService {
+public interface SubСategoryService {
 
 //    List<SubCategory> findAllSubcategory();
 //

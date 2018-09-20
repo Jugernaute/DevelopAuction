@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ua.com.dao.UserDao;
 import ua.com.entity.User;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,18 +26,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUserId(int id) {
-        return userDao.findByUserId(id);
+    public void deleteBuId(int id) {
+        userDao.delete(id);
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+    public User findOne(int id) {
+        return userDao.findOne(id);
     }
 
     @Override
-    public User findByRandomKey(String randomKey) {
-        return userDao.findByRandomKey(randomKey);
+    public List<User> findAll(int id) {
+        return userDao.findAll();
     }
 
     @Override

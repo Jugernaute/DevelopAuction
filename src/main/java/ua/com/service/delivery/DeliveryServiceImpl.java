@@ -1,37 +1,39 @@
 package ua.com.service.delivery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.DeliveryDao;
 import ua.com.entity.Delivery;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class DeliveryServiceImpl implements DeliveryService {
+
     @Autowired
-    DeliveryDao deliveryDao;
+    private DeliveryDao deliveryDao;
 
     @Override
-    public List<Delivery> findAllDelivery() {
+    public void save(Delivery delivery) {
+        if (delivery != null){
+        deliveryDao.save(delivery);
+    }
+    }
+
+    @Override
+    public void deleteById(int id) {
+        deliveryDao.delete(id);
+    }
+
+    @Override
+    public Delivery findOne(int id) {
+        return deliveryDao.findOne(id);
+    }
+
+    @Override
+    public List<Delivery> findAll() {
         return deliveryDao.findAll();
-    }
-
-    @Override
-    public Delivery getDeliveryById(int idDelivery) {
-        return deliveryDao.findOne(idDelivery);
-    }
-
-    @Override
-    public void addDelivery(Delivery delivery) {
-        deliveryDao.save(delivery);
-    }
-
-    @Override
-    public void updateDelivery(Delivery delivery) {
-        deliveryDao.save(delivery);
-    }
-
-    @Override
-    public void deleteDeliveryByIb(int idDelivery) {
-
     }
 }
