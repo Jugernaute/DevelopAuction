@@ -81,10 +81,11 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="both"></div>
                     <%--</div>--%>
 
 <br>
-                        <div class="row" style="margin-top: 45px">
+                        <div class="row">
                             <div class="col-xs-2">
                                 <p style="float: right">Назва*</p>
                             </div>
@@ -93,12 +94,67 @@
                                 </div>
                         </div>
 <br>
-                        <div class="row" style="margin-top: 45px">
+                        <div class="row" >
                             <div class="col-xs-2">
                                 <p style="float: right">Фотографія*</p>
                             </div>
                             <div class="col-xs-10">
                                 <input type="file">
+                            </div>
+                        </div>
+
+                        <h6>Тип продажу</h6>
+                <hr>
+                        <div class="row" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Тип продажу:</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <select>
+                                    <option>Аукцион з можливістю бліц-покупки</option>
+                                    <option>Простий аукціон</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Ціна стартова</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text">
+                            </div>
+                        </div>
+
+                        <div class="row blic" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Ціна купити зараз</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text">
+                            </div>
+                        </div>
+
+                <div class="type-sell-head">
+                    <div class="start-sell">Дата початку торгів</div>
+                    <div class="form-dataSell">
+
+                            <label for="date1">Дата</label>
+                            <input type="date" id="date1" name="date"/>
+                        <label for="time1">Час: </label>
+                        <input type="time" id="time1" name="time"/>
+
+                    </div>
+
+                </div>
+                        <div class="both"></div>
+                        <div class="type-sell-head">
+                            <div class="start-sell">Дата закінчення торгів</div>
+                            <div class="form-dataSell">
+                                <label for="date2">Дата</label>
+                                <input type="date" id="date2" name="date"/>
+                                <label for="time2">Час: </label>
+                                <input type="time" id="time2" name="time"/>
                             </div>
                         </div>
 
