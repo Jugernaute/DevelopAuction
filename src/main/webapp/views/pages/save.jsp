@@ -14,10 +14,10 @@
 <body>
 <h3>User</h3>
 <form action="/save/user" method="post">
-    <input type="text" name="firstname" placeholder="firstname"/>
-    <input type="text" name="surname" placeholder="surname"/>
-    <input type="text" name="balans" placeholder="balans"/>
-    <input type="text" name="userPostAdress" placeholder="userPostAdress"/>
+    <input type="text" name="firstNameUser" placeholder="firstNameUser"/>
+    <input type="text" name="surNameUser" placeholder="surNameUser"/>
+    <input type="text" name="userBalance" placeholder="userBalance"/>
+    <input type="text" name="userPostAddress" placeholder="userPostAddress"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Manufacturer</h3>
@@ -35,10 +35,10 @@
     <input type="text" name="dataStartLot" placeholder="dataStartLot"/>
     <input type="text" name="dataEndLot" placeholder="dataEndLot"/>
     <input type="text" name="startPrice" placeholder="startPrice"/>
-    <input type="text" name="hotPrise" placeholder="hotPrise"/>
-    <input type="text" name="idDelivery" placeholder="idDelivery"/>
-    <input type="text" name="idPayment" placeholder="idPayment"/>
-    <input type="text" name="idProduct" placeholder="idProduct"/>
+    <input type="text" name="hotPrice" placeholder="hotPrice"/>
+    <input type="text" name="id_Delivery" placeholder="id_Delivery"/>
+    <input type="text" name="id_Payment" placeholder="id_Payment"/>
+    <input type="text" name="id_Product" placeholder="id_Product"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Product</h3>
@@ -47,16 +47,17 @@
     <input type="text" name="modelProduct" placeholder="modelProduct"/>
     <input type="text" name="linkOnImageProduct" placeholder="linkOnImageProduct"/>
     <input type="text" name="descriptionProduct" placeholder="descriptionProduct"/>
-    <input type="text" name="idManufacturer" placeholder="idManufacturer"/>
-    <input type="text" name="idSubCategory" placeholder="idSubCategory"/>
+    <%--<input type="text" name="stateProduct" placeholder="stateProduct"/>--%>
+    <input type="text" name="id_Manufacturer" placeholder="id_Manufacturer"/>
+    <input type="text" name="id_SubCategory" placeholder="id_SubCategory"/>
     <input type="text" name="userId" placeholder="userId"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Bet</h3>
 <form action="/save/bet" method="post">
-    <input type="text" name="sumOfTheBet" placeholder="sumOfTheBet"/>
-    <input type="text" name="stapeBet" placeholder="stapeBet"/>
-    <input type="text" name="idLot" placeholder="idLot"/>
+    <input type="text" name="sum_of_the_bet" placeholder="sum_of_the_bet"/>
+    <input type="text" name="stepBet" placeholder="stepBet"/>
+    <input type="text" name="id_Lot" placeholder="id_Lot"/>
     <input type="text" name="userId" placeholder="userId"/>
     <input type="submit" name="" placeholder="">
 </form>
@@ -74,7 +75,7 @@
 <h3>SubCategory</h3>
 <form action="/save/subCategory" method="post">
     <input type="text" name="nameSubCategory" placeholder="nameSubCategory"/>
-    <input type="text" name="idCommonCategory" placeholder="idCommonCategory"/>
+    <input type="text" name="id_CommonCategory" placeholder="id_CommonCategory"/>
     <input type="submit" name="" placeholder="">
 </form>
 

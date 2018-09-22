@@ -8,27 +8,26 @@ import java.util.Objects;
 
 @Entity
 public class Delivery {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Delivery;
     private String methodDelivery;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
-    private List<Lot> listLot;
-
-    public Delivery() {
-    }
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+    mappedBy = "delivery")
+    private Lot lot;
 
     public Delivery(String methodDelivery) {
         this.methodDelivery = methodDelivery;
     }
 
-    public Delivery(String methodDelivery, List<Lot> listLot) {
+    public Delivery() {
+    }
+
+    public Delivery(String methodDelivery, Lot lot) {
         this.methodDelivery = methodDelivery;
-        this.listLot = listLot;
+        this.lot = lot;
     }
 
     public int getId_Delivery() {
@@ -49,12 +48,12 @@ public class Delivery {
         return this;
     }
 
-    public List<Lot> getListLot() {
-        return listLot;
+    public Lot getLot() {
+        return lot;
     }
 
-    public Delivery setListLot(List<Lot> listLot) {
-        this.listLot = listLot;
+    public Delivery setLot(Lot lot) {
+        this.lot = lot;
         return this;
     }
 
@@ -65,13 +64,13 @@ public class Delivery {
         Delivery delivery = (Delivery) o;
         return id_Delivery == delivery.id_Delivery &&
                 Objects.equals(methodDelivery, delivery.methodDelivery) &&
-                Objects.equals(listLot, delivery.listLot);
+                Objects.equals(lot, delivery.lot);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Delivery, methodDelivery, listLot);
+        return Objects.hash(id_Delivery, methodDelivery, lot);
     }
 
     @Override

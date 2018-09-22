@@ -1,7 +1,6 @@
 package ua.com.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,8 +10,7 @@ import lombok.*;
 @Entity
 
 public class CommonCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_CommonCategory;
     private String nameCommonCategory;
 
@@ -23,27 +21,17 @@ public class CommonCategory {
     @JsonIgnore
     @OneToMany(
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE},
+            cascade = CascadeType.PERSIST,
             mappedBy = "commonCategory"
     )
-    List<SubCategory> listSubCategorie = new ArrayList<>();
-
+    List<SubCategory> subCategoryList;
 
     public CommonCategory() {
     }
 
-    public CommonCategory(String nameCommonCategory, List<SubCategory> listSubCategorie) {
+    public CommonCategory(String nameCommonCategory, List<SubCategory> subCategoryList) {
         this.nameCommonCategory = nameCommonCategory;
-        this.listSubCategorie = listSubCategorie;
-    }
-
-    public List<SubCategory> getListSubCategorie() {
-        return listSubCategorie;
-    }
-
-    public CommonCategory setListSubCategorie(List<SubCategory> listSubCategorie) {
-        this.listSubCategorie = listSubCategorie;
-        return this;
+        this.subCategoryList = subCategoryList;
     }
 
     public int getId_CommonCategory() {
@@ -64,6 +52,15 @@ public class CommonCategory {
         return this;
     }
 
+    public List<SubCategory> getSubCategoryList() {
+        return subCategoryList;
+    }
+
+    public CommonCategory setSubCategoryList(List<SubCategory> subCategoryList) {
+        this.subCategoryList = subCategoryList;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,13 +68,13 @@ public class CommonCategory {
         CommonCategory that = (CommonCategory) o;
         return id_CommonCategory == that.id_CommonCategory &&
                 Objects.equals(nameCommonCategory, that.nameCommonCategory) &&
-                Objects.equals(listSubCategorie, that.listSubCategorie);
+                Objects.equals(subCategoryList, that.subCategoryList);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_CommonCategory, nameCommonCategory, listSubCategorie);
+        return Objects.hash(id_CommonCategory, nameCommonCategory, subCategoryList);
     }
 
     @Override

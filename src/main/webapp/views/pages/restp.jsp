@@ -18,54 +18,55 @@
 <input type="text" id="modelProduct" placeholder=""/>
 <input type="text" id="linkOnImageProduct" placeholder=""/>
 <input type="text" id="descriptionProduct" placeholder=""/>
-<input type="text" id="idManufacturer" placeholder=""/>
-<input type="text" id="idSubCategory" placeholder=""/>
+<input type="text" id="id_Manufacturer" placeholder=""/>
+<input type="text" id="id_SubCategory" placeholder=""/>
 <input type="text" id="userId" placeholder=""/>
-<button id="addproduct">addProduct</button>
+<button id="addproduct">addProduct</button><br>
 
 <button id="alldelivery">alldelivery</button>
 <input type="" id="methodDelivery" placeholder="">
-<button id="adddelivery">addDelivery</button>
+<button id="adddelivery">addDelivery</button><br>
 
 <button id="allbet">allbet</button>
 <input type="text" id="sum_of_the_bet" placeholder="">
 <input type="text" id="stapeBet" placeholder="">
 <input type="text" id="idLot" placeholder="">
-<%--<input type="text" id="userId" placeholder="">--%>
-<button id="addbet">addbet</button>
+<input type="text" id="userId1" placeholder="">
+<button id="addbet">addbet</button><br>
 
 <button id="allCommonCategory">allCommonCategory</button>
 <input type="text" id="nameCommonCategory" placeholder="">
-<button id="addCommonCategory">addCommonCategory</button>
+<button id="addCommonCategory">addCommonCategory</button><br>
 
 <button id="allSubCategory">allSubCategory</button>
 <input type="text" id="nameSubCategory" placeholder="">
-<button id="addSubCategory">addSubCategory</button>
+<input type="text" id="id_CommonCategory" placeholder="">
+<button id="addSubCategory">addSubCategory</button><br>
 
 <button id="allManufacturer">allManufacturer</button>
 <input type="text" id="nameManufacturer" placeholder="">
-<button id="addManufacturer">addManufacturer</button>
+<button id="addManufacturer">addManufacturer</button><br>
 
 <button id="allPayment">allPayment</button>
-<input type="text" id="mathodPayment" placeholder="">
-<button id="addPayment">addPayment</button>
+<input type="text" id="methodPayment" placeholder="">
+<button id="addPayment">addPayment</button><br>
 
 <button id="allLot">allLot</button>
 <input type="text" id="dataStartLot" placeholder="">
 <input type="text" id="dataEndLot" placeholder="">
 <input type="text" id="startPrice" placeholder="">
-<input type="text" id="hotPrise" placeholder="">
-<input type="text" id="idDelivery" placeholder="">
-<input type="text" id="idPaytment" placeholder="">
-<input type="text" id="idProduct" placeholder="">
-<button id="addLot">addLot</button>
+<input type="text" id="hotPrice" placeholder="">
+<input type="text" id="id_Delivery" placeholder="">
+<input type="text" id="id_Payment" placeholder="">
+<input type="text" id="id_Product" placeholder="">
+<button id="addLot">addLot</button><br>
 
 <button id="allUser">allUser</button>
-<input type="text" id="firstname" placeholder="">
-<input type="text" id="surname" placeholder="">
-<input type="text" id="userBalans" placeholder="">
+<input type="text" id="firstNameUser" placeholder="">
+<input type="text" id="surNameUser" placeholder="">
+<input type="text" id="userBalance" placeholder="">
 <input type="text" id="userPostAddress" placeholder="">
-<button id="addUser">addUser</button>
+<button id="addUser">addUser</button><br>
 
 <div id="conversationDiv"></div>
 <script>
@@ -75,19 +76,19 @@
     $('#addUser').click(function () {
         $("#conversationDiv").empty();
 
-        let $x = $('#firstname');
-        let firstname = $x.val();
+        let $x = $('#firstNameUser');
+        let firstNameUser = $x.val();
         $x.val(' ');
-        let $x1 = $('#surname');
-        let surname = $x1.val();
+        let $x1 = $('#surNameUser');
+        let surNameUser = $x1.val();
         $x1.val(' ');
-        let $x2 = $('#userBalans');
-        let userBalans = $x2.val();
+        let $x2 = $('#userBalance');
+        let userBalance = $x2.val();
         $x2.val(' ');
         let $x3 = $('#userPostAddress');
         let userPostAddress = $x3.val();
         $x3.val(' ');
-        let user = JSON.stringify({firstname, surname, userBalans, userPostAddress});
+        let user = JSON.stringify({firstNameUser, surNameUser, userBalance, userPostAddress});
         $.ajax({
             url : '/addUser',
             type : 'put',
@@ -106,7 +107,7 @@
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let user = $('<div/>', {text : obj.firstname + ' ' + obj.surname + ' ' + obj.userBalans + ' ' + obj.userPostAddress});
+                    let user = $('<div/>', {text : obj.firstNameUser + ' ' + obj.surNameUser + ' ' + obj.userBalance + ' ' + obj.userPostAddress});
                     user.appendTo('#conversationDiv');
                 }
             },
@@ -129,21 +130,21 @@
         let $x2 = $('#startPrice');
         let startPrice = $x2.val();
         $x2.val(' ');
-        let $x3 = $('#hotPrise');
-        let hotPrise = $x3.val();
+        let $x3 = $('#hotPrice');
+        let hotPrice = $x3.val();
         $x3.val(' ');
-        let $x4 = $('#idDelivery');
-        let idDelivery = $x4.val();
+        let $x4 = $('#id_Delivery');
+        let id_Delivery = $x4.val();
         $x4.val(' ');
-        let $x5 = $('#idPaytment');
-        let idPaytment = $x5.val();
+        let $x5 = $('#id_Payment');
+        let id_Payment = $x5.val();
         $x5.val(' ');
-        let $x6 = $('#idProduct');
-        let idProduct = $x6.val();
+        let $x6 = $('#id_Product');
+        let id_Product = $x6.val();
         $x6.val(' ');
-        let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrise, idDelivery, idPaytment, idProduct});
+        let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrice, id_Delivery, id_Payment, id_Product});
         $.ajax({
-            url : '/addLot',
+            url : '/addLot?id_Delivery=' + id_Delivery + '&id_Payment=' + id_Payment + '&id_Product=' + id_Product,
             type : 'put',
             contentType : 'application/json',
             data : lot,
@@ -159,7 +160,7 @@
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let lot = $('<div/>', {text : obj.dataStartLot + ' ' + obj.dataEndLot + ' ' + obj.startPrice + ' ' + obj.hotPrise + ' ' + obj.idDelivery + ' ' + obj.idPaytment + ' ' + obj.idProduct});
+                    let lot = $('<div/>', {text : obj.dataStartLot + ' ' + obj.dataEndLot + ' ' + obj.startPrice + ' ' + obj.hotPrice + ' ' + obj.id_Product + ' ' + obj.id_Payment + ' ' + obj.id_Delivery});
                     lot.appendTo('#conversationDiv');
                 }
             },
@@ -174,10 +175,10 @@
     $('#addPayment').click(function () {
         $("#conversationDiv").empty();
 
-        let $x = $('#mathodPayment');
-        let mathodPayment = $x.val();
+        let $x = $('#methodPayment');
+        let methodPayment = $x.val();
         $x.val(' ');
-        let payment = JSON.stringify({mathodPayment});
+        let payment = JSON.stringify({methodPayment});
         $.ajax({
             url : '/addPayment',
             type : 'put',
@@ -195,7 +196,7 @@
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let payment = $('<div/>', {text : obj.mathodPayment});
+                    let payment = $('<div/>', {text : obj.methodPayment});
                     payment.appendTo('#conversationDiv');
                 }
             },
@@ -249,9 +250,12 @@
         let $x = $('#nameSubCategory');
         let nameSubCategory = $x.val();
         $x.val(' ');
+        let $x1 = $('#id_CommonCategory');
+        let id_CommonCategory = $x1.val();
+        $x1.val(' ');
         let subCategory = JSON.stringify({nameSubCategory});
         $.ajax({
-            url : '/addSubCategory',
+            url : '/addSubCategory?id_CommonCategory='+id_CommonCategory,
             type : 'put',
             contentType : 'application/json',
             data : subCategory
@@ -425,19 +429,19 @@
         let $x3 = $("#descriptionProduct");
         let descriptionProduct = $x3.val();
         $x3.val(' ');
-        let $x4 = $("#idManufacturer");
-        let idManufacturer = $x4.val();
+        let $x4 = $("#id_Manufacturer");
+        let id_Manufacturer = $x4.val();
         $x4.val(' ');
-        let $x5 = $("#idSubCategory");
-        let idSubCategory = $x5.val();
+        let $x5 = $("#id_SubCategory");
+        let id_SubCategory = $x5.val();
         $x5.val(' ');
         let $x6 = $("#userId");
         let userId = $x6.val();
         $x6.val(' ');
-        let product = JSON.stringify({nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, idSubCategory, idManufacturer, userId});
+        let product = JSON.stringify({nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, id_SubCategory, id_Manufacturer, userId});
 console.log(product);
         $.ajax({
-            url:"/addProduct",
+            url:'/addProduct?id_Manufacturer=' + id_Manufacturer + '&id_SubCategory=' + id_SubCategory + '&userId=' + userId,
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

@@ -78,8 +78,11 @@ public void addDeliveryMethod(@RequestBody Delivery delivery){
 
 /////////////////////////////////////////////////////////////////
 @PutMapping("/addProduct")
-public void addProductMethod(@RequestBody Product product){
-    productService.save(product);
+public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, @RequestBody Product product){
+        Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
+        SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
+        User user = userService.findOne(userId);
+    productService.save(product.setUserOwner(user).setSubCategory(subCategory).setManufacturer(manufacturer));
 }
     @GetMapping("/allProduct")
     public List<Product> allProductMethod(){
@@ -99,8 +102,10 @@ public void addCommonCategory(@RequestBody CommonCategory commonCategory){
  //////////////////////////////////////////////////////////////////////
 
  @PutMapping("/addSubCategory")
-    public void addSubCategory(@RequestBody SubCategory subCategory){
-        subCategoryService.save(subCategory);
+    public void addSubCategory(@RequestParam int id_CommonCategory, @RequestBody SubCategory subCategory){
+     System.out.println(id_CommonCategory);
+     CommonCategory commonCategory = commonCategoryDao.findOne(id_CommonCategory);
+        subCategoryService.save(subCategory.setCommonCategory(commonCategory));
  }
  @GetMapping("/allSubCategory")
     public List<SubCategory> allSubCategory(){
@@ -121,8 +126,11 @@ public void addCommonCategory(@RequestBody CommonCategory commonCategory){
 //////////////////////////////////////////////////////////////////////////
 
 @PutMapping("/addLot")
-public void addLot(@RequestBody Lot lot){
-        lotService.save(lot);
+public void addLot(@RequestParam int id_Delivery, @RequestParam int id_Payment, @RequestParam int id_Product, @RequestBody Lot lot){
+        Product product = productDao.findOne(id_Product);
+        Delivery delivery = deliveryDao.findOne(id_Delivery);
+        Payment payment = paymentDao.findOne(id_Payment);
+        lotService.save(lot.setProduct(product).setDelivery(delivery).setPayment(payment));
 }
 @GetMapping("/allLot")
     public List<Lot> allLot(){

@@ -1,22 +1,25 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Bet {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id_Bet;
     private int sum_of_the_bet;
-    private int stapeBet;
+    private int stepBet;
 
-    @ManyToOne(fetch = FetchType.LAZY,
+    @JsonIgnore
+    @ManyToOne
+            (fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Lot lot;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private User user;
@@ -24,14 +27,9 @@ public class Bet {
     public Bet() {
     }
 
-    public Bet(int sum_of_the_bet, int stapeBet) {
+    public Bet(int sum_of_the_bet, int stepBet, Lot lot, User user) {
         this.sum_of_the_bet = sum_of_the_bet;
-        this.stapeBet = stapeBet;
-    }
-
-    public Bet(int sum_of_the_bet, int stapeBet, Lot lot, User user) {
-        this.sum_of_the_bet = sum_of_the_bet;
-        this.stapeBet = stapeBet;
+        this.stepBet = stepBet;
         this.lot = lot;
         this.user = user;
     }
@@ -54,12 +52,12 @@ public class Bet {
         return this;
     }
 
-    public int getStapeBet() {
-        return stapeBet;
+    public int getStepBet() {
+        return stepBet;
     }
 
-    public Bet setStapeBet(int stapeBet) {
-        this.stapeBet = stapeBet;
+    public Bet setStepBet(int stepBet) {
+        this.stepBet = stepBet;
         return this;
     }
 
@@ -88,7 +86,7 @@ public class Bet {
         Bet bet = (Bet) o;
         return id_Bet == bet.id_Bet &&
                 sum_of_the_bet == bet.sum_of_the_bet &&
-                stapeBet == bet.stapeBet &&
+                stepBet == bet.stepBet &&
                 Objects.equals(lot, bet.lot) &&
                 Objects.equals(user, bet.user);
     }
@@ -96,7 +94,7 @@ public class Bet {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Bet, sum_of_the_bet, stapeBet, lot, user);
+        return Objects.hash(id_Bet, sum_of_the_bet, stepBet, lot, user);
     }
 
     @Override
@@ -104,7 +102,7 @@ public class Bet {
         return "Bet{" +
                 "id_Bet=" + id_Bet +
                 ", sum_of_the_bet=" + sum_of_the_bet +
-                ", stapeBet=" + stapeBet +
+                ", stepBet=" + stepBet +
                 '}';
     }
 }

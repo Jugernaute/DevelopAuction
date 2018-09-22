@@ -17,46 +17,48 @@ public class Lot {
     private String dataStartLot;
     private String dataEndLot;
     private int startPrice;
-    private int hotPrise;
+    private int hotPrice;
+
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "lot")
+    List<Bet> listLotBet;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Product product;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
-            mappedBy = "lot")
-    private List<Bet> listLotBet;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Delivery delivery;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE})
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE)
     private Payment payment;
 
     public Lot() {
     }
 
-    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrise) {
+    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrice) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
-        this.hotPrise = hotPrise;
+        this.hotPrice = hotPrice;
     }
 
-    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrise, Product product, List<Bet> listLotBet, Delivery delivery, Payment payment) {
+    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, Delivery delivery, Payment payment) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
-        this.hotPrise = hotPrise;
-        this.product = product;
+        this.hotPrice = hotPrice;
         this.listLotBet = listLotBet;
+        this.product = product;
         this.delivery = delivery;
         this.payment = payment;
     }
@@ -97,21 +99,12 @@ public class Lot {
         return this;
     }
 
-    public int getHotPrise() {
-        return hotPrise;
+    public int getHotPrice() {
+        return hotPrice;
     }
 
-    public Lot setHotPrise(int hotPrise) {
-        this.hotPrise = hotPrise;
-        return this;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Lot setProduct(Product product) {
-        this.product = product;
+    public Lot setHotPrice(int hotPrice) {
+        this.hotPrice = hotPrice;
         return this;
     }
 
@@ -121,6 +114,15 @@ public class Lot {
 
     public Lot setListLotBet(List<Bet> listLotBet) {
         this.listLotBet = listLotBet;
+        return this;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Lot setProduct(Product product) {
+        this.product = product;
         return this;
     }
 
@@ -149,11 +151,11 @@ public class Lot {
         Lot lot = (Lot) o;
         return id_Lot == lot.id_Lot &&
                 startPrice == lot.startPrice &&
-                hotPrise == lot.hotPrise &&
+                hotPrice == lot.hotPrice &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
                 Objects.equals(dataEndLot, lot.dataEndLot) &&
-                Objects.equals(product, lot.product) &&
                 Objects.equals(listLotBet, lot.listLotBet) &&
+                Objects.equals(product, lot.product) &&
                 Objects.equals(delivery, lot.delivery) &&
                 Objects.equals(payment, lot.payment);
     }
@@ -161,7 +163,7 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrise, product, listLotBet, delivery, payment);
+        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, listLotBet, product, delivery, payment);
     }
 
     @Override
@@ -171,7 +173,7 @@ public class Lot {
                 ", dataStartLot='" + dataStartLot + '\'' +
                 ", dataEndLot='" + dataEndLot + '\'' +
                 ", startPrice=" + startPrice +
-                ", hotPrise=" + hotPrise +
+                ", hotPrice=" + hotPrice +
                 '}';
     }
 }

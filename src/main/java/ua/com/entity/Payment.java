@@ -8,22 +8,26 @@ import java.util.Objects;
 
 @Entity
 public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Payment;
-    private String mathodPayment;
+    private String methodPayment;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST} )
-    private List<Lot> listLot;
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "payment")
+    private Lot lot;
 
     public Payment() {
     }
 
-    public Payment(String mathodPayment, List<Lot> listLot) {
-        this.mathodPayment = mathodPayment;
-        this.listLot = listLot;
+    public Payment(String methodPayment) {
+        this.methodPayment = methodPayment;
+    }
+
+    public Payment(String methodPayment, Lot lot) {
+        this.methodPayment = methodPayment;
+        this.lot = lot;
     }
 
     public int getId_Payment() {
@@ -35,21 +39,21 @@ public class Payment {
         return this;
     }
 
-    public String getMathodPayment() {
-        return mathodPayment;
+    public String getMethodPayment() {
+        return methodPayment;
     }
 
-    public Payment setMathodPayment(String mathodPayment) {
-        this.mathodPayment = mathodPayment;
+    public Payment setMethodPayment(String methodPayment) {
+        this.methodPayment = methodPayment;
         return this;
     }
 
-    public List<Lot> getListLot() {
-        return listLot;
+    public Lot getLot() {
+        return lot;
     }
 
-    public Payment setListLot(List<Lot> listLot) {
-        this.listLot = listLot;
+    public Payment setLot(Lot lot) {
+        this.lot = lot;
         return this;
     }
 
@@ -59,21 +63,21 @@ public class Payment {
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
         return id_Payment == payment.id_Payment &&
-                Objects.equals(mathodPayment, payment.mathodPayment) &&
-                Objects.equals(listLot, payment.listLot);
+                Objects.equals(methodPayment, payment.methodPayment) &&
+                Objects.equals(lot, payment.lot);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Payment, mathodPayment, listLot);
+        return Objects.hash(id_Payment, methodPayment, lot);
     }
 
     @Override
     public String toString() {
         return "Payment{" +
                 "id_Payment=" + id_Payment +
-                ", mathodPayment='" + mathodPayment + '\'' +
+                ", methodPayment='" + methodPayment + '\'' +
                 '}';
     }
 }

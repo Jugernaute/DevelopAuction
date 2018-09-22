@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Entity
 public class Manufacturer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Manufacturer;
@@ -17,16 +16,20 @@ public class Manufacturer {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST
-          )
-    private List<Product> listManufacturerProduct = new ArrayList<>();
+            cascade = CascadeType.PERSIST,
+            mappedBy = "manufacturer")
+    private List<Product> productListOfManufacture;
 
     public Manufacturer() {
     }
 
-    public Manufacturer(String nameManufacturer, List<Product> listManufacturerProduct) {
+    public Manufacturer(String nameManufacturer) {
         this.nameManufacturer = nameManufacturer;
-        this.listManufacturerProduct = listManufacturerProduct;
+    }
+
+    public Manufacturer(String nameManufacturer, List<Product> productListOfManufacture) {
+        this.nameManufacturer = nameManufacturer;
+        this.productListOfManufacture = productListOfManufacture;
     }
 
     public int getId_Manufacturer() {
@@ -47,12 +50,12 @@ public class Manufacturer {
         return this;
     }
 
-    public List<Product> getListManufacturerProduct() {
-        return listManufacturerProduct;
+    public List<Product> getProductListOfManufacture() {
+        return productListOfManufacture;
     }
 
-    public Manufacturer setListManufacturerProduct(List<Product> listManufacturerProduct) {
-        this.listManufacturerProduct = listManufacturerProduct;
+    public Manufacturer setProductListOfManufacture(List<Product> productListOfManufacture) {
+        this.productListOfManufacture = productListOfManufacture;
         return this;
     }
 
@@ -63,13 +66,13 @@ public class Manufacturer {
         Manufacturer that = (Manufacturer) o;
         return id_Manufacturer == that.id_Manufacturer &&
                 Objects.equals(nameManufacturer, that.nameManufacturer) &&
-                Objects.equals(listManufacturerProduct, that.listManufacturerProduct);
+                Objects.equals(productListOfManufacture, that.productListOfManufacture);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Manufacturer, nameManufacturer, listManufacturerProduct);
+        return Objects.hash(id_Manufacturer, nameManufacturer, productListOfManufacture);
     }
 
     @Override

@@ -58,6 +58,8 @@ public class SaveController {
     private SubCategoryDao subCategoryDao;
     @Autowired
     private CommonCategoryDao commonCategoryDao;
+    @Autowired
+    private BetDao betDao;
 
     @PostMapping("/user")
     public String saveUser(User user){
@@ -71,9 +73,19 @@ public class SaveController {
         return "delete";
     }
 
+    @PostMapping("/lot")
+    public String saveLot(@RequestParam int id_Delivery, @RequestParam int id_Product, @RequestParam int id_Payment, Lot lot){
+        Delivery delivery = deliveryDao.findOne(id_Delivery);
+        Product product = productDao.findOne(id_Product);
+        Payment payment = paymentDao.findOne(id_Payment);
+        lotService.save(lot.setProduct(product).setPayment(payment).setDelivery(delivery));
+        return "save";
+    }
+
+
     @PostMapping("/bet")
-    public String saveBet(@RequestParam int idLot, @RequestParam int userId, Bet bet){
-        Lot lot = lotDao.findOne(idLot);
+    public String saveBet(@RequestParam int id_Lot, @RequestParam int userId, Bet bet){
+        Lot lot = lotDao.findOne(id_Lot);
         User user = userDao.findOne(userId);
         betService.save(bet.setLot(lot).setUser(user));
         return "save";
@@ -103,9 +115,9 @@ public class SaveController {
     }
 
     @PostMapping("/product")
-    public String saveProduct(@RequestParam int idManufacturer, @RequestParam int idSubCategory, @RequestParam int userId, Product product){
-        Manufacturer manufacturer = manufacturerDao.findOne(idManufacturer);
-        SubCategory subCategory = subCategoryDao.findOne(idSubCategory);
+    public String saveProduct(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, Product product){
+        Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
+        SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
         User user = userDao.findOne(userId);
         productService.save(product.setSubCategory(subCategory).setManufacturer(manufacturer).setUserOwner(user));
         return "save";
@@ -118,8 +130,8 @@ public class SaveController {
     }
 
     @PostMapping("/subCategory")
-    public String saveSubCategory(@RequestParam int idCommonCategory, SubCategory subCategory){
-        CommonCategory commonCategory = commonCategoryDao.findOne(idCommonCategory);
+    public String saveSubCategory(@RequestParam int id_CommonCategory, SubCategory subCategory){
+        CommonCategory commonCategory = commonCategoryDao.findOne(id_CommonCategory);
         subCategoryService.save(subCategory.setCommonCategory(commonCategory));
         return "save";
     }

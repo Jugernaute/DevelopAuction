@@ -11,10 +11,8 @@ import java.util.Objects;
 
 @Entity
 public class SubCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_SubCategory;
-
     private String nameSubCategory;
 
     @JsonIgnore
@@ -24,8 +22,9 @@ public class SubCategory {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST})
-    private List<Product> listSubCategoryProduct;
+    cascade = CascadeType.PERSIST,
+    mappedBy = "subCategory")
+    private List<Product>products;
 
 
     public SubCategory() {
@@ -35,28 +34,10 @@ public class SubCategory {
         this.nameSubCategory = nameSubCategory;
     }
 
-    public SubCategory(String nameSubCategory, CommonCategory commonCategory, List<Product> listSubCategoryProduct) {
+    public SubCategory(String nameSubCategory, CommonCategory commonCategory, List<Product> products) {
         this.nameSubCategory = nameSubCategory;
         this.commonCategory = commonCategory;
-        this.listSubCategoryProduct = listSubCategoryProduct;
-    }
-
-    public List<Product> getListSubCategoryProduct() {
-        return listSubCategoryProduct;
-    }
-
-    public SubCategory setListSubCategoryProduct(List<Product> listSubCategoryProduct) {
-        this.listSubCategoryProduct = listSubCategoryProduct;
-        return this;
-    }
-
-    public CommonCategory getCommonCategory() {
-        return commonCategory;
-    }
-
-    public SubCategory setCommonCategory(CommonCategory commonCategory) {
-        this.commonCategory = commonCategory;
-        return this;
+        this.products = products;
     }
 
     public int getId_SubCategory() {
@@ -77,6 +58,24 @@ public class SubCategory {
         return this;
     }
 
+    public CommonCategory getCommonCategory() {
+        return commonCategory;
+    }
+
+    public SubCategory setCommonCategory(CommonCategory commonCategory) {
+        this.commonCategory = commonCategory;
+        return this;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public SubCategory setProducts(List<Product> products) {
+        this.products = products;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,13 +84,13 @@ public class SubCategory {
         return id_SubCategory == that.id_SubCategory &&
                 Objects.equals(nameSubCategory, that.nameSubCategory) &&
                 Objects.equals(commonCategory, that.commonCategory) &&
-                Objects.equals(listSubCategoryProduct, that.listSubCategoryProduct);
+                Objects.equals(products, that.products);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_SubCategory, nameSubCategory, commonCategory, listSubCategoryProduct);
+        return Objects.hash(id_SubCategory, nameSubCategory, commonCategory, products);
     }
 
     @Override
