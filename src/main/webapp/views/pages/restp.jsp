@@ -29,8 +29,8 @@
 
 <button id="allbet">allbet</button>
 <input type="text" id="sum_of_the_bet" placeholder="">
-<input type="text" id="stapeBet" placeholder="">
-<input type="text" id="idLot" placeholder="">
+<input type="text" id="stepBet" placeholder="">
+<input type="text" id="id_Lot" placeholder="">
 <input type="text" id="userId1" placeholder="">
 <button id="addbet">addbet</button><br>
 
@@ -323,18 +323,18 @@
         let $input = $('#sum_of_the_bet');
         let sum_of_the_bet = $input.val();
         $input.val(' ');
-        let $input1 = $('#stapeBet');
-        let stapeBet = $input1.val();
+        let $input1 = $('#stepBet');
+        let stepBet = $input1.val();
         $input1.val(' ');
-        let $input2 = $('#idLot');
-        let idLot = $input2.val();
+        let $input2 = $('#id_Lot');
+        let id_Lot = $input2.val();
         $input2.val(' ');
-        let $input3 = $('#userId');
-        let userId = $input3.val();
+        let $input3 = $('#userId1');
+        let userId1 = $input3.val();
         $input3.val(' ');
-        let bet = JSON.stringify({sum_of_the_bet, stapeBet, idLot, userId});
+        let bet = JSON.stringify({sum_of_the_bet, stepBet, id_Lot, userId1});
         $.ajax({
-            url : '/addBet',
+            url : '/addBet?id_Lot=' + id_Lot + '&userId=' + userId1,
             type : 'put',
             contentType : 'application/json',
             data : bet
@@ -350,7 +350,7 @@
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let bet = $('<div/>', {text : obj.sum_of_the_bet + ' ' + obj.stapeBet + ' ' + obj.idLot + ' ' + obj.userId});
+                    let bet = $('<div/>', {text : obj.sum_of_the_bet + ' ' + obj.stepBet + ' ' + obj.id_Lot + ' ' + obj.userId1});
                     bet.appendTo('#conversationDiv');
                 }
             },

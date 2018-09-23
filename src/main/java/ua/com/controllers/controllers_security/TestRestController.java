@@ -59,8 +59,10 @@ public class TestRestController {
 
 
     @PutMapping("/addBet")
-    public void addBet(@RequestBody Bet bet){
-        betService.save(bet);
+    public void addBet(@RequestParam int id_Lot, @RequestParam int userId, @RequestBody Bet bet){
+        Lot lot = lotDao.findOne(id_Lot);
+        User user = userDao.findOne(userId);
+        betService.save(bet.setLot(lot).setUser(user));
     }
     @GetMapping("/allBet")
     public List<Bet> allBet(){

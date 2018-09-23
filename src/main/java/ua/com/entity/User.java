@@ -151,10 +151,6 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, int userBalance) {
-        this.username = username;
-        this.userBalance = userBalance;
-    }
 
     public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress) {
         this.firstNameUser = firstNameUser;
@@ -162,15 +158,7 @@ public class User implements UserDetails {
         this.userBalance = userBalance;
         this.userPostAddress = userPostAddress;
     }
-
-    public User(String username, int userBalance,
-                List<Product> productListOfUser,
-                List<Bet> listUserBet) {
-        this.username = username;
-        this.userBalance = userBalance;
-        this.productListOfUser = productListOfUser;
-        this.listUserBet = listUserBet;
-    }
+    
 
     public String getFirstNameUser() {
         return firstNameUser;
