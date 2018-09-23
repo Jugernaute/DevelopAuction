@@ -51,6 +51,16 @@ public class User implements UserDetails {
             mappedBy = "user")
     private List<Bet>listUserBet;
 
+    public User() {
+    }
+
+
+    public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress) {
+        this.firstNameUser = firstNameUser;
+        this.surNameUser = surNameUser;
+        this.userBalance = userBalance;
+        this.userPostAddress = userPostAddress;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -79,6 +89,59 @@ public class User implements UserDetails {
         return isEnabled;
     }
 
+    public String getFirstNameUser() {
+        return firstNameUser;
+    }
+
+    public User setFirstNameUser(String firstNameUser) {
+        this.firstNameUser = firstNameUser;
+        return this;
+    }
+
+    public String getSurNameUser() {
+        return surNameUser;
+    }
+
+    public User setSurNameUser(String surNameUser) {
+        this.surNameUser = surNameUser;
+        return this;
+    }
+
+    public int getUserBalance() {
+        return userBalance;
+    }
+
+    public User setUserBalance(int userBalance) {
+        this.userBalance = userBalance;
+        return this;
+    }
+
+    public String getUserPostAddress() {
+        return userPostAddress;
+    }
+
+    public User setUserPostAddress(String userPostAddress) {
+        this.userPostAddress = userPostAddress;
+        return this;
+    }
+
+    public List<Product> getProductListOfUser() {
+        return productListOfUser;
+    }
+
+    public User setProductListOfUser(List<Product> productListOfUser) {
+        this.productListOfUser = productListOfUser;
+        return this;
+    }
+
+    public List<Bet> getListUserBet() {
+        return listUserBet;
+    }
+
+    public User setListUserBet(List<Bet> listUserBet) {
+        this.listUserBet = listUserBet;
+        return this;
+    }
 
     public Role getRole() {
         return role;
@@ -146,31 +209,30 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-
-
-    public User() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId &&
+                isAccountNonExpired == user.isAccountNonExpired &&
+                isAccountNonLocked == user.isAccountNonLocked &&
+                isCredentialsNonExpired == user.isCredentialsNonExpired &&
+                isEnabled == user.isEnabled &&
+                userBalance == user.userBalance &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(phone, user.phone) &&
+                role == user.role &&
+                Objects.equals(firstNameUser, user.firstNameUser) &&
+                Objects.equals(surNameUser, user.surNameUser) &&
+                Objects.equals(userPostAddress, user.userPostAddress) &&
+                Objects.equals(productListOfUser, user.productListOfUser) &&
+                Objects.equals(listUserBet, user.listUserBet);
     }
 
 
-    public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress) {
-        this.firstNameUser = firstNameUser;
-        this.surNameUser = surNameUser;
-        this.userBalance = userBalance;
-        this.userPostAddress = userPostAddress;
-    }
-    
-
-    public String getFirstNameUser() {
-        return firstNameUser;
-    }
-
-    public void setFirstNameUser(String firstNameUser) {
-        this.firstNameUser = firstNameUser;
-    }
-
-    public String getSurNameUser() {
-        return surNameUser;
-    }
 
     @Override
     public int hashCode() {
