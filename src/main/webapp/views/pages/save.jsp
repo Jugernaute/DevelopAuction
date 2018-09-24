@@ -16,8 +16,8 @@
 <form action="/save/user" method="post">
     <input type="text" name="firstname" placeholder="firstname"/>
     <input type="text" name="surname" placeholder="surname"/>
-    <input type="text" name="balans" placeholder="balans"/>
-    <input type="text" name="userPostAdress" placeholder="userPostAdress"/>
+    <input type="text" name="userBalans" placeholder="balans"/>
+    <input type="text" name="userPostAddress" placeholder="userPostAdress"/>
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Manufacturer</h3>

@@ -17,10 +17,9 @@ public class BetServiceImpl implements BetService {
 
     @Override
     public void save(Bet bet) {
-        if (bet != null){
-        betDao.save(bet);
-    }
-
+        if (bet != null) {
+            betDao.save(bet);
+        }
     }
 
     @Override

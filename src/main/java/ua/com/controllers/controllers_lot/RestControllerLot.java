@@ -5,13 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
-import ua.com.entity.CommonCategory;
-import ua.com.entity.Manufacturer;
-import ua.com.entity.SubCategory;
+import ua.com.entity.*;
 import ua.com.service.commomCategory.CommonCategoryService;
+import ua.com.service.delivery.DeliveryService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.subcategory.SubСategoryService;
 
+import javax.mail.Multipart;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,8 @@ public class RestControllerLot {
     private ManufacturerService manufacturerService;
     @Autowired
     CommonCategoryService commonCategoryService;
+    @Autowired
+    private DeliveryService deliveryService;
 
 
     @GetMapping("loadCommonCategory")
@@ -38,7 +41,6 @@ public class RestControllerLot {
             @RequestBody String nameCommonCategory ){
         CommonCategory commonCategory = commonCategoryService.findByNameCommonCategory(nameCommonCategory);
         List<SubCategory> subCategoryList = commonCategory.getSubCategoryList();
-        System.out.println(nameCommonCategory);
         return subCategoryList;
     }
 
@@ -48,5 +50,24 @@ public class RestControllerLot {
         List<Manufacturer> all = manufacturerService.findAll();
         System.out.println(all);
         return all;
+    }
+
+    @GetMapping("selectDeliveryList")
+    public List list(){
+        List<Delivery> all = deliveryService.findAll();
+        return all;
+    }
+
+    @PutMapping("loadStateProduct")
+    private List enumProduct(){
+        List list = Arrays.asList(StateProduct.values());
+//        System.out.println(list);
+        return list;
+    }
+
+    @PostMapping("loadImg")
+    public void string(@RequestParam String formData){
+        System.out.println(formData);
+//        return formData;
     }
 }

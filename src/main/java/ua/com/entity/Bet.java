@@ -34,4 +34,5 @@ public class Bet {
         this.sum_of_the_bet = sum_of_the_bet;
     }
 
+
 }

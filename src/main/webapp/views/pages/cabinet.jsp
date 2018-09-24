@@ -12,7 +12,7 @@
     <script src="../js/main.js" defer></script>
     <script src="../js/script.js" defer></script>
     <script src="../js/sell.js" defer></script>
-</head>
+    </head>
 <body>
 <div class="auction">
     <header>
@@ -64,7 +64,7 @@
                                 <ul class="categoryHandleList">
                                     <li>
                                         <select size="10" class="form" name="selectFirst" id="sellFromSelectFirst">
-                                            <%--<option class="result"></option>--%>
+                                            <option class="result">Виберіть</option>
 
                                         </select>
                                     </li>
@@ -87,6 +87,17 @@
 <br>
                         <div class="row">
                             <div class="col-xs-2">
+                                <p style="float: right">Модель</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text" class="modelProduct" placeholder="модель продукту">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-2">
                                 <p style="float: right">Назва*</p>
                             </div>
                                 <div class="col-xs-10">
@@ -94,25 +105,60 @@
                                 </div>
                         </div>
 <br>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Стан товару</p>
+                            </div>
+                            <div class="col-xs-10" >
+                                <%--<button>Виберіть</button>--%>
+                                <select   style="width: 100px !important;" class="stateProduct" id="resultStateProduct" name="stateProductName">
+                                    <option value="0">Виберіть</option>
+                                    <option value="1">Новий</option>
+                                    <option value="2">Вживаний</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+<br>
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Опис товару</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <textarea></textarea>
+                            </div>
+                        </div>
+
+<br>
+
                         <div class="row" >
                             <div class="col-xs-2">
                                 <p style="float: right">Фотографія*</p>
                             </div>
                             <div class="col-xs-10">
-                                <input type="file">
+                                <form class="formUpload">
+                                <input type="file" multiple="multiple" class="imageLoad" name="formData" formmethod="post" >
+                                <button class="loadImg">LOAD</button>
+                                    </form>
                             </div>
                         </div>
 
+                        <div class="ajax-respond"></div>
                         <h6>Тип продажу</h6>
                 <hr>
+
+
                         <div class="row" >
                             <div class="col-xs-2">
                                 <p style="float: right">Тип продажу:</p>
                             </div>
                             <div class="col-xs-10">
-                                <select>
-                                    <option>Аукцион з можливістю бліц-покупки</option>
-                                    <option>Простий аукціон</option>
+                                <select id="change-blic">
+                                    <option value="0">Вибрати</option>
+                                    <option value="1">Простий аукціон</option>
+                                    <option value="2">Аукцион з можливістю бліц-покупки</option>
                                 </select>
                             </div>
                         </div>
@@ -157,8 +203,41 @@
                                 <input type="time" id="time2" name="time"/>
                             </div>
                         </div>
+                        <div class="both"></div>
+
+                <h6 style="margin-top: 20px">Оплата і доставка</h6>
+<hr>
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Спосіб доставки</p>
+                            </div>
+                            <div class="col-xs-10 delivery-checkbox">
+                                <%--<div class="delivery-checkbox"></div>--%>
+                                           <div class="resultDelivery">
+
+                                <label >
+                                    <input class="resultDelivery" type="checkbox" value="1">
+                                </label >Нова Пошта<br>
+
+                                    <label >
+                                        <input class="resultDelivery" type="checkbox" value="2">
+                                    </label>При зустрічі<br>
 
 
+                                    <label >
+                                    <input class="resultDelivery" type="checkbox" value="3">
+                                </label>Самовивіз<br>
+                                <label>
+                                    <input class="resultDelivery" type="checkbox" value="4">
+                                </label>По договору<br>
+                                           </div>
+
+                            </div>
+                        </div>
+
+                        <br>
+                <button class="createLotForm" type="submit">Створити</button>
             </div>
             </div>
             <div class="buy hidden">Купівля</div>

@@ -32,6 +32,26 @@ public class User implements UserDetails {
     private int userBalance;
     private String userPostAddress;
 
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(
+            targetClass = TypeUser.class,
+            fetch = FetchType.EAGER)
+    @CollectionTable(name = "type_user",
+            joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "type")
+    private Set<TypeUser> typeOfUser;
+
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "userOwner")
+    private List<Product> productListOfUser;
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
+            mappedBy = "user")
+    private List<Bet>listUserBet;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -135,25 +155,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(
-            targetClass = TypeUser.class,
-            fetch = FetchType.EAGER)
-    @CollectionTable(name = "type_user",
-            joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "type")
-    private Set<TypeUser> typeOfUser;
 
-
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            mappedBy = "userOwner")
-    private List<Product> productListOfUser;
-
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
-            mappedBy = "user")
-   private List<Bet>listUserBet;
 
     public User() {
     }

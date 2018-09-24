@@ -23,7 +23,7 @@ public class Lot {
     private String dataStartLot;
     private String dataEndLot;
     private int startPrice;
-    int hotPrice;
+    private int hotPrice;
 
 
     @OneToMany(fetch = FetchType.LAZY,

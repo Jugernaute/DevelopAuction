@@ -1,5 +1,6 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class Delivery {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Delivery;
     private String methodDelivery;
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
     mappedBy = "delivery")
