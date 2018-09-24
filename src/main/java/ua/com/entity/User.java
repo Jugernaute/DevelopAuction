@@ -18,6 +18,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private String phone;
+    private String randomKey;
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
     private boolean isAccountNonExpired = true;
@@ -82,6 +83,15 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
+    }
+
+    public String getRandomKey() {
+        return randomKey;
+    }
+
+    public User setRandomKey(String randomKey) {
+        this.randomKey = randomKey;
+        return this;
     }
 
     @Override

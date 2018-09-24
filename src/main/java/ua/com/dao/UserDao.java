@@ -7,5 +7,6 @@ import ua.com.entity.User;
 public interface UserDao extends JpaRepository<User,Integer> {
 
     User findByUsername(String username);
+    User findByRandomKey(String randomKey);
  }
 
