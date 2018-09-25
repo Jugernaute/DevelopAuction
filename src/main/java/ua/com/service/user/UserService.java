@@ -1,10 +1,10 @@
 package ua.com.service.user;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-import ua.com.entity.User;
+        import org.springframework.security.core.userdetails.UserDetailsService;
+        import ua.com.entity.User;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.List;
+        import javax.jws.soap.SOAPBinding;
+        import java.util.List;
 
 
 public interface UserService extends UserDetailsService {
@@ -14,5 +14,4 @@ public interface UserService extends UserDetailsService {
     List<User> findAll();
     User findByUsername(String username);
     User findByRandomKey(String randomKey);
-
-    }
+}

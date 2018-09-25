@@ -42,10 +42,10 @@
     <input type="submit" name="" placeholder="">
 </form>
 <h3>Product</h3>
-<form action="/save/product" method="post">
+<form action="/save/product" method="post" enctype="multipart/form-data">
     <input type="text" name="nameProduct" placeholder="nameProduct"/>
     <input type="text" name="modelProduct" placeholder="modelProduct"/>
-    <input type="text" name="linkOnImageProduct" placeholder="linkOnImageProduct"/>
+    <input type="file" id="file" name="linkOnImageProduct" placeholder="linkOnImageProduct"/>
     <input type="text" name="descriptionProduct" placeholder="descriptionProduct"/>
     <%--<input type="text" name="stateProduct" placeholder="stateProduct"/>--%>
     <input type="text" name="id_Manufacturer" placeholder="id_Manufacturer"/>

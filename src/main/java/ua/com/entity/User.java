@@ -85,6 +85,20 @@ public class User implements UserDetails {
         return isCredentialsNonExpired;
     }
 
+//    public String getRandomKey() {
+//        return randomKey;
+//    }
+//
+//    public User setRandomKey(String randomKey) {
+//        this.randomKey = randomKey;
+//        return this;
+//    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
     public String getRandomKey() {
         return randomKey;
     }
@@ -92,11 +106,6 @@ public class User implements UserDetails {
     public User setRandomKey(String randomKey) {
         this.randomKey = randomKey;
         return this;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
     }
 
     public String getFirstNameUser() {

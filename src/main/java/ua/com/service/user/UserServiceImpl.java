@@ -41,12 +41,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+    public User findByUsername(String user) {
+        return userDao.findByUsername(user);
     }
 
     @Override
     public User findByRandomKey(String randomKey) {
         return userDao.findByRandomKey(randomKey);
     }
+
 }
