@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             inMemoryConfigurer()
                     .withUser("admin")
-                    .password("{noop}admin")
+                    .password("admin")
                     .authorities("ADMIN")
                     .and()
                     .configure(auth);
@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .successForwardUrl("/ok")
-                .failureUrl("/login-error")
+                .failureUrl("/error")
                 .and()
                 .logout()
                 .logoutRequestMatcher( new AntPathRequestMatcher("/logout"))
