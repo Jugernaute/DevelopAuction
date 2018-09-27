@@ -85,15 +85,15 @@ public void addDeliveryMethod(@RequestBody Delivery delivery){
 
 /////////////////////////////////////////////////////////////////
 @PutMapping("/addProduct")
-public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, @RequestBody Product product) {
-//    file.transferTo(
-//            new File
-//                    (System.getProperty("user.home")
-//                            + separator +
-//                            "pics"
-//                            + separator +
-//                            file.getOriginalFilename()));
-//    product.setLinkOnImageProduct("/prefixForAva/" + file.getOriginalFilename());
+public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId,@RequestParam("file")MultipartFile file, @RequestBody Product product) throws IOException {
+    file.transferTo(
+            new File
+                    (System.getProperty("user.home")
+                            + separator +
+                            "pics"
+                            + separator +
+                            file.getOriginalFilename()));
+    product.setLinkOnImageProduct("/prefixForAva/" + file.getOriginalFilename());
         Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
         SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
         User user = userService.getUserById(userId);

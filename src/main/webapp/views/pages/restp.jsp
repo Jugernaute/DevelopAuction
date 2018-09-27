@@ -428,9 +428,16 @@
         let $x1 = $("#modelProduct");
         let modelProduct = $x1.val();
         $x1.val(' ');
-        let $x2 = $("#linkOnImageProduct");
-        let linkOnImageProduct = $x2.val();
-        $x2.val(' ');
+
+        var linkOnImageProduct;
+        $('input[type=file]').change(function(){
+            linkOnImageProduct = this.linkOnImageProduct;
+            console.log(linkOnImageProduct);
+        });
+
+        // let $x2 = $("#linkOnImageProduct");
+        // let linkOnImageProduct = $x2.val();
+        // $x2.val(' ');
         let $x3 = $("#descriptionProduct");
         let descriptionProduct = $x3.val();
         $x3.val(' ');
