@@ -13,15 +13,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
 
+<%--<form action="/addproduct" method="pust" id="my_form" enctype="multipart/form-data">--%>
 <button id="allproduct">allProduct</button>
 <input type="text" id="nameProduct" placeholder=""/>
 <input type="text" id="modelProduct" placeholder=""/>
-<input type="file" id="file" value="" placeholder=""/>
+<input type="file" id="file" multiple="multiple" placeholder=""/>
 <input type="text" id="descriptionProduct" placeholder=""/>
 <input type="text" id="id_Manufacturer" placeholder=""/>
 <input type="text" id="id_SubCategory" placeholder=""/>
 <input type="text" id="userId" placeholder=""/>
 <button id="addproduct">addProduct</button><br>
+<%--</form>--%>
 
 <button id="alldelivery">alldelivery</button>
 <input type="" id="methodDelivery" placeholder="">
@@ -414,8 +416,11 @@
 
    //////////////////       PRODUCT      ////////////////////////////////
 
+
     $("#addproduct").click(function () {
         $("#conversationDiv").empty();
+
+        let product = new FormData();
 
         let $x = $("#nameProduct");
         let nameProduct = $x.val();
@@ -423,8 +428,8 @@
         let $x1 = $("#modelProduct");
         let modelProduct = $x1.val();
         $x1.val(' ');
-        let $x2 = $("#file");
-        let file = $x2.val();
+        let $x2 = $("#linkOnImageProduct");
+        let linkOnImageProduct = $x2.val();
         $x2.val(' ');
         let $x3 = $("#descriptionProduct");
         let descriptionProduct = $x3.val();
@@ -438,8 +443,11 @@
         let $x6 = $("#userId");
         let userId = $x6.val();
         $x6.val(' ');
-        let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, file, id_SubCategory, id_Manufacturer, userId});
+
+        let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, linkOnImageProduct, id_SubCategory, id_Manufacturer, userId});
 console.log(product);
+
+
         $.ajax({
             url:'/addProduct?id_Manufacturer=' + id_Manufacturer + '&id_SubCategory=' + id_SubCategory + '&userId=' + userId,
             headers:{
@@ -448,7 +456,8 @@ console.log(product);
             },
             type: "put",
             data: product,
-            contentType : 'application/json',
+            processData : false,
+            contentType : false,
             dataType: 'json',          //передаєм
         })
     })
