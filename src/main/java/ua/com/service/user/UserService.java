@@ -9,10 +9,11 @@ package ua.com.service.user;
 
 public interface UserService extends UserDetailsService {
 
-    void save(User user);
-    void deleteBuId(int id);
-    User findOne(int id);
-    List<User> findAll();
+    void addUser(User user);
+    void deleteUserById(int userId);
+    void updateUser(User user);
+    User getUserById(int userId);
+    List<User> findAllUser();
     User findByUsername(String username);
     User findByRandomKey(String randomKey);
 

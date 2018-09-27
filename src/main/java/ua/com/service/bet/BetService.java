@@ -5,11 +5,13 @@ import ua.com.entity.Bet;
 import java.util.List;
 
 public interface BetService {
-    void save(Bet bet);
+    void addBet(Bet bet);
 
-    void deleteById(int id);
+    void deleteBet(int idBet);
 
-    Bet findOne(int id);
+    Bet getBetById(int idBet);
 
-    List<Bet> findAll();
+    List<Bet> findAllBet();
+
+    void updateBet(Bet bet);
 }

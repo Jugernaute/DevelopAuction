@@ -27,7 +27,7 @@ public class DataConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUsername("root");
         dataSource.setPassword("Andreus110576");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/auction?createDatabaseIfNotExist=true");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/auction?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8");
         return dataSource;
 
     }

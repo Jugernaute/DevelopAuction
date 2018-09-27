@@ -45,7 +45,7 @@
 <form action="/save/product" method="post" enctype="multipart/form-data">
     <input type="text" name="nameProduct" placeholder="nameProduct"/>
     <input type="text" name="modelProduct" placeholder="modelProduct"/>
-    <input type="file" id="file" name="linkOnImageProduct" placeholder="linkOnImageProduct"/>
+    <input id="file" type="file" name="file" placeholder=""/>
     <input type="text" name="descriptionProduct" placeholder="descriptionProduct"/>
     <%--<input type="text" name="stateProduct" placeholder="stateProduct"/>--%>
     <input type="text" name="id_Manufacturer" placeholder="id_Manufacturer"/>

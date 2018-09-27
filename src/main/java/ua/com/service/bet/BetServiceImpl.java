@@ -15,27 +15,31 @@ public class BetServiceImpl implements BetService {
     @Autowired
     private BetDao betDao;
 
+
     @Override
-    public void save(Bet bet) {
+    public void addBet(Bet bet) {
         if (bet != null){
             betDao.save(bet);
         }
-
     }
 
     @Override
-    public void deleteById(int id) {
-        betDao.delete(id);
-
+    public void deleteBet(int idBet) {
+        betDao.delete(idBet);
     }
 
     @Override
-    public Bet findOne(int id) {
-        return betDao.findOne(id);
+    public Bet getBetById(int idBet) {
+        return betDao.findOne(idBet);
     }
 
     @Override
-    public List<Bet> findAll() {
+    public List<Bet> findAllBet() {
         return betDao.findAll();
+    }
+
+    @Override
+    public void updateBet(Bet bet) {
+        betDao.save(bet);
     }
 }

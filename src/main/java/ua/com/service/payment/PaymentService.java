@@ -5,8 +5,9 @@ import ua.com.entity.Payment;
 import java.util.List;
 
 public interface PaymentService {
-    void save(Payment payment);
-    void delete(int id);
-    Payment findOne(int id);
-    List<Payment> findAll();
+    void addPayment(Payment payment);
+    void deletePaymentById(int id_Payment);
+    void updatePayment(Payment payment);
+    Payment getPaymentById(int id_Payment);
+    List<Payment> findAllPayment();
 }

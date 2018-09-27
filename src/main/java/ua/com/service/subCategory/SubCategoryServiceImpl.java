@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.SubCategoryDao;
+import ua.com.entity.CommonCategory;
 import ua.com.entity.SubCategory;
 
 import java.util.List;
@@ -14,25 +15,31 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Autowired
     private SubCategoryDao subCategoryDao;
 
+
     @Override
-    public void save(SubCategory subCategory) {
+    public void addSubCategory(SubCategory subCategory) {
         if (subCategory !=null){
             subCategoryDao.save(subCategory);
         }
     }
 
     @Override
-    public void deleteById(int id) {
-        subCategoryDao.delete(id);
+    public void deleteSubCategoryById(int id_SubCategory) {
+        subCategoryDao.delete(id_SubCategory);
     }
 
     @Override
-    public SubCategory findOne(int id) {
-        return subCategoryDao.findOne(id);
+    public void updateSubCategory(SubCategory subCategory) {
+        subCategoryDao.save(subCategory);
     }
 
     @Override
-    public List<SubCategory> findAll() {
+    public SubCategory getSubCategoryById(int id_SubCategory) {
+        return subCategoryDao.findOne(id_SubCategory);
+    }
+
+    @Override
+    public List<SubCategory> findAllSubCategory() {
         return subCategoryDao.findAll();
     }
 }

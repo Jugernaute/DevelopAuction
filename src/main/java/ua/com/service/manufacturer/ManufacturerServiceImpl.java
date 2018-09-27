@@ -14,25 +14,31 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Autowired
     private ManufacturerDao manufacturerDao;
 
+
     @Override
-    public void save(Manufacturer manufacturer) {
+    public void addManufacturer(Manufacturer manufacturer) {
         if (manufacturer != null){
             manufacturerDao.save(manufacturer);
         }
     }
 
     @Override
-    public void deleteById(int id) {
-        manufacturerDao.delete(id);
+    public void deleteManufacturerById(int id_Manufacturer) {
+        manufacturerDao.delete(id_Manufacturer);
     }
 
     @Override
-    public Manufacturer findOne(int id) {
-        return manufacturerDao.findOne(id);
+    public void updateManufacturer(Manufacturer manufacturer) {
+        manufacturerDao.save(manufacturer);
     }
 
     @Override
-    public List<Manufacturer> findAll() {
+    public Manufacturer getManufacturerById(int id_Manufacturer) {
+        return manufacturerDao.findOne(id_Manufacturer);
+    }
+
+    @Override
+    public List<Manufacturer> findAllManufacturer() {
         return manufacturerDao.findAll();
     }
 }

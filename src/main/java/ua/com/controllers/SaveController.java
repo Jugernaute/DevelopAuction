@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.*;
 import ua.com.entity.*;
 import ua.com.service.bet.BetService;
@@ -17,6 +18,10 @@ import ua.com.service.subCategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.IOException;
+
+import static java.io.File.separator;
 
 @Controller
 @RequestMapping("/save")
@@ -63,13 +68,13 @@ public class SaveController {
 
     @PostMapping("/user")
     public String saveUser(User user){
-        userService.save(user);
+        userService.addUser(user);
         return "save";
     }
 
     @PostMapping("/delete/user")
     public String deleteUser(User user){
-        userService.deleteBuId(1);
+        userService.deleteUserById(1);
         return "delete";
     }
 
@@ -78,7 +83,7 @@ public class SaveController {
         Delivery delivery = deliveryDao.findOne(id_Delivery);
         Product product = productDao.findOne(id_Product);
         Payment payment = paymentDao.findOne(id_Payment);
-        lotService.save(lot.setProduct(product).setPayment(payment).setDelivery(delivery));
+        lotService.addLot(lot.setProduct(product).setPayment(payment).setDelivery(delivery));
         return "save";
     }
 
@@ -87,7 +92,7 @@ public class SaveController {
     public String saveBet(@RequestParam int id_Lot, @RequestParam int userId, Bet bet){
         Lot lot = lotDao.findOne(id_Lot);
         User user = userDao.findOne(userId);
-        betService.save(bet.setLot(lot).setUser(user));
+        betService.addBet(bet.setLot(lot).setUser(user));
         return "save";
     }
 
@@ -95,7 +100,7 @@ public class SaveController {
 
     @PostMapping("/delivery")
     public String saveDelivery(Delivery delivery){
-        deliveryService.save(delivery);
+        deliveryService.addDelivery(delivery);
         return "save";
     }
 
@@ -104,35 +109,44 @@ public class SaveController {
 
     @PostMapping("/manufacturer")
     public String saveManufacturer(Manufacturer manufacturer){
-        manufacturerService.save(manufacturer);
+        manufacturerService.addManufacturer(manufacturer);
         return "save";
     }
 
     @PostMapping("/payment")
     public String savePayment(Payment payment){
-        paymentService.save(payment);
+        paymentService.addPayment(payment);
         return "save";
     }
 
     @PostMapping("/product")
-    public String saveProduct(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, Product product){
+    public String saveProduct(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, Product product, @RequestParam ("file")MultipartFile file) throws IOException {
+        System.out.println(System.getProperty("user.home"));
+        file.transferTo(
+                new File
+                        (System.getProperty("user.home")
+                        + separator +
+                        "pics"
+                        + separator +
+                        file.getOriginalFilename()));
+        product.setLinkOnImageProduct("/prefixForAva/" + file.getOriginalFilename());
         Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
         SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
         User user = userDao.findOne(userId);
-        productService.save(product.setSubCategory(subCategory).setManufacturer(manufacturer).setUserOwner(user));
+        productService.addProduct(product.setSubCategory(subCategory).setManufacturer(manufacturer).setUserOwner(user));
         return "save";
     }
 
     @PostMapping("/commonCategory")
     public String saveCommonCategory(CommonCategory commonCategory){
-        commonCategoryService.save(commonCategory);
+        commonCategoryService.addCommonCategory(commonCategory);
         return "save";
     }
 
     @PostMapping("/subCategory")
     public String saveSubCategory(@RequestParam int id_CommonCategory, SubCategory subCategory){
         CommonCategory commonCategory = commonCategoryDao.findOne(id_CommonCategory);
-        subCategoryService.save(subCategory.setCommonCategory(commonCategory));
+        subCategoryService.addSubCategory(subCategory.setCommonCategory(commonCategory));
         return "save";
     }
     @ModelAttribute("userModel")

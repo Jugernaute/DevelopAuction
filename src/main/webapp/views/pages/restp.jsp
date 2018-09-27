@@ -16,7 +16,7 @@
 <button id="allproduct">allProduct</button>
 <input type="text" id="nameProduct" placeholder=""/>
 <input type="text" id="modelProduct" placeholder=""/>
-<input type="text" id="linkOnImageProduct" placeholder=""/>
+<input type="file" id="file" value="" placeholder=""/>
 <input type="text" id="descriptionProduct" placeholder=""/>
 <input type="text" id="id_Manufacturer" placeholder=""/>
 <input type="text" id="id_SubCategory" placeholder=""/>
@@ -423,8 +423,8 @@
         let $x1 = $("#modelProduct");
         let modelProduct = $x1.val();
         $x1.val(' ');
-        let $x2 = $("#linkOnImageProduct");
-        let linkOnImageProduct = $x2.val();
+        let $x2 = $("#file");
+        let file = $x2.val();
         $x2.val(' ');
         let $x3 = $("#descriptionProduct");
         let descriptionProduct = $x3.val();
@@ -438,7 +438,7 @@
         let $x6 = $("#userId");
         let userId = $x6.val();
         $x6.val(' ');
-        let product = JSON.stringify({nameProduct, modelProduct, linkOnImageProduct, descriptionProduct, id_SubCategory, id_Manufacturer, userId});
+        let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, file, id_SubCategory, id_Manufacturer, userId});
 console.log(product);
         $.ajax({
             url:'/addProduct?id_Manufacturer=' + id_Manufacturer + '&id_SubCategory=' + id_SubCategory + '&userId=' + userId,
@@ -450,16 +450,6 @@ console.log(product);
             data: product,
             contentType : 'application/json',
             dataType: 'json',          //передаєм
-            // success: function (result) {
-            //    console.log(result);
-            //     for (let obj of result) {
-            //         let prod = $('<div/>', {text: obj.nameProduct + " " + obj.modelProduct + " " + obj.linkOnImageProduct + " " + obj.descriptionProduct});
-            //         prod.appendTo($("#conversationDiv"));
-            //     }
-            // },
-            // error: function (error) {
-            //     console.log(error);
-            // }
         })
     })
 

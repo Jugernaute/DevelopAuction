@@ -73,7 +73,7 @@ public class MainController {
         }
 
         userEditor.setValue(user);
-        userService.save(user);
+        userService.addUser(user);
         return "home";
         }
 

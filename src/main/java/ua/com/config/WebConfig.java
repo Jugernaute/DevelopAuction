@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.io.File;
 import java.util.Properties;
 
 @Configuration
@@ -34,8 +35,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("/views/img/");
         registry.addResourceHandler("/style/**")
                 .addResourceLocations("/views/style/");
-
-    }
+        registry.addResourceHandler("/prefixForAva/**")
+                .addResourceLocations(
+                        "file:" +
+                                System.getProperty("user.home") +
+                                File.separator +
+                                "pics" +
+                                File.separator
+                );
+     }
 
 @Bean
 public JavaMailSenderImpl javaMailSender(){
