@@ -138,12 +138,15 @@
                                 <p style="float: right">Фотографія*</p>
                             </div>
                             <div class="col-xs-10">
-                                <form class="formUpload">
-                                <input type="file" multiple="multiple" class="imageLoad" name="formData" formmethod="post" >
-                                <button class="loadImg">LOAD</button>
-                                    </form>
-                            </div>
-                        </div>
+                                <%--<form class="formUpload">--%>
+                                <%--<input type="file" multiple class="imageLoad" name="formData" formmethod="post" >--%>
+
+                                    <%--</form>--%>
+                                    <input type="file" id="files" name="files" multiple >
+                                    <button class="loadImg">LOAD</button>
+                                    <output id="list"></output>
+                                    <div class="pop"></div>                           <%--</div>--%>
+                        <%--</div>--%>
 
                         <div class="ajax-respond"></div>
                         <h6>Тип продажу</h6>

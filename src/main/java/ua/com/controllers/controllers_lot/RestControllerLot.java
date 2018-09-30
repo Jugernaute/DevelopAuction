@@ -3,6 +3,7 @@ package ua.com.controllers.controllers_lot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
@@ -12,6 +13,8 @@ import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.subcategory.SubСategoryService;
 
 import javax.mail.Multipart;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,8 +69,31 @@ public class RestControllerLot {
     }
 
     @PostMapping("loadImg")
-    public void string(@RequestParam String formData){
-        System.out.println(formData);
-//        return formData;
+    public String upload(@RequestParam String my_file_upload) throws IOException {
+
+//        System.out.println(String.format("File name %s", files.getName()));
+//        System.out.println(String.format("File original name %s", files.getOriginalFilename()));
+//        System.out.println(String.format("File size %s", files.getSize()));
+        String path = System.getProperty("user.home")
+        +File.separator
+        +"IdeaProjects"
+        +File.separator
+        +"DevelopAuction1"
+        +File.separator
+        +"src"
+        +File.separator
+        +"main"
+        +File.separator
+        +"webapp"
+        +File.separator
+        +"views"
+        +File.separator
+        +"img";
+
+        System.out.println(my_file_upload);
+        System.out.println(path);
+        //do whatever you want with the MultipartFile
+//        file.getInputStream();
+        return my_file_upload;
     }
 }
