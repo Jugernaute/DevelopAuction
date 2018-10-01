@@ -84,7 +84,7 @@ public void addDeliveryMethod(@RequestBody Delivery delivery){
     }
 
 /////////////////////////////////////////////////////////////////
-@PutMapping("/addProduct")
+@PostMapping("/addProduct")
 public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId,@RequestParam("file")MultipartFile file, @RequestBody Product product) throws IOException {
     file.transferTo(
             new File
