@@ -79,16 +79,31 @@ public class RestControllerCabinet {
         }
     }
 
-    @PostMapping("/sendKeys")
-    public void userSave(Model model) {
+    @PutMapping("/sendKeys")
+    public void userSave(@RequestBody String email) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         String s = RandomStr.randomKey();
-        User user = userService.findByUsername(name);
-        user.setRandomKey(s);
-        String email = user.getEmail();
         String subjectForgotPassword = "Підтвердження дій для зміни пароля";
         String text = "Your key for change password: "+ s;
-        mail.sendMail(email,subjectForgotPassword,text);
+
+        if(name.equals("anonymousUser") && email!=null)
+        {
+            User byEmail = userService.findByEmail(email);
+            if(byEmail==null)
+            {
+                return;
+            }
+            byEmail.setRandomKey(s);
+            userService.save(byEmail);
+            mail.sendMail(email,subjectForgotPassword,text);
+        }
+        else if(email==null && !(name.equals("anonymousUser")))
+        {
+            User user = userService.findByUsername(name);
+            user.setRandomKey(s);
+            String userEmail = user.getEmail();
+            mail.sendMail(userEmail,subjectForgotPassword,text);
+        }
     }
 
     @GetMapping("/getCurrent_Email_Phone_Username")

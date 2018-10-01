@@ -45,7 +45,7 @@
                     <a href="#" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
                 </div>
                 <div class="col_login">
-                    <a href="#" style="color:white" class="btn">Забули пароль?</a>
+                    <a href="/goLostPsw" style="color:white" class="btn">Забули пароль?</a>
                 </div>
             </div>
         </div>

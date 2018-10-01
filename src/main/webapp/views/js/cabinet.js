@@ -8,6 +8,7 @@
 
     let optionList = $('.options-list li');
     let optionListShow = $('.option-list-show div');
+
     optionList.on('click', function () {
         for (let i = 0; i < optionList.length; i++) {
             optionList[i].style.borderBottom = 1 +'px solid gray';

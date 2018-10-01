@@ -20,8 +20,6 @@ public class MainController{
     CommonCategoryDao commonCategoryDao;
 @Autowired
     SubCategoryDao subCategoryDao;
-    @Autowired
-    private AuctionItemsDao auctionItemsDao;
 
     @GetMapping("/goToCabinet")
     private String goToCabinet(){
@@ -38,6 +36,10 @@ public class MainController{
         return "home";
     }
 
+    @GetMapping("/goLostPsw")
+    private String goLostPsw(){
+        return "lostpassword";
+    }
 
 
 }
