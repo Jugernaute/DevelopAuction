@@ -123,6 +123,9 @@ $('.resultDelivery').on('change', function () {
    console.log($(this).val())}
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
 let data;
 $('.imageLoad').on('change',function (evt) {
 
@@ -161,7 +164,7 @@ console.log(data);
             // отключаем обработку передаваемых данных, пусть передаются как есть
             processData : false,
             // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
-            contentType : false,
+            // contentType : false,
             // функция успешного ответа сервера
             success     : function( respond/*, status, jqXHR */){
                 if( typeof files == 'undefined' ) return;
@@ -194,7 +197,7 @@ console.log(data);
         });
 
     });
-
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 function handleFileSelect(evt) {
      files = evt.target.files; // FileList object
 

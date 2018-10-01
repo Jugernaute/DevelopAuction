@@ -245,7 +245,7 @@
             </div>
             <div class="buy hidden">Купівля</div>
             <div class="history hidden">History</div>
-            <div class="settings hidden">
+            <div class="settings <%--hidden--%>">
                 <ol>
                     <li>Настройки учетной записи</li>
                     <ul>
