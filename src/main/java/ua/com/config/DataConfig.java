@@ -59,6 +59,7 @@ public class DataConfig {
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory factory) {
 
+
         return new JpaTransactionManager(factory);
 
     }

@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import ua.com.dao.AuctionItemsDao;
- import ua.com.entity.User;
+import ua.com.dao.AuctionItemsDao;
+import ua.com.entity.User;
 import ua.com.service.user.UserService;
+
+import javax.naming.Context;
 
 @Controller
 @PropertySource("classpath:validation.properties")
@@ -39,11 +41,16 @@ public class ControllerSecurity {
     }
 
 
-
+    @GetMapping("/qwe")
+    public String qwe(){
+        return "qwe";
+    }
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+        private AuctionItemsDao auctionItemsDao;
 
     @GetMapping("/activate/{key}")
     public String activate(@PathVariable String key,
@@ -52,18 +59,15 @@ public class ControllerSecurity {
         if(!(user ==null)){
             user.setRandomKey(null);
             user.setEnabled(true);
-            userService.addUser(user);
+            userService.save(user);
         }
-
-//        model.addAttribute("user",user);
         return "home";
     }
 
 
         @PostMapping("/ok")
             public String ok (Model model){
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getName(); //get logged in username
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
             model.addAttribute("user",user);
             return "cabinet";

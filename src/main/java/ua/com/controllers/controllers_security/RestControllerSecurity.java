@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
 import ua.com.entity.User;
-//import ua.com.method.Mail;
-//import ua.com.method.RandomStr;
 import ua.com.method.Mail;
 import ua.com.method.RandomStr;
 import ua.com.service.user.UserService;
@@ -67,8 +65,10 @@ public class RestControllerSecurity {
             String subject = environment.getProperty("textForMailSender_String_subject");
             String email = user.getEmail();
             mail.sendMail(email,subject,text);
+        } else {
+            return environment.getProperty("matchPassword_registrationForm");
         }
-        return environment.getProperty("matchPassword_registrationForm");
+        return "you are login";
     }
 }
 

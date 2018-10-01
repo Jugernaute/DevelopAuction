@@ -1,15 +1,23 @@
 package ua.com.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
+//import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.io.File;
+import java.util.List;
 import java.util.Properties;
 
 @Configuration
@@ -35,15 +43,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("/views/img/");
         registry.addResourceHandler("/style/**")
                 .addResourceLocations("/views/style/");
-        registry.addResourceHandler("/prefixForAva/**")
-                .addResourceLocations(
-                        "file:" +
-                                System.getProperty("user.home") +
-                                File.separator +
-                                "pics" +
-                                File.separator
-                );
-     }
+
+    }
 
 @Bean
 public JavaMailSenderImpl javaMailSender(){
@@ -60,4 +61,22 @@ public JavaMailSenderImpl javaMailSender(){
     properties.put("mail.debug","true");
     return javaMailSender;
 }
+
+//    public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
+//        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        //Registering Hibernate4Module to support lazy objects
+//        mapper.registerModule(new Hibernate5Module());
+//
+//        messageConverter.setObjectMapper(mapper);
+//        return messageConverter;
+//    }
+//
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        //Here we add our custom-configured HttpMessageConverter
+//        converters.add(jacksonMessageConverter());
+//        super.configureMessageConverters(converters);
+//    }
 }

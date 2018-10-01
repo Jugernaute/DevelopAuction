@@ -56,5 +56,4 @@ public class UserServiceImpl implements UserService {
     public User findByRandomKey(String randomKey) {
         return userDao.findByRandomKey(randomKey);
     }
-
 }
