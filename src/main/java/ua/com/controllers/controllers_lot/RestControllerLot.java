@@ -7,10 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
-import ua.com.service.commomCategory.CommonCategoryService;
+import ua.com.service.commonCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
 import ua.com.service.manufacturer.ManufacturerService;
-import ua.com.service.subcategory.SubСategoryService;
+import ua.com.service.subCategory.SubCategoryService;
 
 import javax.mail.Multipart;
 import java.io.File;
@@ -25,7 +25,7 @@ public class RestControllerLot {
     @Autowired
     private SubCategoryDao subCategoryDao;
     @Autowired
-    private SubСategoryService subСategoryService;
+    private SubCategoryService subCategoryService;
     @Autowired
     private ManufacturerService manufacturerService;
     @Autowired
@@ -50,14 +50,14 @@ public class RestControllerLot {
     @PostMapping("loadManufacturers")
     public List loadManufacturers (/*CommonCategory commonCategory,*/
             @RequestBody String nameManufacturer ){
-        List<Manufacturer> all = manufacturerService.findAll();
+        List<Manufacturer> all = manufacturerService.findAllManufacturer();
         System.out.println(all);
         return all;
     }
 
     @GetMapping("selectDeliveryList")
     public List list(){
-        List<Delivery> all = deliveryService.findAll();
+        List<Delivery> all = deliveryService.findAllDelivery();
         return all;
     }
 

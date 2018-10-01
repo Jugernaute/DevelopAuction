@@ -59,7 +59,7 @@ public class ControllerSecurity {
         if(!(user ==null)){
             user.setRandomKey(null);
             user.setEnabled(true);
-            userService.save(user);
+            userService.addUser(user);
         }
         return "home";
     }

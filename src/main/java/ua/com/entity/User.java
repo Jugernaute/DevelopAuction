@@ -5,9 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -251,20 +249,20 @@ public class User implements UserDetails {
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(phone, user.phone) &&
+                Objects.equals(randomKey, user.randomKey) &&
                 role == user.role &&
                 Objects.equals(firstNameUser, user.firstNameUser) &&
                 Objects.equals(surNameUser, user.surNameUser) &&
                 Objects.equals(userPostAddress, user.userPostAddress) &&
+                Objects.equals(typeOfUser, user.typeOfUser) &&
                 Objects.equals(productListOfUser, user.productListOfUser) &&
                 Objects.equals(listUserBet, user.listUserBet);
     }
 
-
-
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, username, email, password, phone, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, userBalance, userPostAddress);
+        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, userBalance, userPostAddress, typeOfUser, productListOfUser, listUserBet);
     }
 
     @Override

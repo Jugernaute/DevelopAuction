@@ -2,7 +2,9 @@ package ua.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.AuctionItemsDao;
@@ -41,5 +43,24 @@ public class MainController{
         return "lostpassword";
     }
 
+////////////////////////////////////////////////////////////////
+@GetMapping("/save")
+public String home(Model model){
+    return "save";
+}
 
+    @GetMapping("/delete")
+    public String delete(Model model){
+        return "delete";
+    }
+
+    @GetMapping("/restp")
+    public String restp(){
+        return "restp";
+    }
+
+    @ModelAttribute("userModel")
+    public User user(){
+        return new User();
+    }
 }
