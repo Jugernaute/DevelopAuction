@@ -33,6 +33,7 @@ public class Mail {
             e.printStackTrace();
         }
         sender.send(mimeMessage);
+
     }
 
 

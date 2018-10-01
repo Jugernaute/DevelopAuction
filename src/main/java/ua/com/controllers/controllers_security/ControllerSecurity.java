@@ -13,6 +13,8 @@ import ua.com.dao.AuctionItemsDao;
 import ua.com.entity.User;
 import ua.com.service.user.UserService;
 
+import javax.naming.Context;
+
 @Controller
 @PropertySource("classpath:validation.properties")
 public class ControllerSecurity {
@@ -39,7 +41,10 @@ public class ControllerSecurity {
     }
 
 
-
+    @GetMapping("/qwe")
+    public String qwe(){
+        return "qwe";
+    }
 
     @Autowired
     private UserService userService;
@@ -56,16 +61,13 @@ public class ControllerSecurity {
             user.setEnabled(true);
             userService.save(user);
         }
-
-//        model.addAttribute("user",user);
         return "home";
     }
 
 
         @PostMapping("/ok")
             public String ok (Model model){
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getName(); //get logged in username
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
             model.addAttribute("user",user);
             return "cabinet";

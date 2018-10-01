@@ -11,7 +11,7 @@
     <script src="../js/main.js" defer></script>
 </head>
 <body>
-
+<a href="qwe">regina</a>
     <div class="enter_form">
         <div class="modal-content">
             <div class="close_cont">
@@ -45,7 +45,7 @@
                     <a href="#" style="color:white" class="btn btn_alt_reg">Зареєструватись</a>
                 </div>
                 <div class="col_login">
-                    <a href="#" style="color:white" class="btn">Забули пароль?</a>
+                    <a href="/goLostPsw" style="color:white" class="btn">Забули пароль?</a>
                 </div>
             </div>
         </div>

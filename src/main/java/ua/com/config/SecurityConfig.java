@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             inMemoryConfigurer()
                     .withUser("admin")
                     .password("admin")
-                    .authorities("ADMIN")
+                    .authorities("ROLE_ADMIN")
                     .and()
                     .configure(auth);
         } catch (Exception e) {

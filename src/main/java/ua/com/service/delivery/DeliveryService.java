@@ -6,14 +6,9 @@ import java.util.List;
 
 public interface DeliveryService {
 
-    List<Delivery> findAllDelivery();
+    void save(Delivery delivery);
 
-    Delivery getDeliveryById(int idDelivery);
-
-    void addDelivery(Delivery delivery);
-
-    void updateDelivery(Delivery delivery);
-
-    void deleteDeliveryByIb(int idDelivery);
-
+    void deleteById(int id);
+    Delivery findOne(int id);
+    List<Delivery> findAll();
 }

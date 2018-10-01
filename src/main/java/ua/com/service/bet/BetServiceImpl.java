@@ -1,45 +1,40 @@
 package ua.com.service.bet;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.BetDao;
 import ua.com.entity.Bet;
-import ua.com.entity.Lot;
-import ua.com.entity.User;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class BetServiceImpl implements BetService {
-    @Autowired
-    BetDao betDao;
 
+    @Autowired
+    private BetDao betDao;
 
     @Override
-    public List<Bet> findAllBet() {
+    public void save(Bet bet) {
+        if (bet != null) {
+            betDao.save(bet);
+        }
+    }
+
+    @Override
+    public void deleteById(int id) {
+        betDao.delete(id);
+
+    }
+
+    @Override
+    public Bet findOne(int id) {
+        return betDao.findOne(id);
+    }
+
+    @Override
+    public List<Bet> findAll() {
         return betDao.findAll();
     }
-
-    @Override
-    public Bet getBetById(int idBet) {
-        return betDao.findOne(idBet);
-    }
-
-    @Override
-    public void addBet(Bet bet) {
-        betDao.save(bet);
-    }
-
-
-    @Override
-    public void updateBet(Bet bet) {
-        betDao.save(bet);
-    }
-
-    @Override
-    public void deleteBetByIb(int idBet) {
-        betDao.delete(idBet);
-    }
-
-
 }

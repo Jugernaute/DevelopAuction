@@ -10,7 +10,7 @@ public class RandomStr {
         int randomLength = randomNum.length()-2;
 
         Random randomOfLength = new Random();
-        int numOfLength = randomOfLength.nextInt(19);
+        int numOfLength = randomOfLength.nextInt(18);
 
         Random chars = new Random();
         int x2 = chars.nextInt(26) + 97;

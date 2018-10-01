@@ -65,8 +65,10 @@ public class RestControllerSecurity {
             String subject = environment.getProperty("textForMailSender_String_subject");
             String email = user.getEmail();
             mail.sendMail(email,subject,text);
+        } else {
+            return environment.getProperty("matchPassword_registrationForm");
         }
-        return environment.getProperty("matchPassword_registrationForm");
+        return "you are login";
     }
 }
 

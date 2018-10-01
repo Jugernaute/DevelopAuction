@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>cabinet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/stylePasha.css">
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
     <script src="../js/script.js" defer></script>
-</head>
+    <script src="../js/sell.js" defer></script>
+    </head>
 <body>
 <div class="auction">
     <header>
@@ -49,10 +51,201 @@
                 <li id="mesagges">Повідомлення</li>
             </ul>
         <div class="option-list-show">
-            <div class="sell-item">Продаж</div>
+            <div class="sell-item">
+
+
+                    <%--<div class="row">--%>
+                        <div class="col-xs-2">
+                            <p style="float: left">Категорія*</p>
+                        </div>
+                        <div class="col-xs-10">
+                            <button class="btn_Category">Вибрати</button>
+                            <div class="categoryStaticList">
+                                <ul class="categoryHandleList">
+                                    <li>
+                                        <select size="10" class="form" name="selectFirst" id="sellFromSelectFirst">
+                                            <option class="result">Виберіть</option>
+
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select size="10" class="form" name="selectSecond" id="sellFromSelectSecond">
+
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select size="10" class="form" name="selectThird" id="sellFromSelectThrid">
+
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="both"></div>
+                    <%--</div>--%>
+
+<br>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Модель</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text" class="modelProduct" placeholder="модель продукту">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Назва*</p>
+                            </div>
+                                <div class="col-xs-10">
+                                    <input class="descrProduct" id="inputProduct" name="nameProduct" placeholder="введіть назву продукту">
+                                </div>
+                        </div>
+<br>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Стан товару</p>
+                            </div>
+                            <div class="col-xs-10" >
+                                <%--<button>Виберіть</button>--%>
+                                <select   style="width: 100px !important;" class="stateProduct" id="resultStateProduct" name="stateProductName">
+                                    <option value="0">Виберіть</option>
+                                    <option value="1">Новий</option>
+                                    <option value="2">Вживаний</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+<br>
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Опис товару</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <textarea></textarea>
+                            </div>
+                        </div>
+
+<br>
+
+                        <div class="row" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Фотографія*</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <%--<form class="formUpload">--%>
+                                <%--<input type="file" multiple class="imageLoad" name="formData" formmethod="post" >--%>
+
+                                    <%--</form>--%>
+                                    <input type="file" id="files" name="files" multiple >
+                                    <button class="loadImg">LOAD</button>
+                                    <output id="list"></output>
+                                    <div class="pop"></div>                           <%--</div>--%>
+                        <%--</div>--%>
+
+                        <div class="ajax-respond"></div>
+                        <h6>Тип продажу</h6>
+                <hr>
+
+
+                        <div class="row" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Тип продажу:</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <select id="change-blic">
+                                    <option value="0">Вибрати</option>
+                                    <option value="1">Простий аукціон</option>
+                                    <option value="2">Аукцион з можливістю бліц-покупки</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Ціна стартова</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text">
+                            </div>
+                        </div>
+
+                        <div class="row blic" >
+                            <div class="col-xs-2">
+                                <p style="float: right">Ціна купити зараз</p>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text">
+                            </div>
+                        </div>
+
+                <div class="type-sell-head">
+                    <div class="start-sell">Дата початку торгів</div>
+                    <div class="form-dataSell">
+
+                            <label for="date1">Дата</label>
+                            <input type="date" id="date1" name="date"/>
+                        <label for="time1">Час: </label>
+                        <input type="time" id="time1" name="time"/>
+
+                    </div>
+
+                </div>
+                        <div class="both"></div>
+                        <div class="type-sell-head">
+                            <div class="start-sell">Дата закінчення торгів</div>
+                            <div class="form-dataSell">
+                                <label for="date2">Дата</label>
+                                <input type="date" id="date2" name="date"/>
+                                <label for="time2">Час: </label>
+                                <input type="time" id="time2" name="time"/>
+                            </div>
+                        </div>
+                        <div class="both"></div>
+
+                <h6 style="margin-top: 20px">Оплата і доставка</h6>
+<hr>
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <p style="float: right">Спосіб доставки</p>
+                            </div>
+                            <div class="col-xs-10 delivery-checkbox">
+                                <%--<div class="delivery-checkbox"></div>--%>
+                                           <div class="resultDelivery">
+
+                                <label >
+                                    <input class="resultDelivery" type="checkbox" value="1">
+                                </label >Нова Пошта<br>
+
+                                    <label >
+                                        <input class="resultDelivery" type="checkbox" value="2">
+                                    </label>При зустрічі<br>
+
+
+                                    <label >
+                                    <input class="resultDelivery" type="checkbox" value="3">
+                                </label>Самовивіз<br>
+                                <label>
+                                    <input class="resultDelivery" type="checkbox" value="4">
+                                </label>По договору<br>
+                                           </div>
+
+                            </div>
+                        </div>
+
+                        <br>
+                <button class="createLotForm" type="submit">Створити</button>
+            </div>
+            </div>
             <div class="buy hidden">Купівля</div>
             <div class="history hidden">History</div>
-            <div class="settings hidden">
+            <div class="settings <%--hidden--%>">
                 <ol>
                     <li>Настройки учетной записи</li>
                     <ul>
@@ -71,32 +264,49 @@
                             <input class="password" type="password" placeholder="новий пароль" name="password" required><br>
                             <input class="repeatPassword" type="password" placeholder="повторіть пароль" name="repeatPassword" required><br>
 
-                            <a class="resultChangePassword"></a><br>
+                            <span class="resultChangePassword"></span><br>
 
                             <button type="submit" class="saveChangePassword">save change</button>
 <%--// change password    end--%>
 
                         <li>Сторінка про мене................  </li>
-                        <form action="change_AboutMe" method="post">
+
                             <input type="text" placeholder="не працює ще" name="description" required>
                             <button type="submit" class="save">save change</button>
-                        </form>
-                        <li>Телефон.......................... <a class="resultUserPhone"></a> </li>
-<%--// change phone      start--%>
-                        <%--<form>--%>
-                        <input class="inputChangePhone" type="text" placeholder="new phone" name="phone" required>
+
+                        <li>Телефон.......................... <span class="resultUserPhone"></span> </li>
+<%-- change phone      start--%>
+
+                        <input class="inputChangePhone" type="text" placeholder="new phone" name="phone">
                         <button class="saveChangePhone" type="submit" disabled="disable">save change</button>
-                        <%--</form>--%>
-<%--// change phone      end--%>
+
+<%-- change phone      end--%>
+
+<%--set firstname user       start--%>
+                        <li>Ваше імя........................<span class="resultFirstName"></span> </li>
+                        <input class="inputFirstName" type="text" placeholder="ввести імя" name="firstNameUser">
+                        <button class="saveFirstName" type="submit" disabled="disable">save name</button>
+<%--set firstname user       end--%>
+
+<%--set surname user       start--%>
+                        <li>Ваша фамілія.....................<span class="resultSurName"></span> </li>
+                        <input class="inputSurNameUser" type="text" placeholder="ввести фамілію" name="surNameUser">
+                        <button class="saveSurName" type="submit" disabled="disable">save surname</button>
+<%--set surname user       end--%>
+
+<%--set adress user       start--%>
+                        <li>Ваш поштовий адрес......................<span class="resultPostAddress"></span> </li>
+                        <input class="inputPostAddress" type="text" placeholder="ввести поштовий адрес" name="userPostAddress">
+                        <button class="savePostAddress" type="submit" disabled="disable">save adress</button>
+<%--set adress user       end--%>
+
                     </ul>
                 </ol>
-
-
-            </div>
             </div>
             <div class="balans hidden">balans</div>
             <div class="mesagges hidden">masegges</div>
-        <%--</div>--%>
+
+
     </section>
 
 

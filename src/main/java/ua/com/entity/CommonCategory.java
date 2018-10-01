@@ -2,7 +2,10 @@ package ua.com.entity;
 
 import javax.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,11 +24,13 @@ public class CommonCategory {
     public CommonCategory(String nameCommonCategory) {
         this.nameCommonCategory = nameCommonCategory;
     }
-
+    @JsonIgnore
     @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,           // змінили з LAZY
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH},
             mappedBy = "commonCategory"
     )
     List<SubCategory> subCategoryList;
+
+
 }
