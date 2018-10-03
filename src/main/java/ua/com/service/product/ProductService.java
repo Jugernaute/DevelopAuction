@@ -5,8 +5,9 @@ import ua.com.entity.Product;
 import java.util.List;
 
 public interface ProductService {
-    void save(Product product);
-    void deleteById(int id);
-    Product findOne(int id);
-    List<Product> findAll();
+    void addProduct(Product product);
+    void deleteProductById(int id_Product);
+    void updateProduct(Product product);
+    Product getProductById(int id_Product);
+    List<Product> findAllProduct();
 }

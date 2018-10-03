@@ -5,10 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -52,6 +49,13 @@ public class User implements UserDetails {
             mappedBy = "user")
     private List<Bet>listUserBet;
 
+
+    public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress) {
+        this.firstNameUser = firstNameUser;
+        this.surNameUser = surNameUser;
+        this.userBalance = userBalance;
+        this.userPostAddress = userPostAddress;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -228,5 +232,46 @@ public class User implements UserDetails {
 
     public void setListUserBet(List<Bet> listUserBet) {
         this.listUserBet = listUserBet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId &&
+                isAccountNonExpired == user.isAccountNonExpired &&
+                isAccountNonLocked == user.isAccountNonLocked &&
+                isCredentialsNonExpired == user.isCredentialsNonExpired &&
+                isEnabled == user.isEnabled &&
+                userBalance == user.userBalance &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(randomKey, user.randomKey) &&
+                role == user.role &&
+                Objects.equals(firstNameUser, user.firstNameUser) &&
+                Objects.equals(surNameUser, user.surNameUser) &&
+                Objects.equals(userPostAddress, user.userPostAddress) &&
+                Objects.equals(typeOfUser, user.typeOfUser) &&
+                Objects.equals(productListOfUser, user.productListOfUser) &&
+                Objects.equals(listUserBet, user.listUserBet);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, userBalance, userPostAddress, typeOfUser, productListOfUser, listUserBet);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstNameUser='" + firstNameUser + '\'' +
+                ", surNameUser='" + surNameUser + '\'' +
+                ", userBalance=" + userBalance +
+                ", userPostAddress='" + userPostAddress + '\'' +
+                '}';
     }
 }

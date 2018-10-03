@@ -14,26 +14,31 @@ public class LotServiceImpl implements LotService {
     @Autowired
     private LotDao lotDao;
 
+
     @Override
-    public void save(Lot lot) {
+    public void addLot(Lot lot) {
       if (lot != null){
         lotDao.save(lot);
     }
     }
 
     @Override
-    public void deleteById(int id) {
-        lotDao.delete(id);
-
+    public void deleteLotById(int id_Lot) {
+        lotDao.findOne(id_Lot);
     }
 
     @Override
-    public Lot findOne(int id) {
-        return lotDao.findOne(id);
+    public void updateLot(Lot lot) {
+        lotDao.save(lot);
     }
 
     @Override
-    public List<Lot> findAll() {
+    public Lot getLotById(int id_Lot) {
+        return lotDao.findOne(id_Lot);
+    }
+
+    @Override
+    public List<Lot> findAllLot() {
         return lotDao.findAll();
     }
 }

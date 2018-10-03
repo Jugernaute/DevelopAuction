@@ -2,6 +2,8 @@ package ua.com.controllers.controllers_lot;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
@@ -14,8 +16,11 @@ import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.subcategory.SubСategoryService;
 
 import javax.mail.Multipart;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,14 +58,14 @@ public class RestControllerLot {
     @PostMapping("loadManufacturers")
     public List loadManufacturers (/*CommonCategory commonCategory,*/
             @RequestBody String nameManufacturer ){
-        List<Manufacturer> all = manufacturerService.findAll();
+        List<Manufacturer> all = manufacturerService.findAllManufacturer();
         System.out.println(all);
         return all;
     }
 
     @GetMapping("selectDeliveryList")
     public List list(){
-        List<Delivery> all = deliveryService.findAll();
+        List<Delivery> all = deliveryService.findAllDelivery();
         return all;
     }
 
@@ -71,8 +76,10 @@ public class RestControllerLot {
         return list;
     }
 
+
     @PostMapping("loadImg")
-    public String upload(@RequestParam("uploadfile") MultipartFile file) {
+    public String uploadFile(@RequestParam("uploadfile") MultipartFile uploadfile) {
+
         String path = System.getProperty("user.home")
                 +File.separator
                 +"IdeaProjects"
@@ -87,23 +94,27 @@ public class RestControllerLot {
                 +File.separator
                 +"views"
                 +File.separator
-                +"img";
+                +"img"
+                +File.separator
+                +"product_Img";
+        try {
+            // Get the filename and build the local file path (be sure that the
+            // application have write permissions on such directory)
+            String filename = uploadfile.getOriginalFilename();
+            String filepath = Paths.get(path, filename).toString();
 
-        /*
-         * MultipartFile Upload
-         */
-
-            try {
-                fileStorage.store(file);
-                return "File uploaded successfully! -> filename = " + file.getOriginalFilename();
-            } catch (Exception e) {
-                return "Error -> message = " + e.getMessage();
-            }
-
-
-
-        //do whatever you want with the MultipartFile
-//        file.getInputStream();
+            // Save the file locally
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+            stream.write(uploadfile.getBytes());
+            stream.close();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return "file isnot upload";
+        }
+        System.out.println(uploadfile.getOriginalFilename());
+        return "file is upload";
 
     }
 }

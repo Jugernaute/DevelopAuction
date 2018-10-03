@@ -82,7 +82,7 @@ public class RestMainController {
             byEmail.setPassword(password);
             userEditor.setValue(byEmail);
             byEmail.setRandomKey("");
-            userService.save(byEmail);
+            userService.addUser(byEmail);
             return environment.getProperty("change_password_success");
         }
         else{

@@ -5,8 +5,9 @@ import ua.com.entity.Lot;
 import java.util.List;
 
 public interface LotService {
-    void save(Lot lot);
-    void deleteById(int id);
-    Lot findOne(int id);
-    List<Lot> findAll();
+    void addLot(Lot lot);
+    void deleteLotById(int id_Lot);
+    void  updateLot(Lot lot);
+    Lot getLotById(int id_Lot);
+    List<Lot> findAllLot();
 }

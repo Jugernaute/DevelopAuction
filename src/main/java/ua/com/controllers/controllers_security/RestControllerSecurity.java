@@ -57,7 +57,7 @@ public class RestControllerSecurity {
             String randomKey = RandomStr.randomKey();   //Генерація і відправка ключа реєстрації на пошту клієнта
             user.setRandomKey(randomKey);
             userEditor.setValue(user);
-            userService.save(user);
+            userService.addUser(user);
             String text = "Good day, " + user.getUsername() + " "
                     +"Activate account : <a href='http://localhost:8080/activate/"
                     + randomKey

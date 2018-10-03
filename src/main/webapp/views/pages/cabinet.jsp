@@ -144,20 +144,10 @@
                                         <label class="control-label" for="uploadfile">Upload File:</label>
                                         <input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile">
                                     </div>
-
                                     <button type="submit" class="btn btn-default" id="btnSubmit">Upload</button>
-                                    <button type="button" class="btn btn-default" id="btnGetFiles">Files</button>
                                 </form>
+                                <div id="listFiles"></div>
 
-
-                                <input type="file" id="files" name="files" multiple >
-                                    <button class="loadImg">LOAD</button>
-
-                                    <div id="listFiles">
-                                    <div class="pop"></div>                           <%--</div>--%>
-                                    </div>
-
-                        <div class="ajax-respond"></div>
                         <h6>Тип продажу</h6>
                 <hr>
 

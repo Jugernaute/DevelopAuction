@@ -201,23 +201,22 @@ $('.resultDelivery').on('change', function () {
 
 $('#btnSubmit').on('click',function (event) {
     event.preventDefault();
-    let form = $('#fileUploadForm')[0];
-    let data = new FormData(files);
 
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
         url: 'http://localhost:8080/loadImg',
-        data: data,
+        data: new FormData($("#fileUploadForm")[0]),
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
         cache: false,
         success: (data) => {
             $("#listFiles").text(data);
-            // console.log("all ok - " +data)
+            console.log("all ok - " +data)
         },
         error: (e) => {
             $("#listFiles").text(e.responseText);
+            console.log("error")
         }
     });
 
@@ -245,7 +244,7 @@ function handleFileSelect(evt) {
                 let span = document.createElement('span');
                 span.innerHTML = ['<img class="thumb" src="', e.target.result,
                     '" title="', theFile.name, '"/>'].join('');
-                document.getElementById('list').insertBefore(span, null);
+                document.getElementById('listFiles').insertBefore(span, null);
             };
         })(f);
 
@@ -254,7 +253,7 @@ function handleFileSelect(evt) {
     }
 }
 
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+document.getElementById('uploadfile').addEventListener('change', handleFileSelect, false);
 
 
 

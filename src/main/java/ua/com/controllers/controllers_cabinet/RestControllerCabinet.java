@@ -39,7 +39,7 @@ public class RestControllerCabinet {
                        Model model){
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setEmail(email);
-        userService.save(user);
+        userService.addUser(user);
         model.addAttribute("user",user);
         System.out.println(user.getEmail());
         return user.getEmail();
@@ -70,7 +70,7 @@ public class RestControllerCabinet {
             }else{
                 userFromBD.setPassword(password);
                 userEditor.setValue(userFromBD);
-                userService.save(userFromBD);
+                userService.addUser(userFromBD);
             return environment.getProperty("change_password_success");
             }
         }
@@ -94,7 +94,7 @@ public class RestControllerCabinet {
                 return;
             }
             byEmail.setRandomKey(s);
-            userService.save(byEmail);
+            userService.addUser(byEmail);
             mail.sendMail(email,subjectForgotPassword,text);
         }
         else if(email==null && !(name.equals("anonymousUser")))
@@ -130,7 +130,7 @@ public class RestControllerCabinet {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
         user.setPhone(phone);
-        userService.save(user);
+        userService.addUser(user);
         return user.getPhone();
     }
 
@@ -143,7 +143,7 @@ public class RestControllerCabinet {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
         user.setFirstNameUser(firstNameUser);
-        userService.save(user);
+        userService.addUser(user);
         return user.getFirstNameUser();
     }
 
@@ -156,7 +156,7 @@ public class RestControllerCabinet {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
         user.setSurNameUser(surNameUser);
-        userService.save(user);
+        userService.addUser(user);
         return user.getSurNameUser();
     }
 
@@ -169,7 +169,7 @@ public class RestControllerCabinet {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
         user.setUserPostAddress(userPostAddress);
-        userService.save(user);
+        userService.addUser(user);
         return user.getUserPostAddress();
     }
 }

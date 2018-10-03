@@ -6,13 +6,9 @@ import java.util.List;
 
 public interface SubСategoryService {
 
-//    List<SubCategory> findAllSubcategory();
-//
-//    SubCategory getSubcategoryById(int idSubcategory);
-//
-//    void addSubcategory(SubCategory subCategory);
-//
-//    void updateSubcategory(SubCategory subCategory);
-//
-//    void deleteSubcategoryByIb(int idSubcategory);
+    void addSubCategory(SubCategory subCategory);
+    void deleteSubCategoryById(int id_SubCategory);
+    void updateSubCategory(SubCategory subCategory);
+    SubCategory getSubCategoryById(int id_SubCategory);
+    List<SubCategory> findAllSubCategory();
 }
