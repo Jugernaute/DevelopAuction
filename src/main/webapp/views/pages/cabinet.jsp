@@ -138,15 +138,24 @@
                                 <p style="float: right">Фотографія*</p>
                             </div>
                             <div class="col-xs-10">
-                                <%--<form class="formUpload">--%>
-                                <%--<input type="file" multiple class="imageLoad" name="formData" formmethod="post" >--%>
 
-                                    <%--</form>--%>
-                                    <input type="file" id="files" name="files" multiple >
+                                <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+                                    <div class="form-group">
+                                        <label class="control-label" for="uploadfile">Upload File:</label>
+                                        <input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-default" id="btnSubmit">Upload</button>
+                                    <button type="button" class="btn btn-default" id="btnGetFiles">Files</button>
+                                </form>
+
+
+                                <input type="file" id="files" name="files" multiple >
                                     <button class="loadImg">LOAD</button>
-                                    <output id="list"></output>
+
+                                    <div id="listFiles">
                                     <div class="pop"></div>                           <%--</div>--%>
-                        <%--</div>--%>
+                                    </div>
 
                         <div class="ajax-respond"></div>
                         <h6>Тип продажу</h6>
@@ -245,7 +254,7 @@
             </div>
             <div class="buy hidden">Купівля</div>
             <div class="history hidden">History</div>
-            <div class="settings <%--hidden--%>">
+            <div class="settings hidden">
                 <ol>
                     <li>Настройки учетной записи</li>
                     <ul>

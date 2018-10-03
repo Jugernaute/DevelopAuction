@@ -126,82 +126,109 @@ $('.resultDelivery').on('change', function () {
 
 
 
-let data;
-$('.imageLoad').on('change',function (evt) {
 
-    files = evt.target.files;
-    console.log( files);
+// $('.imageLoad').on('change',function (evt) {
+//
+//     files2 = evt.target.files;
+//
+// });
+//
+// $('.loadImg').on('click',function (event) {
+//
+//     event.stopPropagation(); // остановка всех текущих JS событий
+//     event.preventDefault();  // остановка дефолтного события для текущего элемента - клик для <a> тега
+//     console.log(files);
+//     // ничего не делаем если files пустой
+//     if( typeof files == 'undefined' ) return;
+//
+//     // создадим объект данных формы
+//     let data = new FormData();
+//
+//     // заполняем объект данных файлами в подходящем для отправки формате
+//     $.each( files, function( key, value ){
+//         data.append( key, value );
+//     });
+// console.log(data);
+//     // добавим переменную для идентификации запроса
+//     data.append( 'my_file_upload', 1);
+// // обработка и отправка AJAX запроса при клике на кнопку upload_files
+//
+//     $.ajax({
+//        url: 'http://localhost:8080/loadImg',
+//
+//             type        : 'POST', // важно!
+//             data        : data,
+//             cache       : false,
+//             dataType    : 'json',
+//             // отключаем обработку передаваемых данных, пусть передаются как есть
+//             processData : false,
+//             // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
+//             // contentType : false,
+//             // функция успешного ответа сервера
+//             success     : function( respond/*, status, jqXHR */){
+//                 if( typeof files == 'undefined' ) return;
+//                 console.log(respond);
+//                 if( typeof respond.error === 'undefined' ){
+//                     // ОК - файлы загружены
+//                     console.log("all ok!!!! uraaaaaaaaaa");
+//                     // выведем пути загруженных файлов в блок '.ajax-reply'
+//                     let files_path = respond.files;
+//                     let html2 = '';
+//                     $.each( files_path, function( key, val ){
+//                         // console.log(val);
+//                         html2 += val +'<br>';
+//                         let $div = $('<div/>',val);
+//                         $('.pop').append( $div );
+//                     } );
+//
+//
+//                 }
+//                 // ошибка
+//                 else {
+//                     console.log('ОШИБКА: ' + respond.error );
+//                 }
+//             },
+//             // функция ошибки ответа сервера
+//             error: function( jqXHR, status, errorThrown ){
+//                 console.log( 'ОШИБКА AJAX запроса: ' + status, jqXHR );
+//             }
+//
+//         });
+//
+//     });
 
-});
 
-$('.loadImg').on('click',function (event) {
 
-    event.stopPropagation(); // остановка всех текущих JS событий
-    event.preventDefault();  // остановка дефолтного события для текущего элемента - клик для <a> тега
-    console.log(files);
-    // ничего не делаем если files пустой
-    if( typeof files == 'undefined' ) return;
-
-    // создадим объект данных формы
-    let data = new FormData();
-
-    // заполняем объект данных файлами в подходящем для отправки формате
-    $.each( files, function( key, value ){
-        data.append( key, value );
-    });
-console.log(data);
-    // добавим переменную для идентификации запроса
-    data.append( 'my_file_upload', 1);
-// обработка и отправка AJAX запроса при клике на кнопку upload_files
+$('#btnSubmit').on('click',function (event) {
+    event.preventDefault();
+    let form = $('#fileUploadForm')[0];
+    let data = new FormData(files);
 
     $.ajax({
-       url: 'http://localhost:8080/loadImg',
-
-            type        : 'POST', // важно!
-            data        : data,
-            cache       : false,
-            dataType    : 'json',
-            // отключаем обработку передаваемых данных, пусть передаются как есть
-            processData : false,
-            // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
-            // contentType : false,
-            // функция успешного ответа сервера
-            success     : function( respond/*, status, jqXHR */){
-                if( typeof files == 'undefined' ) return;
-                console.log(respond);
-                if( typeof respond.error === 'undefined' ){
-                    // ОК - файлы загружены
-                    console.log("all ok!!!! uraaaaaaaaaa");
-                    // выведем пути загруженных файлов в блок '.ajax-reply'
-                    let files_path = respond.files;
-                    let html2 = '';
-                    $.each( files_path, function( key, val ){
-                        // console.log(val);
-                        html2 += val +'<br>';
-                        let $div = $('<div/>',val);
-                        $('.pop').append( $div );
-                    } );
-
-
-                }
-                // ошибка
-                else {
-                    console.log('ОШИБКА: ' + respond.error );
-                }
-            },
-            // функция ошибки ответа сервера
-            error: function( jqXHR, status, errorThrown ){
-                console.log( 'ОШИБКА AJAX запроса: ' + status, jqXHR );
-            }
-
-        });
-
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: 'http://localhost:8080/loadImg',
+        data: data,
+        processData: false, //prevent jQuery from automatically transforming the data into a query string
+        contentType: false,
+        cache: false,
+        success: (data) => {
+            $("#listFiles").text(data);
+            // console.log("all ok - " +data)
+        },
+        error: (e) => {
+            $("#listFiles").text(e.responseText);
+        }
     });
+
+    event.preventDefault();
+});
+
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 function handleFileSelect(evt) {
      files = evt.target.files; // FileList object
 
-    // Loop through the FileList and render image files as thumbnails.
+// Loop through the FileList and render image files as thumbnails.
     for (let i = 0, f; f = files[i]; i++) {
 
         // Only process image files.
@@ -228,9 +255,7 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
-// $('#files').on('change', function () {
-//     handleFileSelect()
-// });
+
 
 
 // // Проверяем поддержку различных файлов API.

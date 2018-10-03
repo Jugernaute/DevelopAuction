@@ -9,6 +9,7 @@ import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
+import ua.com.service.fileStorage.FileStorage;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.subcategory.SubСategoryService;
 
@@ -32,6 +33,8 @@ public class RestControllerLot {
     CommonCategoryService commonCategoryService;
     @Autowired
     private DeliveryService deliveryService;
+    @Autowired
+    private FileStorage fileStorage;
 
 
     @GetMapping("loadCommonCategory")
@@ -69,31 +72,38 @@ public class RestControllerLot {
     }
 
     @PostMapping("loadImg")
-    public String upload(@RequestParam String my_file_upload) throws IOException {
-
-//        System.out.println(String.format("File name %s", files.getName()));
-//        System.out.println(String.format("File original name %s", files.getOriginalFilename()));
-//        System.out.println(String.format("File size %s", files.getSize()));
+    public String upload(@RequestParam("uploadfile") MultipartFile file) {
         String path = System.getProperty("user.home")
-        +File.separator
-        +"IdeaProjects"
-        +File.separator
-        +"DevelopAuction1"
-        +File.separator
-        +"src"
-        +File.separator
-        +"main"
-        +File.separator
-        +"webapp"
-        +File.separator
-        +"views"
-        +File.separator
-        +"img";
+                +File.separator
+                +"IdeaProjects"
+                +File.separator
+                +"DevelopAuction1"
+                +File.separator
+                +"src"
+                +File.separator
+                +"main"
+                +File.separator
+                +"webapp"
+                +File.separator
+                +"views"
+                +File.separator
+                +"img";
 
-        System.out.println(my_file_upload);
-        System.out.println(path);
+        /*
+         * MultipartFile Upload
+         */
+
+            try {
+                fileStorage.store(file);
+                return "File uploaded successfully! -> filename = " + file.getOriginalFilename();
+            } catch (Exception e) {
+                return "Error -> message = " + e.getMessage();
+            }
+
+
+
         //do whatever you want with the MultipartFile
 //        file.getInputStream();
-        return my_file_upload;
+
     }
 }
