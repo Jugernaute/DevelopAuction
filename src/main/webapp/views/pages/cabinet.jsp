@@ -198,7 +198,7 @@
                         <div class="type-sell-head">
                             <div class="start-sell">Тривалість торгів</div>
                             <div class="form-dataSell">
-                                <select id="dayOfSell">
+                                <select id="durationOfLot">
                                     <option value="0">Виберіть</option>
                                     <option value="1">1</option>
                                     <option value="3">3</option>
@@ -229,16 +229,17 @@
                                 </label >Нова Пошта<br>
 
                                     <label >
-                                        <input class="resultDelivery" type="checkbox" value="2">
+                                        <input class="resultDelivery" type="checkbox" value="2" name="При зустрічі">
                                     </label>При зустрічі<br>
-
 
                                     <label >
                                     <input class="resultDelivery" type="checkbox" value="3">
                                 </label>Самовивіз<br>
+
                                 <label>
                                     <input class="resultDelivery" type="checkbox" value="4">
                                 </label>По договору<br>
+
                                            </div>
 
                             </div>

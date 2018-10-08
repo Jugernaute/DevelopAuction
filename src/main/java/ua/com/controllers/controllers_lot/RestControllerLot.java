@@ -14,6 +14,7 @@ import ua.com.entity.*;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
 import ua.com.service.imageLink.ImageLinkService;
+import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.product.ProductService;
 import ua.com.service.subcategory.SubСategoryService;
@@ -51,6 +52,8 @@ public class RestControllerLot {
     private ImageLinkService imageLinkService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private LotService lotService;
 
 
 
@@ -94,6 +97,7 @@ public class RestControllerLot {
     public String uploadFile(
             Product product,
             ImageLink imageLink,
+//            Lot lot,
             @RequestParam("uploadfile") MultipartFile [] uploadfile,
             @RequestParam String nameProduct,
             @RequestParam String nameCommonCategory,
@@ -104,7 +108,9 @@ public class RestControllerLot {
             @RequestParam String typeSell,
             @RequestParam String hotPrice,
             @RequestParam String startPrice,
-            @RequestParam String dataStartLot
+            @RequestParam String dataStartLot,
+            @RequestParam String durationOfLot,
+            @RequestParam String methodDelivery
 
     ) {
 //        System.out.println(nameProduct);
@@ -114,10 +120,22 @@ public class RestControllerLot {
 
         String replace = dataStartLot.replace("T", " ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime parse = LocalDateTime.parse(replace, formatter);
-        System.out.println(parse);
+        LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
+        System.out.println(dataStart);
+        Lot lot= new Lot();
+
+        lot.setDataStartLot(dataStart);
 
 
+
+        // duration lot
+
+            long durationLot = Long.parseLong(durationOfLot);
+            // add int to date
+        LocalDateTime dataEnd = dataStart.plusDays(durationLot);
+        lot.setDataEndLot(dataEnd);
+        System.out.println(dataEnd);
+        lotService.addLot(lot);
 
         String path = System.getProperty("user.home")
                 +File.separator

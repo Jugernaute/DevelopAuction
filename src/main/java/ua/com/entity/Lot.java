@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.xml.crypto.Data;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,8 +15,10 @@ public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Lot;
-    private String dataStartLot;
-    private String dataEndLot;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dataStartLot;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dataEndLot;
     private int startPrice;
     private int hotPrice;
 
@@ -45,14 +48,14 @@ public class Lot {
     public Lot() {
     }
 
-    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrice) {
+    public Lot(LocalDateTime dataStartLot, LocalDateTime dataEndLot, int startPrice, int hotPrice) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
         this.hotPrice = hotPrice;
     }
 
-    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, Delivery delivery, Payment payment) {
+    public Lot(LocalDateTime dataStartLot, LocalDateTime dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, Delivery delivery, Payment payment) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
@@ -72,20 +75,20 @@ public class Lot {
         return this;
     }
 
-    public String getDataStartLot() {
+    public LocalDateTime getDataStartLot() {
         return dataStartLot;
     }
 
-    public Lot setDataStartLot(String dataStartLot) {
+    public Lot setDataStartLot(LocalDateTime dataStartLot) {
         this.dataStartLot = dataStartLot;
         return this;
     }
 
-    public String getDataEndLot() {
+    public LocalDateTime getDataEndLot() {
         return dataEndLot;
     }
 
-    public Lot setDataEndLot(String dataEndLot) {
+    public Lot setDataEndLot(LocalDateTime dataEndLot) {
         this.dataEndLot = dataEndLot;
         return this;
     }

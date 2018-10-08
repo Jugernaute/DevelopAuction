@@ -4,6 +4,7 @@ let nameProduct;            // select product
 let stateProduct;           // result stateProduct (enum)
 let files;                  // image of product
 let changeBlic;             // change type of sell (enum)
+let resultDelivery=[];
 
 
 
@@ -133,8 +134,13 @@ $('#resultStateProduct').on('change',function () {
 
 $('.resultDelivery').on('change', function () {
     // $(this).empty();
+    // resultDelivery = [];
     if ($(this).is(':checked')){
-   console.log($(this).val())}
+        console.log($(this).val());
+   // console.log($(this).attr('name'));
+        resultDelivery.push($(this).val())
+    }
+    // console.log(resultDelivery)
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -156,9 +162,13 @@ $('#btnSubmit').on('click',function (event) {
     formData.append("typeSell", changeBlic);
     if(changeBlic==="Аукцион з можливістю бліц-покупки"){
         formData.append("hotPrice", $('#hotPrice').val())
+    }else {
+        formData.append("hotPrice", "")
     }
     formData.append("startPrice", $('#startPrice'));
-    formData.append("dataStartLot", $('#dateStart').val() );
+    formData.append("dataStartLot", $('#dateStart').val());
+    formData.append("durationOfLot",$('#durationOfLot').val());
+    formData.append("methodDelivery", resultDelivery);
 
 
     let val = $('#listFiles').val();
@@ -230,8 +240,12 @@ $('.createLotForm').on('click', function () {
     let s = date.toLocaleString();
     let s1 = date.toTimeString();
     let s2 = date.toUTCString();
-    console.log(s);
-    console.log(s1);
-    console.log(s2);
-   console.log(date.getTime()/1000);
+   //  console.log(s);
+   //  console.log(s1);
+   //  console.log(s2);
+   // console.log(date.getTime()/1000);
+   // console.log($('#dayOfSell').val());
+   console.log(resultDelivery);
+   resultDelivery=[];
+   $('input[type=checkbox]').prop('checked',false);
 });
