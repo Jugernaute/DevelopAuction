@@ -16,7 +16,8 @@
 <button id="allproduct">allProduct</button>
 <input type="text" id="nameProduct" placeholder=""/>
 <input type="text" id="modelProduct" placeholder=""/>
-<input type="file" id="file" multiple="multiple" placeholder=""/>
+<%--<input type="file" id="file" multiple="multiple" placeholder=""/>--%>
+<input type="text" id="linkOnImageProduct" placeholder="">
 <input type="text" id="descriptionProduct" placeholder=""/>
 <input type="text" id="id_Manufacturer" placeholder=""/>
 <input type="text" id="id_SubCategory" placeholder=""/>
@@ -51,6 +52,8 @@
 <input type="text" id="methodPayment" placeholder="">
 <button id="addPayment">addPayment</button><br>
 
+<button id="addPaymentIn">addPaymentIn</button><br>
+
 <button id="allLot">allLot</button>
 <input type="text" id="dataStartLot" placeholder="">
 <input type="text" id="dataEndLot" placeholder="">
@@ -68,12 +71,14 @@
 <input type="text" id="userPostAddress" placeholder="">
 <button id="addUser">addUser</button><br>
 
-<div id="conversationDiv"></div>
+
+
 <script>
+
 
     /////////////////   User            //////////////
 
-    $('#addUser').click(function () {
+    $("#addUser").click(function () {
         $("#conversationDiv").empty();
 
         let $x = $('#firstNameUser');
@@ -187,6 +192,11 @@
             dataType : 'json'
         })
     })
+
+
+
+
+
     $('#allPayment').click(function () {
         $("#conversationDiv").empty();
 
@@ -208,32 +218,32 @@
 
     /////////////////   Manufacturer    ///////////////
 
-    $('#addManufacturer').click(function () {
+    $("#allManufacturer").click(function () {
         $("#conversationDiv").empty();
 
-        let $x = $('#nameManufacturer');
+        let $x = $("#nameManufacturer");
         let nameManufacturer = $x.val();
         $x.val(' ');
         let manufacturer = JSON.stringify({nameManufacturer});
         $.ajax({
-            url : '/addManufacturer',
+            url : "/addManufacturer",
             type : 'put',
             contentType : 'application/json',           // отримуєм
             data : manufacturer,
             dataType: 'json'          //передаєм
         })
     })
-    $('#allManufacturer').click(function () {
+    $("#allManufacturer").click(function () {
         $("#conversationDiv").empty();
 
         $.ajax({
-            url : '/allManufacturer',
+            url : "/allManufacturer",
             type : 'get',
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
                     let manufacturer = $('<div/>', {text : obj.nameManufacturer});
-                    manufacturer.appendTo('#conversationDiv');
+                    manufacturer.appendTo($("#conversationDiv"));
                 }
             },
             error : function (error) {
@@ -337,7 +347,9 @@
             url : '/addBet?id_Lot=' + id_Lot + '&userId=' + userId1,
             type : 'put',
             contentType : 'application/json',
-            data : bet
+            data : bet,
+            dataType: 'json'
+
         })
     })
 
@@ -374,12 +386,12 @@
             type: 'put',
             contentType : 'application/json',    //отримуєм
             data: delivery,
-            // dataType: 'json'
+            dataType: 'json'
             // success: function (result) {
             //     console.log(result);
             //     for (let obj of result) {
-            //         let $div = $('<div/>', {text: obj.methodDelivery});
-            //         $div.appendTo($("#conversationDiv"));
+            //         let div = $('<div/>', {text: obj.methodDelivery});
+            //         div.appendTo($("#conversationDiv"));
             //     }
             // },
             // error: function (error) {
@@ -401,7 +413,7 @@
                 console.log(result);
                 for (let obj of result) {
                     let delivery = $('<div/>', {text: obj.methodDelivery});
-                    delivery.appendTo($("#conversationDiv"));
+                    delivery.appendTo($('#conversationDiv'));
                 }
             },
             error : function (error) {
@@ -424,14 +436,18 @@
         let modelProduct = $x1.val();
         $x1.val(' ');
 
-        var files;
-        let $x2 = $('input[type=file]');
-        let data = new FormData();
-        $.each($x2, function (key, value) {
-            data.append(key, value);
-        });
-        data.append('my_file', 1);
-        console.log(data);
+        let $x2 = $("linkOnImageProduct");
+        let linkOnImageProduct = $x2.val();
+        $x2.val(' ');
+        //
+        // var files;
+        // let $x2 = $('input[type=file]');
+        // let data = new FormData();
+        // $.each($x2, function (key, value) {
+        //     data.append(key, value);
+        // });
+        // data.append('my_file', 1);
+        // console.log(data);
 
         let $x3 = $("#descriptionProduct");
         let descriptionProduct = $x3.val();
@@ -446,7 +462,7 @@
         let userId = $x6.val();
         $x6.val(' ');
 
-        let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, data, id_SubCategory, id_Manufacturer, userId});
+        let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, linkOnImageProduct, id_SubCategory, id_Manufacturer, userId});
 console.log(product);
 
         $.ajax({
@@ -484,6 +500,7 @@ $("#allproduct").click(function () {
     })
 })
 
+    // $(location).attr('href', '/basket');
 </script>
 
 </body>
