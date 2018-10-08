@@ -41,7 +41,6 @@ public class RestControllerCabinet {
         user.setEmail(email);
         userService.addUser(user);
         model.addAttribute("user",user);
-        System.out.println(user.getEmail());
         return user.getEmail();
     }
 
@@ -54,8 +53,6 @@ public class RestControllerCabinet {
         String property = environment.getProperty("message_pw.length.error");
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User userFromBD = userService.findByUsername(name);
-        System.out.println(userFromBD);
-
 
         userValidator.validate(userNew, result);
         if(passwordEncoder.matches(oldPassword, userFromBD.getPassword())

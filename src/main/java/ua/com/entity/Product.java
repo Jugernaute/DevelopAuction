@@ -1,9 +1,9 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -16,9 +16,16 @@ public class Product {
     private String nameProduct;
     private String modelProduct;
     private String descriptionProduct;
-    private String linkOnImageProduct;
+//    private String linkOnImageProduct;
     @Enumerated(EnumType.STRING)
     private StateProduct stateProduct;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "product"
+    )
+    private List<ImageLink> imageLinks;
 
 
     @JsonIgnore
@@ -30,6 +37,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private User userOwner;
+
 @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
@@ -43,18 +51,16 @@ public class Product {
     public Product() {
     }
 
-    public Product(String nameProduct, String modelProduct, String descriptionProduct, String linkOnImageProduct) {
+    public Product(String nameProduct, String modelProduct, String descriptionProduct) {
         this.nameProduct = nameProduct;
         this.modelProduct = modelProduct;
         this.descriptionProduct = descriptionProduct;
-        this.linkOnImageProduct = linkOnImageProduct;
     }
 
-    public Product(String nameProduct, String modelProduct, String descriptionProduct, String linkOnImageProduct, SubCategory subCategory, User userOwner, Manufacturer manufacturer, Lot lot) {
+    public Product(String nameProduct, String modelProduct, String descriptionProduct, SubCategory subCategory, User userOwner, Manufacturer manufacturer, Lot lot) {
         this.nameProduct = nameProduct;
         this.modelProduct = modelProduct;
         this.descriptionProduct = descriptionProduct;
-        this.linkOnImageProduct = linkOnImageProduct;
         this.subCategory = subCategory;
         this.userOwner = userOwner;
         this.manufacturer = manufacturer;
@@ -97,15 +103,6 @@ public class Product {
         return this;
     }
 
-    public String getLinkOnImageProduct() {
-        return linkOnImageProduct;
-    }
-
-    public Product setLinkOnImageProduct(String linkOnImageProduct) {
-        this.linkOnImageProduct = linkOnImageProduct;
-        return this;
-    }
-
     public String getDescriptionProduct() {
         return descriptionProduct;
     }
@@ -114,15 +111,6 @@ public class Product {
         this.descriptionProduct = descriptionProduct;
         return this;
     }
-
-//    public StateProduct getStateProduct() {
-//        return stateProduct;
-//    }
-//
-//    public Product setStateProduct(StateProduct stateProduct) {
-//        this.stateProduct = stateProduct;
-//        return this;
-//    }
 
     public User getUserOwner() {
         return userOwner;
@@ -151,6 +139,14 @@ public class Product {
         return this;
     }
 
+    public List<ImageLink> getImageLinks() {
+        return imageLinks;
+    }
+
+    public void setImageLinks(List<ImageLink> imageLinks) {
+        this.imageLinks = imageLinks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -160,7 +156,8 @@ public class Product {
                 Objects.equals(nameProduct, product.nameProduct) &&
                 Objects.equals(modelProduct, product.modelProduct) &&
                 Objects.equals(descriptionProduct, product.descriptionProduct) &&
-                Objects.equals(linkOnImageProduct, product.linkOnImageProduct) &&
+                stateProduct == product.stateProduct &&
+                Objects.equals(imageLinks, product.imageLinks) &&
                 Objects.equals(subCategory, product.subCategory) &&
                 Objects.equals(userOwner, product.userOwner) &&
                 Objects.equals(manufacturer, product.manufacturer) &&
@@ -170,7 +167,7 @@ public class Product {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Product, nameProduct, modelProduct, descriptionProduct, linkOnImageProduct, subCategory, userOwner, manufacturer, lot);
+        return Objects.hash(id_Product, nameProduct, modelProduct, descriptionProduct, /*linkOnImageProduct,*/ subCategory, userOwner, manufacturer, lot);
     }
 
     @Override
@@ -180,7 +177,13 @@ public class Product {
                 ", nameProduct='" + nameProduct + '\'' +
                 ", modelProduct='" + modelProduct + '\'' +
                 ", descriptionProduct='" + descriptionProduct + '\'' +
-                ", linkOnImageProduct='" + linkOnImageProduct + '\'' +
+//                ", linkOnImageProduct='" + linkOnImageProduct + '\'' +
+                ", stateProduct=" + stateProduct +
+                ", imageLinks=" + imageLinks +
+                ", subCategory=" + subCategory +
+                ", userOwner=" + userOwner +
+                ", manufacturer=" + manufacturer +
+                ", lot=" + lot +
                 '}';
     }
 }

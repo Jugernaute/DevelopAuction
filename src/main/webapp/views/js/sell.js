@@ -1,8 +1,9 @@
 let nameCommonCategory;     // select commonCategory
 let subCategory;            // select subCategory
 let nameProduct;            // select product
-let stateProduct;           // result stateProduct in index !!!
+let stateProduct;           // result stateProduct (enum)
 let files;                  // image of product
+let changeBlic;             // change type of sell (enum)
 
 
 
@@ -80,10 +81,17 @@ $('#sellFromSelectThrid').on('dblclick',function () {
 
 //--------------------------------------Вибір типу аукціону-----------------
 $('#change-blic').on('change',function () {
+    changeBlic = "";
     if($(this).val()==2) {
+        changeBlic="Аукцион з можливістю бліц-покупки";
+        console.log(changeBlic==="Аукцион з можливістю бліц-покупки");
         console.log($(this).val());
         $('.blic').css('display', 'block');
-    }else $('.blic').css('display', 'none');
+    }else
+    {
+        changeBlic="Простий аукціон";
+        $('.blic').css('display', 'none');
+    }
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -111,8 +119,14 @@ $('.stateProduct').on('click',function () {
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 $('#resultStateProduct').on('change',function () {
-stateProduct = ($(this).val());                     // виводить індекс stateProduct
-console.log(stateProduct);
+// stateProduct = ($(this).val());                     // виводить індекс stateProduct
+    stateProduct = "";
+    if($(this).val()==1) {
+        stateProduct="Новий";
+        $('.blic').css('display', 'block');
+    }else {
+        stateProduct = "Вживаний";
+    }
 });
 
 //------------------------------------------отримуємо інфу від чекбоксів-------
@@ -125,88 +139,36 @@ $('.resultDelivery').on('change', function () {
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
-
-
-// $('.imageLoad').on('change',function (evt) {
-//
-//     files2 = evt.target.files;
-//
-// });
-//
-// $('.loadImg').on('click',function (event) {
-//
-//     event.stopPropagation(); // остановка всех текущих JS событий
-//     event.preventDefault();  // остановка дефолтного события для текущего элемента - клик для <a> тега
-//     console.log(files);
-//     // ничего не делаем если files пустой
-//     if( typeof files == 'undefined' ) return;
-//
-//     // создадим объект данных формы
-//     let data = new FormData();
-//
-//     // заполняем объект данных файлами в подходящем для отправки формате
-//     $.each( files, function( key, value ){
-//         data.append( key, value );
-//     });
-// console.log(data);
-//     // добавим переменную для идентификации запроса
-//     data.append( 'my_file_upload', 1);
-// // обработка и отправка AJAX запроса при клике на кнопку upload_files
-//
-//     $.ajax({
-//        url: 'http://localhost:8080/loadImg',
-//
-//             type        : 'POST', // важно!
-//             data        : data,
-//             cache       : false,
-//             dataType    : 'json',
-//             // отключаем обработку передаваемых данных, пусть передаются как есть
-//             processData : false,
-//             // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
-//             // contentType : false,
-//             // функция успешного ответа сервера
-//             success     : function( respond/*, status, jqXHR */){
-//                 if( typeof files == 'undefined' ) return;
-//                 console.log(respond);
-//                 if( typeof respond.error === 'undefined' ){
-//                     // ОК - файлы загружены
-//                     console.log("all ok!!!! uraaaaaaaaaa");
-//                     // выведем пути загруженных файлов в блок '.ajax-reply'
-//                     let files_path = respond.files;
-//                     let html2 = '';
-//                     $.each( files_path, function( key, val ){
-//                         // console.log(val);
-//                         html2 += val +'<br>';
-//                         let $div = $('<div/>',val);
-//                         $('.pop').append( $div );
-//                     } );
-//
-//
-//                 }
-//                 // ошибка
-//                 else {
-//                     console.log('ОШИБКА: ' + respond.error );
-//                 }
-//             },
-//             // функция ошибки ответа сервера
-//             error: function( jqXHR, status, errorThrown ){
-//                 console.log( 'ОШИБКА AJAX запроса: ' + status, jqXHR );
-//             }
-//
-//         });
-//
-//     });
-
-
-
 $('#btnSubmit').on('click',function (event) {
     event.preventDefault();
+    nameProduct = $('#inputProduct').val();
+    let descriptionProduct = $('#descriptionProduct').val();
+    let modelProduct = $('.modelProduct').val();
+
+    let formData = new FormData($("#fileUploadForm")[0]);
+
+    formData.append("nameProduct", nameProduct);
+    formData.append("nameCommonCategory", nameCommonCategory);
+    formData.append("nameSubCategory", subCategory);
+    formData.append("stateProduct", stateProduct);
+    formData.append("descriptionProduct", descriptionProduct);
+    formData.append("modelProduct", modelProduct);
+    formData.append("typeSell", changeBlic);
+    if(changeBlic==="Аукцион з можливістю бліц-покупки"){
+        formData.append("hotPrice", $('#hotPrice').val())
+    }
+    formData.append("startPrice", $('#startPrice'));
+    formData.append("dataStartLot", $('#dateStart').val() );
+
+
+    let val = $('#listFiles').val();
+    console.log(val);
 
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
         url: 'http://localhost:8080/loadImg',
-        data: new FormData($("#fileUploadForm")[0]),
+        data: formData,
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
         cache: false,
@@ -261,3 +223,15 @@ document.getElementById('uploadfile').addEventListener('change', handleFileSelec
 // if ( window . File && window . FileReader && window . FileList && window . Blob ) { alert('all ok') }
 //     else {
 // alert ( 'API-интерфейсы файлов не поддерживаются полностью в этом браузере.' ); }
+
+$('.createLotForm').on('click', function () {
+    let val = $('#dateStart').val();
+    let date = new Date(val);
+    let s = date.toLocaleString();
+    let s1 = date.toTimeString();
+    let s2 = date.toUTCString();
+    console.log(s);
+    console.log(s1);
+    console.log(s2);
+   console.log(date.getTime()/1000);
+});

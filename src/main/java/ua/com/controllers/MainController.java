@@ -9,6 +9,7 @@ import ua.com.dao.AuctionItemsDao;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.CommonCategory;
+import ua.com.entity.ImageLink;
 import ua.com.entity.SubCategory;
 import ua.com.entity.User;
 
@@ -22,8 +23,7 @@ public class MainController{
     SubCategoryDao subCategoryDao;
 
     @GetMapping("/goToCabinet")
-    private String goToCabinet(){
-        return "cabinet";
+    private String goToCabinet(){ return "cabinet";
     }
 
     @GetMapping("goToSale")

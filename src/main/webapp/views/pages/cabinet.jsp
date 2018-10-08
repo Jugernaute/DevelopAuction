@@ -127,7 +127,7 @@
                                 <p style="float: right">Опис товару</p>
                             </div>
                             <div class="col-xs-10">
-                                <textarea></textarea>
+                                <textarea id="descriptionProduct"></textarea>
                             </div>
                         </div>
 
@@ -142,7 +142,7 @@
                                 <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
                                     <div class="form-group">
                                         <label class="control-label" for="uploadfile">Upload File:</label>
-                                        <input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile">
+                                        <input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" multiple>
                                     </div>
                                     <button type="submit" class="btn btn-default" id="btnSubmit">Upload</button>
                                 </form>
@@ -170,7 +170,7 @@
                                 <p style="float: right">Ціна стартова</p>
                             </div>
                             <div class="col-xs-10">
-                                <input type="text">
+                                <input type="text" id="startPrice">
                             </div>
                         </div>
 
@@ -179,7 +179,7 @@
                                 <p style="float: right">Ціна купити зараз</p>
                             </div>
                             <div class="col-xs-10">
-                                <input type="text">
+                                <input type="text" id="hotPrice">
                             </div>
                         </div>
 
@@ -187,22 +187,28 @@
                     <div class="start-sell">Дата початку торгів</div>
                     <div class="form-dataSell">
 
-                            <label for="date1">Дата</label>
-                            <input type="date" id="date1" name="date"/>
-                        <label for="time1">Час: </label>
-                        <input type="time" id="time1" name="time"/>
-
+                            <label for="dateStart">Дата</label>
+                            <input type="datetime-local" id="dateStart" name="dataStartLot"/>
                     </div>
+
+
 
                 </div>
                         <div class="both"></div>
                         <div class="type-sell-head">
-                            <div class="start-sell">Дата закінчення торгів</div>
+                            <div class="start-sell">Тривалість торгів</div>
                             <div class="form-dataSell">
-                                <label for="date2">Дата</label>
-                                <input type="date" id="date2" name="date"/>
-                                <label for="time2">Час: </label>
-                                <input type="time" id="time2" name="time"/>
+                                <select id="dayOfSell">
+                                    <option value="0">Виберіть</option>
+                                    <option value="1">1</option>
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                    <option value="7">7</option>
+                                    <option value="9">9</option>
+                                    <option value="11">11</option>
+                                    <option value="14">14</option>
+                                </select>
+
                             </div>
                         </div>
                         <div class="both"></div>
