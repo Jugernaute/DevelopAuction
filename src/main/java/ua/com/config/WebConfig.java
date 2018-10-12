@@ -25,14 +25,9 @@ import java.util.Properties;
 @ComponentScan("ua.com.*")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-//    @Bean
-//    public StandardServletMultipartResolver resolver() {
-//        return new StandardServletMultipartResolver();
-//    }
     @Bean (name = "multipartResolver")
     public CommonsMultipartResolver filterMultipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-//        resolver.setDefaultEncoding("utf-8");
 //        multipartResolver.setMaxUploadSize(10485760); // 10MB
 //        multipartResolver.setMaxUploadSizePerFile(1048576); // 1MB
         return resolver;

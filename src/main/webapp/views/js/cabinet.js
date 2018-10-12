@@ -1,24 +1,16 @@
-    //
-    // let changeEmail = $('.ChangeEmail'); /*pasha*/
-    // let loginForms = $('.login_form');
-
-        let saveChangePassword = $('.saveChangePassword');
-        // let resultChangePassword = $('.resultChangePassword');
-
-
+///windows switch
     let optionList = $('.options-list li');
-    let optionListShow = $('.option-list-show div');
-
+    let optionListShow = $('.slider');
     optionList.on('click', function () {
         for (let i = 0; i < optionList.length; i++) {
             optionList[i].style.borderBottom = 1 +'px solid gray';
         }
         $(this).css('border-bottom', 'none');
 
-        for (let j = 0; j < optionListShow.length; j++){
-            optionListShow[j].classList.add('hidden')
-
+        for (let opt of optionListShow) {
+            opt.classList.add('hidden')
         }
+
         if ($(this).attr('id') === 'sell') {
             $('.sell-item').toggleClass('hidden');
         } else if ($(this).attr('id') === 'buy') {
@@ -32,51 +24,11 @@
         }else if ($(this).attr('id') === 'mesagges') {
             $('.mesagges').toggleClass('hidden');
         }
-       /* if ($(this).attr('id') === 'sell') {
-            $('.sell').css('display', 'block');
-        } else if ($(this).attr('id') === 'buy') {
-            $('.buy').css('display', 'block');
-        } else if ($(this).attr('id') === 'history') {
-            $('.history').css('display', 'block');
-        }else if ($(this).attr('id') === 'settings') {
-            $('.settings').css('display', 'block');
-        }else if ($(this).attr('id') === 'balans') {
-            $('.balans').css('display', 'block');
-        }else if ($(this).attr('id') === 'mesagges') {
-            $('.mesagges').css('display', 'block');
-        }*/
     });
 
     optionList.first().css('border-bottom', 'none');
 
-                                         // ne vudalyatu!!!!!     -----------                pasha start
-
-                                         //            change email
-    let saveChangeEmail = $('.saveChangeEmail');
-    let userEmail = $('.userEmail');
-
-    (saveChangeEmail).on('click', function (event){
-        // event.preventDefault();
-        let email = $('.changeEmail').val();
-        userEmail.empty();
-        $.ajax({
-            url: 'http://localhost:8080/change_Email',
-            type: 'put',
-            data: email,
-            contentType: 'text/plain',
-
-            success: function(result){
-                    userEmail.append(result);
-            },
-            error: function (error) {
-                console.log("error")
-            }
-        });
-
-});                 //.............................*change email end*/
-
-
-                                        //          change password
+             /// sel category
 
     saveChangePassword.on('click',function (event) {
         event.preventDefault();

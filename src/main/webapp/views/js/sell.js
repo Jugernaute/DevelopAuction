@@ -1,18 +1,23 @@
-let nameCommonCategory;     // select commonCategory
-let subCategory;            // select subCategory
-let nameProduct;            // select product
-let stateProduct;           // result stateProduct (enum)
-let files;                  // image of product
-let changeBlic;             // change type of sell (enum)
-let resultDelivery=[];
 
-
+let stateProductError = $('#state-product-error');
+let modelNameDescription = $('#modelNameDescription');
+let $spanError = $('#span-error');
+let $errorFormEnter = $('#error-form-enter');
+let $blic = $('#blic-error');
+let $listImageFiles = $('#listFiles');
+let $imageError = $('#image-error');
+let $startPrice = $('#start-price');
+let $dateStart = $('#dateStart');
+let $durationOfLot = $('#durationOfLot');
+let $duratioLotnError = $('#duration-lot-error');
+let $checkboxError = $('#checkbox-error');
+let $changeBlic = $('#change-blic');
+let $hotPrice = $('#hot-price');
 
 
 //------------------------кнопка вибору товарів (загрузка першої колонки селектів)--------
-$('.btn_Category').on('click',function () {
-    $('.categoryStaticList').css('display','block');
-    $('#sellFromSelectFirst').empty();
+$('#sell').on('click',function () {
+    $('.sell-item-list-lvl1').empty();
     $.ajax({
         url: 'http://localhost:8080/loadCommonCategory',
         type: 'get',
@@ -22,7 +27,7 @@ $('.btn_Category').on('click',function () {
         success: function (result) {
             $(result).each(function (index, object) {
                 let $div = $('<option/>',{text:object.nameCommonCategory});
-                        $('#sellFromSelectFirst').append($div)
+                        $('.sell-item-list-lvl1').append($div)
             })
         },
     })
@@ -30,10 +35,10 @@ $('.btn_Category').on('click',function () {
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 //-----------------------------(загрузка другої колонки селектів)-----------------------
-$('#sellFromSelectFirst').on('click',function () {
+$('.sell-item-list-lvl1').on('click',function () {
     nameCommonCategory = $(this).val();
-    $('#sellFromSelectSecond').empty();
-    $('#sellFromSelectThrid').empty();
+    $('.sell-item-list-lvl2').empty();
+    $('.sell-item-list-lvl3').empty();
     $.ajax({
         url: 'http://localhost:8080/loadSubCategory',
         type: 'post',
@@ -43,7 +48,7 @@ $('#sellFromSelectFirst').on('click',function () {
         success: function (result) {
             $(result).each(function (index, value) {
                 let $option = $('<option/>',{text:value.nameSubCategory});
-                $('#sellFromSelectSecond').append($option);
+                $('.sell-item-list-lvl2').append($option);
             })
         }
     });
@@ -53,9 +58,9 @@ $('#sellFromSelectFirst').on('click',function () {
 
 //-------------------------------------------(загрузка третьої колонки селектів)--------
 
-$('#sellFromSelectSecond').on('click',function () {
+$('.sell-item-list-lvl2').on('click',function () {
     subCategory = $(this).val();
-    $('#sellFromSelectThrid').empty();
+    $('.sell-item-list-lvl3').empty();
     $.ajax({
         url: 'http://localhost:8080/loadManufacturers',
         type: 'post',
@@ -65,7 +70,7 @@ $('#sellFromSelectSecond').on('click',function () {
         success: function (result) {
             $(result).each(function (index, value) {
                 let $option = $('<option/>',{text:value.nameManufacturer});
-                $('#sellFromSelectThrid').append($option);
+                $('.sell-item-list-lvl3').append($option);
             })
         }
     });
@@ -73,106 +78,147 @@ $('#sellFromSelectSecond').on('click',function () {
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 //---------------------------------Вибір товару з третьої колонки---------------
-$('#sellFromSelectThrid').on('dblclick',function () {
-    nameProduct = $(this).val();
-    console.log(nameProduct)
+$('.sell-item-list-lvl3').on('dblclick',function () {
+    $spanError.addClass('hidden');
+    $errorFormEnter.addClass('hidden');
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 //--------------------------------------Вибір типу аукціону-----------------
-$('#change-blic').on('change',function () {
-    changeBlic = "";
-    if($(this).val()==2) {
-        changeBlic="Аукцион з можливістю бліц-покупки";
-        console.log(changeBlic==="Аукцион з можливістю бліц-покупки");
-        console.log($(this).val());
-        $('.blic').css('display', 'block');
-    }else
-    {
-        changeBlic="Простий аукціон";
-        $('.blic').css('display', 'none');
-    }
-});
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
-//--------------------------------------Вибір типу продукту(б.у\новий)--------
-$('.stateProduct').on('click',function () {
-    // $('.stateProduct').empty();
-    $.ajax({
-        url: 'http://localhost:8080/loadStateProduct',
-        type: 'put',
-        // data: nameCommonCategory,
-        contentType: 'application/json',
-
-        success: function (result) {
-
-            $(result).each(function (index, value) {
-
-                let $option = $('<option/>',{text:value});
-                // $('#resultStateProduct').append($option);
-
-            });
-        }
-    });
-});
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-$('#resultStateProduct').on('change',function () {
-// stateProduct = ($(this).val());                     // виводить індекс stateProduct
-    stateProduct = "";
-    if($(this).val()==1) {
-        stateProduct="Новий";
-        $('.blic').css('display', 'block');
+$changeBlic.on('change',function () {
+    let temp = $('#buy-now');
+    $blic.addClass('hidden');
+    if($(this).val() == "Аукцион з можливістю бліц-покупки") {
+        temp.removeClass('hidden')
     }else {
-        stateProduct = "Вживаний";
+        temp.addClass('hidden');
     }
 });
+
+$('#resultStateProduct').on('click',function () {
+    // $(this).empty();
+    stateProductError.addClass('hidden');
+    $errorFormEnter.addClass('hidden');
+});
+
 
 //------------------------------------------отримуємо інфу від чекбоксів-------
 
-$('.resultDelivery').on('change', function () {
-    // $(this).empty();
-    // resultDelivery = [];
-    if ($(this).is(':checked')){
-        console.log($(this).val());
-   // console.log($(this).attr('name'));
-        resultDelivery.push($(this).val())
+let deliveryArray = [];
+let check = $('.option-list-show-send-wrapper input[type="checkbox"]');
+$(check).on('change', function () {
+    $checkboxError.addClass('hidden');
+    deliveryArray = [];
+    for (let i = 0; i < check.length; i++) {
+        if (check[i].checked) {
+            deliveryArray.push(check[i].getAttribute('name'));
+        }
     }
-    // console.log(resultDelivery)
+    // console.log(deliveryArray);
+
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+$durationOfLot.on('click',function () {
+    $duratioLotnError.addClass('hidden');
+    $errorFormEnter.addClass('hidden')
+});
 
-
-$('#btnSubmit').on('click',function (event) {
+$('.add-product-sell').on('click',function (event) {
     event.preventDefault();
-    nameProduct = $('#inputProduct').val();
-    let descriptionProduct = $('#descriptionProduct').val();
-    let modelProduct = $('.modelProduct').val();
-
+    stateProductError.removeClass('hidden');
+    $errorFormEnter.removeClass('hidden');
+    $spanError.removeClass('hidden');
+    $blic.removeClass('hidden');
     let formData = new FormData($("#fileUploadForm")[0]);
-
-    formData.append("nameProduct", nameProduct);
-    formData.append("nameCommonCategory", nameCommonCategory);
-    formData.append("nameSubCategory", subCategory);
-    formData.append("stateProduct", stateProduct);
-    formData.append("descriptionProduct", descriptionProduct);
-    formData.append("modelProduct", modelProduct);
-    formData.append("typeSell", changeBlic);
-    if(changeBlic==="Аукцион з можливістю бліц-покупки"){
-        formData.append("hotPrice", $('#hotPrice').val())
-    }else {
-        formData.append("hotPrice", "")
+    let change = $('#change-blic').val();
+    let manufacturerProduct = $('.sell-item-list-lvl3').val();
+    let nameCommonCategory = $('.sell-item-list-lvl1').val();
+    let nameSubCategory = $('.sell-item-list-lvl2').val();
+    let nameProduct = $('#name-product');
+    let model = $('#model');
+    let resultStateProduct = $('#resultStateProduct');
+    if(manufacturerProduct===null || nameCommonCategory===null || nameSubCategory===null){
+        $spanError.empty();
+        $errorFormEnter.empty();
+        $spanError.append("Виберіть категорію товару");
+        $errorFormEnter.append("Форма заповнена не вірно");
+        return;
+    }else{
+        $errorFormEnter.addClass('hidden');
+        $spanError.addClass('hidden');
     }
-    formData.append("startPrice", $('#startPrice'));
+     if(nameProduct.val()===""){
+        nameProduct.addClass('red');
+        nameProduct.focus();
+        return;
+    }
+    if(resultStateProduct.val()==0){
+        stateProductError.empty();
+        stateProductError.append("Виберіть стан товару");
+        $errorFormEnter.append("Форма заповнена не вірно");
+        return;
+    }
+    if(modelNameDescription.val()===""){
+        modelNameDescription.focus();
+        modelNameDescription.addClass('red');
+        return;
+    }
+    if($listImageFiles.children().length === 0) {
+        $('#image-error').empty();
+        $('#image-error').append("Загрузіть хоча б одну картинку");
+        return;
+    }
+    if(change==0){
+        $blic.empty();
+        $blic.append("Виберіть тип продажу");
+        return;}
+    if($startPrice.val()===""){
+        $startPrice.focus();
+        $startPrice.addClass('red');
+        return;
+    }
+    if($dateStart.val()===""){
+        $dateStart.focus();
+        return;
+    }
+    if($durationOfLot.val()==0){
+        $duratioLotnError.empty();
+        $errorFormEnter.empty();
+        $duratioLotnError.append("Введіть тривалість торгів");
+        $duratioLotnError.removeClass('hidden');
+        $errorFormEnter.removeClass('hidden');
+        $errorFormEnter.append("Не вірно заповнена форма");
+        return;
+    }
+    if(deliveryArray.length==0){
+        $checkboxError.empty();
+        $checkboxError.removeClass('hidden');
+        $checkboxError.append("Виберіть спосіб доставки");
+        return;
+    }
+    if($changeBlic.val()=="Аукцион з можливістю бліц-покупки" && $hotPrice.val()===""){
+        $hotPrice.focus();
+        $hotPrice.addClass('red');
+        return;
+    }
+    formData.append("manufacturerProduct", manufacturerProduct);
+    formData.append("nameCommonCategory", nameCommonCategory);
+    formData.append("nameSubCategory", nameSubCategory);
+    formData.append("nameProduct", nameProduct.val());
+    formData.append("stateProduct", resultStateProduct.val());
+    formData.append("descriptionProduct", modelNameDescription.val());
+    formData.append("modelProduct", model.val());
+    formData.append("typeSell", change);
+    if(change==="Аукцион з можливістю бліц-покупки"){
+        formData.append("hotPrice", $('#hot-price').val())
+    }else {
+        formData.append("hotPrice", "null")
+    }
+    formData.append("startPrice", $('#start-price').val());
     formData.append("dataStartLot", $('#dateStart').val());
     formData.append("durationOfLot",$('#durationOfLot').val());
-    formData.append("methodDelivery", resultDelivery);
-
-
-    let val = $('#listFiles').val();
-    console.log(val);
+    formData.append("methodDelivery", deliveryArray);
 
     $.ajax({
         type: "POST",
@@ -187,7 +233,7 @@ $('#btnSubmit').on('click',function (event) {
             console.log("all ok - " +data)
         },
         error: (e) => {
-            $("#listFiles").text(e.responseText);
+            // $("#listFiles").text(e.responseText);
             console.log("error")
         }
     });
@@ -197,6 +243,7 @@ $('#btnSubmit').on('click',function (event) {
 
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 function handleFileSelect(evt) {
+    $('#image-error').empty();
      files = evt.target.files; // FileList object
 
 // Loop through the FileList and render image files as thumbnails.
@@ -204,6 +251,8 @@ function handleFileSelect(evt) {
 
         // Only process image files.
         if (!f.type.match('image.*')) {
+            $imageError.empty();
+            $imageError.append("Загружайте тільки картинки");
             continue;
         }
 
@@ -212,11 +261,20 @@ function handleFileSelect(evt) {
         // Closure to capture the file information.
         reader.onload = (function(theFile) {
             return function(e) {
-                // Render thumbnail.
-                let span = document.createElement('span');
-                span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                    '" title="', theFile.name, '"/>'].join('');
-                document.getElementById('listFiles').insertBefore(span, null);
+
+                if ($listImageFiles.children().length < 4){
+                    console.log($listImageFiles.children().length);
+                    // Render thumbnail.
+                    let span = document.createElement('span');
+                    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                        '" title="', theFile.name, '"/>'].join("");
+                    document.getElementById('listFiles').insertBefore(span, null);
+                }else{
+                    $('#image-error').empty();
+                    $('#image-error').append("Ви не можете загрузити більше 4 картинок");
+                    return false;
+                }
+
             };
         })(f);
 
@@ -234,18 +292,12 @@ document.getElementById('uploadfile').addEventListener('change', handleFileSelec
 //     else {
 // alert ( 'API-интерфейсы файлов не поддерживаются полностью в этом браузере.' ); }
 
-$('.createLotForm').on('click', function () {
-    let val = $('#dateStart').val();
-    let date = new Date(val);
-    let s = date.toLocaleString();
-    let s1 = date.toTimeString();
-    let s2 = date.toUTCString();
-   //  console.log(s);
-   //  console.log(s1);
-   //  console.log(s2);
-   // console.log(date.getTime()/1000);
-   // console.log($('#dayOfSell').val());
-   console.log(resultDelivery);
-   resultDelivery=[];
-   $('input[type=checkbox]').prop('checked',false);
+$('.add-product-sell2').on('click', function () {
+    // let val = $('#dateStart').val();
+    // let date = new Date(val);
+    // let s = date.toLocaleStringt();
+    // let s1 = date.toTimeString();
+    // let s2 = date.toUTCString();
+    console.log($hotPrice.val());
+    console.log($startPrice.val());
 });

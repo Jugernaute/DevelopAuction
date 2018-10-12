@@ -95,11 +95,13 @@ public class RestControllerLot {
 
     @PostMapping("loadImg")
     public String uploadFile(
+            User user,
             Product product,
             ImageLink imageLink,
 //            Lot lot,
             @RequestParam("uploadfile") MultipartFile [] uploadfile,
             @RequestParam String nameProduct,
+            @RequestParam String manufacturerProduct,
             @RequestParam String nameCommonCategory,
             @RequestParam String nameSubCategory,
             @RequestParam String stateProduct,
@@ -110,18 +112,36 @@ public class RestControllerLot {
             @RequestParam String startPrice,
             @RequestParam String dataStartLot,
             @RequestParam String durationOfLot,
-            @RequestParam String methodDelivery
+            @RequestParam String methodDelivery []
 
     ) {
-//        System.out.println(nameProduct);
-//        System.out.println(nameCommonCategory);
-//        System.out.println(nameSubCategory);
-//        System.out.println(stateProduct);
+        System.out.println(nameProduct);
+        System.out.println(manufacturerProduct);
+        System.out.println(nameCommonCategory);
+        System.out.println(nameSubCategory);
+        System.out.println(stateProduct);
+        System.out.println(descriptionProduct);
+        System.out.println(modelProduct);
+        System.out.println(typeSell);
+        System.out.println(hotPrice);
+        System.out.println(startPrice);
+        System.out.println(dataStartLot);
+        System.out.println(durationOfLot);
+        System.out.println(Arrays.toString(methodDelivery));
+        Delivery delivery = new Delivery();
+        delivery.setMethodDelivery("Nova Poshta");
+        deliveryService.addDelivery(delivery);
+        delivery.setMethodDelivery("При зустрічі");
+        deliveryService.addDelivery(delivery);
+        delivery.setMethodDelivery("Самовивіз");
+        deliveryService.addDelivery(delivery);
+        delivery.setMethodDelivery("По домовленості");
+        deliveryService.addDelivery(delivery);
 
         String replace = dataStartLot.replace("T", " ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
-        System.out.println(dataStart);
+//        System.out.println(dataStart);
         Lot lot= new Lot();
 
         lot.setDataStartLot(dataStart);
@@ -134,8 +154,8 @@ public class RestControllerLot {
             // add int to date
         LocalDateTime dataEnd = dataStart.plusDays(durationLot);
         lot.setDataEndLot(dataEnd);
-        System.out.println(dataEnd);
-        lotService.addLot(lot);
+//        System.out.println(dataEnd);
+//        lotService.addLot(lot);
 
         String path = System.getProperty("user.home")
                 +File.separator
