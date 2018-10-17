@@ -43,4 +43,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     public List<Delivery> findAllDelivery() {
         return deliveryDao.findAll();
     }
+
+    @Override
+    public Delivery findByMethodDelivery(String methodDelivery) {
+        return deliveryDao.findByMethodDelivery(methodDelivery);
+    }
 }

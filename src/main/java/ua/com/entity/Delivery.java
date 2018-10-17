@@ -13,9 +13,8 @@ public class Delivery {
     private String methodDelivery;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
-    mappedBy = "delivery")
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE)
     private Lot lot;
 
     public Delivery(String methodDelivery) {
@@ -25,7 +24,7 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Delivery(String methodDelivery, Lot lot) {
+    public Delivery(String methodDelivery,Lot lot) {
         this.methodDelivery = methodDelivery;
         this.lot = lot;
     }

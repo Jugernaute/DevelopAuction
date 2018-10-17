@@ -8,4 +8,5 @@ import ua.com.entity.SubCategory;
 public interface SubCategoryDao extends JpaRepository<SubCategory, Integer> {
 
     SubCategory findBy(String name);
+    SubCategory findByNameSubCategory(String nameSubCategory);
 }

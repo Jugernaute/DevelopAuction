@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
@@ -18,6 +19,7 @@ import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.product.ProductService;
 import ua.com.service.subcategory.SubСategoryService;
+import ua.com.service.user.UserService;
 
 import javax.mail.Multipart;
 import java.io.BufferedOutputStream;
@@ -29,10 +31,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class RestControllerLot {
@@ -54,6 +53,8 @@ public class RestControllerLot {
     private ProductService productService;
     @Autowired
     private LotService lotService;
+    @Autowired
+    private UserService userService;
 
 
 
@@ -95,9 +96,10 @@ public class RestControllerLot {
 
     @PostMapping("loadImg")
     public String uploadFile(
-            User user,
-            Product product,
-            ImageLink imageLink,
+//            Delivery delivery,
+//            User user,
+//            Product product,
+//            ImageLink imageLink,
 //            Lot lot,
             @RequestParam("uploadfile") MultipartFile [] uploadfile,
             @RequestParam String nameProduct,
@@ -115,6 +117,12 @@ public class RestControllerLot {
             @RequestParam String methodDelivery []
 
     ) {
+
+        Product product = new Product();
+//        Delivery delivery = new Delivery();
+        Manufacturer manufacturer = new Manufacturer();
+
+
         System.out.println(nameProduct);
         System.out.println(manufacturerProduct);
         System.out.println(nameCommonCategory);
@@ -128,84 +136,173 @@ public class RestControllerLot {
         System.out.println(dataStartLot);
         System.out.println(durationOfLot);
         System.out.println(Arrays.toString(methodDelivery));
-        Delivery delivery = new Delivery();
-        delivery.setMethodDelivery("Nova Poshta");
-        deliveryService.addDelivery(delivery);
-        delivery.setMethodDelivery("При зустрічі");
-        deliveryService.addDelivery(delivery);
-        delivery.setMethodDelivery("Самовивіз");
-        deliveryService.addDelivery(delivery);
-        delivery.setMethodDelivery("По домовленості");
-        deliveryService.addDelivery(delivery);
-
-        String replace = dataStartLot.replace("T", " ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
-//        System.out.println(dataStart);
-        Lot lot= new Lot();
-
-        lot.setDataStartLot(dataStart);
 
 
 
-        // duration lot
+        /*
+        *  start working with product object
+        *
+        *  */
+        try{
+            /*
+             * for tree load link
+             * */
 
-            long durationLot = Long.parseLong(durationOfLot);
-            // add int to date
-        LocalDateTime dataEnd = dataStart.plusDays(durationLot);
-        lot.setDataEndLot(dataEnd);
-//        System.out.println(dataEnd);
-//        lotService.addLot(lot);
+            SubCategory byNameSubCategory = subСategoryService.findByNameSubCategory(nameSubCategory);
+            product.setSubCategory(byNameSubCategory);
 
-        String path = System.getProperty("user.home")
-                +File.separator
-                +"IdeaProjects"
-                +File.separator
-                +"DevelopAuction1"
-                +File.separator
-                +"src"
-                +File.separator
-                +"main"
-                +File.separator
-                +"webapp"
-                +File.separator
-                +"views"
-                +File.separator
-                +"img"
-                +File.separator
-                +"product_Img";
-        try {
-            // Get the filename and build the local file path (be sure that the
-            // application have write permissions on such directory)
-//            List<ImageLink> linkList = new ArrayList<>();
+        }catch(Exception e){
+            return "error in tree load link -> " +e.getMessage();
+        }
 
+        /*find user from session*/
 
+        User userFind = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
-            // Save the file locally
-            for(MultipartFile file : uploadfile) {
-                String filename = file.getOriginalFilename();
-                String filepath = Paths.get(path, filename).toString();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-                stream.write(file.getBytes());
-                stream.close();
+        product.setUserOwner(userFind);
+
+        Manufacturer byNameManufacturer = manufacturerService.findByNameManufacturer(manufacturerProduct);
+        product.setManufacturer(byNameManufacturer);
+
+//        productService.addProduct(product);
+        try{
+
+            product.setNameProduct(nameProduct);
+
+            if(modelProduct!=null){
+                product.setModelProduct(modelProduct);
+            }else{
+                product.setModelProduct("Не заповнено користувачем");
             }
 
-//            imageLink.setLinkOfImage(filename);
-//            linkList.add(imageLink);
-//            imageLink.setProduct(product);
-//            productService.addProduct(product);
-//            imageLinkService.save(imageLink);
+            product.setDescriptionProduct(descriptionProduct);
 
-//            System.out.println(product.getImageLinks());
+            StateProduct[] values = StateProduct.values();    //enum stateProduct
+            for (StateProduct value : values) {
+                String s= String.valueOf(value);
+                if(s.equals(stateProduct.toUpperCase())) {
+                    product.setStateProduct(value);
+                }
+        }
 
+            TypeSell[] typeSells = TypeSell.values();       //enum typeOfSale
+            for (TypeSell sell : typeSells) {
+                if(sell.getString().equals(typeSell)){
+                    product.setTypeSell(sell);
+                }
+            }
+        } catch (Exception e){
+            return "error with create product class -> "+e.getMessage();
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            return "file isnot upload";
+        productService.addProduct(product);
+                            // working with multipart file
+                            // Get the filename and build the local file path
+        try{
+            System.out.println(product.getTypeSell()+ " type sell");
+            System.out.println(product.getNameProduct()+ " name prod");
+            System.out.println(product.getUserOwner().getUsername()+ " user");
+            System.out.println(product.getSubCategory()+ " subCateg");
+            System.out.println(product.getManufacturer()+ " manuf");
+
+        } catch (Exception e){
+            return "error with product save -> " + e.getMessage();
         }
-//        System.out.println(uploadfile.getOriginalFilename());
-//        System.out.println(nameProduct);
+
+        try{
+            String path = System.getProperty("user.home")
+                    +File.separator
+                    +"IdeaProjects"
+                    +File.separator
+                    +"DevelopAuction1"
+                    +File.separator
+                    +"src"
+                    +File.separator
+                    +"main"
+                    +File.separator
+                    +"webapp"
+                    +File.separator
+                    +"views"
+                    +File.separator
+                    +"img"
+                    +File.separator
+                    +"product_Img";
+            try{
+
+                for(MultipartFile file : uploadfile) {
+                    ImageLink link =new ImageLink();
+                    System.out.println(file.getOriginalFilename() + " file");
+                    String filename = file.getOriginalFilename();
+                    String filepath = Paths.get(path, filename).toString();
+                    BufferedOutputStream stream =
+                            new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+                    link.setLinkOfImage(filename);
+                    link.setProduct(product);
+                    imageLinkService.addImageLink(link);                      // Save the file locally
+                    stream.write(file.getBytes());
+                    stream.close();
+                }
+
+               } catch (Exception e){
+                return "error with imageLink save -> " + e.getMessage();
+            }
+        } catch (Exception e){
+            return "error in filePath -> " + e.getMessage();
+        }
+
+
+
+        try{
+            /*
+            * Working with Lot object*/
+
+            String replace = dataStartLot.replace("T", " ");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
+                                                // duration lot
+            long durationLot = Long.parseLong(durationOfLot);
+            // add int to date
+            LocalDateTime dataEnd = dataStart.plusDays(durationLot);
+
+            //            working with delivery
+
+            Lot lot = new Lot();
+            for (String s : methodDelivery) {
+                Delivery delivery = new Delivery();
+                lot.setDataStartLot(dataStart);
+                lot.setProduct(product);
+                lot.setDataEndLot(dataEnd);
+                lot.setStartPrice(Integer.parseInt(startPrice));
+                if(hotPrice.equals("null")){
+                    System.out.println(hotPrice + " hotPrice1");
+//                lot.setHotPrice(Integer.parseInt(hotPrice));
+                }else {
+                    System.out.println(hotPrice + " hotPrice2");
+                    lot.setHotPrice(Integer.parseInt(hotPrice));
+                }
+
+                Delivery byMethodDelivery = deliveryService.findByMethodDelivery(s);
+                System.out.println(byMethodDelivery + " byMethodDelivery");
+                lotService.addLot(lot);
+//                delivery.setLot(lot);
+                delivery.setMethodDelivery(s);
+                delivery.setLot(lot);
+                deliveryService.updateDelivery(delivery);
+            }
+
+          /*
+          * end Lot object*/
+        }catch (Exception e){
+            return "error with Lot object -> " + e.getMessage();
+        }
+
+        /*
+        * working with delivery
+        * */
+
+
+        userFind.setTypeOfUser(Collections.singleton(TypeUser.SELLER));
+        userService.addUser(userFind);
+
         return "file is upload";
 
     }

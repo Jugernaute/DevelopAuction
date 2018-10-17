@@ -16,7 +16,9 @@ let $hotPrice = $('#hot-price');
 
 
 //------------------------кнопка вибору товарів (загрузка першої колонки селектів)--------
-$('#sell').on('click',function () {
+$('.btn-flex').on('click',function () {
+    $('.sell-item-list-wrapper').css('display', 'flex');
+    $(this).addClass('hidden');
     $('.sell-item-list-lvl1').empty();
     $.ajax({
         url: 'http://localhost:8080/loadCommonCategory',
@@ -89,7 +91,7 @@ $('.sell-item-list-lvl3').on('dblclick',function () {
 $changeBlic.on('change',function () {
     let temp = $('#buy-now');
     $blic.addClass('hidden');
-    if($(this).val() == "Аукцион з можливістю бліц-покупки") {
+    if($(this).val() == "Аукціон з можливістю бліц-покупки") {
         temp.removeClass('hidden')
     }else {
         temp.addClass('hidden');
@@ -115,7 +117,7 @@ $(check).on('change', function () {
             deliveryArray.push(check[i].getAttribute('name'));
         }
     }
-    // console.log(deliveryArray);
+    console.log(deliveryArray);
 
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -138,7 +140,7 @@ $('.add-product-sell').on('click',function (event) {
     let nameProduct = $('#name-product');
     let model = $('#model');
     let resultStateProduct = $('#resultStateProduct');
-    if(manufacturerProduct===null || nameCommonCategory===null || nameSubCategory===null){
+    if(manufacturerProduct===null || nameCommonCategory===null ||  nameSubCategory===null){
         $spanError.empty();
         $errorFormEnter.empty();
         $spanError.append("Виберіть категорію товару");
@@ -210,7 +212,7 @@ $('.add-product-sell').on('click',function (event) {
     formData.append("descriptionProduct", modelNameDescription.val());
     formData.append("modelProduct", model.val());
     formData.append("typeSell", change);
-    if(change==="Аукцион з можливістю бліц-покупки"){
+    if(change==="Аукціон з можливістю бліц-покупки"){
         formData.append("hotPrice", $('#hot-price').val())
     }else {
         formData.append("hotPrice", "null")
@@ -225,6 +227,7 @@ $('.add-product-sell').on('click',function (event) {
         enctype: 'multipart/form-data',
         url: 'http://localhost:8080/loadImg',
         data: formData,
+        dataType: 'JSON',
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
         cache: false,
@@ -233,7 +236,7 @@ $('.add-product-sell').on('click',function (event) {
             console.log("all ok - " +data)
         },
         error: (e) => {
-            // $("#listFiles").text(e.responseText);
+            $("#listFiles").text(e.responseText);
             console.log("error")
         }
     });
@@ -263,7 +266,7 @@ function handleFileSelect(evt) {
             return function(e) {
 
                 if ($listImageFiles.children().length < 4){
-                    console.log($listImageFiles.children().length);
+                    // console.log($listImageFiles.children().length);
                     // Render thumbnail.
                     let span = document.createElement('span');
                     span.innerHTML = ['<img class="thumb" src="', e.target.result,
@@ -298,6 +301,6 @@ $('.add-product-sell2').on('click', function () {
     // let s = date.toLocaleStringt();
     // let s1 = date.toTimeString();
     // let s2 = date.toUTCString();
-    console.log($hotPrice.val());
-    console.log($startPrice.val());
+        console.log(new FormData($("#fileUploadForm")[0]));
+    // console.log($startPrice.val());
 });

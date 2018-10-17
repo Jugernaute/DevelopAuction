@@ -13,4 +13,6 @@ public interface DeliveryService {
     void updateDelivery(Delivery delivery);
     Delivery getDeliveryById(int id_Delivery);
     List<Delivery> findAllDelivery();
+
+    Delivery findByMethodDelivery(String methodDelivery);
 }

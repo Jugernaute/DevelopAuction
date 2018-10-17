@@ -16,9 +16,10 @@ public class Product {
     private String nameProduct;
     private String modelProduct;
     private String descriptionProduct;
-//    private String linkOnImageProduct;
     @Enumerated(EnumType.STRING)
     private StateProduct stateProduct;
+    @Enumerated(EnumType.STRING)
+    private TypeSell typeSell;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
@@ -44,7 +45,7 @@ public class Product {
     private Manufacturer manufacturer;
 @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
     mappedBy = "product")
     private Lot lot;
 
@@ -67,6 +68,14 @@ public class Product {
         this.lot = lot;
     }
 
+    public TypeSell getTypeSell() {
+        return typeSell;
+    }
+
+    public void setTypeSell(TypeSell typeSell) {
+        this.typeSell = typeSell;
+    }
+
     public SubCategory getSubCategory() {
         return subCategory;
     }
@@ -74,6 +83,14 @@ public class Product {
     public Product setSubCategory(SubCategory subCategory) {
         this.subCategory = subCategory;
         return this;
+    }
+
+    public StateProduct getStateProduct() {
+        return stateProduct;
+    }
+
+    public void setStateProduct(StateProduct stateProduct) {
+        this.stateProduct = stateProduct;
     }
 
     public int getId_Product() {

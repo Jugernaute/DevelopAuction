@@ -67,7 +67,7 @@
 .sell-item-list-wrapper {
     padding-right: 0;
     padding-left: 0;
-    display: flex;
+    display: none;
     width: 100%;
     justify-content: space-between;
 }
@@ -165,6 +165,9 @@
 }
 .red::placeholder {
     color: red;
+}
+.btn-flex{
+    display: flex;
 }
 
 

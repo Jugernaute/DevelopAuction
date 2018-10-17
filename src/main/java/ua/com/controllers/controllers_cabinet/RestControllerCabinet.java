@@ -3,6 +3,7 @@ package ua.com.controllers.controllers_cabinet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
@@ -36,6 +37,8 @@ public class RestControllerCabinet {
 
     @PutMapping("/change_Email")
     public String user(@RequestBody String email,
+//                       @AuthenticationPrincipal User user,
+
                        Model model){
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setEmail(email);
@@ -46,6 +49,7 @@ public class RestControllerCabinet {
 
     @PostMapping("/change_Password")
     private String changePassword( User userNew,
+
                                    @RequestParam String password,
                                    @RequestParam String oldPassword,
                                    @RequestParam String repeatPassword,

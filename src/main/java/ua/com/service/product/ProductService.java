@@ -10,4 +10,5 @@ public interface ProductService {
     void updateProduct(Product product);
     Product getProductById(int id_Product);
     List<Product> findAllProduct();
+    Product findByNameProduct(String product);
 }

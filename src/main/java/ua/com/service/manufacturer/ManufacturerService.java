@@ -10,4 +10,5 @@ public interface ManufacturerService {
     void updateManufacturer(Manufacturer manufacturer);
     Manufacturer getManufacturerById(int id_Manufacturer);
     List<Manufacturer> findAllManufacturer();
+    Manufacturer findByNameManufacturer (String nameManufacturer);
 }

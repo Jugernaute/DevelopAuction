@@ -15,12 +15,15 @@ public class ImageLinkServiceImpl implements ImageLinkService {
     private ImageLinkDao imageLinkDao;
 
     @Override
-    public void save(List<ImageLink> imageLinks) {
-        imageLinkDao.save(imageLinks);
+    public void saveList(List<ImageLink> imageLinks) {
+        for (ImageLink imageLink : imageLinks) {
+            imageLinkDao.save(imageLink);
+        }
+
     }
 
     @Override
-    public void save(ImageLink imageLink) {
-        imageLinkDao.save(imageLink);
+    public void addImageLink(ImageLink imageLink) {
+       imageLinkDao.save(imageLink);
     }
 }

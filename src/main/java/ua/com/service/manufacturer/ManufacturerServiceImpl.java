@@ -41,4 +41,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public List<Manufacturer> findAllManufacturer() {
         return manufacturerDao.findAll();
     }
+
+    @Override
+    public Manufacturer findByNameManufacturer(String nameManufacturer) {
+        return manufacturerDao.findByNameManufacturer(nameManufacturer);
+    }
 }

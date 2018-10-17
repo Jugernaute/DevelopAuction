@@ -39,4 +39,11 @@ public class SubСategoryServiceImpl implements SubСategoryService {
     public List<SubCategory> findAllSubCategory() {
         return subCategoryDao.findAll();
     }
+
+    @Override
+    public SubCategory findByNameSubCategory(String nameSubCategory) {
+        return subCategoryDao.findByNameSubCategory(nameSubCategory);
+    }
+
+
 }

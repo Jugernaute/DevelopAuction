@@ -31,17 +31,18 @@ public class Lot {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = CascadeType.MERGE)
     private Product product;
 
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
-    private Delivery delivery;
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "lot")
+    private List<Delivery> delivery;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Payment payment;
 
@@ -55,7 +56,7 @@ public class Lot {
         this.hotPrice = hotPrice;
     }
 
-    public Lot(LocalDateTime dataStartLot, LocalDateTime dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, Delivery delivery, Payment payment) {
+    public Lot(LocalDateTime dataStartLot, LocalDateTime dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, List<Delivery> delivery, Payment payment) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
@@ -129,11 +130,11 @@ public class Lot {
         return this;
     }
 
-    public Delivery getDelivery() {
+    public List<Delivery> getDelivery() {
         return delivery;
     }
 
-    public Lot setDelivery(Delivery delivery) {
+    public Lot setDelivery(List<Delivery> delivery) {
         this.delivery = delivery;
         return this;
     }

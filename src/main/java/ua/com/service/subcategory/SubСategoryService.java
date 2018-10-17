@@ -11,4 +11,5 @@ public interface SubСategoryService {
     void updateSubCategory(SubCategory subCategory);
     SubCategory getSubCategoryById(int id_SubCategory);
     List<SubCategory> findAllSubCategory();
+    SubCategory findByNameSubCategory (String nameSubCategory);
 }

@@ -16,41 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `delivery`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `delivery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `firstNameUser` varchar(255) DEFAULT NULL,
-  `isAccountNonExpired` bit(1) NOT NULL,
-  `isAccountNonLocked` bit(1) NOT NULL,
-  `isCredentialsNonExpired` bit(1) NOT NULL,
-  `isEnabled` bit(1) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `randomKey` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
-  `surNameUser` varchar(255) DEFAULT NULL,
-  `userBalance` int(11) NOT NULL,
-  `userPostAddress` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `UK_jreodf78a7pl5qidfh43axdfb` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `delivery` (
+  `id_Delivery` int(11) NOT NULL AUTO_INCREMENT,
+  `methodDelivery` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_Delivery`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `delivery`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'pasha',NULL,_binary '',_binary '',_binary '',_binary '','$2a$10$1JY0OQzrcSZADw.7ZPwQzuz.7DEoSq5u8/ihKK/.jHNIdbvStF8uS',NULL,'255160g79519157g76','ROLE_USER',NULL,0,NULL,'pasha');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `delivery` WRITE;
+/*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
+INSERT INTO `delivery` VALUES (1,'По домовленості'),(2,'Нова Пошта'),(3,'При зустрічі'),(4,'Самовивіз');
+/*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -62,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-21 16:01:22
+-- Dump completed on 2018-10-17  0:18:52

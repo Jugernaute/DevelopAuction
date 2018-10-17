@@ -13,10 +13,10 @@ public class Payment {
     private String methodPayment;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
             mappedBy = "payment")
-    private Lot lot;
+    private List<Lot> lot;
 
     public Payment() {
     }
@@ -25,7 +25,7 @@ public class Payment {
         this.methodPayment = methodPayment;
     }
 
-    public Payment(String methodPayment, Lot lot) {
+    public Payment(String methodPayment, List<Lot> lot) {
         this.methodPayment = methodPayment;
         this.lot = lot;
     }
@@ -48,11 +48,11 @@ public class Payment {
         return this;
     }
 
-    public Lot getLot() {
+    public List<Lot> getLot() {
         return lot;
     }
 
-    public Payment setLot(Lot lot) {
+    public Payment setLot(List<Lot> lot) {
         this.lot = lot;
         return this;
     }
