@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.*;
 //import ua.com.dao.ProductDao;
 import ua.com.entity.*;
+import ua.com.service.delivery.DeliveryService;
 import ua.com.service.user.UserService;
 
 @Controller
@@ -33,6 +34,8 @@ public class MainControllerTest {
     PaymentDao paymentDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DeliveryService deliveryService;
 
 
     @PostMapping("/saveCommonCategory")
@@ -113,7 +116,7 @@ public class MainControllerTest {
     @PostMapping("/createDelivery")
     public String createDelivery(@RequestParam String methodDelivery) {
         Delivery delivery = new Delivery(methodDelivery);
-        deliveryDao.save(delivery);
+        deliveryService.addDelivery(delivery);
         return "qwe";
     }
 
@@ -121,7 +124,7 @@ public class MainControllerTest {
     public String createPayment(@RequestParam String methodPayment) {
         Payment payment = new Payment(methodPayment);
         paymentDao.save(payment);
-        return "home1";
+        return "qwe";
     }
 
 //    @PostMapping("/createLot")
@@ -146,7 +149,7 @@ public class MainControllerTest {
     @GetMapping("/deleteLot")
     public String deleteLot(@RequestParam int idLot) {
         lotDao.delete(idLot);
-        return "home1";
+        return "qwe";
     }
 
 //    @PostMapping("/createBet")

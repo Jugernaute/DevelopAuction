@@ -194,7 +194,7 @@ public class RestControllerLot {
         } catch (Exception e){
             return "error with create product class -> "+e.getMessage();
         }
-        productService.addProduct(product);
+
                             // working with multipart file
                             // Get the filename and build the local file path
         try{
@@ -203,10 +203,11 @@ public class RestControllerLot {
             System.out.println(product.getUserOwner().getUsername()+ " user");
             System.out.println(product.getSubCategory()+ " subCateg");
             System.out.println(product.getManufacturer()+ " manuf");
-
         } catch (Exception e){
-            return "error with product save -> " + e.getMessage();
+            return "error with product save -> " + e.getMessage()+ " "+e.getLocalizedMessage();
         }
+        productService.addProduct(product);
+
 
         try{
             String path = System.getProperty("user.home")
@@ -258,7 +259,8 @@ public class RestControllerLot {
             String replace = dataStartLot.replace("T", " ");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
-                                                // duration lot
+            LocalDateTime dateTimeNow = LocalDateTime.now();
+            // duration lot
             long durationLot = Long.parseLong(durationOfLot);
             // add int to date
             LocalDateTime dataEnd = dataStart.plusDays(durationLot);
@@ -266,9 +268,12 @@ public class RestControllerLot {
             //            working with delivery
 
             Lot lot = new Lot();
-            for (String s : methodDelivery) {
-                Delivery delivery = new Delivery();
-                lot.setDataStartLot(dataStart);
+                     if(dataStart.isBefore(dateTimeNow)){
+                         return "enter dataTime right!!!";
+                     }else {
+                         lot.setDataStartLot(dataStart);
+                     }
+
                 lot.setProduct(product);
                 lot.setDataEndLot(dataEnd);
                 lot.setStartPrice(Integer.parseInt(startPrice));
@@ -280,14 +285,14 @@ public class RestControllerLot {
                     lot.setHotPrice(Integer.parseInt(hotPrice));
                 }
 
-                Delivery byMethodDelivery = deliveryService.findByMethodDelivery(s);
-                System.out.println(byMethodDelivery + " byMethodDelivery");
-                lotService.addLot(lot);
+//                Delivery byMethodDelivery = deliveryService.findByMethodDelivery(s);
+//                System.out.println(byMethodDelivery + " byMethodDelivery");
+//                lotService.addLot(lot);
+////                delivery.setLot(lot);
+//                delivery.setMethodDelivery(s);
 //                delivery.setLot(lot);
-                delivery.setMethodDelivery(s);
-                delivery.setLot(lot);
-                deliveryService.updateDelivery(delivery);
-            }
+//                deliveryService.updateDelivery(delivery);
+
 
           /*
           * end Lot object*/

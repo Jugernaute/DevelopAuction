@@ -11,7 +11,8 @@
     <script src="../js/main.js" defer></script>
 </head>
 <body>
-<a href="qwe">regina</a>
+<a href="qwe">regina</a><br>
+<a href="goToSell">fast-start</a>
     <div class="enter_form">
         <div class="modal-content">
             <div class="close_cont">

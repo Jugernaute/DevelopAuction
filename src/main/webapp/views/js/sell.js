@@ -128,10 +128,11 @@ $durationOfLot.on('click',function () {
 
 $('.add-product-sell').on('click',function (event) {
     event.preventDefault();
+    $('#listFiles').empty();
     stateProductError.removeClass('hidden');
     $errorFormEnter.removeClass('hidden');
     $spanError.removeClass('hidden');
-    $blic.removeClass('hidden');
+    // $blic.empty();
     let formData = new FormData($("#fileUploadForm")[0]);
     let change = $('#change-blic').val();
     let manufacturerProduct = $('.sell-item-list-lvl3').val();
@@ -172,9 +173,11 @@ $('.add-product-sell').on('click',function (event) {
         return;
     }
     if(change==0){
+        $blic.removeClass('hidden');
         $blic.empty();
         $blic.append("Виберіть тип продажу");
-        return;}
+        return;
+    }
     if($startPrice.val()===""){
         $startPrice.focus();
         $startPrice.addClass('red');
@@ -247,7 +250,7 @@ $('.add-product-sell').on('click',function (event) {
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 function handleFileSelect(evt) {
     $('#image-error').empty();
-     files = evt.target.files; // FileList object
+     let files = evt.target.files; // FileList object
 
 // Loop through the FileList and render image files as thumbnails.
     for (let i = 0, f; f = files[i]; i++) {

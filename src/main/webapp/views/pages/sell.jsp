@@ -24,7 +24,7 @@
                     <li class="sell"><a href="#">Продати</a></li>
                     <li class="favorits"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>
-                    <li class="exit"><a href="#">Вийти</a></li>
+                    <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>
         </div>
@@ -72,8 +72,8 @@
                 <p class="required">Стан товару: </p>
                 <select id="resultStateProduct">
                     <option value="0">Виберіть</option>
-                    <option <%--value="1" name="Новий"--%>>Новий</option>
-                    <option <%--value="2" name="Вживаний"--%>>Вживаний</option>
+                    <option>Новий</option>
+                    <option>Вживаний</option>
                 </select>
             </div>
             <span id="state-product-error"></span>
@@ -158,7 +158,7 @@
                         <input type="checkbox" name="Самовивіз"><p>Самовивіз</p>
                     </label>
                     <label>
-                        <input type="checkbox" name="По домовленості"><p>По домовленості</p>
+                        <input type="checkbox" name="По домовленості"><p>По договору</p>
                     </label>
                     <span id="checkbox-error"></span>
                 </div>
