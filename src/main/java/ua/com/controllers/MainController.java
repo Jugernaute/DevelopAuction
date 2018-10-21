@@ -41,5 +41,9 @@ public class MainController{
         return "lostpassword";
     }
 
+    @GetMapping("/lot")
+    private String Lot(){
+        return "lot";
+    }
 
 }

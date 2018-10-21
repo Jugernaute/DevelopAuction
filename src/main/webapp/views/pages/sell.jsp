@@ -12,6 +12,7 @@
     <script src="../js/sell.js" defer></script>
 </head>
 <body>
+<a href="lot">lot</a>
 <div class="auction">
     <header>
         <div class="wrapper">
