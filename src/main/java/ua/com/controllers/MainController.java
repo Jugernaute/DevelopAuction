@@ -26,10 +26,10 @@ public class MainController{
     private String goToCabinet(){ return "cabinet";
     }
 
-    @GetMapping("goToSale")
-    private String goToSale(){
-        return "sale";
-    }
+//    @GetMapping("goToSell")
+//    private String goToSale(){
+//        return "sell";
+//    }
 
     @GetMapping("/fromLogoToHome")
     private String fromLogoToHome(){

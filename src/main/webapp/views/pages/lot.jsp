@@ -91,10 +91,11 @@
                 </label>
                 <ul class="menu">
                     <li class="enter"><a href="#">Вхід</a></li>
-                    <li class="registration"><a href="#">Реєстрація</a></li>
-                    <li class="sell"><a href="goToSale">Продати</a></li>
+                    <%--<li class="registration"><a href="#" class="hidden">Реєстрація</a></li>--%>
+                    <li class="sell"><a href="goToSell">Продати</a></li>
                     <li class="favorites"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>
+                    <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>
         </div>

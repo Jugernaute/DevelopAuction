@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <title>Auction | Кабінет</title>
     <link rel="stylesheet" href="../style/main.css">
+    <%--<link rel="stylesheet" href="../style/style.css">--%>
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
-    <script src="../js/sell.js" defer></script>
+    <%--<script src="../js/sell.js" defer></script>--%>
 </head>
 <body>
 <div class="auction">
@@ -19,7 +20,7 @@
                 <input type="search" placeholder="ПОШУК ТОВАРІВ">
                 <ul class="menu">
 
-                    <li class="user-id"><a href="#">userID</a></li>
+                    <li class="user-id"><a href="#">${user.getUsername()}</a></li>
                     <li class="sell"><a href="/goToSell" id="sell1">Продати</a></li>
                     <li class="favorits"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>
@@ -37,186 +38,91 @@
     </section>
     <section class="options">
         <ul class="options-list">
-            <li id="sell">Продаж</li>
+            <li id="settings">Налаштування</li>
             <li id="buy">Купівля</li>
             <li id="history">Історія</li>
-            <li id="settings">Налаштування</li>
             <li id="balans">Баланс</li>
             <li id="mesagges">Повідомлення</li>
         </ul>
-        <%--<div class="option-list-show">--%>
-            <%--<div class="sell-item slider">--%>
-                <%--<div class="sell-item-list">--%>
-                    <%--<p class="required">Категорія: </p>--%>
-                    <%--<div class="sell-item-list-wrapper">--%>
-                        <%--<select class="sell-item-list-lvl1" size="6">--%>
-
-                        <%--</select>--%>
-                        <%--<select class="sell-item-list-lvl2" size="6">--%>
-                        <%--</select>--%>
-                        <%--<select class="sell-item-list-lvl3" size="6">--%>
-                        <%--</select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<span id="span-error"></span>--%>
-            <%--&lt;%&ndash;<span id="sell-item-list-wrapper-error"></span>&ndash;%&gt;--%>
-                <%--<div class="sell-item-container">--%>
-                    <%--<p >Модель: </p>--%>
-                    <%--<label>--%>
-                        <%--<input type="text" id="model" placeholder="Введіть модель товару">--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="sell-item-container">--%>
-                    <%--<p class="required">Назва продукту: </p>--%>
-                    <%--<label>--%>
-                        <%--<input type="text" name="modelName" id="name-product" placeholder="Введіть назву товару">--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="sell-item-container">--%>
-                    <%--<p class="required">Стан товару: </p>--%>
-                        <%--<select id="resultStateProduct">--%>
-                            <%--<option value="0">Виберіть</option>--%>
-                            <%--<option &lt;%&ndash;value="1" name="Новий"&ndash;%&gt;>Новий</option>--%>
-                            <%--<option &lt;%&ndash;value="2" name="Вживаний"&ndash;%&gt;>Вживаний</option>--%>
-                        <%--</select>--%>
-                <%--</div>--%>
-                <%--<span id="state-product-error"></span>--%>
-                <%--<div class="sell-item-container">--%>
-                    <%--<p class="required">Опис: </p>--%>
-                    <%--<label>--%>
-                        <%--<textarea type="text" id="modelNameDescription" placeholder="Опишіть Ваш товар" ></textarea>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="sell-item-container">--%>
-                    <%--<p class="required">Фотографія: </p>--%>
-                    <%--<form method="POST" enctype="multipart/form-data" id="fileUploadForm">--%>
-                        <%--<div class="form-group">--%>
-                            <%--&lt;%&ndash;<label class="control-label" for="uploadfile">Upload File:</label>&ndash;%&gt;--%>
-                            <%--<input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" multiple>--%>
-                        <%--</div>--%>
-                    <%--</form>--%>
-                <%--</div>--%>
-                <%--<span id="image-error"></span>--%>
-                <%--<div class="sell-item-container " id="listFiles">--%>
-
-                <%--</div>--%>
-                <%--<div class="option-list-show-type">--%>
-                    <%--<div class="option-list-show-type-wrapper">--%>
-                        <%--<p class="required">Тип продажу: </p>--%>
-                        <%--<label>--%>
-                            <%--<select id="change-blic">--%>
-                                <%--<option value="0">Вибрати</option>--%>
-                                <%--<option &lt;%&ndash;value="1"&ndash;%&gt;>Простий аукціон</option>--%>
-                                <%--<option &lt;%&ndash;value="2"&ndash;%&gt;>Аукціон з можливістю бліц-покупки</option>--%>
-                            <%--</select>--%>
-                        <%--</label>--%>
-                    <%--</div>--%>
-                    <%--<span id="blic-error"></span>--%>
-                    <%--<div class="option-list-show-type-wrapper">--%>
-                        <%--<p class="required">Стартова ціна: </p>--%>
-                        <%--<label>--%>
-                            <%--<input type="number" id="start-price" placeholder="Введіть стартову ціну товару">--%>
-                        <%--</label>--%>
-                    <%--</div>--%>
-                    <%--<div class="hidden" id="buy-now">--%>
-                        <%--<div class="option-list-show-type-wrapper" >--%>
-                            <%--<p class="required">Ціна купити зараз: </p>--%>
-                            <%--<label>--%>
-                                <%--<input type="number" id="hot-price" placeholder="Введіть ціну">--%>
-                            <%--</label>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="option-list-show-type-wrapper">--%>
-                        <%--<p class="required">Початок торгів : </p>--%>
-                        <%--<label>--%>
-                            <%--<input type="datetime-local" id="dateStart">--%>
-                        <%--</label>--%>
-                    <%--</div>--%>
-                    <%--<div class="option-list-show-type-wrapper">--%>
-                        <%--<p class="required">Тривалість торгів: </p>--%>
-                        <%--<label>--%>
-                            <%--<select id="durationOfLot">--%>
-                                <%--<option value="0">Виберіть</option>--%>
-                                <%--<option value="1">1</option>--%>
-                                <%--<option value="3">3</option>--%>
-                                <%--<option value="5">5</option>--%>
-                                <%--<option value="7">7</option>--%>
-                                <%--<option value="9">9</option>--%>
-                                <%--<option value="11">11</option>--%>
-                                <%--<option value="14">14</option>--%>
-                            <%--</select>--%>
-                        <%--</label>--%>
-                    <%--</div>--%>
-                    <%--<span id="duration-lot-error"></span>--%>
-                <%--</div>--%>
-                <%--<div class="option-list-show-send">--%>
-                    <%--<p class="required">Спосіб доставки : </p>--%>
-                    <%--<div class="option-list-show-send-wrapper">--%>
-                        <%--<label>--%>
-                            <%--<input type="checkbox" name="Нова Пошта"><p>Нова Пошта</p>--%>
-                        <%--</label>--%>
-                        <%--<label>--%>
-                            <%--<input type="checkbox" name="При зустрічі"><p>При зустрічі</p>--%>
-                        <%--</label>--%>
-                        <%--<label>--%>
-                            <%--<input type="checkbox" name="Самовивіз"><p>Самовивіз</p>--%>
-                        <%--</label>--%>
-                        <%--<label>--%>
-                            <%--<input type="checkbox" name="По домовленості"><p>По домовленості</p>--%>
-                        <%--</label>--%>
-                        <%--<span id="checkbox-error"></span>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<input class="add-product-sell" type="submit" name="addProduct" value="Створити">--%>
-                <%--<span id="error-form-enter"></span>--%>
-                <%--<input class="add-product-sell2" type="submit" name="addProduct" value="Створити2">--%>
-            <%--</div>--%>
-            <%--<div class="buy hidden slider">Купівля</div>--%>
-            <%--<div class="history hidden slider">History</div>--%>
-            <%--<div class="settings hidden slider">--%>
-                <%--<h3>Налаштування облікового запису</h3>--%>
-                <%--<p>Введіть новий email:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="email">--%>
-                <%--</label>--%>
-                <%--<p>Змінити пароль:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="password" placeholder="Старий пароль" name="old-password">--%>
-                <%--</label>--%>
-                <%--<label>--%>
-                    <%--<input type="password" placeholder="Новий пароль" name="new-password">--%>
-                <%--</label>--%>
-                <%--<label>--%>
-                    <%--<input type="password" placeholder="Повторіть новий пароль" name="repit-password">--%>
-                <%--</label>--%>
-                <%--<p>Сторінка про мене:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="text" name="about-me">--%>
-                <%--</label>--%>
-                <%--<p>Телефон:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="text" name="phone-num">--%>
-                <%--</label>--%>
-                <%--<p>Ім’я:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="text" name="first-name">--%>
-                <%--</label>--%>
-                <%--<p>Прізвище:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="text" name="last-name">--%>
-                <%--</label>--%>
-                <%--<p>Пошта:</p>--%>
-                <%--<label>--%>
-                    <%--<input type="text" name="post">--%>
-                <%--</label>--%>
-                <%--<label>--%>
-                    <%--<input class="add-product" type="submit" value="Зберегти">--%>
-                <%--</label>--%>
-            <%--</div>--%>
-            <%--<div class="balans hidden slider"></div>--%>
-            <%--<div class="mesagges hidden slider"></div>--%>
-        <%--</div>--%>
     </section>
+    <div class="settings hidden slider">
+        <h3>Налаштування облікового запису</h3>
+        <ul>
+            <li>Логін(нік).............................<span class="resultUserName green"></span></li>
+            <li >Е-мейл................................<span class="userEmail green"></span></li>
+            <li>Телефон.............................<span class="resultUserPhone green"></span></li>
+            <li>Імя.......................................<span class="resultFirstName green"></span></li>
+            <li>Прізвище.............................<span class="resultSurName green"></span></li>
+            <li>Поштовий адрес.................<span class="resultCountry green"></span><span class="resultState green"></span>
+                <span class="resultCity green"></span><span class="resultPostAddress green"></span>
+                </li>
+        </ul>
+        <br>
+
+        <p>Введіть новий email:</p>
+        <label class="verification-email-1">
+            <input class="changeEmail" type="email" placeholder="введіть нову електронну пошту" name="email" required>
+            <button type="submit" class="send-key" disabled="disable">send key</button>
+            <span class="resultChangeEmail error"></span>
+        </label>
+        <label class="verification-email-2 hidden">
+            <em style="color: crimson">enter KEY from new e-mail -></em>
+            <input style="width: 170px" class="enter-key" type="text" placeholder="key" name="randomKey" required>
+            <button type="submit" class="saveChangeEmail" disabled="disable">save change</button>
+        </label>
+        <p>Змінити пароль:</p>
+        <label>
+            <input class="oldPassword" type="password" placeholder="старий пароль" name="oldPassword" required>
+        </label>
+        <label>
+            <input class="password" type="password" placeholder="новий пароль" name="password" required>
+        </label>
+        <label>
+            <input class="repeatPassword" type="password" placeholder="повторіть новий пароль" name="repeatPassword" required>
+        </label>
+        <button type="submit" class="saveChangePassword" disabled="disable">save change</button><br>
+        <span class="resultChangePassword error"></span>
+
+        <p>Сторінка про мене (не більше 50 символів!):</p>
+        <label>
+            <textarea class="text-area" name="about-me" placeholder="Інформація про мене"></textarea>
+        </label>
+        <button type="submit" class="saveAboutMe" disabled="disable">save change</button>
+        <span class="resultChangeAboutMe error"></span>
+        <p>Телефон:</p>
+        <label>
+            <input class="inputChangePhone" type="text" placeholder="введіть ваш номер телефону" name="phone">
+        </label>
+        <button class="saveChangePhone" type="submit" disabled="disable">save change</button>
+        <span class="resultChangePhone error"></span>
+        <p>Ім’я:</p>
+        <label>
+            <input class="inputFirstName" type="text" placeholder="ввести імя" name="firstNameUser">
+            <button class="saveFirstName" type="submit" disabled="disable">save change</button>
+            <span class="resultChangeName error"></span>
+        </label>
+        <p>Прізвище:</p>
+        <label>
+            <input class="inputSurNameUser" type="text" placeholder="ввести фамілію" name="surNameUser">
+            <button class="saveSurName" type="submit" disabled="disable">save change</button>
+            <span class="resultChangeSurName error"></span>
+        </label><br>
+        <p>Місцезнаходження:</p>
+        <label>
+            <select name="country" class="countries country-select" id="countryId">
+                <option value="">Виберіть країну</option>
+            </select><br>
+            <select name="state" class="states country-select" id="stateId">
+                <option value="">Виберіть область</option>
+            </select><br>
+            <select name="city" class="cities country-select" id="cityId">
+                <option value="">Виберіть місто</option>
+            </select>
+            <input class="inputPostAddress" type="text" placeholder="вулиця, будинок, квартира" name="userPostAddress">
+            <button class="savePostAddress" type="submit" disabled="disable">save change</button>
+            <span class="resultChangePostAddress error"></span>
+        </label>
+    </div>
 
 
     <footer>
@@ -238,7 +144,8 @@
         <div class="addres"></div>
     </footer>
 </div>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>

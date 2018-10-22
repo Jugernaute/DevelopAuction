@@ -1,5 +1,6 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,8 +27,8 @@ public class User implements UserDetails {
     private boolean isEnabled = true;
     private String firstNameUser;
     private String surNameUser;
+    private String aboutMe;
     private int userBalance;
-    private String userPostAddress;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(
@@ -49,18 +50,38 @@ public class User implements UserDetails {
             mappedBy = "user")
     private List<Bet>listUserBet;
 
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.DETACH})
+    private List<Location> location;
 
-    public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress) {
+
+    public User(String firstNameUser, String surNameUser, int userBalance) {
         this.firstNameUser = firstNameUser;
         this.surNameUser = surNameUser;
         this.userBalance = userBalance;
-        this.userPostAddress = userPostAddress;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(role.name()));
         return authorities;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public List<Location> getLocation() {
+        return location;
+    }
+
+    public void setLocation(List<Location> location) {
+        this.location = location;
     }
 
     public String getRandomKey() {
@@ -178,6 +199,7 @@ public class User implements UserDetails {
         this.listUserBet = listUserBet;
     }
 
+
     public String getFirstNameUser() {
         return firstNameUser;
     }
@@ -200,14 +222,6 @@ public class User implements UserDetails {
 
     public void setUserBalance(int userBalance) {
         this.userBalance = userBalance;
-    }
-
-    public String getUserPostAddress() {
-        return userPostAddress;
-    }
-
-    public void setUserPostAddress(String userPostAddress) {
-        this.userPostAddress = userPostAddress;
     }
 
     public Set<TypeUser> getTypeOfUser() {
@@ -253,7 +267,7 @@ public class User implements UserDetails {
                 role == user.role &&
                 Objects.equals(firstNameUser, user.firstNameUser) &&
                 Objects.equals(surNameUser, user.surNameUser) &&
-                Objects.equals(userPostAddress, user.userPostAddress) &&
+                Objects.equals(aboutMe, user.aboutMe) &&
                 Objects.equals(typeOfUser, user.typeOfUser) &&
                 Objects.equals(productListOfUser, user.productListOfUser) &&
                 Objects.equals(listUserBet, user.listUserBet);
@@ -262,16 +276,20 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, userBalance, userPostAddress, typeOfUser, productListOfUser, listUserBet);
+        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, aboutMe, userBalance, typeOfUser, productListOfUser, listUserBet);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "firstNameUser='" + firstNameUser + '\'' +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", role=" + role +
+                ", firstNameUser='" + firstNameUser + '\'' +
                 ", surNameUser='" + surNameUser + '\'' +
                 ", userBalance=" + userBalance +
-                ", userPostAddress='" + userPostAddress + '\'' +
                 '}';
     }
 }

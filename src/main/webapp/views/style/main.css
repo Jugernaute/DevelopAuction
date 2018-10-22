@@ -272,8 +272,8 @@ button[type=submit] {
 .reg_container form h1{
     font-size: 26px;
 }
-input[type=email], input[type=password], input[type=text]{
-    width: 100%;
+input[type=email], input[type=password], input[type=text], .country-select{
+    width: 50%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;

@@ -152,9 +152,20 @@
     margin: 10px 5px 0 0;
 }
 
-#span-error, #state-product-error, #image-error, #blic-error, #duration-lot-error {
+#span-error, #state-product-error, #image-error, #blic-error, #duration-lot-error
+{
     color: red;
     margin-left: 40%;
+}
+.error{
+    color: red;
+}
+.text-area{
+    height: 135px;
+    width: 50%;
+}
+.green{
+    color: #0020ff;
 }
 #error-form-enter, #checkbox-error {
     color: red;
@@ -168,6 +179,13 @@
 }
 .btn-flex{
     display: flex;
+}
+button[type=submit] {
+    background-color: #3B5998;
+    color: white;
+    cursor: pointer;
+    height: 42px;
+    width: 100px;
 }
 
 

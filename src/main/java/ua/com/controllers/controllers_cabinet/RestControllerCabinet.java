@@ -3,18 +3,18 @@ package ua.com.controllers.controllers_cabinet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
+import ua.com.entity.Location;
 import ua.com.entity.User;
 import ua.com.method.Mail;
 import ua.com.method.RandomStr;
+import ua.com.service.location.LocationService;
 import ua.com.service.user.UserService;
 
 import java.util.*;
@@ -34,17 +34,24 @@ public class RestControllerCabinet {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private Environment environment;
+    @Autowired
+    private LocationService locationService;
 
-    @PutMapping("/change_Email")
-    public String user(@RequestBody String email,
-//                       @AuthenticationPrincipal User user,
-
-                       Model model){
-        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setEmail(email);
-        userService.addUser(user);
-        model.addAttribute("user",user);
-        return user.getEmail();
+    @PostMapping("/change_Email")
+    public String user(
+                        @RequestParam String randomKey,
+                        @RequestParam String email){
+//                       @AuthenticationPrincipal User user,){
+        User byRandomKey = userService.findByRandomKey(randomKey);
+        System.out.println(randomKey);
+        System.out.println(mail);
+        if(byRandomKey!=null){
+            byRandomKey.setRandomKey("");
+            byRandomKey.setEmail(email);
+            userService.addUser(byRandomKey);
+            return environment.getProperty("change_e-mail_success");
+        }
+        return "something error";
     }
 
     @PostMapping("/change_Password")
@@ -98,12 +105,12 @@ public class RestControllerCabinet {
             userService.addUser(byEmail);
             mail.sendMail(email,subjectForgotPassword,text);
         }
-        else if(email==null && !(name.equals("anonymousUser")))
+        else if(email!=null && !(name.equals("anonymousUser")))
         {
-            User user = userService.findByUsername(name);
-            user.setRandomKey(s);
-            String userEmail = user.getEmail();
-            mail.sendMail(userEmail,subjectForgotPassword,text);
+//            User user = userService.findByUsername(name);
+//            user.setRandomKey(s);
+//            String userEmail = user.getEmail();
+            mail.sendMail(email,subjectForgotPassword,text);
         }
     }
 
@@ -111,13 +118,20 @@ public class RestControllerCabinet {
     public Map<String, String> getCurrentEmail(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User byUsername = userService.findByUsername(name);
+        List<Location> userLocation = byUsername.getLocation();
         Map<String,String>list = new LinkedHashMap<>();
+        for (Location location1 : userLocation) {
+            list.put("country", location1.getCountry());
+            list.put("state", location1.getRegion());
+            list.put("city", location1.getCity());
+            list.put("postAddress", location1.getUserPostAddress());
+        }
         list.put("email",byUsername.getEmail());
         list.put("phone",byUsername.getPhone());
         list.put("username",byUsername.getUsername());
         list.put("firstname",byUsername.getFirstNameUser());
         list.put("surname",byUsername.getSurNameUser());
-        list.put("postadsress",byUsername.getUserPostAddress());
+        list.put("about",byUsername.getAboutMe());
         return list;
     }
 
@@ -161,16 +175,40 @@ public class RestControllerCabinet {
         return user.getSurNameUser();
     }
 
-    @PutMapping("/savePostAddress")
-    private String savePostAddress(@RequestBody String userPostAddress
+    @PostMapping("/savePostAddress")
+    private void savePostAddress(@RequestParam String address,
+                                   @RequestParam String country,
+                                   @RequestParam String cities,
+                                   @RequestParam String state
     ){
-        if(userPostAddress.length()<2){
-            return "false name";
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(name);
+        List<Location> userLocation = user.getLocation();
+        for (Location location1 : userLocation) {
+            location1.setRegion(state);
+            location1.setCountry(country);
+            location1.setCity(cities);
+            location1.setUser(Collections.singletonList(user));
+            location1.setUserPostAddress(address);
+            locationService.addLocation(location1);
+        }
+        user.setLocation(userLocation);
+        userService.addUser(user);
+    }
+
+    @PutMapping("changeAboutMe")
+    private String AboutMe(@RequestBody String aboutMe,
+                           Location location){
+        System.out.println(aboutMe.length());
+        if(aboutMe.length()>50){
+            return environment.getProperty("aboutMe_Max_Symbols");
         }
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
-        user.setUserPostAddress(userPostAddress);
+        user.setAboutMe(aboutMe);
+
         userService.addUser(user);
-        return user.getUserPostAddress();
+
+        return "description success save";
     }
 }

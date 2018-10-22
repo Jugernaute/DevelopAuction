@@ -22,12 +22,16 @@ public class Lot {
     private int startPrice;
     private int hotPrice;
 
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    private List<Location> location;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "lot")
-    List<Bet> listLotBet;
+    private List<Bet> listLotBet;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
@@ -74,6 +78,14 @@ public class Lot {
     public Lot setId_Lot(int id_Lot) {
         this.id_Lot = id_Lot;
         return this;
+    }
+
+    public List<Location> getLocation() {
+        return location;
+    }
+
+    public void setLocation(List<Location> location) {
+        this.location = location;
     }
 
     public LocalDateTime getDataStartLot() {
