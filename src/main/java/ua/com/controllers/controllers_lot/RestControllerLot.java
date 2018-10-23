@@ -119,7 +119,7 @@ public class RestControllerLot {
     ) {
 
         Product product = new Product();
-//        Delivery delivery = new Delivery();
+        Delivery delivery = new Delivery();
         Manufacturer manufacturer = new Manufacturer();
 
 
@@ -252,7 +252,7 @@ public class RestControllerLot {
 
 
 
-        try{
+//        try{
             /*
             * Working with Lot object*/
 
@@ -284,21 +284,33 @@ public class RestControllerLot {
                     System.out.println(hotPrice + " hotPrice2");
                     lot.setHotPrice(Integer.parseInt(hotPrice));
                 }
+            lotService.addLot(lot);
+            int id_lot = lot.getId_Lot();
+            System.out.println(id_lot+ "=> id-lot");
 
-//                Delivery byMethodDelivery = deliveryService.findByMethodDelivery(s);
-//                System.out.println(byMethodDelivery + " byMethodDelivery");
-//                lotService.addLot(lot);
-////                delivery.setLot(lot);
-//                delivery.setMethodDelivery(s);
-//                delivery.setLot(lot);
-//                deliveryService.updateDelivery(delivery);
+        Lot lotByID = lotService.getLotById(id_lot);
+        List<Delivery> deliveryList = new ArrayList<>();
+        for (String method : methodDelivery) {
+                System.out.println();
+                Delivery byMethodDelivery = deliveryService.findByMethodDelivery(method);
+                byMethodDelivery.setLot(Collections.singletonList(lotByID));
+                System.out.println(byMethodDelivery.getLot()+"getLot");
+                System.out.println(byMethodDelivery+ "method");
+                System.out.println(lotByID + "lotID");
+                deliveryList.add(byMethodDelivery);
+            lotByID.setDelivery(deliveryList);
+        }
+        lotService.addLot(lotByID);
+        System.out.println(deliveryList + "delList");
+        System.out.println(lotByID + "lotId");
+        deliveryService.addDeliveries(deliveryList);
 
 
           /*
           * end Lot object*/
-        }catch (Exception e){
-            return "error with Lot object -> " + e.getMessage();
-        }
+//        }catch (Exception e){
+//            return "error with Lot object -> " + e.getMessage();
+//        }
 
         /*
         * working with delivery

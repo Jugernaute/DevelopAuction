@@ -24,6 +24,11 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    public void addDeliveries(List<Delivery> delivery) {
+        deliveryDao.save(delivery);
+    }
+
+    @Override
     public void deleteDeliveryById(int id_Delivery) {
         deliveryDao.delete(id_Delivery);
     }

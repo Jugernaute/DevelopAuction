@@ -37,6 +37,7 @@ public class LotServiceImpl implements LotService {
         return lotDao.findOne(id_Lot);
     }
 
+
     @Override
     public List<Lot> findAllLot() {
         return lotDao.findAll();

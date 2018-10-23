@@ -15,6 +15,7 @@ let $changeBlic = $('#change-blic');
 let $hotPrice = $('#hot-price');
 
 
+
 //------------------------кнопка вибору товарів (загрузка першої колонки селектів)--------
 $('.btn-flex').on('click',function () {
     $('.sell-item-list-wrapper').css('display', 'flex');
@@ -167,9 +168,10 @@ $('.add-product-sell').on('click',function (event) {
         modelNameDescription.addClass('red');
         return;
     }
-    if($listImageFiles.children().length === 0) {
-        $('#image-error').empty();
-        $('#image-error').append("Загрузіть хоча б одну картинку");
+    if($listImageFiles.children().length !== 0) {
+        console.log($listImageFiles.children().length);
+        $imageError.empty();
+        $imageError.append("Загрузіть хоча б одну картинку");
         return;
     }
     if(change==0){

@@ -13,9 +13,9 @@ public class Delivery {
     private String methodDelivery;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
-    private Lot lot;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.ALL/*, CascadeType.DETACH*/})
+    private List<Lot> lot;
 
     public Delivery(String methodDelivery) {
         this.methodDelivery = methodDelivery;
@@ -24,7 +24,7 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Delivery(String methodDelivery,Lot lot) {
+    public Delivery(String methodDelivery,List<Lot> lot) {
         this.methodDelivery = methodDelivery;
         this.lot = lot;
     }
@@ -47,11 +47,11 @@ public class Delivery {
         return this;
     }
 
-    public Lot getLot() {
+    public List<Lot> getLot() {
         return lot;
     }
 
-    public Delivery setLot(Lot lot) {
+    public Delivery setLot(List<Lot> lot) {
         this.lot = lot;
         return this;
     }

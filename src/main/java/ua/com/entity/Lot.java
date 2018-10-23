@@ -40,8 +40,8 @@ public class Lot {
 
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.ALL},
             mappedBy = "lot")
     private List<Delivery> delivery;
 
