@@ -9,6 +9,7 @@ import ua.com.dao.AuctionItemsDao;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.CommonCategory;
+import ua.com.entity.ImageLink;
 import ua.com.entity.SubCategory;
 import ua.com.entity.User;
 
@@ -22,14 +23,13 @@ public class MainController{
     SubCategoryDao subCategoryDao;
 
     @GetMapping("/goToCabinet")
-    private String goToCabinet(){
-        return "cabinet";
+    private String goToCabinet(){ return "cabinet";
     }
 
-    @GetMapping("goToSale")
-    private String goToSale(){
-        return "sale";
-    }
+//    @GetMapping("goToSell")
+//    private String goToSale(){
+//        return "sell";
+//    }
 
     @GetMapping("/fromLogoToHome")
     private String fromLogoToHome(){
@@ -41,5 +41,9 @@ public class MainController{
         return "lostpassword";
     }
 
+    @GetMapping("/lot")
+    private String Lot(){
+        return "lot";
+    }
 
 }

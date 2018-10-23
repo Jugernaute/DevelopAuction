@@ -8,4 +8,5 @@ import java.util.List;
 public interface ManufacturerDao extends JpaRepository<Manufacturer, Integer> {
 
     List<Manufacturer> findAll();
+    Manufacturer findByNameManufacturer(String nameManufacturer);
 }

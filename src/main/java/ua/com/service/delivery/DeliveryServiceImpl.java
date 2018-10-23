@@ -15,25 +15,42 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Autowired
     private DeliveryDao deliveryDao;
 
+
     @Override
-    public void save(Delivery delivery) {
+    public void addDelivery(Delivery delivery) {
         if (delivery != null){
         deliveryDao.save(delivery);
     }
     }
 
     @Override
-    public void deleteById(int id) {
-        deliveryDao.delete(id);
+    public void addDeliveries(List<Delivery> delivery) {
+        deliveryDao.save(delivery);
     }
 
     @Override
-    public Delivery findOne(int id) {
-        return deliveryDao.findOne(id);
+    public void deleteDeliveryById(int id_Delivery) {
+        deliveryDao.delete(id_Delivery);
+    }
+
+
+    @Override
+    public void updateDelivery(Delivery delivery) {
+        deliveryDao.save(delivery);
     }
 
     @Override
-    public List<Delivery> findAll() {
+    public Delivery getDeliveryById(int id_Delivery) {
+        return deliveryDao.findOne(id_Delivery);
+    }
+
+    @Override
+    public List<Delivery> findAllDelivery() {
         return deliveryDao.findAll();
+    }
+
+    @Override
+    public Delivery findByMethodDelivery(String methodDelivery) {
+        return deliveryDao.findByMethodDelivery(methodDelivery);
     }
 }

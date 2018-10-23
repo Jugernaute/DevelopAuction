@@ -11,26 +11,36 @@ import java.util.List;
 @Component
 public class CommonCategoryServiceImpl implements CommonCategoryService {
     @Autowired
-    CommonCategoryDao commonCategoryDao;
+    private CommonCategoryDao commonCategoryDao;
+
+    @Override
+    public List<CommonCategory> findAllCommonCategory() {
+        return commonCategoryDao.findAll();
+    }
+
+    @Override
+    public CommonCategory getCommonCategoryById(int idCommonCategory) {
+        return commonCategoryDao.findOne(idCommonCategory);
+    }
 
     @Override
     public CommonCategory findByNameCommonCategory(String name) {
         return commonCategoryDao.findByNameCommonCategory(name);
     }
 
+    @Override
+    public void addCommonCategory(CommonCategory commonCategory) {
+        commonCategoryDao.save(commonCategory);
 
-//    @Override
-//    public CommonCategory getCommonCategoryById_CommonCategory(int id_CommonCategory) {
-//        return commonCategoryDao.getCommonCategoryById_CommonCategory(id_CommonCategory);
-//    }
-//
-//    @Override
-//    public void saveCommonCategory(CommonCategory commonCategory) {
-//        commonCategoryDao.saveCommonCategory(commonCategory);
-//    }
-//
-//    @Override
-//    public void deleteCommonCategoryById_CommonCategory(int id_CommonCategory) {
-//        commonCategoryDao.deleteCommonCategoryById_CommonCategory(id_CommonCategory);
-//    }
+    }
+
+    @Override
+    public void updateCommonCategory(CommonCategory commonCategory) {
+        commonCategoryDao.save(commonCategory);
+    }
+
+    @Override
+    public void deleteCommonCategoryByIb(int idCommonCategory) {
+        commonCategoryDao.delete(idCommonCategory);
+    }
 }

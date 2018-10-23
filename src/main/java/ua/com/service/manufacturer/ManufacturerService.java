@@ -5,8 +5,10 @@ import ua.com.entity.Manufacturer;
 import java.util.List;
 
 public interface ManufacturerService {
-    void save(Manufacturer manufacturer);
-    void deleteById(int id);
-    Manufacturer findOne(int id);
-    List<Manufacturer> findAll();
+    void addManufacturer(Manufacturer manufacturer);
+    void deleteManufacturerById(int id_Manufacturer);
+    void updateManufacturer(Manufacturer manufacturer);
+    Manufacturer getManufacturerById(int id_Manufacturer);
+    List<Manufacturer> findAllManufacturer();
+    Manufacturer findByNameManufacturer (String nameManufacturer);
 }

@@ -21,37 +21,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public void addUser(User user) {
+        if (user != null) {
+        userDao.save(user);
+    }
+    }
+
+    @Override
+    public void deleteUserById(int userId) {
+        userDao.delete(userId);
+    }
+
+    @Override
+    public void updateUser(User user) {
         userDao.save(user);
     }
 
     @Override
-    public void deleteBuId(int id) {
-        userDao.delete(id);
+    public User getUserById(int userId) {
+        return userDao.findOne(userId);
     }
 
     @Override
-    public User findOne(int id) {
-        return userDao.findOne(id);
-    }
-
-    @Override
-    public List<User> findAll(int id) {
+    public List<User> findAllUser() {
         return userDao.findAll();
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email);
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+    public User findByUsername(String user) {
+        return userDao.findByUsername(user);
     }
 
     @Override
     public User findByRandomKey(String randomKey) {
         return userDao.findByRandomKey(randomKey);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 }

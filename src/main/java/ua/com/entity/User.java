@@ -1,14 +1,12 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -29,8 +27,8 @@ public class User implements UserDetails {
     private boolean isEnabled = true;
     private String firstNameUser;
     private String surNameUser;
+    private String aboutMe;
     private int userBalance;
-    private String userPostAddress;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(
@@ -52,11 +50,38 @@ public class User implements UserDetails {
             mappedBy = "user")
     private List<Bet>listUserBet;
 
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.DETACH})
+    private List<Location> location;
+
+
+    public User(String firstNameUser, String surNameUser, int userBalance) {
+        this.firstNameUser = firstNameUser;
+        this.surNameUser = surNameUser;
+        this.userBalance = userBalance;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(role.name()));
         return authorities;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public List<Location> getLocation() {
+        return location;
+    }
+
+    public void setLocation(List<Location> location) {
+        this.location = location;
     }
 
     public String getRandomKey() {
@@ -174,6 +199,7 @@ public class User implements UserDetails {
         this.listUserBet = listUserBet;
     }
 
+
     public String getFirstNameUser() {
         return firstNameUser;
     }
@@ -198,14 +224,6 @@ public class User implements UserDetails {
         this.userBalance = userBalance;
     }
 
-    public String getUserPostAddress() {
-        return userPostAddress;
-    }
-
-    public void setUserPostAddress(String userPostAddress) {
-        this.userPostAddress = userPostAddress;
-    }
-
     public Set<TypeUser> getTypeOfUser() {
         return typeOfUser;
     }
@@ -228,5 +246,50 @@ public class User implements UserDetails {
 
     public void setListUserBet(List<Bet> listUserBet) {
         this.listUserBet = listUserBet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId &&
+                isAccountNonExpired == user.isAccountNonExpired &&
+                isAccountNonLocked == user.isAccountNonLocked &&
+                isCredentialsNonExpired == user.isCredentialsNonExpired &&
+                isEnabled == user.isEnabled &&
+                userBalance == user.userBalance &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(randomKey, user.randomKey) &&
+                role == user.role &&
+                Objects.equals(firstNameUser, user.firstNameUser) &&
+                Objects.equals(surNameUser, user.surNameUser) &&
+                Objects.equals(aboutMe, user.aboutMe) &&
+                Objects.equals(typeOfUser, user.typeOfUser) &&
+                Objects.equals(productListOfUser, user.productListOfUser) &&
+                Objects.equals(listUserBet, user.listUserBet);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, aboutMe, userBalance, typeOfUser, productListOfUser, listUserBet);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", role=" + role +
+                ", firstNameUser='" + firstNameUser + '\'' +
+                ", surNameUser='" + surNameUser + '\'' +
+                ", userBalance=" + userBalance +
+                '}';
     }
 }

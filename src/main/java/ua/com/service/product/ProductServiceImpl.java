@@ -14,27 +14,36 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductDao productDao;
 
+
     @Override
-    public void save(Product product) {
+    public void addProduct(Product product) {
         if (product != null){
         productDao.save(product);
     }
     }
 
     @Override
-    public void deleteById(int id) {
-        productDao.delete(id);
+    public void deleteProductById(int id_Product) {
+        productDao.delete(id_Product);
     }
 
     @Override
-    public Product findOne(int id) {
-        return productDao.findOne(id);
+    public void updateProduct(Product product) {
+        productDao.save(product);
     }
 
     @Override
-    public List<Product> findAll() {
+    public Product getProductById(int id_Product) {
+        return productDao.findOne(id_Product);
+    }
+
+    @Override
+    public List<Product> findAllProduct() {
         return productDao.findAll();
     }
 
-
+    @Override
+    public Product findByNameProduct(String product) {
+        return productDao.findByNameProduct(product);
+    }
 }

@@ -14,25 +14,32 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private PaymentDao paymentDao;
 
+
     @Override
-    public void save(Payment payment) {
+    public void addPayment(Payment payment) {
         if(payment != null){
         paymentDao.save(payment);
     }
+
     }
 
     @Override
-    public void delete(int id) {
-        paymentDao.delete(id);
+    public void deletePaymentById(int id_Payment) {
+        paymentDao.delete(id_Payment);
     }
 
     @Override
-    public Payment findOne(int id) {
-        return paymentDao.findOne(id);
+    public void updatePayment(Payment payment) {
+        paymentDao.save(payment);
     }
 
     @Override
-    public List<Payment> findAll() {
+    public Payment getPaymentById(int id_Payment) {
+        return paymentDao.findOne(id_Payment);
+    }
+
+    @Override
+    public List<Payment> findAllPayment() {
         return paymentDao.findAll();
     }
 }

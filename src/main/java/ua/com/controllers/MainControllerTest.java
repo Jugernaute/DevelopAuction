@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.*;
 //import ua.com.dao.ProductDao;
 import ua.com.entity.*;
+import ua.com.service.delivery.DeliveryService;
 import ua.com.service.user.UserService;
 
 @Controller
@@ -33,6 +34,8 @@ public class MainControllerTest {
     PaymentDao paymentDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DeliveryService deliveryService;
 
 
     @PostMapping("/saveCommonCategory")
@@ -81,27 +84,27 @@ public class MainControllerTest {
     public String createUser(@RequestParam String username,
                              @RequestParam int userBalance) {
         User user = new User(username, userBalance);
-        userService.save(user);
+        userService.addUser(user);
         return "qwe";
     }
 
 
-    @PostMapping("/saveProduct")
-    public String createProduct(@RequestParam String nameProduct,
-                                @RequestParam String modelProduct,
-                                @RequestParam String descriptionProduct,
-                                @RequestParam int id_SubCategory,
-                                @RequestParam int id_Manufacturer,
-                                @RequestParam int id_User) {
-        SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
-        Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
-        User user = userDao.findOne(id_User);
-        Product product = new Product(nameProduct, modelProduct,
-                descriptionProduct, subCategory, user, manufacturer);
-        productDao.save(product);
-
-        return "qwe";
-    }
+//    @PostMapping("/saveProduct")
+//    public String createProduct(@RequestParam String nameProduct,
+//                                @RequestParam String modelProduct,
+//                                @RequestParam String descriptionProduct,
+//                                @RequestParam int id_SubCategory,
+//                                @RequestParam int id_Manufacturer,
+//                                @RequestParam int id_User) {
+//        SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
+//        Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
+//        User user = userDao.findOne(id_User);
+//        Product product = new Product(nameProduct, modelProduct,
+//                descriptionProduct, subCategory, user, manufacturer, lot);
+//        productDao.save(product);
+//
+//        return "qwe";
+//    }
 
     @GetMapping("/deleteProduct")
     public String deleteProduct(@RequestParam int idProduct) {
@@ -113,7 +116,7 @@ public class MainControllerTest {
     @PostMapping("/createDelivery")
     public String createDelivery(@RequestParam String methodDelivery) {
         Delivery delivery = new Delivery(methodDelivery);
-        deliveryDao.save(delivery);
+        deliveryService.addDelivery(delivery);
         return "qwe";
     }
 
@@ -121,47 +124,47 @@ public class MainControllerTest {
     public String createPayment(@RequestParam String methodPayment) {
         Payment payment = new Payment(methodPayment);
         paymentDao.save(payment);
-        return "home1";
+        return "qwe";
     }
 
-    @PostMapping("/createLot")
-    public String createAction(@RequestParam String dataStartLot,
-                               @RequestParam String dataEndLot,
-                               @RequestParam int id_Product,
-                               @RequestParam int startPrice,
-                               @RequestParam int hotPrice,
-                               @RequestParam int idDelivery,
-                               @RequestParam int idPayment) {
-        Product product = productDao.findOne(id_Product);
-        Delivery delivery = deliveryDao.findOne(idDelivery);
-        Payment payment = paymentDao.findOne(idPayment);
-        Lot lot = new Lot(dataStartLot, dataEndLot, startPrice, hotPrice);
-        lot.setDelivery(delivery);
-        lot.setPayment(payment);
-        lot.setProduct(product);
-        lotDao.save(lot);
-        return "home1";
-    }
+//    @PostMapping("/createLot")
+//    public String createAction(@RequestParam String dataStartLot,
+//                               @RequestParam String dataEndLot,
+//                               @RequestParam int id_Product,
+//                               @RequestParam int startPrice,
+//                               @RequestParam int hotPrice,
+//                               @RequestParam int idDelivery,
+//                               @RequestParam int idPayment) {
+//        Product product = productDao.findOne(id_Product);
+//        Delivery delivery = deliveryDao.findOne(idDelivery);
+//        Payment payment = paymentDao.findOne(idPayment);
+//        Lot lot = new Lot(dataStartLot, dataEndLot, startPrice, hotPrice);
+//        lot.setDelivery(delivery);
+//        lot.setPayment(payment);
+//        lot.setProduct(product);
+//        lotDao.save(lot);
+//        return "home1";
+//    }
 
     @GetMapping("/deleteLot")
     public String deleteLot(@RequestParam int idLot) {
         lotDao.delete(idLot);
-        return "home1";
+        return "qwe";
     }
 
-    @PostMapping("/createBet")
-    public String createBet(@RequestParam int sum_of_the_bet,
-                            @RequestParam int id_Lot,
-                            @RequestParam int id_User) {
-        Bet bet = new Bet(sum_of_the_bet);
-        Lot lot = lotDao.getOne(id_Lot);
-        User user = userDao.getOne(id_User);
-        bet.setUser(user);
-        bet.setLot(lot);
-        betDao.save(bet);
-        return "home1";
-
-    }
+//    @PostMapping("/createBet")
+//    public String createBet(@RequestParam int sum_of_the_bet,
+//                            @RequestParam int id_Lot,
+//                            @RequestParam int id_User) {
+//        Bet bet = new Bet(sum_of_the_bet);
+//        Lot lot = lotDao.getOne(id_Lot);
+//        User user = userDao.getOne(id_User);
+//        bet.setUser(user);
+//        bet.setLot(lot);
+//        betDao.save(bet);
+//        return "home1";
+//
+//    }
 
     @GetMapping("/deleteBet")
     public String deleteBet(@RequestParam int idBet) {
