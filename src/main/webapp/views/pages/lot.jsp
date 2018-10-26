@@ -133,28 +133,28 @@
                 </div>
                 <div class="lot-slider-row">
                     <div class="lot-slider-column">
-                        <img src="../img/img_nature.jpg" alt="Nature">
+                        <%--<img src="../img/product_Img/408394-blackangel.jpg" alt="Nature">--%>
                     </div>
-                    <div class="lot-slider-column">
-                        <img src="../img/img_snow.jpg" alt="Snow">
+                    <div class="lot-slider-column-2">
+                        <%--<img src="../img/img_snow.jpg" alt="Snow">--%>
                     </div>
-                    <div class="lot-slider-column">
-                        <img src="../img/img_mountains.jpg" alt="Mountains">
+                    <div class="lot-slider-column-3">
+                        <%--<img src="../img/img_mountains.jpg" alt="Mountains">--%>
                     </div>
-                    <div class="lot-slider-column">
-                        <img src="../img/img_lights.jpg" alt="Lights">
+                    <div class="lot-slider-column-4">
+                        <%--<img src="../img/img_lights.jpg" alt="Lights">--%>
                     </div>
                 </div>
             </div>
             <div class="lot-info">
                 <div class="lot-info-name">
-                    <h3 id="lot-name">Some lot name</h3>
-                    <h3 id="lot-description">Some lot name</h3>
+                    <h3 id="lot-name">${product.getNameProduct()}</h3>
+                    <h3 id="lot-description">${product.getModelProduct()}</h3>
                 </div>
                 <div class="lot-info-price">
                     <div class="lot-info-current-price">
                         <p>Price:</p>
-                        <p>11161</p>
+                        <p><c:out value="${product.getLot().getStartPrice()}"></c:out></p>
                         <span>&#8372</span>
                     </div>
                     <div class="lot-info-price_bet">
@@ -176,7 +176,7 @@
                     </label>
                 </div>
                 <div class="lot-info-price-timer">
-                    <p>До закінчення: <span id="timer"></span></p>
+                    <p>До закінчення: <span id="timer">${data}</span></p>
                     <p>Тип доставки: <span>qwerhjnt</span></p>
                     <p>Місцезнаходення лоту: <span>qawfvge</span></p>
                 </div>

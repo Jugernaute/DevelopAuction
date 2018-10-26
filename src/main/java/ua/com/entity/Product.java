@@ -22,7 +22,7 @@ public class Product {
     private TypeSell typeSell;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.EAGER,
     cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "product"
     )
@@ -45,7 +45,7 @@ public class Product {
     private Manufacturer manufacturer;
 @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST},
     mappedBy = "product")
     private Lot lot;
 

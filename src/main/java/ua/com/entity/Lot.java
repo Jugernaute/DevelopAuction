@@ -34,7 +34,7 @@ public class Lot {
     private List<Bet> listLotBet;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE)
     private Product product;
 

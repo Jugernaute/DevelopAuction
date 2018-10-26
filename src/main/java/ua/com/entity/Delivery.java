@@ -3,6 +3,7 @@ package ua.com.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Delivery {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.ALL/*, CascadeType.DETACH*/})
-    private List<Lot> lot;
+    private List<Lot> lot = new ArrayList<>();
 
     public Delivery(String methodDelivery) {
         this.methodDelivery = methodDelivery;

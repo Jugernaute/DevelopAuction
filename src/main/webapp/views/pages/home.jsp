@@ -109,86 +109,123 @@
                 </div>
             </section>
             <section class="hot_lot">
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
+
+                <c:forEach items="${imgLinks}" var="img">
+                    <%--<p>${img.getLinkOfImage()}</p>--%>
+                    <div class="hot_lot_wrapper">
+                        <div class="cont_img img1" >
+                                <a href="lot/${img.getProduct().getId_Product()}"><img src="../img/product_Img/${img.getLinkOfImage()}" height="200" width="200"/>
+                                </a></div>
+                            <div class="container">
+                            <h2 class="cont_titel">${img.getProduct().getNameProduct()}</h2>
+                            <div class="cont_timer">00:00:00</div>
+                            <h4 class="cont_price">Стартова ціна: <span>${img.getProduct().getLot().getStartPrice()} грн</span></h4>
+                        </div>
                     </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
+
+
+            </c:forEach>
+
+                <%--<div class="hot_lot_wrapper">                    --%>
+                    <%--<div class="cont_img img1" >                        --%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img2">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img3">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img4">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img5">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                        <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img6">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img7">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper img8">--%>
+                    <%--<div class="cont_img">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper img9">--%>
+                    <%--<div class="cont_img">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="hot_lot_wrapper">--%>
+                    <%--<div class="cont_img img10">--%>
+                        <%--&lt;%&ndash;<img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/>&ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<div class="container">--%>
+                        <%--<h2 class="cont_titel">Iphone X</h2>--%>
+                        <%--<div class="cont_timer">00:00:00</div>--%>
+                        <%--<h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </section>
 
 

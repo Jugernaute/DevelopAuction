@@ -146,6 +146,19 @@
                 </div>
                 <span id="duration-lot-error"></span>
             </div>
+
+            <select name="country" class="countries country-select" id="countryId">
+                <option value="">Виберіть країну</option>
+            </select><br>
+            <select name="state" class="states country-select" id="stateId">
+                <option value="">Виберіть область</option>
+            </select><br>
+            <select name="city" class="cities country-select" id="cityId">
+                <option value="">Виберіть місто</option>
+            </select>
+            <button class="savePostAddress" type="submit" disabled="disable">save change</button>
+
+
             <div class="option-list-show-send">
                 <p class="required">Спосіб доставки : </p>
                 <div class="option-list-show-send-wrapper">

@@ -27,10 +27,10 @@ optionList.first().css('border-bottom', 'none');
 let imgContainer = $('.lot-slider-container');
 let imgFirstChildSrc = $('.lot-slider-column:first-child').children();
 
-function loadImage(){
-    imgContainer.append('<img src="'+imgFirstChildSrc.prop('src')+'" alt="'+imgFirstChildSrc.prop('alt')+'">');
-}
-loadImage();
+// function loadImage(){
+//     imgContainer.append('<img src="'+imgFirstChildSrc.prop('src')+'" alt="'+imgFirstChildSrc.prop('alt')+'">');
+// }
+
 
 $('.lot-slider-column').on('click', function () {
     imgContainer.children().remove();
@@ -45,6 +45,31 @@ $('.lot-slider-column').on('click', function () {
 let heart = $('.lot-nav-add');
 
 heart.on('click', function () {
-    $('#heart-empty').toggleClass('hidden')
+    $('#heart-empty').toggleClass('hidden');
     $('#heart-full').toggleClass('hidden')
-})
+});
+
+
+$('#heart-empty').on('click',function () {
+    let $lot = $('.lot-slider-column');
+    imgContainer.empty();
+    $lot.empty();
+
+    $.ajax({
+       url: 'http://localhost:8080/lot/loadImg',
+        type: 'put',
+
+        success: function (result) {
+            $lot.append('<img src="../img/product_Img/'+result+'">');
+            imgContainer.append('<img src="../img/product_Img/'+result+'">');
+            // imgContainer.append('<img src="'+result+'" alt="'+tempAlt+'">')
+            // loadImage();
+            console.log(result);
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+
+
+});

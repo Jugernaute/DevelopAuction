@@ -2,17 +2,20 @@ package ua.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.AuctionItemsDao;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
-import ua.com.entity.CommonCategory;
-import ua.com.entity.ImageLink;
-import ua.com.entity.SubCategory;
-import ua.com.entity.User;
+import ua.com.entity.*;
+import ua.com.service.product.ProductService;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,8 @@ public class MainController{
     CommonCategoryDao commonCategoryDao;
 @Autowired
     SubCategoryDao subCategoryDao;
+@Autowired
+    private ProductService productService;
 
     @GetMapping("/goToCabinet")
     private String goToCabinet(){ return "cabinet";
@@ -41,8 +46,19 @@ public class MainController{
         return "lostpassword";
     }
 
-    @GetMapping("/lot")
-    private String Lot(){
+    @GetMapping("/lot/{idProduct}")
+    private String Lot(@PathVariable int idProduct,
+                       Model model){
+        Product productById = productService.getProductById(idProduct);
+        LocalDateTime dataEndLot = productById.getLot().getDataEndLot();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEEE MMMMM yyyy HH:mm");
+
+        LocalDateTime now = LocalDateTime.now();
+        Duration between = Duration.between(dataEndLot, now);
+        String data = now .format(formatter);
+        System.out.println(data);
+        model.addAttribute("data", between);
+        model.addAttribute("product", productById);
         return "lot";
     }
 

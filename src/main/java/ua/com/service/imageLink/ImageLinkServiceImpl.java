@@ -26,4 +26,9 @@ public class ImageLinkServiceImpl implements ImageLinkService {
     public void addImageLink(ImageLink imageLink) {
        imageLinkDao.save(imageLink);
     }
+
+    @Override
+    public List<ImageLink> findAll() {
+        return imageLinkDao.findAll();
+    }
 }
