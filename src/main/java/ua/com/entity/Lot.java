@@ -33,15 +33,15 @@ public class Lot {
 
     //@Column(nullable = false)
     @OneToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = CascadeType.MERGE)
     private Product product;
 
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
-    private Delivery delivery;
+    private List<Delivery>deliveries;
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Payment payment;
 

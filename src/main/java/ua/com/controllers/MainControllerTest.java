@@ -10,6 +10,8 @@ import ua.com.dao.*;
 import ua.com.entity.*;
 import ua.com.service.user.UserService;
 
+import java.util.List;
+
 @Controller
 public class MainControllerTest {
 
@@ -106,7 +108,7 @@ public class MainControllerTest {
     @GetMapping("/deleteProduct")
     public String deleteProduct(@RequestParam int idProduct) {
         productDao.delete(idProduct);
-        return "home1";
+        return "qwe";
     }
 
 
@@ -121,7 +123,7 @@ public class MainControllerTest {
     public String createPayment(@RequestParam String methodPayment) {
         Payment payment = new Payment(methodPayment);
         paymentDao.save(payment);
-        return "home1";
+        return "qwe";
     }
 
     @PostMapping("/createLot")
@@ -131,22 +133,29 @@ public class MainControllerTest {
                                @RequestParam int startPrice,
                                @RequestParam int hotPrice,
                                @RequestParam int idDelivery,
+                               @RequestParam int idDelivery1,
+                               @RequestParam int idDelivery2,
                                @RequestParam int idPayment) {
         Product product = productDao.findOne(id_Product);
         Delivery delivery = deliveryDao.findOne(idDelivery);
+        Delivery delivery1 = deliveryDao.findOne(idDelivery1);
+        Delivery delivery2 = deliveryDao.findOne(idDelivery2);
         Payment payment = paymentDao.findOne(idPayment);
         Lot lot = new Lot(dataStartLot, dataEndLot, startPrice, hotPrice);
-        lot.setDelivery(delivery);
+        List<Delivery>deliveryList = lot.getDeliveries();
+        deliveryList.add(delivery);
+        deliveryList.add(delivery1);
+        deliveryList.add(delivery2);
         lot.setPayment(payment);
         lot.setProduct(product);
         lotDao.save(lot);
-        return "home1";
+        return "qwe";
     }
 
     @GetMapping("/deleteLot")
     public String deleteLot(@RequestParam int idLot) {
         lotDao.delete(idLot);
-        return "home1";
+        return "qwe";
     }
 
     @PostMapping("/createBet")
@@ -159,20 +168,20 @@ public class MainControllerTest {
         bet.setUser(user);
         bet.setLot(lot);
         betDao.save(bet);
-        return "home1";
+        return "qwe";
 
     }
 
     @GetMapping("/deleteBet")
     public String deleteBet(@RequestParam int idBet) {
         betDao.delete(idBet);
-        return "home1";
+        return "qwe";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam int idUser) {
         userDao.delete(idUser);
-        return "home1";
+        return "qwe";
     }
 
 

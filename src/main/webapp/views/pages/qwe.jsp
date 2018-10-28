@@ -77,6 +77,8 @@
     <input type="text" name="startPrice" placeholder="startPrice">
     <input type="text" name="hotPrice" placeholder="hotPrice">
     <input type="text" name="idDelivery" placeholder="idDelivery">
+    <input type="text" name="idDelivery1" placeholder="idDelivery1">
+    <input type="text" name="idDelivery2" placeholder="idDelivery2">
     <input type="text" name="idPayment" placeholder="idPayment">
     <input type="submit" value="Create new Lot">
 </form>

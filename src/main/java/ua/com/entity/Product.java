@@ -39,8 +39,9 @@ public class Product {
             cascade = CascadeType.MERGE)
     private Manufacturer manufacturer;
 
+
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
     mappedBy = "product")
     private Lot lot;
 

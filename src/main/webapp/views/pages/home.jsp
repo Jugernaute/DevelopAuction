@@ -12,6 +12,7 @@
 </head>
 <body>
 <a href="qwe">regina</a>
+
     <div class="enter_form">
         <div class="modal-content">
             <div class="close_cont">
@@ -19,7 +20,7 @@
             </div>
             <form class="login_form" action="/login" method="post">
                 <div class="col_login">
-                    <a href="#" class="fb btn">
+                    <a href="pagebf" class="fb btn">
                         <i class="fa fa-facebook fa-fw"></i> Увійти за допомогою Facebook
                     </a>
                     <a href="#" class="twitter btn">

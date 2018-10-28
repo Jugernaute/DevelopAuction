@@ -5,10 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -51,6 +48,13 @@ public class User implements UserDetails {
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             mappedBy = "user")
     private List<Bet>listUserBet;
+
+
+    private String userIdSocial; // social
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")//social
+    private List<UserConnection> userConnection = new ArrayList<>();//social
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -172,6 +176,36 @@ public class User implements UserDetails {
         this.userBalance = userBalance;
         this.productListOfUser = productListOfUser;
         this.listUserBet = listUserBet;
+    }
+
+    // social
+    public User(String userIdSocial, String username, String password, String email, Role role, UserConnection userConnection){
+        this.userIdSocial = userIdSocial;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.userConnection.add(userConnection);
+    }
+
+    //social
+    public String getUserIdSocial() {
+        return userIdSocial;
+    }
+
+    //social
+    public void setUserIdSocial(String userIdSocial) {
+        userIdSocial = userIdSocial;
+    }
+
+    //social
+    public List<UserConnection> getUserConnection() {
+        return userConnection;
+    }
+
+    //social
+    public void setUserConnection(List<UserConnection> userConnection) {
+        this.userConnection = userConnection;
     }
 
     public String getFirstNameUser() {

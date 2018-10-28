@@ -20,9 +20,9 @@ public class Delivery {
     private int id_Delivery;
     private String methodDelivery;
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
-    mappedBy = "delivery")
+    mappedBy = "deliveries")
     private List<Lot> lotListDelivery;
 
     public Delivery(String methodDelivery) {

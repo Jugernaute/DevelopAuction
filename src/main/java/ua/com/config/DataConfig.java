@@ -36,7 +36,6 @@ public class DataConfig {
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         dataSource.setUrl("jdbc:mysql://localhost:3306/auction?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8");
-//        dataSource.setUrl("jdbc:mysql://localhost:3306/auction?useUnicode=true&characterEncoding=utf8");
         return dataSource;
 
     }
@@ -58,7 +57,7 @@ public class DataConfig {
         factory.setPackagesToScan("ua.com.entity");
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 
         factory.setJpaProperties(properties);
         return factory;
