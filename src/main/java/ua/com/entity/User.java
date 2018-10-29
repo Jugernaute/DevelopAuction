@@ -53,7 +53,7 @@ public class User implements UserDetails {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.DETACH})
-    private List<Location> location;
+    private List<LocationUser> location;
 
 
     public User(String firstNameUser, String surNameUser, int userBalance) {
@@ -76,11 +76,11 @@ public class User implements UserDetails {
         this.aboutMe = aboutMe;
     }
 
-    public List<Location> getLocation() {
+    public List<LocationUser> getLocation() {
         return location;
     }
 
-    public void setLocation(List<Location> location) {
+    public void setLocation(List<LocationUser> location) {
         this.location = location;
     }
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../style/lot_Style.css">
     <script src="../js/main.js" defer></script>
     <script src="../js/lotstyle.js" defer></script>
+    <%--<script src="../js/bet.js" defer></script>--%>
 </head>
 <body>
 
@@ -113,11 +114,10 @@
     <section class="lot">
         <div class="lot-nav">
             <div class="lot-nav_category">
-                <p><a href="#">Category</a></p>
+                <p><a href="#">${product.getNameProduct()}</a></p>
                 <ul class="lot-nav-tree">
-                    <li><a href="#">Some category</a> > </li>
-                    <li><a href="#">Some category</a> > </li>
-                    <li><a href="#">Some category</a> > </li>
+                    <li><a href="#">${nameCom}</a> > </li>
+                    <li><a href="#">${nameSub}</a> > </li>
                 </ul>
             </div>
             <div class="lot-nav-add">
@@ -128,41 +128,51 @@
         <hr>
         <div class="lot-wrapper">
             <div class="lot-slider">
+
                 <div class="lot-slider-container">
+                    <%--<img src="../img/product_Img/${image1.getLinkOfImage()}" alt="">--%>
 
                 </div>
                 <div class="lot-slider-row">
                     <div class="lot-slider-column">
-                        <%--<img src="../img/product_Img/408394-blackangel.jpg" alt="Nature">--%>
+                        <img src="../img/product_Img/${image1.getLinkOfImage()}" alt="${image1.getId_ImageLink()}">
                     </div>
-                    <div class="lot-slider-column-2">
-                        <%--<img src="../img/img_snow.jpg" alt="Snow">--%>
+                    <div class="lot-slider-column">
+                        <img src="../img/product_Img/${image2.getLinkOfImage()}" alt="">
                     </div>
-                    <div class="lot-slider-column-3">
-                        <%--<img src="../img/img_mountains.jpg" alt="Mountains">--%>
+                    <div class="lot-slider-column">
+                        <img src="../img/product_Img/${image3.getLinkOfImage()}" alt="">
                     </div>
-                    <div class="lot-slider-column-4">
-                        <%--<img src="../img/img_lights.jpg" alt="Lights">--%>
+                    <div class="lot-slider-column">
+                        <img src="../img/product_Img/${image4.getLinkOfImage()}" alt="">
                     </div>
                 </div>
             </div>
+            <%--<jsp:useBean id="Product" class="ua.com.entity.Product" scope="page" />--%>
+            <%--<jsp:setProperty name="Product" property="*" />--%>
             <div class="lot-info">
                 <div class="lot-info-name">
                     <h3 id="lot-name">${product.getNameProduct()}</h3>
+
                     <h3 id="lot-description">${product.getModelProduct()}</h3>
                 </div>
+                <c:set var="timeShow" scope="application" value="Oct 30, 2018 15:37:25"/>
                 <div class="lot-info-price">
                     <div class="lot-info-current-price">
                         <p>Price:</p>
-                        <p><c:out value="${product.getLot().getStartPrice()}"></c:out></p>
+                        <%--<c:set scope="session" var="pr" value="${product.getId_Product()}"/>--%>
+                        <%--${pr}--%>
+                        <%--<c:out value="${qwe}"/>--%>
+                        <p><c:out value="${product.getLot().getStartPrice()}"/></p>
                         <span>&#8372</span>
                     </div>
                     <div class="lot-info-price_bet">
                         <p>Your Bet:</p>
                         <label>
-                            <input type="number" name="lotBet">
+                            <input type="number" name="sum_of_the_bet" id="bet-input">
                         </label>
                     </div>
+                    <%--<%=Url.RequestContext.RouteData.Values["id"]%>--%>
                 </div>
                 <div class="lot-info-price_button">
                     <label>
@@ -176,9 +186,12 @@
                     </label>
                 </div>
                 <div class="lot-info-price-timer">
-                    <p>До закінчення: <span id="timer">${data}</span></p>
-                    <p>Тип доставки: <span>qwerhjnt</span></p>
-                    <p>Місцезнаходення лоту: <span>qawfvge</span></p>
+                    <p>Дата закінчення: <span id="test">${data}</span>  <br><span id="timer"></span></p>
+                    <p>Тип доставки: <span>
+                    </span></p>
+                    <p>Місцезнаходення лоту: <span>${location.getRegionLot()} обл, ${location.getLocationLot()}
+
+                    </span></p>
                 </div>
             </div>
         </div>

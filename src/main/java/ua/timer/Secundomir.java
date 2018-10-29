@@ -10,7 +10,7 @@ public class Secundomir {
     public static void main(String[] args) {
 
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime dateTime_future = LocalDateTime.of(2018, 9, 10, 9, 0, 0);
+        LocalDateTime dateTime_future = LocalDateTime.of(2018, 11, 10, 9, 0, 0);
         Duration between = Duration.between(now, dateTime_future);
         long seconds = between.getSeconds();
         Timer timer=new Timer();

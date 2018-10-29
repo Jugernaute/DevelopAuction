@@ -13,6 +13,10 @@ let $duratioLotnError = $('#duration-lot-error');
 let $checkboxError = $('#checkbox-error');
 let $changeBlic = $('#change-blic');
 let $hotPrice = $('#hot-price');
+let $region = $('#region-lot');
+let region = $('#region-error');
+let $place = $('#place-lot');
+let place = $('#place-lot-error');
 
 
 
@@ -126,6 +130,14 @@ $durationOfLot.on('click',function () {
     $duratioLotnError.addClass('hidden');
     $errorFormEnter.addClass('hidden')
 });
+$region.on('click',function () {
+    region.addClass('hidden');
+    $errorFormEnter.addClass('hidden')
+});
+$place.on('click',function () {
+    place.addClass('hidden');
+    $errorFormEnter.addClass('hidden');
+});
 
 $('.add-product-sell').on('click',function (event) {
     event.preventDefault();
@@ -142,6 +154,8 @@ $('.add-product-sell').on('click',function (event) {
     let nameProduct = $('#name-product');
     let model = $('#model');
     let resultStateProduct = $('#resultStateProduct');
+    let regionLot = $("#region-lot option:selected").text();
+    // $region.
     if(manufacturerProduct===null || nameCommonCategory===null ||  nameSubCategory===null){
         $spanError.empty();
         $errorFormEnter.empty();
@@ -198,6 +212,25 @@ $('.add-product-sell').on('click',function (event) {
         $errorFormEnter.append("Не вірно заповнена форма");
         return;
     }
+    if($region.val()==0){
+        region.empty();
+        $errorFormEnter.empty();
+        region.removeClass('hidden');
+        $errorFormEnter.removeClass('hidden');
+        region.append("Виберіть регіон");
+        $errorFormEnter.append("Не вірно заповнена форма");
+        return;
+    }
+    if($place.val()===""){
+        place.empty();
+        $errorFormEnter.empty();
+        place.removeClass('hidden');
+        $errorFormEnter.removeClass('hidden');
+        $place.focus();
+        $place.addClass("red");
+        $errorFormEnter.append("Не вірно заповнена форма");
+        return;
+    }
     if(deliveryArray.length==0){
         $checkboxError.empty();
         $checkboxError.removeClass('hidden');
@@ -216,6 +249,8 @@ $('.add-product-sell').on('click',function (event) {
     formData.append("stateProduct", resultStateProduct.val());
     formData.append("descriptionProduct", modelNameDescription.val());
     formData.append("modelProduct", model.val());
+    formData.append("regionLot", regionLot);
+    formData.append("placeLot", $place.val());
     formData.append("typeSell", change);
     if(change==="Аукціон з можливістю бліц-покупки"){
         formData.append("hotPrice", $('#hot-price').val())
@@ -306,6 +341,13 @@ $('.add-product-sell2').on('click', function () {
     // let s = date.toLocaleStringt();
     // let s1 = date.toTimeString();
     // let s2 = date.toUTCString();
-        console.log(new FormData($("#fileUploadForm")[0]));
-    // console.log($startPrice.val());
+    //     console.log(new FormData($("#fileUploadForm")[0]));
+
+    // var x = this.options[].text;/
+    // var options = this.getElementsByTagName("option");
+    // var optionHTML = options[this.selectedIndex].innerText;
+    let message = $("#region-lot option:selected").text();
+    console.log($region.val());
+    // console.log(message.get());
+
 });

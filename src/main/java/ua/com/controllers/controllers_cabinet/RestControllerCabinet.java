@@ -10,11 +10,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
-import ua.com.entity.Location;
+import ua.com.entity.LocationUser;
 import ua.com.entity.User;
 import ua.com.method.Mail;
 import ua.com.method.RandomStr;
-import ua.com.service.location.LocationService;
+import ua.com.service.location.LocationUserService;
 import ua.com.service.user.UserService;
 
 import java.util.*;
@@ -35,7 +35,7 @@ public class RestControllerCabinet {
     @Autowired
     private Environment environment;
     @Autowired
-    private LocationService locationService;
+    private LocationUserService locationUserService;
 
     @PostMapping("/change_Email")
     public String user(
@@ -118,9 +118,9 @@ public class RestControllerCabinet {
     public Map<String, String> getCurrentEmail(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User byUsername = userService.findByUsername(name);
-        List<Location> userLocation = byUsername.getLocation();
+        List<LocationUser> location = byUsername.getLocation();
         Map<String,String>list = new LinkedHashMap<>();
-        for (Location location1 : userLocation) {
+        for (LocationUser location1 : location) {
             list.put("country", location1.getCountry());
             list.put("state", location1.getRegion());
             list.put("city", location1.getCity());
@@ -183,14 +183,14 @@ public class RestControllerCabinet {
     ){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
-        List<Location> userLocation = user.getLocation();
-        for (Location location1 : userLocation) {
+        List<LocationUser> userLocation = user.getLocation();
+        for (LocationUser location1 : userLocation) {
             location1.setRegion(state);
             location1.setCountry(country);
             location1.setCity(cities);
             location1.setUser(Collections.singletonList(user));
             location1.setUserPostAddress(address);
-            locationService.addLocation(location1);
+            locationUserService.addLocation(location1);
         }
         user.setLocation(userLocation);
         userService.addUser(user);
@@ -198,7 +198,7 @@ public class RestControllerCabinet {
 
     @PutMapping("changeAboutMe")
     private String AboutMe(@RequestBody String aboutMe,
-                           Location location){
+                           LocationUser location){
         System.out.println(aboutMe.length());
         if(aboutMe.length()>50){
             return environment.getProperty("aboutMe_Max_Symbols");

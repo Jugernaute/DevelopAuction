@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Location {
+public class LocationUser {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int locationId;
     private String country;
@@ -27,17 +27,17 @@ public class Location {
             mappedBy = "location")
     private List<Lot> lot;
 
-    public Location() {
+    public LocationUser() {
     }
 
-    public Location(String country, String region, String city, String userPostAddress) {
+    public LocationUser(String country, String region, String city, String userPostAddress) {
         this.country = country;
         this.region = region;
         this.city = city;
         this.userPostAddress = userPostAddress;
     }
 
-    public Location(String region, String city) {
+    public LocationUser(String region, String city) {
         this.region = region;
         this.city = city;
     }
@@ -94,7 +94,7 @@ public class Location {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Location location = (Location) o;
+        LocationUser location = (LocationUser) o;
         return locationId == location.locationId &&
                 Objects.equals(country, location.country) &&
                 Objects.equals(region, location.region) &&

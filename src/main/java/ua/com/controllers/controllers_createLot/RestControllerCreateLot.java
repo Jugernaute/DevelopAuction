@@ -11,10 +11,11 @@ import ua.com.entity.*;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
 import ua.com.service.imageLink.ImageLinkService;
+import ua.com.service.locationLot.LocationLotService;
 import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.product.ProductService;
-import ua.com.service.subcategory.SubСategoryService;
+import ua.com.service.subcategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import java.io.BufferedOutputStream;
@@ -32,7 +33,7 @@ public class RestControllerCreateLot {
     @Autowired
     private SubCategoryDao subCategoryDao;
     @Autowired
-    private SubСategoryService subСategoryService;
+    private SubCategoryService subCategoryService;
     @Autowired
     private ManufacturerService manufacturerService;
     @Autowired
@@ -47,6 +48,8 @@ public class RestControllerCreateLot {
     private LotService lotService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LocationLotService locationLotService;
 
 
     @GetMapping("loadCommonCategory")
@@ -82,11 +85,6 @@ public class RestControllerCreateLot {
 
     @PostMapping("loadImg")
     public String uploadFile(
-//            Delivery delivery,
-//            User user,
-//            Product product,
-//            ImageLink imageLink,
-//            Lot lot,
             @RequestParam("uploadfile") MultipartFile[] uploadfile,
             @RequestParam String nameProduct,
             @RequestParam String manufacturerProduct,
@@ -100,6 +98,8 @@ public class RestControllerCreateLot {
             @RequestParam String startPrice,
             @RequestParam String dataStartLot,
             @RequestParam String durationOfLot,
+            @RequestParam String regionLot,
+            @RequestParam String placeLot,
             @RequestParam String methodDelivery[]
 
     ) {
@@ -122,6 +122,8 @@ public class RestControllerCreateLot {
         System.out.println(dataStartLot);
         System.out.println(durationOfLot);
         System.out.println(Arrays.toString(methodDelivery));
+        System.out.println("-------"+placeLot);
+        System.out.println("-------"+regionLot);
 
 
 
@@ -134,7 +136,7 @@ public class RestControllerCreateLot {
              * for tree load link
              * */
 
-            SubCategory byNameSubCategory = subСategoryService.findByNameSubCategory(nameSubCategory);
+            SubCategory byNameSubCategory = subCategoryService.findByNameSubCategory(nameSubCategory);
             product.setSubCategory(byNameSubCategory);
 
         } catch (Exception e) {
@@ -192,7 +194,15 @@ public class RestControllerCreateLot {
         } catch (Exception e) {
 //            return "error with product save -> " + e.getMessage()+ " "+e.getLocalizedMessage();
         }
+        LocationLot locationLot = new LocationLot(regionLot, placeLot);
+//        List<LocationLot> locationLots = new ArrayList<>();
+//        locationLots.add(locationLot);
+//        product.setLocationLots(locationLot);
         productService.addProduct(product);
+        locationLot.setProducts(product);
+        locationLotService.addLocationLot(locationLot);
+//        locationLots.clear();
+
 
 
         try {
@@ -217,8 +227,16 @@ public class RestControllerCreateLot {
 
                 for (MultipartFile file : uploadfile) {
                     ImageLink link = new ImageLink();
-                    System.out.println(file.getOriginalFilename() + " file");
+//                    System.out.println(file.getOriginalFilename() + " file");
                     String filename = file.getOriginalFilename();
+                    List<ImageLink> all = imageLinkService.findAll();
+
+                    for (ImageLink imageLink : all) {
+                        if (imageLink.equals(filename)){
+                            String s = filename = filename + imageLink.getId_ImageLink();
+                            System.out.println("---->new imgLink "+s);
+                        }
+                    }
                     String filepath = Paths.get(path, filename).toString();
                     BufferedOutputStream stream =
                             new BufferedOutputStream(new FileOutputStream(new File(filepath)));
@@ -235,6 +253,15 @@ public class RestControllerCreateLot {
         } catch (Exception e) {
             return "error in filePath -> " + e.getMessage();
         }
+        Lot lot = new Lot();
+//        try {
+//            LocationLot locationLot = new LocationLot(regionLot, placeLot);
+//            locationLot.setProducts(Collections.singletonList(product));
+//            locationLotService.addLocationLot(locationLot);
+
+//        }catch (Exception e){
+//            return "error with save locationlot => "+e;
+//        }
 
 
 //        try{
@@ -252,7 +279,7 @@ public class RestControllerCreateLot {
 
         //            working with delivery
 
-        Lot lot = new Lot();
+
         if (dataStart.isBefore(dateTimeNow)) {
             return "enter dataTime right!!!";
         } else {

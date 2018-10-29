@@ -147,16 +147,50 @@
                 <span id="duration-lot-error"></span>
             </div>
 
-            <select name="country" class="countries country-select" id="countryId">
-                <option value="">Виберіть країну</option>
-            </select><br>
-            <select name="state" class="states country-select" id="stateId">
-                <option value="">Виберіть область</option>
-            </select><br>
-            <select name="city" class="cities country-select" id="cityId">
-                <option value="">Виберіть місто</option>
-            </select>
-            <button class="savePostAddress" type="submit" disabled="disable">save change</button>
+            <div class="option-list-show-type-wrapper">
+                <p class="required">Регіон : </p>
+                <label>
+                    <select id="region-lot">
+                        <option value="0">Виберіть</option>
+                        <option value="98">А.Р.Крым</option>
+                        <option value="99">Винницкая</option>
+                        <option value="100">Волынская</option>
+                        <option value="101">Днепропетровская</option>
+                        <option value="102">Донецкая</option>
+                        <option value="103">Житомирская</option>
+                        <option value="104">Закарпатская</option>
+                        <option value="105">Запорожская</option>
+                        <option value="106">Ивано-Франковская</option>
+                        <option value="108">Киевская</option>
+                        <option value="109">Кировоградская</option>
+                        <option value="110">Луганская</option>
+                        <option value="112">Львовская</option>
+                        <option value="146">Не из Украины</option>
+                        <option value="113">Николаевская</option>
+                        <option value="114">Одесская</option>
+                        <option value="115">Полтавская</option>
+                        <option value="116">Ровненская</option>
+                        <option value="118">Сумская</option>
+                        <option value="119">Тернопольская</option>
+                        <option value="120">Харьковская</option>
+                        <option value="121">Херсонская</option>
+                        <option value="122">Хмельницкая</option>
+                        <option value="123">Черкасская</option>
+                        <option value="125">Черниговская</option>
+                        <option value="126">Черновицкая</option>
+                        <option value="107">г. Киев</option>
+                        <option value="117">г. Севастополь</option>
+                    </select>
+                    <div id="region-error"></div>
+                </label>
+                </div>
+            <div class="option-list-show-type-wrapper">
+                <p class="required">Місцеположення : </p>
+                <label>
+                    <input type="text" id="place-lot" placeholder="де знаходиться ваш товар">
+                    <div id="place-lot-error"></div>
+                </label>
+            </div>
 
 
             <div class="option-list-show-send">

@@ -152,7 +152,8 @@
     margin: 10px 5px 0 0;
 }
 
-#span-error, #state-product-error, #image-error, #blic-error, #duration-lot-error
+#span-error, #state-product-error, #image-error, #blic-error, #duration-lot-error,
+#region-error, #place-lot-error
 {
     color: red;
     margin-left: 40%;

@@ -22,7 +22,14 @@ import ua.com.service.user.UserService;
 import javax.management.Query;
 import javax.naming.Context;
 import java.sql.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @PropertySource("classpath:validation.properties")
@@ -37,22 +44,41 @@ private ProductService productService;
     @GetMapping("/")
         public String start (Model model){
 
-        int id_product = lotService.getLotById(1).getProduct().getId_Product();
-        System.out.println(id_product);
-        if(id_product == 0 ){
-            System.out.println("null id product");
-            return "home";
+//        int id_product = lotService.getLotById(1).getProduct().getId_Product();
+//        System.out.println(id_product);
+//        if(id_product == 0 ){
+//            System.out.println("null id product");
+//            return "home";
+//        }
+        List<Product> allProduct = productService.findAllProduct();
+        List<String>imgNew=new ArrayList<>();
+
+        List<Product> sortedProduct = allProduct.stream()
+                .filter(p -> LocalDateTime.now().isBefore(p.getLot().getDataStartLot()))
+                .sorted(Comparator.comparing(o -> o.getLot().getDataStartLot()))
+                .collect(Collectors.toList());
+
+        List<ImageLink> imgLink = new ArrayList<>();
+        for (Product product : sortedProduct) {
+            List<ImageLink> imageLinks = product.getImageLinks();
+            ImageLink imageLink = imageLinks.get(0);
+            imgLink.add(imageLink);
         }
-        List<ImageLink> all = imageLinkService.findAll();
-        System.out.println(all);
-        for (ImageLink imageLink : all) {
-//            int startPrice = imageLink.getProduct().getId_Product().getLot().getStartPrice();
-//            if (tmp==id_product){
-//                model.addAttribute("imgLinks", all);
-//                return "home";
+
+//        for (Product product : allProduct) {
+//            LocalDateTime dataStartLot = product.getLot().getDataStartLot();
+//            LocalDateTime dataTimeNow = LocalDateTime.now();
+//
+//            if(dataTimeNow.isBefore(dataStartLot)){
+//                List<ImageLink> imageLinks = product.getImageLinks();
+////                imageLinks.stream().
+//                ImageLink imageLink = imageLinks.get(0);
+//                String linkOfImage = imageLink.getLinkOfImage();
+//                imgNew.add(linkOfImage);
 //            }
-        }
-        model.addAttribute("imgLinks", all);
+//        }
+
+        model.addAttribute("imgLinks", imgLink);
         return "home" ;
         }
 

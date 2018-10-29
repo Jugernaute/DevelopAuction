@@ -7,5 +7,6 @@ import ua.com.entity.Lot;
 public interface LotDao extends JpaRepository<Lot, Integer > {
 
 //    Lot findByProduct
-//    @Query("select * from Lot join ")
+//    @Query("SELECT t.* FROM auction.lot_location t")
+
 }

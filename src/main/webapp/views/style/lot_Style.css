@@ -123,6 +123,7 @@
 }
 .lot-info-price-timer p{
     margin: 2px 0;
+    color: darkblue;
 }
 .lot-about_options-list{
     width: 100%;
@@ -154,7 +155,9 @@
     border-bottom: 1px solid gray;
     padding: 20px 20px;
 }
+
 #timer{
+    margin-left: 60px;
     font-size: 25px;
-    color: #55ACEE;
+    color: red;
 }

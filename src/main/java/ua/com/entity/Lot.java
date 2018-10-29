@@ -24,8 +24,13 @@ public class Lot {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    private List<Location> location;
+            cascade = {CascadeType.MERGE/*.PERSIST,CascadeType.REMOVE*/})
+    private List<LocationUser> location;
+
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {CascadeType.ALL})
+//    private List<LocationLot>locationLots;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
@@ -80,11 +85,19 @@ public class Lot {
         return this;
     }
 
-    public List<Location> getLocation() {
+//    public List<LocationLot> getLocationLots() {
+//        return locationLots;
+//    }
+//
+//    public void setLocationLots(List<LocationLot> locationLots) {
+//        this.locationLots = locationLots;
+//    }
+
+    public List<LocationUser> getLocation() {
         return location;
     }
 
-    public void setLocation(List<Location> location) {
+    public void setLocation(List<LocationUser> location) {
         this.location = location;
     }
 

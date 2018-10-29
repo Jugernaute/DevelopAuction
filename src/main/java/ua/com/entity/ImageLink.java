@@ -33,6 +33,14 @@ public class ImageLink {
     public ImageLink() {
     }
 
+    public int getId_ImageLink() {
+        return id_ImageLink;
+    }
+
+    public void setId_ImageLink(int id_ImageLink) {
+        this.id_ImageLink = id_ImageLink;
+    }
+
     public String getLinkOfImage() {
         return linkOfImage;
     }

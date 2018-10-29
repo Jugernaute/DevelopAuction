@@ -99,5 +99,44 @@
 
 
 
+///category list///////////
+
+    $('.products_list').on('click', () => {
+        $('.category-list').toggleClass('hidden')
+    });
+
+    $('.category-list-parent').on('mouseover', ()=> {
+       $(this).next().toggleClass('hidden')
+    });
+
+    // let countDownDate = 11111111111110;
+    // let countDownDate = new Date("Oct 30, 2018 15:37:25").getTime();
+    //
+    // let x = setInterval(function() {
+    //
+    //     let now = new Date().getTime();
+    //
+    //     let distance = countDownDate - now;
+    //     // console.log($('#test').innerHTML);
+    //
+    //     // console.log(distance);
+    //     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //
+    //     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //
+    //     document.getElementById("timer").innerHTML = days + "дн " + hours + "г "
+    //         + minutes + "хв " + seconds + "с";
+    //     if (distance < 0) {
+    //         clearInterval(x);
+    //         document.getElementById("timer").innerHTML = "EXPIRED";
+    //     }
+    // }, 1000);
+
+    // rest security
+
+
+
 
 
