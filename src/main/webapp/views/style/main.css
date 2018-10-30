@@ -355,3 +355,10 @@ footer{
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
+.img-lot:first-child {
+    width: 450px;
+    height: 320px;
+}
+.imgSrc{
+    width: 500px;
+}

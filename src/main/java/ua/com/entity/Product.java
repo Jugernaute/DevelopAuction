@@ -30,20 +30,21 @@ public class Product {
 
     @JsonIgnore
     @OneToOne(
-            mappedBy = "products",
+
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "products"
     )
     private LocationLot locationLots;
 
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE/*,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH*/})
     private SubCategory subCategory;
 
 @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, //lazy
+        @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private User userOwner;
 

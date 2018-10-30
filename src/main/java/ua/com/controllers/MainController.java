@@ -45,7 +45,7 @@ public class MainController{
 
     @GetMapping("/fromLogoToHome")
     private String fromLogoToHome(){
-        return "home";
+        return "redirect:/";
     }
 
     @GetMapping("/goLostPsw")
@@ -112,16 +112,16 @@ public class MainController{
     }
 
 
-    @PostMapping("lot/{idProduct}/betUp")
-    private String lotSec(
-                          @PathVariable String idProduct,
-                          @RequestBody String betUp,
-                          RedirectAttributes attributes){
-
-        System.out.println(idProduct);
-        System.out.println(betUp);
-
-        return "lot";
-    }
+//    @PostMapping("lot/{idProduct}/betUp")
+//    private String lotSec(
+//                          @PathVariable String idProduct,
+//                          @RequestBody String betUp,
+//                          RedirectAttributes attributes){
+//
+//        System.out.println(idProduct);
+//        System.out.println(betUp);
+//
+//        return "lot";
+//    }
 
 }

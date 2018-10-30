@@ -129,22 +129,22 @@
         <div class="lot-wrapper">
             <div class="lot-slider">
 
-                <div class="lot-slider-container">
+                <div class="lot-slider-container img-lot">
                     <%--<img src="../img/product_Img/${image1.getLinkOfImage()}" alt="">--%>
 
                 </div>
                 <div class="lot-slider-row">
                     <div class="lot-slider-column">
-                        <img src="../img/product_Img/${image1.getLinkOfImage()}" alt="${image1.getId_ImageLink()}">
+                        <img src="../img/product_Img/${image1.getLinkOfImage()}" alt="${image1.getLinkOfImage()}">
                     </div>
                     <div class="lot-slider-column">
-                        <img src="../img/product_Img/${image2.getLinkOfImage()}" alt="">
+                        <img src="../img/product_Img/${image2.getLinkOfImage()}" alt="${image2.getLinkOfImage()}">
                     </div>
                     <div class="lot-slider-column">
-                        <img src="../img/product_Img/${image3.getLinkOfImage()}" alt="">
+                        <img src="../img/product_Img/${image3.getLinkOfImage()}" alt="${image3.getLinkOfImage()}">
                     </div>
                     <div class="lot-slider-column">
-                        <img src="../img/product_Img/${image4.getLinkOfImage()}" alt="">
+                        <img src="../img/product_Img/${image4.getLinkOfImage()}" alt="${image4.getLinkOfImage()}">
                     </div>
                 </div>
             </div>

@@ -31,4 +31,9 @@ public class ImageLinkServiceImpl implements ImageLinkService {
     public List<ImageLink> findAll() {
         return imageLinkDao.findAll();
     }
+
+    @Override
+    public ImageLink findByImageLink(String imageLink) {
+        return imageLinkDao.findByLinkOfImage(imageLink);
+    }
 }

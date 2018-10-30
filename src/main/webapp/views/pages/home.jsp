@@ -117,7 +117,7 @@
                 <c:set var = "qwe" value="5" target="w" property="e"/>
                     <%--<c:out value="${qwe}"//>--%>
                     <div class="hot_lot_wrapper">
-                        <div class="cont_img img1" >
+                        <div class="cont_img" >
                                 <a href="lot/${img.getProduct().getId_Product()}" class="get-id"><img src="../img/product_Img/${img.getLinkOfImage()}" height="200" width="200"/>
                                 </a></div>
                         <div class="container">

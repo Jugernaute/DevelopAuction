@@ -14,7 +14,7 @@ public class ImageLink {
     private String linkOfImage;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE})
     private Product product;
 

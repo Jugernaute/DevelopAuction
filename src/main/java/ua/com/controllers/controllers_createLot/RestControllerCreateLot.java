@@ -105,25 +105,25 @@ public class RestControllerCreateLot {
     ) {
 
         Product product = new Product();
-        Delivery delivery = new Delivery();
-        Manufacturer manufacturer = new Manufacturer();
+//        Delivery delivery = new Delivery();
+//        Manufacturer manufacturer = new Manufacturer();
 
 
-        System.out.println(nameProduct);
-        System.out.println(manufacturerProduct);
-        System.out.println(nameCommonCategory);
-        System.out.println(nameSubCategory);
-        System.out.println(stateProduct);
-        System.out.println(descriptionProduct);
-        System.out.println(modelProduct);
-        System.out.println(typeSell);
-        System.out.println(hotPrice);
-        System.out.println(startPrice);
-        System.out.println(dataStartLot);
-        System.out.println(durationOfLot);
-        System.out.println(Arrays.toString(methodDelivery));
-        System.out.println("-------"+placeLot);
-        System.out.println("-------"+regionLot);
+//        System.out.println(nameProduct);
+//        System.out.println(manufacturerProduct);
+//        System.out.println(nameCommonCategory);
+//        System.out.println(nameSubCategory);
+//        System.out.println(stateProduct);
+//        System.out.println(descriptionProduct);
+//        System.out.println(modelProduct);
+//        System.out.println(typeSell);
+//        System.out.println(hotPrice);
+//        System.out.println(startPrice);
+//        System.out.println(dataStartLot);
+//        System.out.println(durationOfLot);
+//        System.out.println(Arrays.toString(methodDelivery));
+//        System.out.println("-------"+placeLot);
+//        System.out.println("-------"+regionLot);
 
 
 
@@ -152,7 +152,6 @@ public class RestControllerCreateLot {
         Manufacturer byNameManufacturer = manufacturerService.findByNameManufacturer(manufacturerProduct);
         product.setManufacturer(byNameManufacturer);
 
-//        productService.addProduct(product);
         try {
 
             product.setNameProduct(nameProduct);
@@ -185,25 +184,21 @@ public class RestControllerCreateLot {
 
         // working with multipart file
         // Get the filename and build the local file path
-        try {
-            System.out.println(product.getTypeSell() + " type sell");
-            System.out.println(product.getNameProduct() + " name prod");
-            System.out.println(product.getUserOwner().getUsername() + " user");
-            System.out.println(product.getSubCategory() + " subCateg");
-            System.out.println(product.getManufacturer() + " manuf");
-        } catch (Exception e) {
-//            return "error with product save -> " + e.getMessage()+ " "+e.getLocalizedMessage();
-        }
+//        try {
+//            System.out.println(product.getTypeSell() + " type sell");
+//            System.out.println(product.getNameProduct() + " name prod");
+//            System.out.println(product.getUserOwner().getUsername() + " user");
+//            System.out.println(product.getSubCategory() + " subCateg");
+//            System.out.println(product.getManufacturer() + " manuf");
+//        } catch (Exception e) {
+////            return "error with product save -> " + e.getMessage()+ " "+e.getLocalizedMessage();
+//        }
         LocationLot locationLot = new LocationLot(regionLot, placeLot);
-//        List<LocationLot> locationLots = new ArrayList<>();
-//        locationLots.add(locationLot);
-//        product.setLocationLots(locationLot);
+
         productService.addProduct(product);
         locationLot.setProducts(product);
         locationLotService.addLocationLot(locationLot);
 //        locationLots.clear();
-
-
 
         try {
             String path = System.getProperty("user.home")
@@ -225,28 +220,31 @@ public class RestControllerCreateLot {
                     + "product_Img";
             try {
 
+                List<ImageLink> all = imageLinkService.findAll();
+                int add=0;
+                int countImg=0;
                 for (MultipartFile file : uploadfile) {
-                    ImageLink link = new ImageLink();
-//                    System.out.println(file.getOriginalFilename() + " file");
-                    String filename = file.getOriginalFilename();
-                    List<ImageLink> all = imageLinkService.findAll();
-
+                    ++countImg;
+                   do {
+                       String filename = file.getOriginalFilename();
                     for (ImageLink imageLink : all) {
-                        if (imageLink.equals(filename)){
-                            String s = filename = filename + imageLink.getId_ImageLink();
-                            System.out.println("---->new imgLink "+s);
+                        String linkOfImage = imageLink.getLinkOfImage();
+                        while (linkOfImage.equals(filename)){
+                            String toString = Integer.toString(++add);
+                            filename = imageLink.getId_ImageLink()+toString+ filename ;
                         }
                     }
                     String filepath = Paths.get(path, filename).toString();
                     BufferedOutputStream stream =
                             new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-                    link.setLinkOfImage(filename);
+                    ImageLink link = new ImageLink(filename);
                     link.setProduct(product);
                     imageLinkService.addImageLink(link);                      // Save the file locally
                     stream.write(file.getBytes());
                     stream.close();
+                       System.out.println("==> countcountImg "+countImg);
+                   }while (countImg==4);                                    // only 4 img
                 }
-
             } catch (Exception e) {
                 return "error with imageLink save -> " + e.getMessage();
             }
@@ -254,17 +252,7 @@ public class RestControllerCreateLot {
             return "error in filePath -> " + e.getMessage();
         }
         Lot lot = new Lot();
-//        try {
-//            LocationLot locationLot = new LocationLot(regionLot, placeLot);
-//            locationLot.setProducts(Collections.singletonList(product));
-//            locationLotService.addLocationLot(locationLot);
 
-//        }catch (Exception e){
-//            return "error with save locationlot => "+e;
-//        }
-
-
-//        try{
         /*
          * Working with Lot object*/
 

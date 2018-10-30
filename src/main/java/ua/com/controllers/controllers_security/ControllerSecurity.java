@@ -51,18 +51,24 @@ private ProductService productService;
 //            return "home";
 //        }
         List<Product> allProduct = productService.findAllProduct();
-        List<String>imgNew=new ArrayList<>();
+//        List<String>imgNew=new ArrayList<>();
 
-        List<Product> sortedProduct = allProduct.stream()
-                .filter(p -> LocalDateTime.now().isBefore(p.getLot().getDataStartLot()))
-                .sorted(Comparator.comparing(o -> o.getLot().getDataStartLot()))
-                .collect(Collectors.toList());
+//        List<Product> sortedProduct = allProduct.stream()
+//                .filter(p -> LocalDateTime.now().isBefore(p.getLot().getDataStartLot()))
+//                .sorted(Comparator.comparing(o -> o.getLot().getDataStartLot()))
+//                .collect(Collectors.toList());
 
         List<ImageLink> imgLink = new ArrayList<>();
-        for (Product product : sortedProduct) {
+        for (Product product : allProduct) {
             List<ImageLink> imageLinks = product.getImageLinks();
-            ImageLink imageLink = imageLinks.get(0);
-            imgLink.add(imageLink);
+            System.out.println("----"+imageLinks);
+            if (!(imageLinks.size() == 0)){
+                ImageLink imageLink = imageLinks.get(0);
+                imgLink.add(imageLink);
+            }else {
+                System.out.println("----error----");
+            }
+
         }
 
 //        for (Product product : allProduct) {
@@ -94,7 +100,7 @@ private ProductService productService;
 
     @GetMapping("/logout")
         public String logout(){
-        return "home";
+        return "redirect:/";
     }
 
 

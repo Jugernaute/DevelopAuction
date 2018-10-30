@@ -38,7 +38,9 @@ $('.lot-slider-column').on('click', function () {
     let tempImg = $(this).children().prop('src');
     let tempAlt = $(this).children().prop('alt');
 
-    imgContainer.append('<img src="'+tempImg+'" alt="'+tempAlt+'">')
+    imgContainer.append('<img class="imgSrc" src="'+tempImg+'" alt="'+tempAlt+'">').addClass("create");
+    // $('img').parentElement('imgContainer').addClass("create");
+
 });
 ///heart
 
@@ -124,21 +126,29 @@ $("a").click(function(event) {
 let alt;
 // $('.lot')
 $ ("img"). attr ("title", function () {
-    alt =   $ (this) .attr ("alt");
+    alt =   $ (this) .attr ("src");
 });
 
-console.log(alt);
+// let val1 = $('#imgSrc').val();
+// console.log(val1);
+//  = $('.lot-slider-container')
+// let s2 = srcImg.toString();
+// let b = s2.replace("http://localhost:8080/img/product_Img/","");
+// console.log(srcImg);
+// console.log(b);
+// console.log(alt);
 
 $('#btn-bet').on('click',function () {
-
+    let srcImg=imgContainer.find('img').attr('src');
+    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
     let betUps = $('#bet-input').val();
 
     $.ajax({
-        url: "http://localhost:8080/lot/"+alt+"/betUp",
+        url: "http://localhost:8080/lot/betUp",
         type: 'post',
-        data: betUps,
+        data: {betUps, srcLink},
         dataType: 'text',
-        contentType: 'application/json',
+        // contentType: 'application/json',
 
         success:function (success) {
             console.log("ok")
