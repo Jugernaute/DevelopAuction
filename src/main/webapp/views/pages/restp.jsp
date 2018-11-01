@@ -13,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
 
-<button id="allproduct">allProduct</button>
+<button id="allProduct">allProduct</button>
 <input type="text" id="nameProduct" placeholder=""/>
 <input type="text" id="modelProduct" placeholder=""/>
 <%--<input type="file" id="file" multiple="multiple" placeholder=""/>--%>
@@ -21,8 +21,10 @@
 <input type="text" id="descriptionProduct" placeholder=""/>
 <input type="text" id="id_Manufacturer" placeholder=""/>
 <input type="text" id="id_SubCategory" placeholder=""/>
+<%--<input type="text" id="idBasket" placeholder=""/>--%>
 <input type="text" id="userId" placeholder=""/>
 <button id="addproduct">addProduct</button><br>
+<button id="deleteProduct">deleteProduct</button><br>
 
 <button id="alldelivery">alldelivery</button>
 <input type="" id="methodDelivery" placeholder="">
@@ -52,17 +54,18 @@
 <input type="text" id="methodPayment" placeholder="">
 <button id="addPayment">addPayment</button><br>
 
-<button id="addPaymentIn">addPaymentIn</button><br>
-
 <button id="allLot">allLot</button>
 <input type="text" id="dataStartLot" placeholder="">
 <input type="text" id="dataEndLot" placeholder="">
 <input type="text" id="startPrice" placeholder="">
 <input type="text" id="hotPrice" placeholder="">
-<input type="text" id="id_Delivery" placeholder="">
 <input type="text" id="id_Payment" placeholder="">
 <input type="text" id="id_Product" placeholder="">
+<input type="text" id="id_Delivery" placeholder="">
 <button id="addLot">addLot</button><br>
+
+<input type="text" id="idBasket1" placeholder="">
+<button id="paymentNow">PaymentNow</button><br>
 
 <button id="allUser">allUser</button>
 <input type="text" id="firstNameUser" placeholder="">
@@ -73,8 +76,16 @@
 
 
 
-<script>
+<button id="allBasket">allBasket</button>
+<input type="text" id="nameBasketUser" placeholder="">
+<input type="text" id="userId2" placeholder="">
+<button id="addBasket">addBasket</button><br>
 
+<button id="putUserInBasket">putUserInBasket</button>
+
+<div id="conversationDiv"></div>
+
+<script>
 
     /////////////////   User            //////////////
 
@@ -89,11 +100,14 @@
         $x1.val(' ');
         let $x2 = $('#userBalance');
         let userBalance = $x2.val();
+        console.log(userBalance);
         $x2.val(' ');
         let $x3 = $('#userPostAddress');
         let userPostAddress = $x3.val();
         $x3.val(' ');
+
         let user = JSON.stringify({firstNameUser, surNameUser, userBalance, userPostAddress});
+        console.log(user);
         $.ajax({
             url : '/addUser',
             type : 'put',
@@ -121,6 +135,8 @@
             }
         })
     })
+
+
     /////////////////    Lot            //////////////
 
     $('#addLot').click(function () {
@@ -138,24 +154,64 @@
         let $x3 = $('#hotPrice');
         let hotPrice = $x3.val();
         $x3.val(' ');
-        let $x4 = $('#id_Delivery');
-        let id_Delivery = $x4.val();
-        $x4.val(' ');
         let $x5 = $('#id_Payment');
         let id_Payment = $x5.val();
         $x5.val(' ');
         let $x6 = $('#id_Product');
         let id_Product = $x6.val();
         $x6.val(' ');
-        let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrice, id_Delivery, id_Payment, id_Product});
+        let $x7 = $('#id_Delivery');
+        let id_Delivery = $x7.val();
+        $x7.val(' ');
+
+        let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrice, id_Payment, id_Product, id_Delivery});
         $.ajax({
-            url : '/addLot?id_Delivery=' + id_Delivery + '&id_Payment=' + id_Payment + '&id_Product=' + id_Product,
+            url : '/addLot?id_Payment=' + id_Payment + '&id_Product=' + id_Product + '&id_Delivery=' + id_Delivery,
             type : 'put',
             contentType : 'application/json',
             data : lot,
             dataType : 'json'
         })
     })
+    //
+    // $('#paymentNow').click(function () {
+    //     $("#conversationDiv").empty();
+    //
+    //     $.ajax({
+    //     url : '/updateLot',
+    //         type : 'get',
+    //         contentType : 'application/json',
+    //         data : lot,
+    //
+    //     success: function (result) {
+    //         console.log(result);
+    //         for (let obj of result) {
+    //             let div = $('<div/>', {text: obj.dataStartLot + ' ' + obj.dataEndLot + ' ' + obj.hotPrice + ' ' +
+    //             obj.startPrice + ' ' + obj.id_Delivery + ' ' + obj.id_Payment + ' ' + obj.id_Product});
+    //             div.appendTo($("#conversationDiv"));
+    //         }
+    //     },
+    //     error: function (error) {
+    //         console.log(error);
+    //     }
+    //
+    // })
+
+//         let $x8 = $('#idBasket1');
+//         let idBasket = $x8.val();
+//         $x8.val(' ');
+//
+//         let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrice, id_Payment, id_Product, id_Delivery, idBasket});
+// console.log(lot);
+//         $.ajax({
+//             url : '/updateLot?idBasket=' + idBasket,
+//             type : 'put',
+//             contentType : 'application/json',
+//             data : idBasket,
+//             dataType :'json'
+//         })
+//     })
+
     $('#allLot').click(function () {
         $("#conversationDiv").empty();
 
@@ -165,7 +221,7 @@
             contentType : 'application/json',
             success : function (result) {
                 for (let obj of result) {
-                    let lot = $('<div/>', {text : obj.dataStartLot + ' ' + obj.dataEndLot + ' ' + obj.startPrice + ' ' + obj.hotPrice + ' ' + obj.id_Product + ' ' + obj.id_Payment + ' ' + obj.id_Delivery});
+                    let lot = $('<div/>', {text : obj.dataStartLot + ' ' + obj.dataEndLot + ' ' + obj.startPrice + ' ' + obj.hotPrice + ' ' + obj.id_Product + ' ' + obj.id_Payment + ' ' + obj.id_Delivery + ' ' + obj.idBasket});
                     lot.appendTo('#conversationDiv');
                 }
             },
@@ -174,6 +230,7 @@
             }
         })
     })
+
 
     /////////////////    Payment         ////////////
 
@@ -218,7 +275,7 @@
 
     /////////////////   Manufacturer    ///////////////
 
-    $("#allManufacturer").click(function () {
+    $("#addManufacturer").click(function () {
         $("#conversationDiv").empty();
 
         let $x = $("#nameManufacturer");
@@ -316,7 +373,7 @@
             success : function (result) {
                 for (let obj of result) {
                     let commonCategory = $('<div/>', {text : obj.nameCommonCategory});
-                    commonCategory.appendTo('#conversationDiv');
+                    commonCategory.appendTo($('#conversationDiv'));
                 }
             },
             error : function (error) {
@@ -377,9 +434,9 @@
     $('#adddelivery').click(function () {
         $("#conversationDiv").empty();
 
-        let $input = $('#methodDelivery');
-        let methodDelivery = $input.val();
-        $input.val(' ');
+        let $x = $('#methodDelivery');
+        let methodDelivery = $x.val();
+        $x.val(' ');
         let delivery = JSON.stringify({methodDelivery});
         $.ajax({
             url: '/addDelivery',
@@ -408,9 +465,7 @@
             url : '/allDelivery',
             type : 'get',
             contentType : 'application/json',
-            // data :'data',
             success : function (result) {
-                console.log(result);
                 for (let obj of result) {
                     let delivery = $('<div/>', {text: obj.methodDelivery});
                     delivery.appendTo($('#conversationDiv'));
@@ -463,15 +518,14 @@
         $x6.val(' ');
 
         let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, linkOnImageProduct, id_SubCategory, id_Manufacturer, userId});
-console.log(product);
-
+        console.log(product);
         $.ajax({
             url:'/addProduct?id_Manufacturer=' + id_Manufacturer + '&id_SubCategory=' + id_SubCategory + '&userId=' + userId,
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            type: "post",
+            type: "put",
             data: product,
             processData : false,
             contentType : false,
@@ -479,18 +533,17 @@ console.log(product);
         })
     })
 
-$("#allproduct").click(function () {
+$("#allProduct").click(function () {
     $("#conversationDiv").empty();
 
     $.ajax({
         url : '/allProduct',
         type : 'get',
         contentType : 'application/json',
-        // data :'data'
         success : function (result) {
-            console.log(result);
+            console.log("sssss");
             for (let obj of result) {
-                let prod = $('<div/>',{text: obj.nameProduct + " " + obj.modelProduct + " " + obj.linkOnImageProduct + " " + obj.descriptionProduct + ' ' + obj.userId + ' ' + obj.idManufacturer + ' ' + obj.idSubCategory});
+                let prod = $('<div/>',{text: obj.nameProduct + " " + obj.modelProduct + " " + obj.linkOnImageProduct + " " + obj.descriptionProduct});
                 prod.appendTo($("#conversationDiv"));
             }
         },
@@ -499,6 +552,91 @@ $("#allproduct").click(function () {
         }
     })
 })
+
+    $('#deleteProduct').click(function () {
+
+        $.ajax({
+            url : '/deleteProduct',
+            type : 'get'
+
+        })
+
+    })
+
+    ///////////////////////////Basket/////////////////////////////////////
+
+    $("#addBasket").click(function () {
+        $("#conversationDiv").empty();
+
+        let $x = $('#nameBasketUser');
+        let nameBasketUser = $x.val();
+        let $x1 = $('#userId2');
+        let userId = $x1.val();
+
+        let basket = JSON.stringify({nameBasketUser, userId});
+        $.ajax({
+            url: '/addBasket?userId=' + userId,
+            type: 'put',
+            contentType: 'application/json',
+            data: basket,
+            dataType: 'json'
+        })
+    })
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#putUserInBasket').click(function () {
+        $("#conversationDiv").empty();
+
+        $.ajax({
+            url : '/putUserInBasket',
+            type : 'get',
+            contentType : 'application/json',
+            success : function (result) {
+                for (let obj of result) {
+                    if (obj.firstNameUser == "Andriy"){
+                    let user = $('<div/>', {text : obj.firstNameUser + ' ' + obj.phone});
+                    user.appendTo('#conversationDiv');
+                    console.log(obj);
+                    }
+                }
+            },
+            error : function (error) {
+                console.log(error);
+            }
+        })
+
+        $.ajax({
+            url : '/allLot',
+            type : 'get',
+            contentType : 'application/json',
+            success : function (res) {
+                for (let obj of res) {
+                        let lot = $('<div/>', {text: obj.hotPrice});
+                        lot.appendTo('#conversationDiv');
+                        console.log(obj);
+                }
+            },
+            error : function (error) {
+                console.log(error);
+            }
+        })
+
+        $.ajax({
+            url : 'allProduct',
+            type : 'get',
+            contentType : 'application/json',
+            success : function (res) {
+                for (let obj of res) {
+                    let product = $('<div/>', {text : obj.nameProduct + ' ' + obj.modelProduct});
+                    product.appendTo('#conversationDiv');
+                }
+            },
+            error : function (err) {
+                console.log(err);
+            }
+        })
+
+    })
 
     // $(location).attr('href', '/basket');
 </script>

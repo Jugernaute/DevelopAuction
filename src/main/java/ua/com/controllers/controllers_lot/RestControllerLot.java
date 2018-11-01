@@ -3,7 +3,6 @@ package ua.com.controllers.controllers_lot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
@@ -12,7 +11,6 @@ import ua.com.service.delivery.DeliveryService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.subCategory.SubCategoryService;
 
-import javax.mail.Multipart;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;

@@ -10,4 +10,5 @@ public interface LotService {
     void  updateLot(Lot lot);
     Lot getLotById(int id_Lot);
     List<Lot> findAllLot();
+    void getLot(int id_Lot);
 }

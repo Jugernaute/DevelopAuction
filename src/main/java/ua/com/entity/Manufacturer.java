@@ -16,7 +16,7 @@ public class Manufacturer {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH},
             mappedBy = "manufacturer")
     private List<Product> productListOfManufacture;
 

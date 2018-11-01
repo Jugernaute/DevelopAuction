@@ -30,6 +30,7 @@
                 </ul>
             </nav>
         </div>
+        <button onclick="btn">GoToHome</button>
     </header>
     <section class="products">
         <div class="wrapper_products">

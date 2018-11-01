@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.dao.AuctionItemsDao;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
+import ua.com.entity.Basket;
 import ua.com.entity.CommonCategory;
 import ua.com.entity.SubCategory;
 import ua.com.entity.User;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Controller
 public class MainController{
@@ -43,7 +45,18 @@ public class MainController{
         return "lostpassword";
     }
 
+
 ////////////////////////////////////////////////////////////////
+    @GetMapping("/goToLot")
+    private String goToLot(){
+        return "lot";
+    }
+
+    @GetMapping("/goToHome")
+    private String goToHome(){
+        return "home";
+    }
+
 @GetMapping("/save")
 public String home(Model model){
     return "save";
@@ -63,4 +76,20 @@ public String home(Model model){
     public User user(){
         return new User();
     }
+
+    @GetMapping("/cart")
+    public String goCart(){
+        return "cart";
+    }
+
+    @GetMapping("/aukcion")
+    public String goAukcion(){
+        return "aukcion";
+    }
+
+    @GetMapping("/lot")
+    public String goLot(){
+        return "lot";
+    }
+
 }

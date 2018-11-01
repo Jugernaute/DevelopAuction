@@ -88,7 +88,7 @@ public class RestControllerCabinet {
 
         if(name.equals("anonymousUser") && email!=null)
         {
-            User byEmail = userService.findByUsername(email);
+            User byEmail = userService.findByEmail(email);
             if(byEmail==null)
             {
                 return;

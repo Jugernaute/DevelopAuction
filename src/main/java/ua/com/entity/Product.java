@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -19,23 +20,30 @@ public class Product {
 //        @Enumerated(EnumType.STRING)
 //        private StateProduct stateProduct;
 
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY,
+//            cascade = CascadeType.MERGE
+//    )
+//    private Basket basket;
 
     @JsonIgnore
-        @ManyToOne(fetch = FetchType.LAZY,
+        @ManyToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE)
         private SubCategory subCategory;
 
-@JsonIgnore
-        @ManyToOne(fetch = FetchType.LAZY,
+        @JsonIgnore
+        @ManyToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE)
         private User userOwner;
-@JsonIgnore
+
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
                 cascade = CascadeType.MERGE)
         private Manufacturer manufacturer;
-@JsonIgnore
+
+        @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.PERSIST,
+    cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
     mappedBy = "product")
     private Lot lot;
 
@@ -49,6 +57,7 @@ public class Product {
         this.linkOnImageProduct = linkOnImageProduct;
     }
 
+
     public Product(String nameProduct, String modelProduct, String descriptionProduct, String linkOnImageProduct, SubCategory subCategory, User userOwner, Manufacturer manufacturer, Lot lot) {
         this.nameProduct = nameProduct;
         this.modelProduct = modelProduct;
@@ -59,6 +68,15 @@ public class Product {
         this.manufacturer = manufacturer;
         this.lot = lot;
     }
+
+//    public Basket getBasket() {
+//        return basket;
+//    }
+//
+//    public Product setBasket(Basket basket) {
+//        this.basket = basket;
+//        return this;
+//    }
 
     public SubCategory getSubCategory() {
         return subCategory;

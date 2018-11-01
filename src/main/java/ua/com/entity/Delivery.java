@@ -13,10 +13,10 @@ public class Delivery {
     private String methodDelivery;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
     mappedBy = "delivery")
-    private Lot lot;
+    private List<Lot> lotList;
 
     public Delivery(String methodDelivery) {
         this.methodDelivery = methodDelivery;
@@ -25,9 +25,9 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Delivery(String methodDelivery, Lot lot) {
+    public Delivery(String methodDelivery, List<Lot> lotList) {
         this.methodDelivery = methodDelivery;
-        this.lot = lot;
+        this.lotList = lotList;
     }
 
     public int getId_Delivery() {
@@ -48,12 +48,12 @@ public class Delivery {
         return this;
     }
 
-    public Lot getLot() {
-        return lot;
+    public List<Lot> getLotList() {
+        return lotList;
     }
 
-    public Delivery setLot(Lot lot) {
-        this.lot = lot;
+    public Delivery setLotList(List<Lot> lotList) {
+        this.lotList = lotList;
         return this;
     }
 
@@ -64,13 +64,13 @@ public class Delivery {
         Delivery delivery = (Delivery) o;
         return id_Delivery == delivery.id_Delivery &&
                 Objects.equals(methodDelivery, delivery.methodDelivery) &&
-                Objects.equals(lot, delivery.lot);
+                Objects.equals(lotList, delivery.lotList);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Delivery, methodDelivery, lot);
+        return Objects.hash(id_Delivery, methodDelivery, lotList);
     }
 
     @Override

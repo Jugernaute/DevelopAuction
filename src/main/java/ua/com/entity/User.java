@@ -1,5 +1,6 @@
 package ua.com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,29 +39,55 @@ public class User implements UserDetails {
     @Column(name = "type")
     private Set<TypeUser> typeOfUser;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+    mappedBy = "user")
+    private Basket basket;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "userOwner")
     private List<Product> productListOfUser;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             mappedBy = "user")
     private List<Bet>listUserBet;
 
+    public User() {
+    }
 
-    public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress) {
+    public User(String firstNameUser, String surNameUser, int userBalance, String userPostAddress, Basket basket) {
         this.firstNameUser = firstNameUser;
         this.surNameUser = surNameUser;
         this.userBalance = userBalance;
         this.userPostAddress = userPostAddress;
+        this.basket = basket;
+    }
+
+    public User(String username, int userBalance, List<Product> productListOfUser, List<Bet> listUserBet) {
+        this.username = username;
+        this.userBalance = userBalance;
+        this.productListOfUser = productListOfUser;
+        this.listUserBet = listUserBet;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(role.name()));
         return authorities;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public User setBasket(Basket basket) {
+        this.basket = basket;
+        return this;
     }
 
     public String getRandomKey() {
@@ -160,24 +187,6 @@ public class User implements UserDetails {
     }
 
 
-
-    public User() {
-    }
-
-    public User(String username, int userBalance) {
-        this.username = username;
-        this.userBalance = userBalance;
-    }
-
-    public User(String username, int userBalance,
-                List<Product> productListOfUser,
-                List<Bet> listUserBet) {
-        this.username = username;
-        this.userBalance = userBalance;
-        this.productListOfUser = productListOfUser;
-        this.listUserBet = listUserBet;
-    }
-
     public String getFirstNameUser() {
         return firstNameUser;
     }
@@ -255,6 +264,7 @@ public class User implements UserDetails {
                 Objects.equals(surNameUser, user.surNameUser) &&
                 Objects.equals(userPostAddress, user.userPostAddress) &&
                 Objects.equals(typeOfUser, user.typeOfUser) &&
+                Objects.equals(basket, user.basket) &&
                 Objects.equals(productListOfUser, user.productListOfUser) &&
                 Objects.equals(listUserBet, user.listUserBet);
     }
@@ -262,7 +272,7 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, userBalance, userPostAddress, typeOfUser, productListOfUser, listUserBet);
+        return Objects.hash(userId, username, email, password, phone, randomKey, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, firstNameUser, surNameUser, userBalance, userPostAddress, typeOfUser, basket, productListOfUser, listUserBet);
     }
 
     @Override

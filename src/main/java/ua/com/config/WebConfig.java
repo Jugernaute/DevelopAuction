@@ -13,7 +13,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -24,6 +23,18 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan("ua.com.*")
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+//    @Bean
+//    public StandardServletMultipartResolver resolver() {
+//        return new StandardServletMultipartResolver();
+//    }
+    @Bean (name = "multipartResolver")
+    public CommonsMultipartResolver filterMultipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+//        resolver.setDefaultEncoding("utf-8");
+//        resolver.setMaxUploadSize(10000);
+        return resolver;
+    }
 
     @Bean
     public InternalResourceViewResolver viewResolver() {

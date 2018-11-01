@@ -53,7 +53,7 @@ public class RestControllerSecurity {
             }
             return errorMessage;
         }
-        if(user.getPassword().equals(psw_repeat)) {     //перевірка на співпадіння паролів
+        if(user.getPassword().equals(psw_repeat)) {//перевірка на співпадіння паролів
             String randomKey = RandomStr.randomKey();   //Генерація і відправка ключа реєстрації на пошту клієнта
             user.setRandomKey(randomKey);
             userEditor.setValue(user);

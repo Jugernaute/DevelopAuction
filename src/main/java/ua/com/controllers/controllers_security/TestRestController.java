@@ -1,10 +1,13 @@
 package ua.com.controllers.controllers_security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.*;
 import ua.com.entity.*;
+import ua.com.service.basket.BasketService;
 import ua.com.service.bet.BetService;
 import ua.com.service.commonCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
@@ -14,16 +17,21 @@ import ua.com.service.payment.PaymentService;
 import ua.com.service.product.ProductService;
 import ua.com.service.subCategory.SubCategoryService;
 import ua.com.service.user.UserService;
+import java.util.Scanner;
 
+import javax.naming.Context;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 import static java.io.File.separator;
 
 @RestController
 public class TestRestController {
 
+    @Autowired
+    private BasketService basketService;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -43,6 +51,8 @@ public class TestRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BasketDao basketDao;
     @Autowired
     private ProductDao productDao;
     @Autowired
@@ -84,16 +94,17 @@ public void addDeliveryMethod(@RequestBody Delivery delivery){
     }
 
 /////////////////////////////////////////////////////////////////
-@PostMapping("/addProduct")
-public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId,@RequestParam("file")MultipartFile file, @RequestBody Product product) throws IOException {
-    file.transferTo(
-            new File
-                    (System.getProperty("user.home")
-                            + separator +
-                            "pics"
-                            + separator +
-                            file.getOriginalFilename()));
-    product.setLinkOnImageProduct("/prefixForAva/" + file.getOriginalFilename());
+@PutMapping("/addProduct")
+public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, @RequestBody Product product) {
+//    file.transferTo(
+//            new File
+//                    (System.getProperty("user.home")
+//                            + separator +
+//                            "pics"
+//                            + separator +
+//                            file.getOriginalFilename()));
+//    product.setLinkOnImageProduct("/prefixForAva/" + file.getOriginalFilename());
+//        Basket basket = basketDao.findOne(idBasket);
         Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
         SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
         User user = userService.getUserById(userId);
@@ -101,7 +112,18 @@ public void addProductMethod(@RequestParam int id_Manufacturer, @RequestParam in
 }
     @GetMapping("/allProduct")
     public List<Product> allProductMethod(){
+        System.out.println("aaaaa" + productService.findAllProduct());
+
         return productService.findAllProduct();
+
+    }
+
+    @GetMapping("/deleteProduct")
+    public void deleteProduct(){
+//        Scanner scan = new Scanner(System.in);
+//        System.out.println("asasa" + scan);
+//        int number = scan.nextInt();
+//        System.out.println(number);
     }
 
 ////////////////////////////////////////////////////////////////////////
@@ -141,12 +163,19 @@ public void addCommonCategory(@RequestBody CommonCategory commonCategory){
 //////////////////////////////////////////////////////////////////////////
 
 @PutMapping("/addLot")
-public void addLot(@RequestParam int id_Delivery, @RequestParam int id_Payment, @RequestParam int id_Product, @RequestBody Lot lot){
-        Product product = productDao.findOne(id_Product);
+public void addLot(@RequestParam int id_Delivery,@RequestParam int id_Product, @RequestParam int id_Payment, @RequestBody Lot lot){
         Delivery delivery = deliveryDao.findOne(id_Delivery);
-        Payment payment = paymentDao.findOne(id_Payment);
-        lotService.addLot(lot.setProduct(product).setDelivery(delivery).setPayment(payment));
+            Product product = productDao.findOne(id_Product);
+            Payment payment = paymentDao.findOne(id_Payment);
+            lotService.addLot(lot.setPayment(payment).setProduct(product).setDelivery(delivery));
+
+    }
+
+@GetMapping("/updateLot")
+public void updateLot(@RequestParam int id_lot){
+        lotService.getLot(id_lot);
 }
+
 @GetMapping("/allLot")
     public List<Lot> allLot(){
         return lotService.findAllLot();
@@ -173,4 +202,61 @@ public void addLot(@RequestParam int id_Delivery, @RequestParam int id_Payment, 
     public List<User> allUser(){
         return userService.findAllUser();
  }
+
+ @GetMapping("/putUserInBasket")
+ public List<User> putUserInBasket(){
+     return userService.findAllUser();
+ }
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+    @PutMapping("/addBasket")
+    public void addBasket(@RequestBody Basket basket, @RequestParam int userId){
+        User user = userDao.findOne(userId);
+        System.out.println(basket);
+        System.out.println(user);
+        basketService.addBasket(basket.setUser(user));
+    }
+
+//    @GetMapping("getBasket")
+//    public Basket getBasket(Basket basket){
+//        return basketService.getBasketById(5);
+//    }
+    @GetMapping("/nameProduct")
+    public Product nameProduct(){
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println("user : " + user);
+
+        Product productById = productService.getProductById(1);
+        System.out.println("prod : " + productById);
+        final SubCategory subCategory = productById.getSubCategory();
+
+
+        List<SubCategory> subCategoryList = commonCategoryService.getCommonCategoryById(1).getSubCategoryList();
+        CommonCategory commonCategory = subCategoryService.getSubCategoryById(1).getCommonCategory();
+        List<Product> products = subCategoryService.getSubCategoryById(1).getProducts();
+        for (Product product : products) {
+            System.out.println(product);
+        }
+        System.out.println("-------------");
+        System.out.println(subCategoryList);
+        System.out.println("--------------");
+        System.out.println(commonCategory);
+        System.out.println("--------------");
+        System.out.println("subCategory : " + subCategory);
+        final Lot lotById = lotService.getLotById(1);
+        System.out.println("lotById : " + lotById);
+
+
+//        final String firstNameUser = lotService.getLotById(1).getProduct().getUserOwner().getFirstNameUser();
+//        System.out.println("firstNameUser : " + firstNameUser);
+//
+//        String firstNameUser1 = lotService.getLotById(2).getProduct().getUserOwner().getFirstNameUser();
+//        System.out.println("firstNameUser1 : " + firstNameUser1);
+
+        return productById;
+    }
 }
+
+

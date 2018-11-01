@@ -8,13 +8,13 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.*;
 import ua.com.entity.*;
 import ua.com.service.bet.BetService;
-import ua.com.service.commomCategory.CommonCategoryService;
+import ua.com.service.commonCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
 import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.payment.PaymentService;
 import ua.com.service.product.ProductService;
-import ua.com.service.subcategory.SubСategoryService;
+import ua.com.service.subCategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import javax.annotation.PostConstruct;
@@ -45,7 +45,7 @@ public class SaveController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private SubСategoryService subСategoryService;
+    private SubCategoryService subCategoryService;
 
     @Autowired
     private LotDao lotDao;
@@ -68,13 +68,13 @@ public class SaveController {
 
     @PostMapping("/user")
     public String saveUser(User user){
-        userService.save(user);
+        userService.addUser(user);
         return "save";
     }
 
     @PostMapping("/delete/user")
     public String deleteUser(User user){
-        userService.deleteBuId(1);
+        userService.deleteUserById(1);
         return "delete";
     }
 
@@ -83,16 +83,19 @@ public class SaveController {
         Delivery delivery = deliveryDao.findOne(id_Delivery);
         Product product = productDao.findOne(id_Product);
         Payment payment = paymentDao.findOne(id_Payment);
-        lotService.save(lot);
+        lotService.addLot(lot);
         return "save";
     }
+
+//    @PostMapping("/lot")
+//    public String getLot( )
 
 
     @PostMapping("/bet")
     public String saveBet(@RequestParam int id_Lot, @RequestParam int userId, Bet bet){
         Lot lot = lotDao.findOne(id_Lot);
         User user = userDao.findOne(userId);
-        betService.save(bet);
+        betService.addBet(bet);
         return "save";
     }
 
@@ -100,7 +103,7 @@ public class SaveController {
 
     @PostMapping("/delivery")
     public String saveDelivery(Delivery delivery){
-        deliveryService.save(delivery);
+        deliveryService.addDelivery(delivery);
         return "save";
     }
 
@@ -109,13 +112,13 @@ public class SaveController {
 
     @PostMapping("/manufacturer")
     public String saveManufacturer(Manufacturer manufacturer){
-        manufacturerService.save(manufacturer);
+        manufacturerService.addManufacturer(manufacturer);
         return "save";
     }
 
     @PostMapping("/payment")
     public String savePayment(Payment payment){
-        paymentService.save(payment);
+        paymentService.addPayment(payment);
         return "save";
     }
 
@@ -133,9 +136,10 @@ public class SaveController {
         Manufacturer manufacturer = manufacturerDao.findOne(id_Manufacturer);
         SubCategory subCategory = subCategoryDao.findOne(id_SubCategory);
         User user = userDao.findOne(userId);
-        productService.save(product);
+        productService.addProduct(product);
         return "save";
     }
+
 
 //    @PostMapping("/product/in/basket")
 //    public String saveProductInBasket(@RequestParam int id_Manufacturer, @RequestParam int id_SubCategory, @RequestParam int userId, Product product, @RequestParam ("file")MultipartFile file) throws IOException {
@@ -164,7 +168,7 @@ public class SaveController {
     @PostMapping("/subCategory")
     public String saveSubCategory(@RequestParam int id_CommonCategory, SubCategory subCategory){
         CommonCategory commonCategory = commonCategoryDao.findOne(id_CommonCategory);
-        subСategoryService.addSubcategory(subCategory);
+        subCategoryService.addSubCategory(subCategory.setCommonCategory(commonCategory));
         return "save";
     }
     @ModelAttribute("userModel")

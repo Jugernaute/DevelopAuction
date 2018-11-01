@@ -21,6 +21,7 @@ public class ControllerCabinet {
     @GetMapping("/goToSell")
     public String goToSell(Model model){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("name : " + name);
         User user = userService.findByUsername(name);
         model.addAttribute("user",user);
         return "sell";

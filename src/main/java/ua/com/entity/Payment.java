@@ -13,21 +13,22 @@ public class Payment {
     private String methodPayment;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
             mappedBy = "payment")
-    private Lot lot;
-
-    public Payment() {
-    }
+    private List<Lot> lotListPayment;
 
     public Payment(String methodPayment) {
         this.methodPayment = methodPayment;
     }
 
-    public Payment(String methodPayment, Lot lot) {
+    public Payment() {
+    }
+
+
+    public Payment(String methodPayment, List<Lot> lotListPayment) {
         this.methodPayment = methodPayment;
-        this.lot = lot;
+        this.lotListPayment = lotListPayment;
     }
 
     public int getId_Payment() {
@@ -48,12 +49,12 @@ public class Payment {
         return this;
     }
 
-    public Lot getLot() {
-        return lot;
+    public List<Lot> getLotListPayment() {
+        return lotListPayment;
     }
 
-    public Payment setLot(Lot lot) {
-        this.lot = lot;
+    public Payment setLotListPayment(List<Lot> lotListPayment) {
+        this.lotListPayment = lotListPayment;
         return this;
     }
 
@@ -64,13 +65,13 @@ public class Payment {
         Payment payment = (Payment) o;
         return id_Payment == payment.id_Payment &&
                 Objects.equals(methodPayment, payment.methodPayment) &&
-                Objects.equals(lot, payment.lot);
+                Objects.equals(lotListPayment, payment.lotListPayment);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Payment, methodPayment, lot);
+        return Objects.hash(id_Payment, methodPayment, lotListPayment);
     }
 
     @Override

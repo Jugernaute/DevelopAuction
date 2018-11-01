@@ -108,13 +108,13 @@
                 </div>
             </section>
             <section class="hot_lot">
-                <div class="hot_lot_wrapper">
+                <div class="hot_lot_wrapper"><a href="/goToLot">
                     <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
                     <div class="container">
                         <h2 class="cont_titel">Iphone X</h2>
                         <div class="cont_timer">00:00:00</div>
                         <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
+                    </div></a>
                 </div>
                 <div class="hot_lot_wrapper">
                     <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>

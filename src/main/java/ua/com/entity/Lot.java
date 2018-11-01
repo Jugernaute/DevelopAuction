@@ -19,28 +19,31 @@ public class Lot {
     private int startPrice;
     private int hotPrice;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    private Basket basket;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "lot")
     List<Bet> listLotBet;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE})
     private Product product;
 
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Delivery delivery;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private Payment payment;
+
 
     public Lot() {
     }
@@ -52,15 +55,25 @@ public class Lot {
         this.hotPrice = hotPrice;
     }
 
-    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, Delivery delivery, Payment payment) {
+    public Lot(String dataStartLot, String dataEndLot, int startPrice, int hotPrice, Basket basket, List<Bet> listLotBet, Product product, Delivery delivery, Payment payment) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
         this.hotPrice = hotPrice;
+        this.basket = basket;
         this.listLotBet = listLotBet;
         this.product = product;
         this.delivery = delivery;
         this.payment = payment;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public Lot setBasket(Basket basket) {
+        this.basket = basket;
+        return this;
     }
 
     public int getId_Lot() {
@@ -154,6 +167,7 @@ public class Lot {
                 hotPrice == lot.hotPrice &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
                 Objects.equals(dataEndLot, lot.dataEndLot) &&
+                Objects.equals(basket, lot.basket) &&
                 Objects.equals(listLotBet, lot.listLotBet) &&
                 Objects.equals(product, lot.product) &&
                 Objects.equals(delivery, lot.delivery) &&
@@ -163,7 +177,7 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, listLotBet, product, delivery, payment);
+        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, basket, listLotBet, product, delivery, payment);
     }
 
     @Override
