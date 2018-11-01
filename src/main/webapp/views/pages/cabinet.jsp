@@ -30,7 +30,10 @@
                 </ul>
             </nav>
         </div>
-        <button onclick="btn">GoToHome</button>
+
+        <form action="/goToHome" method="get">
+            <button class="goToHome" type="submit" value="GoToHome">GoToHome</button>
+        </form>
     </header>
     <section class="products">
         <div class="wrapper_products">

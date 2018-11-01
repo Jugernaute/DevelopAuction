@@ -226,27 +226,27 @@ public void updateLot(@RequestParam int id_lot){
     @GetMapping("/nameProduct")
     public Product nameProduct(){
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("user : " + user);
+        System.out.println("user : " + user + user.getUsername());
 
         Product productById = productService.getProductById(1);
         System.out.println("prod : " + productById);
-        final SubCategory subCategory = productById.getSubCategory();
+//        final SubCategory subCategory = productById.getSubCategory();
 
 
-        List<SubCategory> subCategoryList = commonCategoryService.getCommonCategoryById(1).getSubCategoryList();
-        CommonCategory commonCategory = subCategoryService.getSubCategoryById(1).getCommonCategory();
-        List<Product> products = subCategoryService.getSubCategoryById(1).getProducts();
-        for (Product product : products) {
-            System.out.println(product);
-        }
-        System.out.println("-------------");
-        System.out.println(subCategoryList);
-        System.out.println("--------------");
-        System.out.println(commonCategory);
-        System.out.println("--------------");
-        System.out.println("subCategory : " + subCategory);
-        final Lot lotById = lotService.getLotById(1);
-        System.out.println("lotById : " + lotById);
+//        List<SubCategory> subCategoryList = commonCategoryService.getCommonCategoryById(1).getSubCategoryList();
+//        CommonCategory commonCategory = subCategoryService.getSubCategoryById(1).getCommonCategory();
+//        List<Product> products = subCategoryService.getSubCategoryById(1).getProducts();
+//        for (Product product : products) {
+//            System.out.println(product);
+//        }
+//        System.out.println("-------------");
+//        System.out.println(subCategoryList);
+//        System.out.println("--------------");
+//        System.out.println(commonCategory);
+//        System.out.println("--------------");
+//        System.out.println("subCategory : " + subCategory);
+//        final Lot lotById = lotService.getLotById(1);
+//        System.out.println("lotById : " + lotById);
 
 
 //        final String firstNameUser = lotService.getLotById(1).getProduct().getUserOwner().getFirstNameUser();
