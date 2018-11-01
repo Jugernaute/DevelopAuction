@@ -226,12 +226,12 @@ public void updateLot(@RequestParam int id_lot){
     @GetMapping("/nameProduct")
     public Product nameProduct(){
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("user : " + user + user.getUsername());
+
 
         Product productById = productService.getProductById(1);
         System.out.println("prod : " + productById);
 //        final SubCategory subCategory = productById.getSubCategory();
-
+        System.out.println("user : " + user + user.getUsername());
 
 //        List<SubCategory> subCategoryList = commonCategoryService.getCommonCategoryById(1).getSubCategoryList();
 //        CommonCategory commonCategory = subCategoryService.getSubCategoryById(1).getCommonCategory();
