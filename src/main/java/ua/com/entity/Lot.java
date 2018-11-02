@@ -21,6 +21,7 @@ public class Lot {
     private LocalDateTime dataEndLot;
     private int startPrice;
     private int hotPrice;
+    private int currentPrice;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
@@ -110,6 +111,14 @@ public class Lot {
         return this;
     }
 
+    public int getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(int currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
     public LocalDateTime getDataEndLot() {
         return dataEndLot;
     }
@@ -181,8 +190,10 @@ public class Lot {
         return id_Lot == lot.id_Lot &&
                 startPrice == lot.startPrice &&
                 hotPrice == lot.hotPrice &&
+                currentPrice == lot.currentPrice &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
                 Objects.equals(dataEndLot, lot.dataEndLot) &&
+                Objects.equals(location, lot.location) &&
                 Objects.equals(listLotBet, lot.listLotBet) &&
                 Objects.equals(product, lot.product) &&
                 Objects.equals(delivery, lot.delivery) &&
@@ -192,17 +203,18 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, listLotBet, product, delivery, payment);
+        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, currentPrice, location, listLotBet, product, delivery, payment);
     }
 
     @Override
     public String toString() {
         return "Lot{" +
                 "id_Lot=" + id_Lot +
-                ", dataStartLot='" + dataStartLot + '\'' +
-                ", dataEndLot='" + dataEndLot + '\'' +
+                ", dataStartLot=" + dataStartLot +
+                ", dataEndLot=" + dataEndLot +
                 ", startPrice=" + startPrice +
                 ", hotPrice=" + hotPrice +
+                ", currentPrice=" + currentPrice +
                 '}';
     }
 }

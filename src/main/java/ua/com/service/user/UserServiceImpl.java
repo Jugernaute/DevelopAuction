@@ -8,6 +8,7 @@ import ua.com.dao.UserDao;
 import ua.com.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -60,5 +61,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
+    }
+
+    @Override
+    public User findUserByProductId(int idProduct) {
+        return userDao.findUserByProductId(idProduct);
+    }
+
+    @Override
+    public List<Object[]> listBetAndUserByLot_id(int id_lot) {
+
+        return userDao.listBetAndUserByLot_id(id_lot);
     }
 }

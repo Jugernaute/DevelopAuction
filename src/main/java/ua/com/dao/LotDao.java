@@ -2,11 +2,12 @@ package ua.com.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import ua.com.entity.Lot;
 
 public interface LotDao extends JpaRepository<Lot, Integer > {
 
-//    Lot findByProduct
-//    @Query("SELECT t.* FROM auction.lot_location t")
+    @Query(value = "select * from lot join product p on lot.product_id_Product = p.id_Product where p.id_Product=:idProduct", nativeQuery = true)
+    Lot findLotByProduct_Id(@Param("idProduct") int idProduct);
 
 }

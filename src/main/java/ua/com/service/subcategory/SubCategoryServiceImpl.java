@@ -49,7 +49,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
     @Override
     public SubCategory findById_Products(int idProduct) {
-        return subCategoryDao.findByProducts(idProduct);
+        return subCategoryDao.findSubCategoryByProducts(idProduct);
     }
 
 

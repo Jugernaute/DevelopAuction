@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
+import ua.com.service.bet.BetService;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
 import ua.com.service.imageLink.ImageLinkService;
@@ -50,6 +51,8 @@ public class RestControllerCreateLot {
     private UserService userService;
     @Autowired
     private LocationLotService locationLotService;
+    @Autowired
+    private BetService betService;
 
 
     @GetMapping("loadCommonCategory")
@@ -242,8 +245,8 @@ public class RestControllerCreateLot {
                     imageLinkService.addImageLink(link);                      // Save the file locally
                     stream.write(file.getBytes());
                     stream.close();
-                       System.out.println("==> countcountImg "+countImg);
-                   }while (countImg==4);                                    // only 4 img
+//                       System.out.println("==> countcountImg "+countImg);
+                   }while (countImg>uploadfile.length);                                    // only 4 img
                 }
             } catch (Exception e) {
                 return "error with imageLink save -> " + e.getMessage();
@@ -276,7 +279,19 @@ public class RestControllerCreateLot {
 
         lot.setProduct(product);
         lot.setDataEndLot(dataEnd);
-        lot.setStartPrice(Integer.parseInt(startPrice));
+        Bet bet = new Bet();
+        int price = Integer.parseInt(startPrice);
+        float stepBet;
+        if(price<10){
+            stepBet = 1;
+            bet.setStepBet((int) stepBet);
+        }else{
+            stepBet = price*10/100;
+            bet.setStepBet(Math.round(stepBet));
+        }
+        lot.setCurrentPrice(price);
+        lot.setStartPrice(price);
+        betService.addBet(bet);                         //set & save stepBet from startPrice
         if (hotPrice.equals("null")) {
             System.out.println(hotPrice + " hotPrice1");
 //                lot.setHotPrice(Integer.parseInt(hotPrice));

@@ -42,4 +42,9 @@ public class BetServiceImpl implements BetService {
     public void updateBet(Bet bet) {
         betDao.save(bet);
     }
+
+    @Override
+    public List<Bet> findAllBetByLot_id(int idLot) {
+        return betDao.findAllBetByLot_id(idLot);
+    }
 }

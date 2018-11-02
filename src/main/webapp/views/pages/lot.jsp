@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -159,36 +159,42 @@
                 <c:set var="timeShow" scope="application" value="Oct 30, 2018 15:37:25"/>
                 <div class="lot-info-price">
                     <div class="lot-info-current-price">
-                        <p>Price:</p>
-                        <%--<c:set scope="session" var="pr" value="${product.getId_Product()}"/>--%>
-                        <%--${pr}--%>
-                        <%--<c:out value="${qwe}"/>--%>
-                        <p><c:out value="${product.getLot().getStartPrice()}"/></p>
-                        <span>&#8372</span>
+                        <p>Поточна<br> ставка:</p>
+                        <p id="price"><c:out value="${product.getLot().getCurrentPrice()}"/></p>
+                        <span>грн</span>
                     </div>
+                    <c:set value="${product.getLot().getCurrentPrice()}" var="price"/>
+
                     <div class="lot-info-price_bet">
-                        <p>Your Bet:</p>
+
                         <label>
-                            <input type="number" name="sum_of_the_bet" id="bet-input">
+                            <input type="number" size="4" name="sum_of_the_bet" id="bet-input" class="inp-style" placeholder="<c:out value="${nextPrice}"/>">
                         </label>
+                        <p>Ваша<br>ставка</p>
+
+
+
+
                     </div>
-                    <%--<%=Url.RequestContext.RouteData.Values["id"]%>--%>
                 </div>
+                <span id="error-bet"></span>
                 <div class="lot-info-price_button">
                     <label>
-                        <input id="btn-bet" type="button" value="Bet">
+                        <input id="btn-bet" class="inp-style" type="button" value="Зробити ставку">
                     </label>
                     <label>
-                        <input id="btn-buy" type="button" value="Buy">
+                        <input id="btn-buy" class="inp-style" type="button" value="Купити">
                     </label>
                     <label>
-                        <input id="send-massege" type="button" value="Send Message">
+                        <input id="send-massege" class="inp-style" type="button" value="Send Message">
                     </label>
                 </div>
                 <div class="lot-info-price-timer">
                     <p>Дата закінчення: <span id="test">${data}</span>  <br><span id="timer"></span></p>
-                    <p>Тип доставки: <span>
-                    </span></p>
+                    <p>Тип доставки: <span></span></p>
+                    <span>ставок:</span><button class="bet-btn1" disabled>${betsLot}</button>
+                    <span id="lider" class="inline">Зараз лідирує:<button class="bet-btn2" disabled>${username}</button>
+                    <a class="inline after-img" href=""><span class="inline inner-img"></span></a>
                     <p>Місцезнаходення лоту: <span>${location.getRegionLot()} обл, ${location.getLocationLot()}
 
                     </span></p>
@@ -205,7 +211,7 @@
             <div class="lot-about_option-list-show">
                 <div class="lot-about_descr slider">Опис</div>
                 <div class="lot-about_buy hidden slider">Оплата і доставка</div>
-                <div class="lot-about-bet hidden slider">Ставки</div>
+                <div class="lot-about-bet hidden slider"></div>
             </div>
         </div>
     </section>

@@ -23,7 +23,7 @@ public class Product {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, //eager my
-    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
             mappedBy = "product"
     )
     private List<ImageLink> imageLinks;
@@ -54,7 +54,7 @@ public class Product {
     private Manufacturer manufacturer;
 @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = {/*CascadeType.MERGE,*/ CascadeType.REMOVE, CascadeType.PERSIST}, //merge
+    cascade = {/*CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH,*/ CascadeType.REFRESH},
     mappedBy = "product")
     private Lot lot;
 

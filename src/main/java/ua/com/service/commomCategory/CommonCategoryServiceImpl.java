@@ -43,4 +43,9 @@ public class CommonCategoryServiceImpl implements CommonCategoryService {
     public void deleteCommonCategoryByIb(int idCommonCategory) {
         commonCategoryDao.delete(idCommonCategory);
     }
+
+    @Override
+    public CommonCategory findCommonCategoriesBySubCategory(String subCategory) {
+        return commonCategoryDao.findCommonCategoriesBySubCategory(subCategory);
+    }
 }

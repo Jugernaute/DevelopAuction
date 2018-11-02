@@ -27,10 +27,15 @@ public class Secundomir {
 //        }, 0, 1000);
 
 
-        int a=0;
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println(++a);
+       String [] array = {"qwe","asd", "zxc","rrr","lklk"};
+//        int length = array.length;
+//        System.out.println(length);
+int count=0;
+        for (String s : array) {
+            ++count;
+            do {
+                System.out.println("-> "+s);
+            }while (count>array.length);
         }
 
     }

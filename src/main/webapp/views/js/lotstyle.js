@@ -39,9 +39,8 @@ $('.lot-slider-column').on('click', function () {
     let tempAlt = $(this).children().prop('alt');
 
     imgContainer.append('<img class="imgSrc" src="'+tempImg+'" alt="'+tempAlt+'">').addClass("create");
-    // $('img').parentElement('imgContainer').addClass("create");
-
 });
+
 ///heart
 
 let heart = $('.lot-nav-add');
@@ -50,30 +49,6 @@ heart.on('click', function () {
     $('#heart-empty').toggleClass('hidden');
     $('#heart-full').toggleClass('hidden')
 });
-
-
-// $('#heart-empty').on('click',function () {
-//     let $lot = $('.lot-slider-column');
-//     imgContainer.empty();
-//     $lot.empty();
-//
-//     $.ajax({
-//        url: 'http://localhost:8080/lot/loadImg',
-//         type: 'put',
-//
-//         success: function (result) {
-//             $lot.append('<img src="../img/product_Img/'+result+'">');
-//             imgContainer.append('<img src="../img/product_Img/'+result+'">');
-//             // imgContainer.append('<img src="'+result+'" alt="'+tempAlt+'">')
-//             // loadImage();
-//             console.log(result);
-//         },
-//         error: function (error) {
-//             console.log(error)
-//         }
-//     });
-// });
-
 
 /*
 * timer
@@ -105,39 +80,19 @@ $('.cont_img').on('change',function () {
     let val = $(this).val();
     console.log(val+"id");
 });
-let idProduct;
-$("a").click(function(event) {
-    // alert("As you can see, the link no longer took you to jquery.com");
-    let href = $(this).attr('href');
-    // alert(href);
-    let s = href.toString();
-    idProduct = s.replace("lot/","");
-    let s1 = idProduct.toString();
 
+let bet = $('#bet-input');
+let error = $('#error-bet');
+let price = $('#price');
 
-
-    // event.preventDefault();
+bet.on('click',function () {
+   error.empty();
+   if (bet.val().length > 0) {
+       error.empty();
+   }
 });
-// let alt;
-// $('img').click(function () {
-//     alt = $(this).attr("alt");
-//     // alert(alt);
-// });
-let alt;
-// $('.lot')
-$ ("img"). attr ("title", function () {
-    alt =   $ (this) .attr ("src");
-});
-
-// let val1 = $('#imgSrc').val();
-// console.log(val1);
-//  = $('.lot-slider-container')
-// let s2 = srcImg.toString();
-// let b = s2.replace("http://localhost:8080/img/product_Img/","");
-// console.log(srcImg);
-// console.log(b);
-// console.log(alt);
-
+let bet1 = $('.bet-btn1');
+let bet2 = $('bet-btn2');
 $('#btn-bet').on('click',function () {
     let srcImg=imgContainer.find('img').attr('src');
     let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
@@ -147,11 +102,76 @@ $('#btn-bet').on('click',function () {
         url: "http://localhost:8080/lot/betUp",
         type: 'post',
         data: {betUps, srcLink},
-        dataType: 'text',
-        // contentType: 'application/json',
 
-        success:function (success) {
-            console.log("ok")
+        success:function (result) {
+            // console.log(result);
+            $.each(result, function(key, value) {
+                if (key === "errorBet") {
+                    error.empty();
+                    bet.focus();
+                    bet.val("");
+                    bet.attr('placeholder',value);
+                    bet.addClass('red');
+                    error.append("Введіть ставку не меншу 10% від поточної ціни - ")
+                }
+                if (key === "price"){
+                    price.empty();
+                    price.append(value)
+                }
+                if ((key === "placeholder")) {
+                    bet.focus();
+                    bet.attr('placeholder',value)
+                }
+                if (key==="nextCurrentPrice"){
+                    bet.removeClass("red");
+                    bet.attr('placeholder',"");
+                    bet.val("");
+                    bet.attr('placeholder',value)
+                }
+                if (key ==="sizeLot"){
+                    bet1.empty();
+                    bet1.append(value)
+                }
+                if (key ==="user"){
+                    bet2.empty();
+                    bet2.append(value)
+                }
+            })
+            }
+    })
+});
+let $bet = $('#bet');
+let lot = $('.lot-about-bet');
+$bet.on('click',function () {
+    let srcImg=imgContainer.find('img').attr('src');
+    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
+
+    $.ajax({
+        url:'http://localhost:8080/lot/listBet',
+        type: 'get',
+        data: {linkOfImage: srcLink},
+        dataType: "json",
+        // contentType: "application/json/*; charset=utf-8*/",
+
+        success: function (data) {
+            console.log("ok");
+            lot.empty();
+            let num=0;
+            $.each(data, function(k, v) {
+                num++;
+                console.log(k+" "+v);
+                let $div = '<p class="list-bet-out">'+num+" - "+k+"грн "+'<em><b>'+v+'</b></em>' +" "+'</p><br>';
+
+                lot.append($div)
+            });
+
+        },
+        error: function (error) {
+            console.log(error)
         }
+
+            // debugger;
+
+
     })
 });
