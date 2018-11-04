@@ -53,6 +53,8 @@
         </div>
     </div>
     <div class="registration_form ">
+        <p class="resultRegistration"></p>
+        <img src="../img/ajax-loader.gif" id="img_loading">
         <div class=" reg_container">
             <form class="reg_form" <%--action="registration"  method="post"--%>>
                 <div class=" close_cont">
@@ -61,7 +63,6 @@
                 <h1>Реєстрація</h1>
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
-                <a class="resultRegistration"></a>
                 <h3>Логін</h3>
                 <input class="enterUsername" type="text" placeholder="Ведіть логін" name="username" required>
                 <h3>Email</h3>

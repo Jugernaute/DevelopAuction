@@ -205,6 +205,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #btn-buy{
     background: red;
+    height: 80px;
+    width: 100px;
+    padding-top: 5px
 
 }
 #send-massege{
@@ -240,10 +243,28 @@ input[type=number]::-webkit-outer-spin-button {
     /*height: 32px;*/
     /*background: transparent url('../img/refresh.png') no-repeat;*/
 /*}*/
-.inner-img{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background: transparent url('../img/refresh.png') no-repeat;
+/*.inner-img{*/
+    /*display: inline-block;*/
+    /*width: 25px;*/
+    /*height: 25px;*/
+    /*background: transparent url('../img/refresh.png') no-repeat;*/
+/*}*/
+
+#qwe{
+    border: 1px solid black;
 }
 
+#hr-btn{
+    margin-bottom: 5px;
+    margin-top: 3px;
+}
+#p-btn{
+    /*font-size: 15px;*/
+    width: 87px;
+    margin-left: 5px;
+    background: white;
+    height: 40px;
+    padding-top: 12px;
+    border-radius: 5px;
+    color: black;
+}

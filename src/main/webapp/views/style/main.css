@@ -202,7 +202,8 @@ button[type=submit] {
     border: 2px solid #ddd;
 }
 .close:hover,
-.close:focus {
+.close:focus,
+.text-decor-none{
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -256,7 +257,6 @@ button[type=submit] {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-
 }
 .reg_container {
     display: flex;
@@ -361,4 +361,36 @@ footer{
 }
 .imgSrc{
     width: 500px;
+}
+.need-regstr{
+    color: red;
+    margin-top: 50px;
+    font-size: 20px;
+    text-shadow: 2px -1px black;
+}
+.needH3{
+    margin-top: 20px
+}
+.success-login{
+    width: 600px;
+    height: 400px;
+}
+.resultRegistration{
+    display: none;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 160px;
+}
+
+.resultRegistration{
+    text-shadow: 2px -2px 3px black;
+    color: red;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 160px;
+}
+#img_loading{
+    display: none;
+    margin-top: 140px;
+    margin-left: 260px;
 }

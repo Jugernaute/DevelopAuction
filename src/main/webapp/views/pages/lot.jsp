@@ -156,7 +156,7 @@
 
                     <h3 id="lot-description">${product.getModelProduct()}</h3>
                 </div>
-                <c:set var="timeShow" scope="application" value="Oct 30, 2018 15:37:25"/>
+                <%--<c:set var="timeShow" scope="application" value="Oct 30, 2018 15:37:25"/>--%>
                 <div class="lot-info-price">
                     <div class="lot-info-current-price">
                         <p>Поточна<br> ставка:</p>
@@ -164,26 +164,23 @@
                         <span>грн</span>
                     </div>
                     <c:set value="${product.getLot().getCurrentPrice()}" var="price"/>
-
                     <div class="lot-info-price_bet">
 
                         <label>
                             <input type="number" size="4" name="sum_of_the_bet" id="bet-input" class="inp-style" placeholder="<c:out value="${nextPrice}"/>">
                         </label>
                         <p>Ваша<br>ставка</p>
-
-
-
-
                     </div>
                 </div>
+
                 <span id="error-bet"></span>
                 <div class="lot-info-price_button">
                     <label>
                         <input id="btn-bet" class="inp-style" type="button" value="Зробити ставку">
                     </label>
                     <label>
-                        <input id="btn-buy" class="inp-style" type="button" value="Купити">
+                        <button id="btn-buy" disabled class="inp-style" type="button" value="">Купити<br class="br-class"><hr id="hr-btn"/><p id="p-btn">${hotPrice}</p></button>
+                        <%--<div id="btn-buy" class="inp-style">Купити<br>678</div>--%>
                     </label>
                     <label>
                         <input id="send-massege" class="inp-style" type="button" value="Send Message">
@@ -193,8 +190,8 @@
                     <p>Дата закінчення: <span id="test">${data}</span>  <br><span id="timer"></span></p>
                     <p>Тип доставки: <span></span></p>
                     <span>ставок:</span><button class="bet-btn1" disabled>${betsLot}</button>
-                    <span id="lider" class="inline">Зараз лідирує:<button class="bet-btn2" disabled>${username}</button>
-                    <a class="inline after-img" href=""><span class="inline inner-img"></span></a>
+                    <span id="lider" class="inline">Зараз лідирує:<button class="bet-btn2" disabled>${username}</button></span>
+                    <%--<a class="inline after-img" href=""><span class="inline inner-img"></span></a>--%>
                     <p>Місцезнаходення лоту: <span>${location.getRegionLot()} обл, ${location.getLocationLot()}
 
                     </span></p>

@@ -282,7 +282,7 @@ public class RestControllerCreateLot {
         Bet bet = new Bet();
         int price = Integer.parseInt(startPrice);
         float stepBet;
-        if(price<10){
+        if(price<=10){
             stepBet = 1;
             bet.setStepBet((int) stepBet);
         }else{

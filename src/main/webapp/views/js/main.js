@@ -3,6 +3,9 @@
     let loginForm = $('.enter_form');
     let regForm = $('.registration_form');
     let auction = $('.auction');
+    let resultRegistration = $('.resultRegistration');
+    let username = $('.enterUsername');
+    let email = $('.enterEmail');
 
     $('.enter').on('click', function (e) {// animation for login form
         loginForm.css('display', 'block');
@@ -40,45 +43,52 @@
     });
     
     $('.signupbtn').on('click', function (event) {      //password validation
-        // let psw = $(this).parent().parent().find('input[name="psw"]');
-        // let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
-        // var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
-        // if (psw.val() != pswRepeat.val()){
-        //     pswRepeat.val('');
-        //     pswRepeat.prop('placeholder',"ПАРОЛІ НЕ ЗБІГАЮТЬСЯ!!!")
-        //     event.preventDefault();
-        // } else if (!psw.val().match(passw)){
-        //     psw.focus();
-        //     psw.val('');
-        //     $(this).parent().parent().find('#psw-must-have').css({
-        //             'font-weight': 'bold',
-        //             'color' : 'red'
-        //         });
-        //     event.preventDefault();
-        // }
-
-        //rest security -------------------------pasha start
-        $('.resultRegistration').empty();
-        let username = $('.enterUsername').val();
-        let email = $('.enterEmail').val();
+        let psw = $(this).parent().parent().find('input[name="psw"]');
         let password = $('.enterPassword').val();
         let psw_repeat = $('.enterRepeatPassword').val();
+        let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
+        let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
+        if (username.val().length<3){
+            username.focus();
+        }
+        if (psw.val() != pswRepeat.val()){
+            pswRepeat.val('');
+            pswRepeat.prop('placeholder',"ПАРОЛІ НЕ ЗБІГАЮТЬСЯ!!!");
+        } else if (!password.match(passw)){
+            psw.focus();
+            psw.val('');
+            $(this).parent().parent().find('#psw-must-have').css({
+                    'font-weight': 'bold',
+                    'color' : 'red'
+                });
+        }else if (password === psw_repeat) {
+        $('.resultRegistration').empty();
+        
+        $('.reg_container').css('display','none');
+        $('.registration_form').addClass('success-login');
+        $('#img_loading').css('display','block');
         event.preventDefault();
-        $.ajax({
-            url: 'http://localhost:8080/registrationUser',
-            type: 'post',
-            data: {username, email, password, psw_repeat},
-            dataType: 'text',
+            $.ajax({
+                url: 'http://localhost:8080/registrationUser',
+                type: 'post',
+                data: {username, email, password, psw_repeat},
+                dataType: 'text',
 
-            success: function (result) {
+                success: function (result) {
+                    resultRegistration.css('display','block');
+                    $('#img_loading').css('display','none');
+                    resultRegistration.append(result+'<br>'+'<a href="">Main Page</a>')
 
-              $('.resultRegistration').append(result)
-            },
-            error: function (error) {
-                console.log(error)
-            }
-        })
-    });        //-----------------------------------------------pasha end
+                },
+                error: function (error) {
+                    $('.reg_container').css('display','block');
+                    $('.registration_form').removeClass('success-login');
+                    $('#img_loading').css('display','none');
+                    console.log(error)
+                }
+            })
+        }
+    });
 
     //social network animation
 
@@ -109,32 +119,6 @@
        $(this).next().toggleClass('hidden')
     });
 
-    // let countDownDate = 11111111111110;
-    // let countDownDate = new Date("Oct 30, 2018 15:37:25").getTime();
-    //
-    // let x = setInterval(function() {
-    //
-    //     let now = new Date().getTime();
-    //
-    //     let distance = countDownDate - now;
-    //     // console.log($('#test').innerHTML);
-    //
-    //     // console.log(distance);
-    //     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //
-    //     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    //
-    //     document.getElementById("timer").innerHTML = days + "дн " + hours + "г "
-    //         + minutes + "хв " + seconds + "с";
-    //     if (distance < 0) {
-    //         clearInterval(x);
-    //         document.getElementById("timer").innerHTML = "EXPIRED";
-    //     }
-    // }, 1000);
-
-    // rest security
 
 
 

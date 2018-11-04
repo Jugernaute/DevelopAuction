@@ -33,64 +33,35 @@ import java.util.stream.Stream;
 
 @Controller
 @PropertySource("classpath:validation.properties")
-public class ControllerSecurity {
-@Autowired
-private ImageLinkService imageLinkService;
-@Autowired
-private LotService lotService;
-@Autowired
-private ProductService productService;
+    public class ControllerSecurity {
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
         public String start (Model model){
 
-//        int id_product = lotService.getLotById(1).getProduct().getId_Product();
-//        System.out.println(id_product);
-//        if(id_product == 0 ){
-//            System.out.println("null id product");
-//            return "home";
-//        }
         List<Product> allProduct = productService.findAllProduct();
-//        List<String>imgNew=new ArrayList<>();
-
-//        List<Product> sortedProduct = allProduct.stream()
-//                .filter(p -> LocalDateTime.now().isBefore(p.getLot().getDataStartLot()))
-//                .sorted(Comparator.comparing(o -> o.getLot().getDataStartLot()))
-//                .collect(Collectors.toList());
 
         List<ImageLink> imgLink = new ArrayList<>();
         for (Product product : allProduct) {
             List<ImageLink> imageLinks = product.getImageLinks();
-            System.out.println("----"+imageLinks);
+//            System.out.println("----"+imageLinks);
             if (!(imageLinks.size() == 0)){
                 ImageLink imageLink = imageLinks.get(0);
                 imgLink.add(imageLink);
             }else {
                 System.out.println("----error----");
             }
-
         }
-
-//        for (Product product : allProduct) {
-//            LocalDateTime dataStartLot = product.getLot().getDataStartLot();
-//            LocalDateTime dataTimeNow = LocalDateTime.now();
-//
-//            if(dataTimeNow.isBefore(dataStartLot)){
-//                List<ImageLink> imageLinks = product.getImageLinks();
-////                imageLinks.stream().
-//                ImageLink imageLink = imageLinks.get(0);
-//                String linkOfImage = imageLink.getLinkOfImage();
-//                imgNew.add(linkOfImage);
-//            }
-//        }
-
         model.addAttribute("imgLinks", imgLink);
         return "home" ;
         }
 
     @GetMapping("/home")
         public String home (){
-            return "home" ;
+            return "homeregisterUser" ;
         }
 
     @GetMapping("/error")
@@ -109,22 +80,15 @@ private ProductService productService;
         return "qwe";
     }
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-        private AuctionItemsDao auctionItemsDao;
-
     @GetMapping("/activate/{key}")
-    public String activate(@PathVariable String key,
-                           Model model) {
+    public String activate(@PathVariable String key) {
         User user = userService.findByRandomKey(key);
         if(!(user ==null)){
             user.setRandomKey(null);
             user.setEnabled(true);
             userService.addUser(user);
         }
-        return "home";
+        return "homeregisterUser";
     }
 
 
@@ -132,8 +96,24 @@ private ProductService productService;
             public String ok (Model model){
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
+
+
+            List<Product> allProduct = productService.findAllProduct();
+            List<ImageLink> imgLink = new ArrayList<>();
+            for (Product product : allProduct) {
+                List<ImageLink> imageLinks = product.getImageLinks();
+//            System.out.println("----"+imageLinks);
+                if (!(imageLinks.size() == 0)){
+                    ImageLink imageLink = imageLinks.get(0);
+                    imgLink.add(imageLink);
+                }else {
+                    System.out.println("---error---");
+                }
+
+            }
+            model.addAttribute("imgLinks", imgLink);
             model.addAttribute("user",user);
-            return "cabinet";
+            return "homeregisterUser";
             }
 
 }

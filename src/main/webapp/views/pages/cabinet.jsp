@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <title>Auction | Кабінет</title>
     <link rel="stylesheet" href="../style/main.css">
-    <%--<link rel="stylesheet" href="../style/style.css">--%>
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
-    <%--<script src="../js/sell.js" defer></script>--%>
 </head>
 <body>
 <div class="auction">

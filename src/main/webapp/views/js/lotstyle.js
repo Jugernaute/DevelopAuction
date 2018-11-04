@@ -1,3 +1,11 @@
+let bet = $('#bet-input');
+let error = $('#error-bet');
+let price = $('#price');
+let btn = $('#btn-buy');
+let heart = $('.lot-nav-add');
+
+
+
 let optionList = $('.lot-about_options-list li');
 let optionListShow = $('.slider');
 optionList.on('click', function () {
@@ -43,8 +51,6 @@ $('.lot-slider-column').on('click', function () {
 
 ///heart
 
-let heart = $('.lot-nav-add');
-
 heart.on('click', function () {
     $('#heart-empty').toggleClass('hidden');
     $('#heart-full').toggleClass('hidden')
@@ -81,10 +87,6 @@ $('.cont_img').on('change',function () {
     console.log(val+"id");
 });
 
-let bet = $('#bet-input');
-let error = $('#error-bet');
-let price = $('#price');
-
 bet.on('click',function () {
    error.empty();
    if (bet.val().length > 0) {
@@ -92,7 +94,7 @@ bet.on('click',function () {
    }
 });
 let bet1 = $('.bet-btn1');
-let bet2 = $('bet-btn2');
+let bet2 = $('.bet-btn2');
 $('#btn-bet').on('click',function () {
     let srcImg=imgContainer.find('img').attr('src');
     let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
@@ -112,7 +114,7 @@ $('#btn-bet').on('click',function () {
                     bet.val("");
                     bet.attr('placeholder',value);
                     bet.addClass('red');
-                    error.append("Введіть ставку не меншу 10% від поточної ціни - ")
+                    error.append("Введіть ставку не меншу 10% від поточної ціни")
                 }
                 if (key === "price"){
                     price.empty();
@@ -136,12 +138,19 @@ $('#btn-bet').on('click',function () {
                     bet2.empty();
                     bet2.append(value)
                 }
+                if (key==="registration"){
+                    error.empty();
+                    error.append(value)
+                }
             })
             }
     })
 });
+
 let $bet = $('#bet');
 let lot = $('.lot-about-bet');
+let p = $('#p-btn');
+
 $bet.on('click',function () {
     let srcImg=imgContainer.find('img').attr('src');
     let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
@@ -174,4 +183,18 @@ $bet.on('click',function () {
 
 
     })
+});
+
+$(window).on('load',function () {
+    let hotPrice = $('#p-btn').val();
+
+    if (!hotPrice === "") {
+        btn.prop("disabled", false);
+    }else {
+        p.empty();
+        p.append("Не доступно");
+    }
+
+
+    console.log(hotPrice==="");
 });

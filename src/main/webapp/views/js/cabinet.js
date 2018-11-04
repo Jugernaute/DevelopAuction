@@ -59,7 +59,7 @@ let $verification2 = $('.verification-email-2');
             }
 
         })
-    });                 //..............................*change password       end*/
+    });                 //..............................*change password  end*/
 
 
                         //                             change phone
@@ -85,7 +85,7 @@ let $verification2 = $('.verification-email-2');
         })
     });
 
-    //............................ change phone end
+    //............................
 let email;   // for change email, empty than (always)
 $send.on('click',function () {
         email = $('.changeEmail').val();

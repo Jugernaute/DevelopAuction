@@ -57,6 +57,7 @@ public class MainController{
         LocalDateTime dataEndLot = productById.getLot().getDataEndLot();
         int id_lot = productById.getLot().getId_Lot();
 
+        int hotPrice = productById.getLot().getHotPrice();
 
         int id = productById.getId_Product();
 
@@ -77,7 +78,7 @@ public class MainController{
 
         List<Bet> listLotBet = betService.findAllBetByLot_id(id_lot);
         int betsLot = listLotBet.size();
-//        System.out.println(">>>>"+betsLot);
+//        System.out.println(">>>>"+hotPrice);
         User userOwner = userService.findUserByProductId(id);
         String username = userOwner.getUsername();
 
@@ -89,21 +90,9 @@ public class MainController{
         model.addAttribute("nextPrice", nextPrice);
         model.addAttribute("betsLot", betsLot);
         model.addAttribute("username", username);
-//        model.addAttribute("sec", l);
+        model.addAttribute("hotPrice", hotPrice);
         return "lot";
     }
 
-
-//    @PostMapping("lot/{idProduct}/betUp")
-//    private String lotSec(
-//                          @PathVariable String idProduct,
-//                          @RequestBody String betUp,
-//                          RedirectAttributes attributes){
-//
-//        System.out.println(idProduct);
-//        System.out.println(betUp);
-//
-//        return "lot";
-//    }
 
 }

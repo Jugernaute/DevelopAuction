@@ -1,6 +1,7 @@
 package ua.com.controllers.controllers_bet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,8 @@ public class RestControllerBet {
     private Map<String,String> betUp(
                             @RequestParam String betUps,
                             @RequestParam String srcLink){
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+//        map.clear();
 
         ImageLink byImageLink = imageLinkService.findByImageLink(srcLink);
         int id_imageLink = byImageLink.getId_ImageLink();
@@ -44,14 +47,19 @@ public class RestControllerBet {
         int id_lot = lot.getId_Lot();
 
         User userOwner = userService.findUserByProductId(id_product);
+        String thisUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        User byUsername = userService.findByUsername(thisUser);
+
+        if (thisUser.equals("anonymousUser") || !byUsername.isEnabled()){
+            map.put("registration","Ви повинні спочатку авторизуватися");
+            return map;
+        }
+
         Bet bet = new Bet();
 
         int userBet=0;
         int currentPrice = lot.getCurrentPrice();
         int nextStepBet;
-
-        LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.clear();
 
         if (betUps.equals("")){
             map.put("errorBet","зробіть ставку");
@@ -77,16 +85,22 @@ public class RestControllerBet {
             bet.setStepBet(nextStepBet);
             bet.setLot(lot);
             bet.setSum_of_the_bet(currentPrice);
-            bet.setUser(userOwner);
+            bet.setUser(byUsername);
             betService.addBet(bet);
 
         List<Bet> listLotBet = betService.findAllBetByLot_id(id_lot);
         int betsLot = listLotBet.size();
-        System.out.println(">>>>"+betsLot);
+//        System.out.println(">>>>"+betsLot);
 
         String username = userOwner.getUsername();
+        int nextCurrentPrice;
+        if(userBet<=10){
+            nextCurrentPrice = userBet+1;
+        }else
+        {
+            nextCurrentPrice=userBet+nextStepBet; //for output  placeholder
+        }
 
-        int nextCurrentPrice=userBet+nextStepBet; //for output  placeholder
         String price = Integer.toString(lot.getCurrentPrice());
         map.put("placeholder", String.valueOf(nextStepBet));
         map.put("price", price);
@@ -109,21 +123,18 @@ public class RestControllerBet {
         Lot lot = lotService.findLotByProduct_Id(id_product);
         int id_lot = lot.getId_Lot();
 
-        List<Bet> listLotBet = betService.findAllBetByLot_id(id_lot);
+//        List<Bet> listLotBet = betService.findAllBetByLot_id(id_lot);
         List<Object[]> objects = userService.listBetAndUserByLot_id(id_lot);
 
         Map<String, String> stringMap = new LinkedHashMap<>();
 
-        MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
+//        MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
         for (Object[] object : objects) {
-            map.add(object[17].toString(), object[14].toString());
+//            map.add(object[17].toString(), object[14].toString());
             stringMap.put(object[17].toString(), object[14].toString());
 //        System.out.println(" -> "+ object[14]+" <-> "+object[17]);
         }
         System.out.println(stringMap);
-        System.out.println();
-        System.out.println();
-        System.out.println(map);
         return stringMap;
     }
 }

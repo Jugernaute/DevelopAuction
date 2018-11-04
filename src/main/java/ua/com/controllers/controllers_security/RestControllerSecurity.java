@@ -68,7 +68,7 @@ public class RestControllerSecurity {
         } else {
             return environment.getProperty("matchPassword_registrationForm");
         }
-        return "you are login";
+        return "Go to the registration link from your mail";
     }
 }
 
