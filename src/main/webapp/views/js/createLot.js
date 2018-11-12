@@ -23,7 +23,7 @@ let place = $('#place-lot-error');
 //------------------------кнопка вибору товарів (загрузка першої колонки селектів)--------
 $('.btn-flex').on('click',function () {
     $('.sell-item-list-wrapper').css('display', 'flex');
-    $(this).addClass('hidden');
+    $(this).css('display','none');
     $('.sell-item-list-lvl1').empty();
     $.ajax({
         url: 'http://localhost:8080/loadCommonCategory',
@@ -61,7 +61,6 @@ $('.sell-item-list-lvl1').on('click',function () {
     });
 });
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
 
 //-------------------------------------------(загрузка третьої колонки селектів)--------
 
@@ -284,6 +283,8 @@ $('.add-product-sell').on('click',function (event) {
     event.preventDefault();
 });
 
+
+
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 function handleFileSelect(evt) {
     $('#image-error').empty();
@@ -310,13 +311,19 @@ function handleFileSelect(evt) {
                     // Render thumbnail.
                     let span = document.createElement('span');
                     span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                        '" title="', theFile.name, '"/>'].join("");
+                        '" title="', theFile.name,'"/>'+['<span id="img-name">'+theFile.name+'</span>']+['<button id="del-image">delete</button>']].join("");
                     document.getElementById('listFiles').insertBefore(span, null);
+
+
+
+
+
                 }else{
                     $('#image-error').empty();
                     $('#image-error').append("Ви не можете загрузити більше 4 картинок");
                     return false;
                 }
+
 
             };
         })(f);
@@ -325,8 +332,9 @@ function handleFileSelect(evt) {
         reader.readAsDataURL(f);
     }
 }
-
 document.getElementById('uploadfile').addEventListener('change', handleFileSelect, false);
+
+
 
 
 

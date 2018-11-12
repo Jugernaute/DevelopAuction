@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.dao.AuctionItemsDao;
 import ua.com.entity.ImageLink;
+import ua.com.entity.Lot;
 import ua.com.entity.Product;
 import ua.com.entity.User;
 import ua.com.service.imageLink.ImageLinkService;
@@ -24,10 +25,9 @@ import javax.naming.Context;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,7 +43,6 @@ import java.util.stream.Stream;
         public String start (Model model){
 
         List<Product> allProduct = productService.findAllProduct();
-
         List<ImageLink> imgLink = new ArrayList<>();
         for (Product product : allProduct) {
             List<ImageLink> imageLinks = product.getImageLinks();
@@ -55,8 +54,11 @@ import java.util.stream.Stream;
                 System.out.println("----error----");
             }
         }
+
+        DateTimeFormatter ru = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss").withLocale(new Locale("ru"));
+//        System.out.println(ru.format(dataEndLot));
         model.addAttribute("imgLinks", imgLink);
-        return "home" ;
+        return "main" ;
         }
 
     @GetMapping("/home")
@@ -81,13 +83,17 @@ import java.util.stream.Stream;
     }
 
     @GetMapping("/activate/{key}")
-    public String activate(@PathVariable String key) {
+    public String activate(@PathVariable String key,
+                           Model model) {
         User user = userService.findByRandomKey(key);
-        if(!(user ==null)){
+        if(!(user ==null)&&!(user.getRandomKey()==null)){
             user.setRandomKey(null);
             user.setEnabled(true);
             userService.addUser(user);
+        }else{
+            return "/errorPage/registration_error";
         }
+        model.addAttribute("user", user);
         return "homeregisterUser";
     }
 
@@ -96,8 +102,9 @@ import java.util.stream.Stream;
             public String ok (Model model){
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
-
-
+            if (user.getRandomKey()!=null){
+                return "/errorPage/activation_error";
+            }
             List<Product> allProduct = productService.findAllProduct();
             List<ImageLink> imgLink = new ArrayList<>();
             for (Product product : allProduct) {
@@ -107,12 +114,20 @@ import java.util.stream.Stream;
                     ImageLink imageLink = imageLinks.get(0);
                     imgLink.add(imageLink);
                 }else {
-                    System.out.println("---error---");
+                    //                    System.out.println("---error---");
                 }
 
             }
+//            Collector<Integer, ?, List<Integer>> integerListCollector = Collectors.toList();
+//            Lot lotByProduct_id = lotService.findLotByProduct_Id(2);
+//            List<String> collect = allProduct.stream().map(Product::getNameProduct).collect(Collectors.toList());
+//            for (String integer : collect) {
+//                System.out.println(integer);
+//            }
+
             model.addAttribute("imgLinks", imgLink);
             model.addAttribute("user",user);
+
             return "homeregisterUser";
             }
 

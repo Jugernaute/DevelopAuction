@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>Вибачте, але ви не зареєстровані</p>
+<p style="text-align: center; font-size: 25px; color: red">Вибачте, але ви не зареєстровані</p>
 </body>
 </html>

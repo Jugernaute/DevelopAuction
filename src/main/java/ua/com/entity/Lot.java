@@ -15,9 +15,9 @@ public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Lot;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
     private LocalDateTime dataStartLot;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
     private LocalDateTime dataEndLot;
     private int startPrice;
     private int hotPrice;

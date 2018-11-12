@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/lot_Style.css">
     <script src="../js/main.js" defer></script>
-    <script src="../js/lotstyle.js" defer></script>
+    <script src="../js/lot.js" defer></script>
     <%--<script src="../js/bet.js" defer></script>--%>
 </head>
 <body>
@@ -19,7 +19,7 @@
         <div class="close_cont">
             <span class="close">&times;</span>
         </div>
-        <form class="login_form" action="#">
+        <form class="login_form" action="/login" method="post">
             <div class="col_login">
                 <a href="#" class="fb btn">
                     <i class="fa fa-facebook fa-fw"></i> Увійти за допомогою Facebook
@@ -91,9 +91,9 @@
                     <input type="search">
                 </label>
                 <ul class="menu">
-                    <li class="enter"><a href="#">Вхід</a></li>
-                    <%--<li class="registration"><a href="#" class="hidden">Реєстрація</a></li>--%>
-                    <li class="sell"><a href="goToSell">Продати</a></li>
+                    <li class="enter"><a href="#" class="for-remove-1">Вхід</a></li>
+                    <li class="view-user"><a href="/goToCabinet" class="for-remove-2">${userFromSession}</a></li>
+                    <li class="sell"><a href="/goToSell">Продати</a></li>
                     <li class="favorites"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>
                     <li class="exit"><a href="/logout">Вийти</a></li>
@@ -189,12 +189,11 @@
                 <div class="lot-info-price-timer">
                     <p>Дата закінчення: <span id="test">${data}</span>  <br><span id="timer"></span></p>
                     <p>Тип доставки: <span></span></p>
-                    <span>ставок:</span><button class="bet-btn1" disabled>${betsLot}</button>
-                    <span id="lider" class="inline">Зараз лідирує:<button class="bet-btn2" disabled>${username}</button></span>
+                    <span>ставок:</span><button class="bet-btn1" disabled>${countOfBet}</button>
+                    <span id="lider" class="inline">Зараз лідирує:<button class="bet-btn2" disabled>${userLider}</button></span>
                     <%--<a class="inline after-img" href=""><span class="inline inner-img"></span></a>--%>
-                    <p>Місцезнаходення лоту: <span>${location.getRegionLot()} обл, ${location.getLocationLot()}
-
-                    </span></p>
+                    <p>Місцезнаходення лоту: <span>${location.getRegionLot()} обл, ${location.getLocationLot()}</span></p>
+                    <p>Продавець: <button class="bet-btn3" disabled>${userCreateLot}</button></p>
                 </div>
             </div>
         </div>
@@ -206,7 +205,7 @@
                 <li id="bet">Ставки</li>
             </ul>
             <div class="lot-about_option-list-show">
-                <div class="lot-about_descr slider">Опис</div>
+                <div class="lot-about_descr slider"></div>
                 <div class="lot-about_buy hidden slider">Оплата і доставка</div>
                 <div class="lot-about-bet hidden slider"></div>
             </div>

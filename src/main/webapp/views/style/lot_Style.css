@@ -166,6 +166,10 @@
     border-bottom: 1px solid gray;
     padding: 20px 20px;
 }
+.lot-about_descr{
+    font-size: 20px;
+    color: brown;
+}
 
 #timer{
     margin-left: 60px;
@@ -229,6 +233,14 @@ input[type=number]::-webkit-outer-spin-button {
     color: black;
 }
 .bet-btn2{
+    height: 30px;
+    background: greenyellow;
+    border-radius: 5px;
+    outline: none;
+    color: black;
+    min-width: 50px;
+}
+.bet-btn3{
     height: 30px;
     background: greenyellow;
     border-radius: 5px;

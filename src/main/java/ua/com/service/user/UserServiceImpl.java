@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.com.dao.UserDao;
+import ua.com.entity.Bet;
 import ua.com.entity.User;
 
 import java.util.List;
@@ -73,4 +74,10 @@ public class UserServiceImpl implements UserService {
 
         return userDao.listBetAndUserByLot_id(id_lot);
     }
+
+    @Override
+    public String getUsernameFromBetById_Bet(int id_bet) {
+        return userDao.getUsernameFromBetById_Bet(id_bet);
+    }
+
 }

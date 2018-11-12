@@ -54,6 +54,14 @@ public class RestControllerCreateLot {
     @Autowired
     private BetService betService;
 
+    @PostMapping("upload")
+    private String upload(@RequestParam("fileload") MultipartFile[] uploadfile){
+        for (MultipartFile multipartFile : uploadfile) {
+            System.out.println(">>>"+multipartFile.getOriginalFilename());
+        }
+        return "ok";
+    }
+
 
     @GetMapping("loadCommonCategory")
     public List loadCommonCategory() {
@@ -291,6 +299,9 @@ public class RestControllerCreateLot {
         }
         lot.setCurrentPrice(price);
         lot.setStartPrice(price);
+        bet.setUser(userFind);
+        bet.setLot(lot);
+        lotService.addLot(lot);
         betService.addBet(bet);                         //set & save stepBet from startPrice
         if (hotPrice.equals("null")) {
             System.out.println(hotPrice + " hotPrice1");
@@ -314,7 +325,7 @@ public class RestControllerCreateLot {
 //        System.out.println(deliveryList);
 //        lot.setDelivery(deliveryList);
 
-        lotService.addLot(lot);
+
 //        lot.setDelivery(deliveryList);
 //        lotService.addLot(lot);
 //        for (Delivery delivery1 : deliveryList) {

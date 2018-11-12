@@ -1,78 +1,78 @@
-/* pasha change**/
-.forgot_psw_css{
-    display: none;
-}
+/*!* pasha change**!*/
+/*.forgot_psw_css{*/
+    /*display: none;*/
+/*}*/
 
-.sendKey{
-    display: none;
-}
-.resultRegistration{
-    background-color: red;
-}
-.btn_Category{
+/*.sendKey{*/
+    /*display: none;*/
+/*}*/
+/*.resultRegistration{*/
+    /*background-color: red;*/
+/*}*/
+/*.btn_Category{*/
 
-    background-color: green;
-}
-.sell-category p{
-    float: right;
-    margin-top: 0px;
-    width: 150px;
-}
-.col-xs-2{
-    width: 15%;
-}
-.categoryStaticList{
-    display: none;
-}
-.categoryHandleList{
-    list-style-type: none;
-    width: 100%;
-}
-.categoryHandleList li{
-    float: left;
-    width: 33%;
-}
-.categoryHandleList li > select{
-    width: 90%;
-}
-.categoryStaticList{
-    padding-left: 0;
-    width: 100%;
-    height: 180px;
-}
-.form{
-    overflow-y: scroll;
-}
-.descrProduct{
-    width: auto;
-    height: 30px;
-}
-.type-sell-head{
-    width: auto;
-    height: auto;
-}
-.start-sell{
-    padding-top: 0 !important;
-    width: 15%;
-    float: left;
-}
-.form-dataSell{
-    float: left;
-    width: 80%;
-    /*border: solid 1px black;*/
-}
-.both{
-    margin: 0 !important;
+    /*background-color: green;*/
+/*}*/
+/*.sell-category p{*/
+    /*float: right;*/
+    /*margin-top: 0px;*/
+    /*width: 150px;*/
+/*}*/
+/*.col-xs-2{*/
+    /*width: 15%;*/
+/*}*/
+/*.categoryStaticList{*/
+    /*display: none;*/
+/*}*/
+/*.categoryHandleList{*/
+    /*list-style-type: none;*/
+    /*width: 100%;*/
+/*}*/
+/*.categoryHandleList li{*/
+    /*float: left;*/
+    /*width: 33%;*/
+/*}*/
+/*.categoryHandleList li > select{*/
+    /*width: 90%;*/
+/*}*/
+/*.categoryStaticList{*/
+    /*padding-left: 0;*/
+    /*width: 100%;*/
+    /*height: 180px;*/
+/*}*/
+/*.form{*/
+    /*overflow-y: scroll;*/
+/*}*/
+/*.descrProduct{*/
+    /*width: auto;*/
+    /*height: 30px;*/
+/*}*/
+/*.type-sell-head{*/
+    /*width: auto;*/
+    /*height: auto;*/
+/*}*/
+/*.start-sell{*/
+    /*padding-top: 0 !important;*/
+    /*width: 15%;*/
+    /*float: left;*/
+/*}*/
+/*.form-dataSell{*/
+    /*float: left;*/
+    /*width: 80%;*/
+    /*!*border: solid 1px black;*!*/
+/*}*/
+/*.both{*/
+    /*margin: 0 !important;*/
+    /*!*padding: 0 !important;*!*/
+/*}*/
+/*.blic{*/
+    /*display: none;*/
+/*}*/
+/*.row{*/
     /*padding: 0 !important;*/
-}
-.blic{
-    display: none;
-}
-.row{
-    padding: 0 !important;
-}
-.thumb {
-    height: 75px;
-    border: 1px solid #000;
-    margin: 10px 5px 0 0;
-}
+/*}*/
+/*.thumb {*/
+    /*height: 75px;*/
+    /*border: 1px solid #000;*/
+    /*margin: 10px 5px 0 0;*/
+/*}*/

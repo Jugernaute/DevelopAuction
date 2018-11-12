@@ -26,7 +26,7 @@ public class ControllerCabinet {
             return "needRegistration";
         }
         model.addAttribute("user",user);
-        return "sell";
+        return "createLot";
     }
 
 

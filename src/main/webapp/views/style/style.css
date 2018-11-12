@@ -126,12 +126,28 @@ nav p input{
 .container{
     padding: 10px 15px 0 15px;
 }
+.text-end {
+    text-align: center;
+    color: deeppink;
+    text-shadow: 1px 1px darkturquoise;
+}
 .cont_titel{
     font-size: 14px;
     margin: 5px 0 10px 0;
 }
+.cont_timer{
+    text-align: center;
+    color: teal;
+    font-size: 18px;
+    text-shadow: 1px 1px darkred;
+}
 .cont_price{
     margin: 10px 0 5px 0;
+    text-align: center;
+    color: red;
+}
+.cont_price span{
+    font-size: 20px;
 }
 
 /*************footer*******************/

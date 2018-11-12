@@ -1,8 +1,11 @@
+let idProductSession = sessionStorage.getItem("idLot");
+
 let bet = $('#bet-input');
 let error = $('#error-bet');
 let price = $('#price');
 let btn = $('#btn-buy');
 let heart = $('.lot-nav-add');
+let $view = $('.view-user');
 
 
 
@@ -82,10 +85,6 @@ let x = setInterval(function() {
 
 /*end timer*/
 
-$('.cont_img').on('change',function () {
-    let val = $(this).val();
-    console.log(val+"id");
-});
 
 bet.on('click',function () {
    error.empty();
@@ -93,17 +92,22 @@ bet.on('click',function () {
        error.empty();
    }
 });
+
+/*
+* up bet
+* */
 let bet1 = $('.bet-btn1');
 let bet2 = $('.bet-btn2');
+
 $('#btn-bet').on('click',function () {
-    let srcImg=imgContainer.find('img').attr('src');
-    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
+    // let srcImg=imgContainer.find('img').attr('src');
+    // let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
     let betUps = $('#bet-input').val();
 
     $.ajax({
         url: "http://localhost:8080/lot/betUp",
         type: 'post',
-        data: {betUps, srcLink},
+        data: {betUps, idProductSession},
 
         success:function (result) {
             // console.log(result);
@@ -120,10 +124,10 @@ $('#btn-bet').on('click',function () {
                     price.empty();
                     price.append(value)
                 }
-                if ((key === "placeholder")) {
-                    bet.focus();
-                    bet.attr('placeholder',value)
-                }
+                // if ((key === "placeholder")) {
+                //     bet.focus();
+                //     bet.attr('placeholder',value)
+                // }
                 if (key==="nextCurrentPrice"){
                     bet.removeClass("red");
                     bet.attr('placeholder',"");
@@ -134,7 +138,7 @@ $('#btn-bet').on('click',function () {
                     bet1.empty();
                     bet1.append(value)
                 }
-                if (key ==="user"){
+                if (key ==="userFromSession"){
                     bet2.empty();
                     bet2.append(value)
                 }
@@ -146,19 +150,24 @@ $('#btn-bet').on('click',function () {
             }
     })
 });
+/*
+* up bet end
+* */
 
+/*
+* get from DB list of lots bet*/
 let $bet = $('#bet');
 let lot = $('.lot-about-bet');
 let p = $('#p-btn');
 
 $bet.on('click',function () {
-    let srcImg=imgContainer.find('img').attr('src');
-    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
+    // let srcImg=imgContainer.find('img').attr('src');
+    // let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
 
     $.ajax({
         url:'http://localhost:8080/lot/listBet',
         type: 'get',
-        data: {linkOfImage: srcLink},
+        data: {idProduct: idProductSession},
         dataType: "json",
         // contentType: "application/json/*; charset=utf-8*/",
 
@@ -178,23 +187,130 @@ $bet.on('click',function () {
         error: function (error) {
             console.log(error)
         }
-
-            // debugger;
-
-
     })
 });
+/*
+* end
+* */
 
+
+/*
+* get from DB description of product
+* */
+let $descript = $('#descr');
+let $lotDescript = $('.lot-about_descr');
+
+$descript.on('click',function () {
+    let srcImg=imgContainer.find('img').attr('src');
+    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
+
+    $.ajax({
+        url:'http://localhost:8080/lot/lotDescription',
+        type: 'get',
+        data: {linkImg: srcLink},
+
+        success: function (result) {
+            $lotDescript.empty();
+            // console.log(result.lastIndexOf('\n'));
+            // let replace = result.replace('\n',"<br>");
+
+            $lotDescript.append(result)
+        },
+        error:function (error) {
+            console.log(error);
+        }
+    })
+
+});
+/*
+* end
+* */
+
+/*
+* if hot price of product isn't present in lot(=='0'), than button is disable  &&
+* if user isn't anonymous, than button 'Вхид' append display block
+* && update page
+* using window.load
+* */
 $(window).on('load',function () {
-    let hotPrice = $('#p-btn').val();
 
-    if (!hotPrice === "") {
+    let hotPrice = $('#p-btn').text();
+
+    if ($('.for-remove-2').text()!=='anonymousUser') {
+        $view.css('display','block');
+        $('.enter').css('display','none')
+    }else{
+    }
+    if (hotPrice!== "0") {
         btn.prop("disabled", false);
     }else {
         p.empty();
         p.append("Не доступно");
     }
 
+    /*
+    * update page of lot every 10sec
+    * for update information about Lot
+    * */
+    setInterval(function () {
+        $.ajax({
+            url: 'http://localhost:8080/lot/updatePage',
+            data: {idProduct: idProductSession},
 
-    console.log(hotPrice==="");
+            success: function (result) {
+                console.log(result);
+                $.each(result, function(key, value) {
+                    if (key === "price") {
+                        price.empty();
+                        price.append(value)
+                    }
+                    if (key === "nextCurrentPrice") {
+                        bet.removeClass("red");
+                        bet.attr('placeholder', "");
+                        bet.val("");
+                        bet.attr('placeholder', value)
+                    }
+                    if (key === "betsLot") {
+                        bet1.empty();
+                        bet1.append(value)
+                    }
+                    if (key === "userLider") {
+                        bet2.empty();
+                        bet2.append(value)
+                    }
+                })
+            },
+            error: function (error) {
+
+            }
+        })
+    },10000);
+});
+/*
+* end
+* */
+
+btn.on('click',function () {
+    let userName = $view.text();
+    if(userName==="anonymousUser"){
+        error.empty();
+        error.append("Ви повинні спочатку авторизуватися")
+    }else{
+
+    let srcImg=imgContainer.find('img').attr('src');
+    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
+
+    $.ajax({
+        url:'http://localhost:8080/lot/hotPrice',
+        type: 'get',
+        data: {linkImg: srcLink},
+
+
+        success: function (result) {
+            error.empty();
+            error.append(result);
+            console.log(result);
+        }
+    })
+    }
 });

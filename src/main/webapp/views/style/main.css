@@ -394,3 +394,19 @@ footer{
     margin-top: 140px;
     margin-left: 260px;
 }
+.view-user a, .user-id a{
+    color: #ff0000 !important;
+    text-shadow: 1px 1px #002cff;
+}
+#fileUploadForm{
+    width: 58%;
+    margin-top: 25px;
+    margin-right: 219px;
+}
+.view-user{
+    display: none;
+}
+
+.settings{
+    margin-left: 50px;
+}

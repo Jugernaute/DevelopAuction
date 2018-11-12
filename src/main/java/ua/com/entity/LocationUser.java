@@ -17,15 +17,9 @@ public class LocationUser {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {/*CascadeType.MERGE,CascadeType.PERSIST, CascadeType.DETACH,*/ CascadeType.REFRESH},
+            cascade = {/*CascadeType.MERGE, CascadeType.DETACH,CascadeType.PERSIST,*/ CascadeType.REFRESH},
             mappedBy = "location")
     private List<User> user;
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH},
-            mappedBy = "location")
-    private List<Lot> lot;
 
     public LocationUser() {
     }
@@ -80,14 +74,6 @@ public class LocationUser {
 
     public void setUser(List<User> user) {
         this.user = user;
-    }
-
-    public List<Lot> getLot() {
-        return lot;
-    }
-
-    public void setLot(List<Lot> lot) {
-        this.lot = lot;
     }
 
     @Override

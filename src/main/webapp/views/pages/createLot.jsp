@@ -5,11 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>sell</title>
+    <link rel="stylesheet" href="<c:url value="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"/>">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
-    <script src="../js/sell.js" defer></script>
+    <script src="../js/createLot.js" defer></script>
 </head>
 <body>
 <a href="lot">lot</a>
@@ -89,7 +92,10 @@
                 <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
                     <div class="form-group">
                         <%--<label class="control-label" for="uploadfile">Upload File:</label>--%>
-                        <input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" multiple>
+                            <div id="btn-img">
+                                <a><label for="uploadfile">Add files..</label></a>
+                            </div>
+                        <input type="file" style="visibility: hidden" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" multiple>
                     </div>
                 </form>
             </div>
@@ -217,6 +223,66 @@
         </div>
     </div>
 
+    <script id="template-upload" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-upload fade">
+            <td class="preview"><span class="fade"></span></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+            {% } else if (o.files.valid && !i) { %}
+            <td>
+            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+            <button class="btn btn-primary">
+            <i class="icon-upload icon-white"></i>
+            <span>{%=locale.fileupload.start%}</span>
+            </button>
+            {% } %}</td>
+            {% } else { %}
+            <td colspan="2"></td>
+            {% } %}
+            <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+            <i class="icon-ban-circle icon-white"></i>
+            <span>{%=locale.fileupload.cancel%}</span>
+            </button>
+            {% } %}</td>
+            </tr>
+            {% } %}
+        </script>
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-download fade">
+            {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+            {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+            <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+            <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+            {% } %}
+            <td class="delete">
+            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+            <i class="icon-trash icon-white"></i>
+            <span>{%=locale.fileupload.destroy%}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+            </td>
+            </tr>
+            {% } %}
+        </script>
+
 
 
 
@@ -248,5 +314,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </body>
 </html>

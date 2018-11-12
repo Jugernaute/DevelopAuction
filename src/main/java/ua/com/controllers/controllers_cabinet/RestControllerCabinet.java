@@ -183,17 +183,29 @@ public class RestControllerCabinet {
     ){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
+
         List<LocationUser> userLocation = user.getLocation();
-        for (LocationUser location1 : userLocation) {
-            location1.setRegion(state);
-            location1.setCountry(country);
-            location1.setCity(cities);
-            location1.setUser(Collections.singletonList(user));
-            location1.setUserPostAddress(address);
-            locationUserService.addLocation(location1);
+        if (userLocation.isEmpty()){
+            LocationUser locationUser = new LocationUser();
+            locationUser.setCity(cities);
+            locationUser.setCountry(country);
+            locationUser.setUser(Collections.singletonList(user));
+            locationUser.setRegion(state);
+            locationUser.setUserPostAddress(address);
+            locationUserService.addLocation(locationUser);
+            user.setLocation(Collections.singletonList(locationUser));
+            userService.addUser(user);
         }
-        user.setLocation(userLocation);
-        userService.addUser(user);
+        for (LocationUser locationUser2 : userLocation) {
+            locationUser2.setCity(cities);
+            locationUser2.setCountry(country);
+            locationUser2.setUser(Collections.singletonList(user));
+            locationUser2.setRegion(state);
+            locationUser2.setUserPostAddress(address);
+            locationUserService.addLocation(locationUser2);
+            user.setLocation(Collections.singletonList(locationUser2));
+            userService.addUser(user);
+        }
     }
 
     @PutMapping("changeAboutMe")

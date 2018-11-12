@@ -58,7 +58,7 @@
 </div>
 <div class="registration_form">
     <div class=" reg_container">
-        <form class="reg_form" <%--action="registration"  method="post"--%>>
+        <form class="reg_form" action="registration"  method="post">
             <div class=" close_cont">
                 <a href="" class="text-decor-none"> <span class="close">&times; </span></a>
             </div>

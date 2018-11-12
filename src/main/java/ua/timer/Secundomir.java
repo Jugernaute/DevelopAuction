@@ -3,8 +3,7 @@ package ua.timer;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Secundomir {
     public static void main(String[] args) {
@@ -27,16 +26,12 @@ public class Secundomir {
 //        }, 0, 1000);
 
 
-       String [] array = {"qwe","asd", "zxc","rrr","lklk"};
-//        int length = array.length;
-//        System.out.println(length);
-int count=0;
-        for (String s : array) {
-            ++count;
-            do {
-                System.out.println("-> "+s);
-            }while (count>array.length);
-        }
+List<String> qwe = new ArrayList<>();
+qwe.add("q");
+qwe.add("a");
+List<String>asd =new ArrayList<>();
+        System.out.println(qwe.isEmpty());
+        System.out.println(asd.isEmpty());
 
     }
 

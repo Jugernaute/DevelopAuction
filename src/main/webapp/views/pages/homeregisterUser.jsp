@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/style.css">
     <script src="../js/main.js" defer></script>
-    <%--<script src="../js/lotstyle.js" defer></script>--%>
+    <%--<script src="../js/lot.js" defer></script>--%>
 </head>
 <body>
 <a href="qwe">regina</a><br>
@@ -91,7 +91,7 @@
             <nav>
                 <p>Пошук: <input type="search"></p>
                 <ul class="menu">
-                    <li class="user-id"><a href="#">${user.getUsername()}</a></li>
+                    <li class="user-id"><a href="goToCabinet">${user.getUsername()}</a></li>
                     <li class="sell"><a href="goToSell">Продати</a></li>
                     <li class="favorits"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>

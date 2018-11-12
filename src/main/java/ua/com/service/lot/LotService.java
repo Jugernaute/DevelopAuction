@@ -11,4 +11,5 @@ public interface LotService {
     Lot getLotById(int id_Lot);
     List<Lot> findAllLot();
     Lot findLotByProduct_Id(int idProduct);
+    Lot findLotByImageLink_Name(String nameImgLink);
 }

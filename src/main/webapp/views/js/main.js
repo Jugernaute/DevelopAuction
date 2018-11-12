@@ -4,8 +4,8 @@
     let regForm = $('.registration_form');
     let auction = $('.auction');
     let resultRegistration = $('.resultRegistration');
-    let username = $('.enterUsername');
-    let email = $('.enterEmail');
+    let $username = $('.enterUsername');
+    let $email = $('.enterEmail');
 
     $('.enter').on('click', function (e) {// animation for login form
         loginForm.css('display', 'block');
@@ -43,13 +43,14 @@
     });
     
     $('.signupbtn').on('click', function (event) {      //password validation
+        // debugger;
         let psw = $(this).parent().parent().find('input[name="psw"]');
         let password = $('.enterPassword').val();
         let psw_repeat = $('.enterRepeatPassword').val();
         let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
         let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
-        if (username.val().length<3){
-            username.focus();
+        if ($username.val().length<3){
+            $username.focus();
         }
         if (psw.val() != pswRepeat.val()){
             pswRepeat.val('');
@@ -63,10 +64,13 @@
                 });
         }else if (password === psw_repeat) {
         $('.resultRegistration').empty();
-        
+        }
+
         $('.reg_container').css('display','none');
         $('.registration_form').addClass('success-login');
         $('#img_loading').css('display','block');
+        let username = $username.val();
+        let email = $email.val();
         event.preventDefault();
             $.ajax({
                 url: 'http://localhost:8080/registrationUser',
@@ -75,10 +79,10 @@
                 dataType: 'text',
 
                 success: function (result) {
+                    console.log("ok");
                     resultRegistration.css('display','block');
                     $('#img_loading').css('display','none');
                     resultRegistration.append(result+'<br>'+'<a href="">Main Page</a>')
-
                 },
                 error: function (error) {
                     $('.reg_container').css('display','block');
@@ -87,7 +91,6 @@
                     console.log(error)
                 }
             })
-        }
     });
 
     //social network animation
@@ -119,7 +122,11 @@
        $(this).next().toggleClass('hidden')
     });
 
-
+$('.cont_img').on('click',function () {
+    let message = $(this).find('a').attr('href');
+    let idProductInSession = message.replace("lot/","");
+    sessionStorage.setItem("idLot",idProductInSession);
+});
 
 
 
