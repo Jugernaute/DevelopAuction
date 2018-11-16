@@ -14,15 +14,15 @@
 <body>
 <form action="/fb/login" method="POST">
     <input type="submit">
-    <input type="hidden"
-           name="${_csrf.parameterName}" value="${_csrf.token}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form>
+
 
 <p>
     ${principal}
 </p>
 <sec:authorize access="isAuthenticated()">
-    pussy
+    "now you are autorized"
 </sec:authorize>
 
 </body>

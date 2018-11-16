@@ -11,7 +11,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserIdSource userIdSource;//social
 
+//    @Autowired
+//    private ConnectionFactoryLocator connectionFactoryLocator;//social
+//
+//    @Autowired
+//    private UsersConnectionRepository usersConnectionRepository;//social
+//
+//    @Autowired
+//    private ConnectionSingUpImpl connectionSingUp;//social
+
+
+//    //social
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth,
-                                @Qualifier("authenticationProvider") AuthenticationProvider provider)  {
+                                @Qualifier("authenticationProvider") AuthenticationProvider provider) {
         try {
             inMemoryConfigurer()
                     .withUser("admin")
@@ -73,6 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/protected").authenticated()//social
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -80,12 +95,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/error")
                 .and()
                 .logout()
-                .logoutRequestMatcher( new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .and()
-                .apply(new SpringSocialConfigurer().alwaysUsePostLoginUrl(true))//social
-                .userIdSource(userIdSource)//social
-                .and()//social
+                .apply(new SpringSocialConfigurer().alwaysUsePostLoginUrl(true).userIdSource(userIdSource).signupUrl("/"))//social
+                .and()
                 .csrf().disable();
     }
 }
+
+

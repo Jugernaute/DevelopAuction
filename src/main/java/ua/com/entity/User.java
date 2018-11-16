@@ -3,6 +3,7 @@ package ua.com.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.facebook.api.AgeRange;
 
 import javax.persistence.*;
 import java.util.*;
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     private String surNameUser;
     private int userBalance;
     private String userPostAddress;
+
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(

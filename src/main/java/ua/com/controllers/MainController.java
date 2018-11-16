@@ -41,5 +41,9 @@ public class MainController{
         return "lostpassword";
     }
 
+    @GetMapping("/goToFb")
+    private String goToFb(){
+        return "pagefb";
+    }
 
 }

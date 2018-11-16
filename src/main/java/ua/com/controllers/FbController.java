@@ -2,12 +2,10 @@ package ua.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
@@ -19,13 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
+import ua.com.entity.User;
 import ua.com.service.user.UserService;
+import ua.com.service.userconnect.FacebookConnectionSingUpImpl;
 import ua.com.service.userconnect.UserConnectService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @SessionAttributes("facebookToken")
@@ -37,7 +35,7 @@ public class FbController {
     @Autowired
     UserConnectService userConnectService;
     @Autowired
-    ConnectionSignUp signUp;
+    FacebookConnectionSingUpImpl connectionSingUp;
     @Autowired
     UsersConnectionRepository repository;
 
@@ -50,7 +48,7 @@ public class FbController {
         );
         OAuth2Parameters parameters = new OAuth2Parameters();
         parameters.setRedirectUri("http://localhost:8080/fb/callback");
-        parameters.setScope("public_profile");
+        parameters.setScope("public_profile, email");
         OAuth2Operations authOperations = factory.getOAuthOperations();
         String authorizeUrl = authOperations.buildAuthorizeUrl(parameters);
         response.sendRedirect(authorizeUrl);
@@ -68,13 +66,19 @@ public class FbController {
                 .exchangeForAccess(code, "http://localhost:8080/fb/callback", null);
         Connection<Facebook> connection = factory.createConnection(accessGrant);
         String token = accessGrant.getAccessToken();
+        System.out.println(token);
         Facebook facebook = connection.getApi();
         if (facebook.isAuthorized()) {
-            String id = signUp.execute(connection);
-            PagedList<Post> feed = facebook.feedOperations().getFeed();
-            List<String> images = feed.stream().map(post -> post.getPicture()).collect(Collectors.toList());
-            model.addAttribute("images", images);
-            return "shalom";
+          String id = connectionSingUp.execute(connection);
+//         PagedList<Post> feed = facebook.feedOperations().getFeed();
+//            List<String> images = feed.stream().map(post -> post.getPicture()).collect(Collectors.toList());
+//            model.addAttribute("images", images);
+
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = userService.findByUsername(name);
+            System.out.println(name);
+            System.out.println(id);
+            return "cabinet";//login, ok,
         } else {
             return "redirect:/fb/login";
         }
@@ -82,7 +86,7 @@ public class FbController {
 
     @PostMapping("/protected")
     public String protect() {
-        return "shalom";
+        return "cabinet";
     }
 
 }
