@@ -16,8 +16,6 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idBasket;
 
-    private String nameBasketUser;
-
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE}
@@ -30,22 +28,16 @@ public class Basket {
             cascade = {CascadeType.MERGE})
     private User user;
 
-    public Basket(String nameBasketUser, User user) {
-        this.nameBasketUser = nameBasketUser;
+    public Basket(User user) {
         this.user = user;
     }
 
-    public Basket(String nameBasketUser, List<Lot> lotList, User user) {
-        this.nameBasketUser = nameBasketUser;
+    public Basket(List<Lot> lotList, User user) {
         this.lotList = lotList;
         this.user = user;
     }
 
     public Basket() {
-    }
-
-    public Basket(String nameBasketUser) {
-        this.nameBasketUser = nameBasketUser;
     }
 
 
@@ -55,15 +47,6 @@ public class Basket {
 
     public Basket setIdBasket(int idBasket) {
         this.idBasket = idBasket;
-        return this;
-    }
-
-    public String getNameBasketUser() {
-        return nameBasketUser;
-    }
-
-    public Basket setNameBasketUser(String nameBasketUser) {
-        this.nameBasketUser = nameBasketUser;
         return this;
     }
 
@@ -91,7 +74,6 @@ public class Basket {
         if (o == null || getClass() != o.getClass()) return false;
         Basket basket = (Basket) o;
         return idBasket == basket.idBasket &&
-                Objects.equals(nameBasketUser, basket.nameBasketUser) &&
                 Objects.equals(lotList, basket.lotList) &&
                 Objects.equals(user, basket.user);
     }
@@ -99,14 +81,13 @@ public class Basket {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idBasket, nameBasketUser, lotList, user);
+        return Objects.hash(idBasket, lotList, user);
     }
 
     @Override
     public String toString() {
         return "Basket{" +
                 "idBasket=" + idBasket +
-                ", nameBasketUser='" + nameBasketUser + '\'' +
                 '}';
     }
 }

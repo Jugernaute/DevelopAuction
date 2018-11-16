@@ -48,3 +48,14 @@ heart.on('click', function () {
     $('#heart-empty').toggleClass('hidden')
     $('#heart-full').toggleClass('hidden')
 })
+
+$('#setCartToLot').on('click', function () {
+    $.ajax({
+        url : '/setCartToLot',
+        type : 'get',
+        contentType : 'application/json',
+        success : function (result) {
+
+        }
+    })
+})

@@ -57,6 +57,11 @@ public class MainController{
         return "home";
     }
 
+    @GetMapping("/goToCart")
+    private String goToCart(){
+        return "cart";
+    }
+
 @GetMapping("/save")
 public String home(Model model){
     return "save";
