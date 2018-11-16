@@ -1,3 +1,4 @@
+charset='UTF-8';
 let idProductSession = sessionStorage.getItem("idLot");
 
 let bet = $('#bet-input');
@@ -63,11 +64,13 @@ heart.on('click', function () {
 * timer
 * */
 let number = $('#test').text();
-let x = setInterval(function() {
+let nowDate;
+let lotDateEnd;
 
-    let now = new Date().getTime();
-    let countDownDate = Date.parse(number.toString());
-    let distance =countDownDate-now;
+let x = setInterval(function() {
+    nowDate = new Date().getTime();
+    lotDateEnd = Date.parse(number.toString());
+    let distance =lotDateEnd-nowDate;
 
     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -76,6 +79,10 @@ let x = setInterval(function() {
 
     document.getElementById("timer").innerHTML = days + "дн " + hours + "г "
         + minutes + "хв " + seconds + "с";
+
+    if (nowDate >= lotDateEnd) {
+        endAuction()
+    }
 
     if (distance < 0) {
         clearInterval(x);
@@ -124,10 +131,11 @@ $('#btn-bet').on('click',function () {
                     price.empty();
                     price.append(value)
                 }
-                // if ((key === "placeholder")) {
-                //     bet.focus();
-                //     bet.attr('placeholder',value)
-                // }
+                if ((key === "endData")) {
+                    bet.focus();
+                    error.empty();
+                    error.append(value);
+                }
                 if (key==="nextCurrentPrice"){
                     bet.removeClass("red");
                     bet.attr('placeholder',"");
@@ -225,13 +233,21 @@ $descript.on('click',function () {
 /*
 * end
 * */
-
+function endAuction(){
+    $('#btn-bet').prop("disabled", true);
+    $('#btn-buy').prop("disabled", true);
+    $('#send-massege').prop("disabled", true);
+    bet.attr("placeholder","");
+    $('#bet-input').prop("disabled", true);
+}
 /*
 * if hot price of product isn't present in lot(=='0'), than button is disable  &&
 * if user isn't anonymous, than button 'Вхид' append display block
 * && update page
 * using window.load
 * */
+
+
 $(window).on('load',function () {
 
     let hotPrice = $('#p-btn').text();
@@ -252,39 +268,40 @@ $(window).on('load',function () {
     * update page of lot every 10sec
     * for update information about Lot
     * */
-    setInterval(function () {
-        $.ajax({
-            url: 'http://localhost:8080/lot/updatePage',
-            data: {idProduct: idProductSession},
+    if (nowDate < lotDateEnd) {
+        setInterval(function () {
+            $.ajax({
+                url: 'http://localhost:8080/lot/updatePage',
+                data: {idProduct: idProductSession},
+                success: function (result) {
+                    console.log(result);
+                    $.each(result, function (key, value) {
+                        if (key === "price") {
+                            price.empty();
+                            price.append(value)
+                        }
+                        if (key === "nextCurrentPrice") {
+                            bet.removeClass("red");
+                            bet.attr('placeholder', "");
+                            bet.val("");
+                            bet.attr('placeholder', value)
+                        }
+                        if (key === "betsLot") {
+                            bet1.empty();
+                            bet1.append(value)
+                        }
+                        if (key === "userLider") {
+                            bet2.empty();
+                            bet2.append(value)
+                        }
+                    })
+                },
+                error: function (error) {
 
-            success: function (result) {
-                console.log(result);
-                $.each(result, function(key, value) {
-                    if (key === "price") {
-                        price.empty();
-                        price.append(value)
-                    }
-                    if (key === "nextCurrentPrice") {
-                        bet.removeClass("red");
-                        bet.attr('placeholder', "");
-                        bet.val("");
-                        bet.attr('placeholder', value)
-                    }
-                    if (key === "betsLot") {
-                        bet1.empty();
-                        bet1.append(value)
-                    }
-                    if (key === "userLider") {
-                        bet2.empty();
-                        bet2.append(value)
-                    }
-                })
-            },
-            error: function (error) {
-
-            }
-        })
-    },10000);
+                }
+            })
+        }, 10000);
+    }
 });
 /*
 * end
@@ -310,6 +327,7 @@ btn.on('click',function () {
             error.empty();
             error.append(result);
             console.log(result);
+            endAuction();
         }
     })
     }

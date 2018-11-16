@@ -85,7 +85,7 @@
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="fromLogoToHome"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
                 <label>
                     <input type="search">
@@ -167,7 +167,7 @@
                     <div class="lot-info-price_bet">
 
                         <label>
-                            <input type="number" size="4" name="sum_of_the_bet" id="bet-input" class="inp-style" placeholder="<c:out value="${nextPrice}"/>">
+                            <input type="number" size="4"  name="sum_of_the_bet" id="bet-input" class="inp-style" placeholder="<c:out value="${nextPrice}"/>">
                         </label>
                         <p>Ваша<br>ставка</p>
                     </div>

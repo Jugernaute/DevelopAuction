@@ -47,7 +47,7 @@ public class RestControllerBet {
         int id_lot = lot.getId_Lot();
 
         if (lot.getDataEndLot().isBefore(LocalDateTime.now())){
-            map.put("errorBet","Аукціон по цьому товару вже закінчився");
+            map.put("endData","Аукціон по цьому товару вже закінчився");
             return map;
         }
 
@@ -156,7 +156,7 @@ public class RestControllerBet {
         Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
 
         if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())){
-            return "Аукціон по цьому товару вже закінчився";
+            return "Time is expired";
         }
         int hotPrice;
         String name = SecurityContextHolder.getContext().getAuthentication().getName();

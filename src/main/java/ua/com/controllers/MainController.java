@@ -5,10 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.com.controllers.controllers_security.ControllerSecurity;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
 import ua.com.method.LiderAndSizeOfBets;
+import ua.com.method.LoadAllLotOnMainPage;
 import ua.com.service.bet.BetService;
 import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
@@ -24,7 +26,7 @@ public class MainController{
 @Autowired
     private ProductService productService;
 @Autowired
-    private BetService betService;
+    private LoadAllLotOnMainPage  allLotOnMainPage;
     @Autowired
     private UserService userService;
     @Autowired
@@ -32,12 +34,32 @@ public class MainController{
 
 
     @GetMapping("/goToCabinet")
-    private String goToCabinet(){ return "cabinet";
+    private String goToCabinet(Model model){
+        String userSession = SecurityContextHolder.getContext().getAuthentication().getName();
+        User username = userService.findByUsername(userSession);
+        model.addAttribute("user",username);
+        return "cabinet";
     }
 
     @GetMapping("/fromLogoToHome")
-    private String fromLogoToHome(){
-        return "redirect:/";
+    private String fromLogoToHome(Model model){
+        String userSession = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(userSession);
+        System.out.println(userSession);
+        if (!userSession.equals("anonymousUser")){
+            if (user.getRandomKey()!=null){
+                return  "/errorPage/activation_error";
+            }
+            List list = allLotOnMainPage.loadAllLotOnMainPage();
+
+            model.addAttribute("imgLinks", list);
+            model.addAttribute("user",user);
+
+            return "homeregisterUser";
+        }else{
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("/goLostPsw")
@@ -73,7 +95,7 @@ public class MainController{
         int nextPrice = (int) Math.round(currentPrice+currentPrice*0.1);
 
         /*
-        * Call from method directory
+        * Call from method's directory
         * */
         Map<String,String> map = liderAndSizeOfBets.Lider(id_lot);
         Set<Map.Entry<String, String>> entries = map.entrySet();

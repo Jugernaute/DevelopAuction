@@ -1,11 +1,9 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javafx.scene.chart.PieChart;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -24,14 +22,17 @@ public class Lot {
     private int currentPrice;
 
     @JsonIgnore
+    @OneToOne(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "lot"
+    )
+    private CompletedLot listOfLotEnd;
+
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE/*.PERSIST,CascadeType.REMOVE*/})
     private List<LocationUser> location;
-
-//    @JsonIgnore
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {CascadeType.ALL})
-//    private List<LocationLot>locationLots;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
@@ -86,14 +87,6 @@ public class Lot {
         return this;
     }
 
-//    public List<LocationLot> getLocationLots() {
-//        return locationLots;
-//    }
-//
-//    public void setLocationLots(List<LocationLot> locationLots) {
-//        this.locationLots = locationLots;
-//    }
-
     public List<LocationUser> getLocation() {
         return location;
     }
@@ -109,6 +102,14 @@ public class Lot {
     public Lot setDataStartLot(LocalDateTime dataStartLot) {
         this.dataStartLot = dataStartLot;
         return this;
+    }
+
+    public CompletedLot getListOfEndLot() {
+        return listOfLotEnd;
+    }
+
+    public void setListOfEndLot(CompletedLot completedLot) {
+        this.listOfLotEnd = completedLot;
     }
 
     public int getCurrentPrice() {

@@ -19,7 +19,7 @@
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="/logout"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
                 <p>Пошук: <input type="search"></p>
                 <ul class="menu">

@@ -15,6 +15,7 @@ import ua.com.entity.ImageLink;
 import ua.com.entity.Lot;
 import ua.com.entity.Product;
 import ua.com.entity.User;
+import ua.com.method.LoadAllLotOnMainPage;
 import ua.com.service.imageLink.ImageLinkService;
 import ua.com.service.lot.LotService;
 import ua.com.service.product.ProductService;
@@ -38,26 +39,16 @@ import java.util.stream.Stream;
     private ProductService productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LoadAllLotOnMainPage allLotOnMainPage;
 
     @GetMapping("/")
         public String start (Model model){
 
-        List<Product> allProduct = productService.findAllProduct();
-        List<ImageLink> imgLink = new ArrayList<>();
-        for (Product product : allProduct) {
-            List<ImageLink> imageLinks = product.getImageLinks();
-//            System.out.println("----"+imageLinks);
-            if (!(imageLinks.size() == 0)){
-                ImageLink imageLink = imageLinks.get(0);
-                imgLink.add(imageLink);
-            }else {
-                System.out.println("----error----");
-            }
-        }
-
+        List list = allLotOnMainPage.loadAllLotOnMainPage();
         DateTimeFormatter ru = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss").withLocale(new Locale("ru"));
 //        System.out.println(ru.format(dataEndLot));
-        model.addAttribute("imgLinks", imgLink);
+        model.addAttribute("imgLinks", list);
         return "main" ;
         }
 
@@ -102,30 +93,13 @@ import java.util.stream.Stream;
             public String ok (Model model){
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
-            if (user.getRandomKey()!=null){
-                return "/errorPage/activation_error";
-            }
-            List<Product> allProduct = productService.findAllProduct();
-            List<ImageLink> imgLink = new ArrayList<>();
-            for (Product product : allProduct) {
-                List<ImageLink> imageLinks = product.getImageLinks();
-//            System.out.println("----"+imageLinks);
-                if (!(imageLinks.size() == 0)){
-                    ImageLink imageLink = imageLinks.get(0);
-                    imgLink.add(imageLink);
-                }else {
-                    //                    System.out.println("---error---");
+
+                if (user.getRandomKey()!=null){
+                    return  "/errorPage/activation_error";
                 }
+            List list = allLotOnMainPage.loadAllLotOnMainPage();
 
-            }
-//            Collector<Integer, ?, List<Integer>> integerListCollector = Collectors.toList();
-//            Lot lotByProduct_id = lotService.findLotByProduct_Id(2);
-//            List<String> collect = allProduct.stream().map(Product::getNameProduct).collect(Collectors.toList());
-//            for (String integer : collect) {
-//                System.out.println(integer);
-//            }
-
-            model.addAttribute("imgLinks", imgLink);
+            model.addAttribute("imgLinks", list);
             model.addAttribute("user",user);
 
             return "homeregisterUser";
