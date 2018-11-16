@@ -3,6 +3,9 @@
     let loginForm = $('.enter_form');
     let regForm = $('.registration_form');
     let auction = $('.auction');
+    let resultRegistration = $('.resultRegistration');
+    let $username = $('.enterUsername');
+    let $email = $('.enterEmail');
 
     $('.enter').on('click', function (e) {// animation for login form
         loginForm.css('display', 'block');
@@ -40,45 +43,55 @@
     });
     
     $('.signupbtn').on('click', function (event) {      //password validation
-        // let psw = $(this).parent().parent().find('input[name="psw"]');
-        // let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
-        // var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
-        // if (psw.val() != pswRepeat.val()){
-        //     pswRepeat.val('');
-        //     pswRepeat.prop('placeholder',"ПАРОЛІ НЕ ЗБІГАЮТЬСЯ!!!")
-        //     event.preventDefault();
-        // } else if (!psw.val().match(passw)){
-        //     psw.focus();
-        //     psw.val('');
-        //     $(this).parent().parent().find('#psw-must-have').css({
-        //             'font-weight': 'bold',
-        //             'color' : 'red'
-        //         });
-        //     event.preventDefault();
-        // }
-
-        //rest security -------------------------pasha start
-        $('.resultRegistration').empty();
-        let username = $('.enterUsername').val();
-        let email = $('.enterEmail').val();
+        // debugger;
+        let psw = $(this).parent().parent().find('input[name="psw"]');
         let password = $('.enterPassword').val();
         let psw_repeat = $('.enterRepeatPassword').val();
+        let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
+        let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
+        if ($username.val().length<3){
+            $username.focus();
+        }
+        if (psw.val() != pswRepeat.val()){
+            pswRepeat.val('');
+            pswRepeat.prop('placeholder',"ПАРОЛІ НЕ ЗБІГАЮТЬСЯ!!!");
+        } else if (!password.match(passw)){
+            psw.focus();
+            psw.val('');
+            $(this).parent().parent().find('#psw-must-have').css({
+                    'font-weight': 'bold',
+                    'color' : 'red'
+                });
+        }else if (password === psw_repeat) {
+        $('.resultRegistration').empty();
+        }
+
+        $('.reg_container').css('display','none');
+        $('.registration_form').addClass('success-login');
+        $('#img_loading').css('display','block');
+        let username = $username.val();
+        let email = $email.val();
         event.preventDefault();
-        $.ajax({
-            url: 'http://localhost:8080/registrationUser',
-            type: 'post',
-            data: {username, email, password, psw_repeat},
-            dataType: 'text',
+            $.ajax({
+                url: 'http://localhost:8080/registrationUser',
+                type: 'post',
+                data: {username, email, password, psw_repeat},
+                dataType: 'text',
 
-            success: function (result) {
-
-              $('.resultRegistration').append(result)
-            },
-            error: function (error) {
-                console.log(error)
-            }
-        })
-    });        //-----------------------------------------------pasha end
+                success: function (result) {
+                    console.log("ok");
+                    resultRegistration.css('display','block');
+                    $('#img_loading').css('display','none');
+                    resultRegistration.append(result+'<br>'+'<a href="">Main Page</a>')
+                },
+                error: function (error) {
+                    $('.reg_container').css('display','block');
+                    $('.registration_form').removeClass('success-login');
+                    $('#img_loading').css('display','none');
+                    console.log(error)
+                }
+            })
+    });
 
     //social network animation
 
@@ -97,6 +110,23 @@
     });
     // rest security
 
+
+
+///category list///////////
+
+    $('.products_list').on('click', () => {
+        $('.category-list').toggleClass('hidden')
+    });
+
+    $('.category-list-parent').on('mouseover', ()=> {
+       $(this).next().toggleClass('hidden')
+    });
+
+$('.cont_img').on('click',function () {
+    let message = $(this).find('a').attr('href');
+    let idProductInSession = message.replace("lot/","");
+    sessionStorage.setItem("idLot",idProductInSession);
+});
 
 
 

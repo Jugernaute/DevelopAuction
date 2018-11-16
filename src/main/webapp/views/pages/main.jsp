@@ -1,3 +1,5 @@
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/style.css">
     <script src="../js/main.js" defer></script>
+    <%--<script src="../js/lot.js" defer></script>--%>
 </head>
 <body>
 <a href="qwe">regina</a><br>
@@ -52,6 +55,8 @@
         </div>
     </div>
     <div class="registration_form ">
+        <p class="resultRegistration"></p>
+        <img src="../img/ajax-loader.gif" id="img_loading">
         <div class=" reg_container">
             <form class="reg_form" <%--action="registration"  method="post"--%>>
                 <div class=" close_cont">
@@ -60,7 +65,6 @@
                 <h1>Реєстрація</h1>
                 <p>Заповніть форму щоб створити акаунт</p>
                 <hr>
-                <a class="resultRegistration"></a>
                 <h3>Логін</h3>
                 <input class="enterUsername" type="text" placeholder="Ведіть логін" name="username" required>
                 <h3>Email</h3>
@@ -109,86 +113,36 @@
                 </div>
             </section>
             <section class="hot_lot">
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
+
+                <c:forEach items="${imgLinks}" var="img">
+                <c:set var = "nameProd" scope = "session" value = "${img.getProduct().getNameProduct()}"/>
+                <c:set var = "modelProd" scope = "session" value = "${img.getProduct().getModelProduct()}"/>
+                <c:set var = "manufProd" scope = "session" value = "${img.getProduct().getManufacturer()}"/>
+                <c:set var = "startLot" scope = "session" value = "${img.getProduct().getLot().getDataStartLot()}"/>
+                <c:set var = "curentPrice" scope = "session" value = "${img.getProduct().getLot().getCurrentPrice()}"/>
+                    <%--<p>Today's date: <%= (new java.util.Date()).getTime()%></p>--%>
+                    <%--<%--%>
+<%----%>
+<%--//                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dddd HH:mm");--%>
+<%--//                        LocalDateTime dateTime = LocalDateTime.of();--%>
+<%--//                        String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"--%>
+                    <%--%>--%>
+                    <%--<c:out value="${qwe}"//>--%>
+                    <div class="hot_lot_wrapper">
+                        <div class="cont_img" >
+                                <a href="lot/${img.getProduct().getId_Product()}" class="get-id"><img src="../img/product_Img/${img.getLinkOfImage()}" height="200" width="200"/>
+                                </a></div>
+                        <div class="container">
+                            <h2 class="cont_titel"><b><c:out value = "${nameProd}"/> <c:out value="${modelProd}"/> <%--<c:out value="${manufProd}"/>--%></b></h2>
+
+                            <p class="text-end">завершення :</p>
+                            <div class="cont_timer"><c:out value="${startLot}"/></div>
+                            <h4 class="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>
+                        </div>
+
+
                     </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
-                <div class="hot_lot_wrapper">
-                    <div class="cont_img"><img src="../img/1120757261_w0_h0_cid2701730_pid684521632-b9c8d61c.jpg" height="200" width="200"/></div>
-                    <div class="container">
-                        <h2 class="cont_titel">Iphone X</h2>
-                        <div class="cont_timer">00:00:00</div>
-                        <h4 class="cont_price">Стартова ціна: <span>20 000 грн</span></h4>
-                    </div>
-                </div>
+            </c:forEach>
             </section>
 
 
@@ -218,3 +172,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
+

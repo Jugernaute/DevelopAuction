@@ -87,9 +87,7 @@
                 <ul class="menu">
                     <li class="enter"><a href="#">Вхід</a></li>
                     <li class="registation"><a href="#">Реєстрація</a></li>
-                    <li class="sell"><a href="sell.jsp">Продати</a></li>
-                    <li class="favorits"><a href="#">Обрані</a></li>
-                    <li class="cart"><a href="#">Корзина</a></li>
+                    <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>
         </div>

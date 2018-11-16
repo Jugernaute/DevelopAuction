@@ -5,17 +5,15 @@
     <meta charset="UTF-8">
     <title>Auction | Кабінет</title>
     <link rel="stylesheet" href="../style/main.css">
-    <%--<link rel="stylesheet" href="../style/style.css">--%>
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
-    <%--<script src="../js/sell.js" defer></script>--%>
 </head>
 <body>
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="/logout"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
                 <input type="search" placeholder="ПОШУК ТОВАРІВ">
                 <ul class="menu">

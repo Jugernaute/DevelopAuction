@@ -14,4 +14,5 @@ public interface BetService {
     List<Bet> findAllBet();
 
     void updateBet(Bet bet);
+    List<Bet> findAllBetByLot_id(int idLot);
 }

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/lot_Style.css">
     <script src="../js/main.js" defer></script>
-    <script src="../js/lotstyle.js" defer></script>
+    <script src="../js/lot.js" defer></script>
+    <%--<script src="../js/bet.js" defer></script>--%>
 </head>
 <body>
 
@@ -18,7 +19,7 @@
         <div class="close_cont">
             <span class="close">&times;</span>
         </div>
-        <form class="login_form" action="#">
+        <form class="login_form" action="/login" method="post">
             <div class="col_login">
                 <a href="#" class="fb btn">
                     <i class="fa fa-facebook fa-fw"></i> Увійти за допомогою Facebook
@@ -84,15 +85,15 @@
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="fromLogoToHome"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
                 <label>
                     <input type="search">
                 </label>
                 <ul class="menu">
-                    <li class="enter"><a href="#">Вхід</a></li>
-                    <%--<li class="registration"><a href="#" class="hidden">Реєстрація</a></li>--%>
-                    <li class="sell"><a href="goToSell">Продати</a></li>
+                    <li class="enter"><a href="#" class="for-remove-1">Вхід</a></li>
+                    <li class="view-user"><a href="/goToCabinet" class="for-remove-2">${userFromSession}</a></li>
+                    <li class="sell"><a href="/goToSell">Продати</a></li>
                     <li class="favorites"><a href="#">Обрані</a></li>
                     <li class="cart"><a href="#">Корзина</a></li>
                     <li class="exit"><a href="/logout">Вийти</a></li>
@@ -113,11 +114,10 @@
     <section class="lot">
         <div class="lot-nav">
             <div class="lot-nav_category">
-                <p><a href="#">Category</a></p>
+                <p><a href="#">${product.getNameProduct()}</a></p>
                 <ul class="lot-nav-tree">
-                    <li><a href="#">Some category</a> > </li>
-                    <li><a href="#">Some category</a> > </li>
-                    <li><a href="#">Some category</a> > </li>
+                    <li><a href="#">${nameCom}</a> > </li>
+                    <li><a href="#">${nameSub}</a> > </li>
                 </ul>
             </div>
             <div class="lot-nav-add">
@@ -128,57 +128,72 @@
         <hr>
         <div class="lot-wrapper">
             <div class="lot-slider">
-                <div class="lot-slider-container">
+
+                <div class="lot-slider-container img-lot">
+                    <%--<img src="../img/product_Img/${image1.getLinkOfImage()}" alt="">--%>
 
                 </div>
                 <div class="lot-slider-row">
                     <div class="lot-slider-column">
-                        <img src="../img/img_nature.jpg" alt="Nature">
+                        <img src="../img/product_Img/${image1.getLinkOfImage()}" alt="${image1.getLinkOfImage()}">
                     </div>
                     <div class="lot-slider-column">
-                        <img src="../img/img_snow.jpg" alt="Snow">
+                        <img src="../img/product_Img/${image2.getLinkOfImage()}" alt="${image2.getLinkOfImage()}">
                     </div>
                     <div class="lot-slider-column">
-                        <img src="../img/img_mountains.jpg" alt="Mountains">
+                        <img src="../img/product_Img/${image3.getLinkOfImage()}" alt="${image3.getLinkOfImage()}">
                     </div>
                     <div class="lot-slider-column">
-                        <img src="../img/img_lights.jpg" alt="Lights">
+                        <img src="../img/product_Img/${image4.getLinkOfImage()}" alt="${image4.getLinkOfImage()}">
                     </div>
                 </div>
             </div>
+            <%--<jsp:useBean id="Product" class="ua.com.entity.Product" scope="page" />--%>
+            <%--<jsp:setProperty name="Product" property="*" />--%>
             <div class="lot-info">
                 <div class="lot-info-name">
-                    <h3 id="lot-name">Some lot name</h3>
-                    <h3 id="lot-description">Some lot name</h3>
+                    <h3 id="lot-name">${product.getNameProduct()}</h3>
+
+                    <h3 id="lot-description">${product.getModelProduct()}</h3>
                 </div>
+                <%--<c:set var="timeShow" scope="application" value="Oct 30, 2018 15:37:25"/>--%>
                 <div class="lot-info-price">
                     <div class="lot-info-current-price">
-                        <p>Price:</p>
-                        <p>11161</p>
-                        <span>&#8372</span>
+                        <p>Поточна<br> ставка:</p>
+                        <p id="price"><c:out value="${product.getLot().getCurrentPrice()}"/></p>
+                        <span>грн</span>
                     </div>
+                    <c:set value="${product.getLot().getCurrentPrice()}" var="price"/>
                     <div class="lot-info-price_bet">
-                        <p>Your Bet:</p>
+
                         <label>
-                            <input type="number" name="lotBet">
+                            <input type="number" size="4"  name="sum_of_the_bet" id="bet-input" class="inp-style" placeholder="<c:out value="${nextPrice}"/>">
                         </label>
+                        <p>Ваша<br>ставка</p>
                     </div>
                 </div>
+
+                <span id="error-bet"></span>
                 <div class="lot-info-price_button">
                     <label>
-                        <input id="btn-bet" type="button" value="Bet">
+                        <input id="btn-bet" class="inp-style" type="button" value="Зробити ставку">
                     </label>
                     <label>
-                        <input id="btn-buy" type="button" value="Buy">
+                        <button id="btn-buy" disabled class="inp-style" type="button" value="">Купити<br class="br-class"><hr id="hr-btn"/><p id="p-btn">${hotPrice}</p></button>
+                        <%--<div id="btn-buy" class="inp-style">Купити<br>678</div>--%>
                     </label>
                     <label>
-                        <input id="send-massege" type="button" value="Send Message">
+                        <input id="send-massege" class="inp-style" type="button" value="Send Message">
                     </label>
                 </div>
                 <div class="lot-info-price-timer">
-                    <p>До закінчення: <span id="timer"></span></p>
-                    <p>Тип доставки: <span>qwerhjnt</span></p>
-                    <p>Місцезнаходення лоту: <span>qawfvge</span></p>
+                    <p>Дата закінчення: <span id="test">${data}</span>  <br><span id="timer"></span></p>
+                    <p>Тип доставки: <span></span></p>
+                    <span>ставок:</span><button class="bet-btn1" disabled>${countOfBet}</button>
+                    <span id="lider" class="inline">Зараз лідирує:<button class="bet-btn2" disabled>${userLider}</button></span>
+                    <%--<a class="inline after-img" href=""><span class="inline inner-img"></span></a>--%>
+                    <p>Місцезнаходення лоту: <span>${location.getRegionLot()} обл, ${location.getLocationLot()}</span></p>
+                    <p>Продавець: <button class="bet-btn3" disabled>${userCreateLot}</button></p>
                 </div>
             </div>
         </div>
@@ -190,9 +205,9 @@
                 <li id="bet">Ставки</li>
             </ul>
             <div class="lot-about_option-list-show">
-                <div class="lot-about_descr slider">Опис</div>
+                <div class="lot-about_descr slider"></div>
                 <div class="lot-about_buy hidden slider">Оплата і доставка</div>
-                <div class="lot-about-bet hidden slider">Ставки</div>
+                <div class="lot-about-bet hidden slider"></div>
             </div>
         </div>
     </section>

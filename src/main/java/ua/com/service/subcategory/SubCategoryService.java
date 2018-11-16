@@ -1,10 +1,11 @@
 package ua.com.service.subcategory;
 
+import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
 
 import java.util.List;
 
-public interface SubСategoryService {
+public interface SubCategoryService {
 
     void addSubCategory(SubCategory subCategory);
     void deleteSubCategoryById(int id_SubCategory);
@@ -12,4 +13,5 @@ public interface SubСategoryService {
     SubCategory getSubCategoryById(int id_SubCategory);
     List<SubCategory> findAllSubCategory();
     SubCategory findByNameSubCategory (String nameSubCategory);
+    SubCategory findById_Products (int idProduct);
 }

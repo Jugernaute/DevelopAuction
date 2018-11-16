@@ -2,13 +2,15 @@ package ua.com.service.subcategory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ua.com.dao.SubCategoryDao;
+import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
 
 import java.util.List;
 
-@Component
-public class SubСategoryServiceImpl implements SubСategoryService {
+@Service
+public class SubCategoryServiceImpl implements SubCategoryService {
     @Autowired
     private SubCategoryDao subCategoryDao;
 
@@ -43,6 +45,11 @@ public class SubСategoryServiceImpl implements SubСategoryService {
     @Override
     public SubCategory findByNameSubCategory(String nameSubCategory) {
         return subCategoryDao.findByNameSubCategory(nameSubCategory);
+    }
+
+    @Override
+    public SubCategory findById_Products(int idProduct) {
+        return subCategoryDao.findSubCategoryByProducts(idProduct);
     }
 
 

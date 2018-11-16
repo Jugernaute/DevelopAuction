@@ -42,4 +42,14 @@ public class LotServiceImpl implements LotService {
     public List<Lot> findAllLot() {
         return lotDao.findAll();
     }
+
+    @Override
+    public Lot findLotByProduct_Id(int idProduct) {
+        return lotDao.findLotByProduct_Id(idProduct);
+    }
+
+    @Override
+    public Lot findLotByImageLink_Name(String nameImgLink) {
+        return lotDao.findLotByImageLink_Name(nameImgLink);
+    }
 }

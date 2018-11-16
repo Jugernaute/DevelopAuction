@@ -22,8 +22,11 @@ public class ControllerCabinet {
     public String goToSell(Model model){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(name);
+        if (name.equals("anonymousUser") || !user.isEnabled()){
+            return "needRegistration";
+        }
         model.addAttribute("user",user);
-        return "sell";
+        return "createLot";
     }
 
 

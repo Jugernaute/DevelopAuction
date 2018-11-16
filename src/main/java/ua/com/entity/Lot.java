@@ -1,11 +1,9 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javafx.scene.chart.PieChart;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -15,17 +13,26 @@ public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Lot;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
     private LocalDateTime dataStartLot;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
     private LocalDateTime dataEndLot;
     private int startPrice;
     private int hotPrice;
+    private int currentPrice;
+
+    @JsonIgnore
+    @OneToOne(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "lot"
+    )
+    private CompletedLot listOfLotEnd;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    private List<Location> location;
+            cascade = {CascadeType.MERGE/*.PERSIST,CascadeType.REMOVE*/})
+    private List<LocationUser> location;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
@@ -34,7 +41,7 @@ public class Lot {
     private List<Bet> listLotBet;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE)
     private Product product;
 
@@ -80,11 +87,11 @@ public class Lot {
         return this;
     }
 
-    public List<Location> getLocation() {
+    public List<LocationUser> getLocation() {
         return location;
     }
 
-    public void setLocation(List<Location> location) {
+    public void setLocation(List<LocationUser> location) {
         this.location = location;
     }
 
@@ -95,6 +102,22 @@ public class Lot {
     public Lot setDataStartLot(LocalDateTime dataStartLot) {
         this.dataStartLot = dataStartLot;
         return this;
+    }
+
+    public CompletedLot getListOfEndLot() {
+        return listOfLotEnd;
+    }
+
+    public void setListOfEndLot(CompletedLot completedLot) {
+        this.listOfLotEnd = completedLot;
+    }
+
+    public int getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(int currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
     public LocalDateTime getDataEndLot() {
@@ -168,8 +191,10 @@ public class Lot {
         return id_Lot == lot.id_Lot &&
                 startPrice == lot.startPrice &&
                 hotPrice == lot.hotPrice &&
+                currentPrice == lot.currentPrice &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
                 Objects.equals(dataEndLot, lot.dataEndLot) &&
+                Objects.equals(location, lot.location) &&
                 Objects.equals(listLotBet, lot.listLotBet) &&
                 Objects.equals(product, lot.product) &&
                 Objects.equals(delivery, lot.delivery) &&
@@ -179,17 +204,18 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, listLotBet, product, delivery, payment);
+        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, currentPrice, location, listLotBet, product, delivery, payment);
     }
 
     @Override
     public String toString() {
         return "Lot{" +
                 "id_Lot=" + id_Lot +
-                ", dataStartLot='" + dataStartLot + '\'' +
-                ", dataEndLot='" + dataEndLot + '\'' +
+                ", dataStartLot=" + dataStartLot +
+                ", dataEndLot=" + dataEndLot +
                 ", startPrice=" + startPrice +
                 ", hotPrice=" + hotPrice +
+                ", currentPrice=" + currentPrice +
                 '}';
     }
 }

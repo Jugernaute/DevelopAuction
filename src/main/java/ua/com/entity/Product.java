@@ -22,20 +22,29 @@ public class Product {
     private TypeSell typeSell;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    @OneToMany(fetch = FetchType.EAGER, //eager my
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
             mappedBy = "product"
     )
     private List<ImageLink> imageLinks;
 
+    @JsonIgnore
+    @OneToOne(
+
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "products"
+    )
+    private LocationLot locationLots;
+
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
+            cascade = {CascadeType.MERGE/*,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH*/})
     private SubCategory subCategory;
 
 @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,
+        @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private User userOwner;
 
@@ -45,7 +54,7 @@ public class Product {
     private Manufacturer manufacturer;
 @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    cascade = {/*CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH,*/ CascadeType.REFRESH},
     mappedBy = "product")
     private Lot lot;
 
@@ -83,6 +92,14 @@ public class Product {
     public Product setSubCategory(SubCategory subCategory) {
         this.subCategory = subCategory;
         return this;
+    }
+
+    public LocationLot getLocationLots() {
+        return locationLots;
+    }
+
+    public void setLocationLots(LocationLot locationLots) {
+        this.locationLots = locationLots;
     }
 
     public StateProduct getStateProduct() {
@@ -195,12 +212,10 @@ public class Product {
                 ", modelProduct='" + modelProduct + '\'' +
                 ", descriptionProduct='" + descriptionProduct + '\'' +
 //                ", linkOnImageProduct='" + linkOnImageProduct + '\'' +
-                ", stateProduct=" + stateProduct +
-                ", imageLinks=" + imageLinks +
-                ", subCategory=" + subCategory +
-                ", userOwner=" + userOwner +
-                ", manufacturer=" + manufacturer +
-                ", lot=" + lot +
+//                ", stateProduct=" + stateProduct +
+//                ", userOwner=" + userOwner +
+//                ", manufacturer=" + manufacturer +
+//                ", lot=" + lot +
                 '}';
     }
 }

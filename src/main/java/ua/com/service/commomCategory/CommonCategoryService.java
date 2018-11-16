@@ -12,5 +12,6 @@ public interface CommonCategoryService {
     void addCommonCategory(CommonCategory commonCategory);
     void updateCommonCategory(CommonCategory commonCategory);
     void deleteCommonCategoryByIb(int idCommonCategory);
+    CommonCategory findCommonCategoriesBySubCategory(String subCategory);
 
 }

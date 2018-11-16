@@ -5,18 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <title>sell</title>
+    <link rel="stylesheet" href="<c:url value="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"/>">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/cabinet_style.css">
     <script src="../js/cabinet.js" defer></script>
     <script src="../js/main.js" defer></script>
-    <script src="../js/sell.js" defer></script>
+    <script src="../js/createLot.js" defer></script>
 </head>
 <body>
 <a href="lot">lot</a>
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="/logout"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
                 <p>Пошук: <input type="search"></p>
                 <ul class="menu">
@@ -89,7 +92,10 @@
                 <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
                     <div class="form-group">
                         <%--<label class="control-label" for="uploadfile">Upload File:</label>--%>
-                        <input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" multiple>
+                            <div id="btn-img">
+                                <a><label for="uploadfile">Add files..</label></a>
+                            </div>
+                        <input type="file" style="visibility: hidden" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" multiple>
                     </div>
                 </form>
             </div>
@@ -146,6 +152,53 @@
                 </div>
                 <span id="duration-lot-error"></span>
             </div>
+
+            <div class="option-list-show-type-wrapper">
+                <p class="required">Регіон : </p>
+                <label>
+                    <select id="region-lot">
+                        <option value="0">Виберіть</option>
+                        <option value="98">А.Р.Крым</option>
+                        <option value="99">Винницкая</option>
+                        <option value="100">Волынская</option>
+                        <option value="101">Днепропетровская</option>
+                        <option value="102">Донецкая</option>
+                        <option value="103">Житомирская</option>
+                        <option value="104">Закарпатская</option>
+                        <option value="105">Запорожская</option>
+                        <option value="106">Ивано-Франковская</option>
+                        <option value="108">Киевская</option>
+                        <option value="109">Кировоградская</option>
+                        <option value="110">Луганская</option>
+                        <option value="112">Львовская</option>
+                        <option value="146">Не из Украины</option>
+                        <option value="113">Николаевская</option>
+                        <option value="114">Одесская</option>
+                        <option value="115">Полтавская</option>
+                        <option value="116">Ровненская</option>
+                        <option value="118">Сумская</option>
+                        <option value="119">Тернопольская</option>
+                        <option value="120">Харьковская</option>
+                        <option value="121">Херсонская</option>
+                        <option value="122">Хмельницкая</option>
+                        <option value="123">Черкасская</option>
+                        <option value="125">Черниговская</option>
+                        <option value="126">Черновицкая</option>
+                        <option value="107">г. Киев</option>
+                        <option value="117">г. Севастополь</option>
+                    </select>
+                    <div id="region-error"></div>
+                </label>
+                </div>
+            <div class="option-list-show-type-wrapper">
+                <p class="required">Місцеположення : </p>
+                <label>
+                    <input type="text" id="place-lot" placeholder="де знаходиться ваш товар">
+                    <div id="place-lot-error"></div>
+                </label>
+            </div>
+
+
             <div class="option-list-show-send">
                 <p class="required">Спосіб доставки : </p>
                 <div class="option-list-show-send-wrapper">
@@ -169,6 +222,66 @@
             <input class="add-product-sell2" type="submit" name="addProduct" value="Створити2">
         </div>
     </div>
+
+    <script id="template-upload" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-upload fade">
+            <td class="preview"><span class="fade"></span></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+            {% } else if (o.files.valid && !i) { %}
+            <td>
+            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+            <button class="btn btn-primary">
+            <i class="icon-upload icon-white"></i>
+            <span>{%=locale.fileupload.start%}</span>
+            </button>
+            {% } %}</td>
+            {% } else { %}
+            <td colspan="2"></td>
+            {% } %}
+            <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+            <i class="icon-ban-circle icon-white"></i>
+            <span>{%=locale.fileupload.cancel%}</span>
+            </button>
+            {% } %}</td>
+            </tr>
+            {% } %}
+        </script>
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-download fade">
+            {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+            {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+            <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+            <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+            {% } %}
+            <td class="delete">
+            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+            <i class="icon-trash icon-white"></i>
+            <span>{%=locale.fileupload.destroy%}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+            </td>
+            </tr>
+            {% } %}
+        </script>
 
 
 
@@ -201,5 +314,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </body>
 </html>
