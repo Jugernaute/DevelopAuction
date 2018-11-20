@@ -24,7 +24,7 @@ public class Basket {
     private List<Lot> lotList;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE})
     private User user;
 

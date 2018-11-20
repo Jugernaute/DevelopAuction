@@ -278,6 +278,7 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
+                "username='" + username + '\'' +
                 "firstNameUser='" + firstNameUser + '\'' +
                 ", surNameUser='" + surNameUser + '\'' +
                 ", userBalance=" + userBalance +

@@ -187,53 +187,7 @@
                     <label>
                         <input id="btn-bet" type="button" value="Bet">
                     </label>
-                    <%--<form action="/setCartToLot" method="get">--%>
                         <button id="setCartToLot">Buy</button><br>
-                        <script>
-                            $("#setCartToLot").on('click',function () {
-                                //
-                                // let $x = $('#dataStartLot');
-                                // let dataStartLot = $x.val();
-                                // $x.val(' ');
-                                // let $x1 = $('#dataEndLot');
-                                // let dataEndLot = $x1.val();
-                                // $x1.val(' ');
-                                // let $x2 = $('#startPrice');
-                                // let startPrice = $x2.val();
-                                // $x2.val(' ');
-                                // let $x3 = $('#hotPrice');
-                                // let hotPrice = $x3.val();
-                                // $x3.val(' ');
-                                // let $x5 = $('#id_Payment');
-                                // let id_Payment = $x5.val();
-                                // $x5.val(' ');
-                                // let $x6 = $('#id_Product');
-                                // let id_Product = $x6.val();
-                                // $x6.val(' ');
-                                // let $x7 = $('#id_Delivery');
-                                // let id_Delivery = $x7.val();
-                                // $x7.val(' ');
-                                // let $x8 = $('#idBasket');
-                                // let idBasket = $x8.val();
-                                // $x8.val(' ');
-
-                                console.log("1111111111");
-                                // let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrice, id_Payment, id_Product, id_Delivery, idBasket});
-                                // console.log("lot : " + lot);
-
-
-                                $.ajax({
-                                    url : '/setCartToLot?id_Payment=' + id_Payment + '&id_Product=' + id_Product + '&idBasket=' + idBasket,
-                                    type : 'put',
-                                    contentType : 'application/json',
-                                    data : lot,
-                                    dataType : 'json'
-                                })
-                            })
-                        </script>
-
-                    <%--<input id="btn-buy" type="button" value="Buy">--%>
-                    <%--</form>--%>
                     <label>
                         <input id="send-massege" type="button" value="Send Message">
                     </label>

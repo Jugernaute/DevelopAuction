@@ -50,12 +50,14 @@ heart.on('click', function () {
 })
 
 $('#setCartToLot').on('click', function () {
+    // let item = sessionStorage.getItem('idLot');
+    let item = 1;
+    console.log("ossssss")
     $.ajax({
         url : '/setCartToLot',
-        type : 'get',
+        type : 'post',
+        data : {item:item},
         contentType : 'application/json',
-        success : function (result) {
-
-        }
+        dataType : 'json'
     })
 })

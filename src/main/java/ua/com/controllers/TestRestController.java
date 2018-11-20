@@ -20,6 +20,7 @@ import ua.com.service.user.UserService;
 import java.util.Scanner;
 
 import javax.naming.Context;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -170,14 +171,22 @@ public class TestRestController {
         lotService.addLot(lot.setPayment(payment).setProduct(product).setDelivery(delivery));
 
     }
+//створення і заповнення корзини
+    @PostMapping("/setCartToLot")
+    public void setCartToLot(){
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println("username1 : " + user.getUsername());
 
-    @PutMapping("/setCartToLot")
-    public void setCartToLot(@RequestBody Lot lot, @RequestParam int idBasket){
-        System.out.println("22222222");
-//                User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//                System.out.println("user : " + user);
+        if (user.getBasket() != null){
+            System.out.println("записуєм інфу");
 
-        //TODO
+        }
+        else {
+            //створюєм корзину і закидуєм інформацію
+            Basket basket = new Basket();
+            basketService.addBasket(basket.setUser(user));
+        }
+
     }
 
     @GetMapping("/updateLot")
