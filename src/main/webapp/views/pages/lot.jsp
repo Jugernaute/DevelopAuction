@@ -187,7 +187,7 @@
                     <label>
                         <input id="btn-bet" type="button" value="Bet">
                     </label>
-                        <button id="setCartToLot">Buy</button><br>
+                        <input type="button" id="setCartToLot" value="Buy">
                     <label>
                         <input id="send-massege" type="button" value="Send Message">
                     </label>
