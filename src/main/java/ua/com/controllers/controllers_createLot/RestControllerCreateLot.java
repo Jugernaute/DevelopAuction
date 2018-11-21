@@ -9,14 +9,14 @@ import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
 import ua.com.service.bet.BetService;
-import ua.com.service.commomCategory.CommonCategoryService;
+import ua.com.service.commonCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
 import ua.com.service.imageLink.ImageLinkService;
 import ua.com.service.locationLot.LocationLotService;
 import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.product.ProductService;
-import ua.com.service.subcategory.SubCategoryService;
+import ua.com.service.subCategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import java.io.BufferedOutputStream;

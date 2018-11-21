@@ -202,7 +202,8 @@ button[type=submit] {
     border: 2px solid #ddd;
 }
 .close:hover,
-.close:focus {
+.close:focus,
+.text-decor-none{
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -256,7 +257,6 @@ button[type=submit] {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-
 }
 .reg_container {
     display: flex;
@@ -272,8 +272,8 @@ button[type=submit] {
 .reg_container form h1{
     font-size: 26px;
 }
-input[type=email], input[type=password], input[type=text]{
-    width: 100%;
+input[type=email], input[type=password], input[type=text], .country-select{
+    width: 50%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
@@ -354,4 +354,59 @@ footer{
 @keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
+}
+.img-lot:first-child {
+    width: 450px;
+    height: 320px;
+}
+.imgSrc{
+    width: 500px;
+}
+.need-regstr{
+    color: red;
+    margin-top: 50px;
+    font-size: 20px;
+    text-shadow: 2px -1px black;
+}
+.needH3{
+    margin-top: 20px
+}
+.success-login{
+    width: 600px;
+    height: 400px;
+}
+.resultRegistration{
+    display: none;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 160px;
+}
+
+.resultRegistration{
+    text-shadow: 2px -2px 3px black;
+    color: red;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 160px;
+}
+#img_loading{
+    display: none;
+    margin-top: 140px;
+    margin-left: 260px;
+}
+.view-user a, .user-id a{
+    color: #ff0000 !important;
+    text-shadow: 1px 1px #002cff;
+}
+#fileUploadForm{
+    width: 58%;
+    margin-top: 25px;
+    margin-right: 219px;
+}
+.view-user{
+    display: none;
+}
+
+.settings{
+    margin-left: 50px;
 }

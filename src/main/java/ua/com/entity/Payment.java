@@ -16,19 +16,18 @@ public class Payment {
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
             mappedBy = "payment")
-    private List<Lot> lotListPayment;
+    private List<Lot> lot;
+
+    public Payment() {
+    }
 
     public Payment(String methodPayment) {
         this.methodPayment = methodPayment;
     }
 
-    public Payment() {
-    }
-
-
-    public Payment(String methodPayment, List<Lot> lotListPayment) {
+    public Payment(String methodPayment, List<Lot> lot) {
         this.methodPayment = methodPayment;
-        this.lotListPayment = lotListPayment;
+        this.lot = lot;
     }
 
     public int getId_Payment() {
@@ -49,12 +48,12 @@ public class Payment {
         return this;
     }
 
-    public List<Lot> getLotListPayment() {
-        return lotListPayment;
+    public List<Lot> getLot() {
+        return lot;
     }
 
-    public Payment setLotListPayment(List<Lot> lotListPayment) {
-        this.lotListPayment = lotListPayment;
+    public Payment setLot(List<Lot> lot) {
+        this.lot = lot;
         return this;
     }
 
@@ -65,13 +64,13 @@ public class Payment {
         Payment payment = (Payment) o;
         return id_Payment == payment.id_Payment &&
                 Objects.equals(methodPayment, payment.methodPayment) &&
-                Objects.equals(lotListPayment, payment.lotListPayment);
+                Objects.equals(lot, payment.lot);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Payment, methodPayment, lotListPayment);
+        return Objects.hash(id_Payment, methodPayment, lot);
     }
 
     @Override

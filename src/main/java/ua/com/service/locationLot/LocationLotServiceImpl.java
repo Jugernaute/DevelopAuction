@@ -2,10 +2,12 @@ package ua.com.service.locationLot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.LocationLotDao;
 import ua.com.entity.LocationLot;
 
 @Service
+@Transactional
 public class LocationLotServiceImpl implements LocationLotService {
 
     @Autowired

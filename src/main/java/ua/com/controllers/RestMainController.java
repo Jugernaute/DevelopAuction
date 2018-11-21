@@ -22,8 +22,6 @@ import java.util.List;
 @PropertySource("classpath:validation.properties")
 public class RestMainController {
     @Autowired
-    private Mail mail;
-    @Autowired
     private UserService userService;
     @Autowired
     private Environment environment;
@@ -31,22 +29,6 @@ public class RestMainController {
     private UserValidator userValidator;
     @Autowired
     private UserEditor userEditor;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-
-//    @PutMapping("sendKeys_lostPsw")
-//    private void sendkeysLostPsw(@RequestBody String email){
-//        User userByEmail = userService.findByEmail(email);
-//        if(userByEmail==null){
-//            return;
-//        }
-//        String s = RandomStr.randomKey();
-//        userByEmail.setRandomKey(s);
-//        String subjectForgotPassword = "Підтвердження дій для зміни пароля";
-//        String text = "Your key for change password: "+ s;
-//        mail.sendMail(email, subjectForgotPassword, text);
-//    }
 
     @PostMapping("enterKey")
     private String lost_password_ok(

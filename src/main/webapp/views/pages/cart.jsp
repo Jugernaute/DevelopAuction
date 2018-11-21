@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Auctione | Корзина</title>
@@ -8,8 +8,6 @@
     <script src="../js/cart.js" defer></script>
     <script src="../js/main.js" defer></script>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <body>
 <div class="auction">
     <header>
@@ -42,7 +40,6 @@
             <div class="product-descrition">
                 <div class="product-seller">
                     <p>Виробник</p>
-
                     <p>Назва продукта</p>
                 </div>
                 <p>Name</p>

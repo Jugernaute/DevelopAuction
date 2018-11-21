@@ -15,15 +15,14 @@ public class SubCategory {
     private int id_SubCategory;
     private String nameSubCategory;
 
-
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER,
+    @ManyToOne(fetch = FetchType.EAGER,  //Lazy
                cascade = {CascadeType.MERGE})
     private CommonCategory commonCategory;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,
-    cascade = {CascadeType.PERSIST,CascadeType.DETACH},
+    cascade = {CascadeType.PERSIST,CascadeType.DETACH/*, CascadeType.MERGE,CascadeType.REFRESH*/},
     mappedBy = "subCategory")
     private List<Product>products;
 

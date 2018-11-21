@@ -1,15 +1,14 @@
 package ua.com.service.commonCategory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.entity.CommonCategory;
 
 import java.util.List;
 
-@Service
-@Transactional
+@Component
 public class CommonCategoryServiceImpl implements CommonCategoryService {
     @Autowired
     private CommonCategoryDao commonCategoryDao;
@@ -43,5 +42,10 @@ public class CommonCategoryServiceImpl implements CommonCategoryService {
     @Override
     public void deleteCommonCategoryByIb(int idCommonCategory) {
         commonCategoryDao.delete(idCommonCategory);
+    }
+
+    @Override
+    public CommonCategory findCommonCategoriesBySubCategory(String subCategory) {
+        return commonCategoryDao.findCommonCategoriesBySubCategory(subCategory);
     }
 }

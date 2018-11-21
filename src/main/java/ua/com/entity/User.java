@@ -187,7 +187,14 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public Basket getBasket() {
+        return basket;
+    }
 
+    public User setBasket(Basket basket) {
+        this.basket = basket;
+        return this;
+    }
 
     public User() {
     }

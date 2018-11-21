@@ -1,10 +1,11 @@
 package ua.com.service.subCategory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.SubCategoryDao;
-import ua.com.entity.CommonCategory;
+import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
 
 import java.util.List;
@@ -42,4 +43,16 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     public List<SubCategory> findAllSubCategory() {
         return subCategoryDao.findAll();
     }
+
+    @Override
+    public SubCategory findByNameSubCategory(String nameSubCategory) {
+        return subCategoryDao.findByNameSubCategory(nameSubCategory);
+    }
+
+    @Override
+    public SubCategory findById_Products(int idProduct) {
+        return subCategoryDao.findSubCategoryByProducts(idProduct);
+    }
+
+
 }

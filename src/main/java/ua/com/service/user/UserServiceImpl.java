@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.UserDao;
 import ua.com.entity.Bet;
 import ua.com.entity.User;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;

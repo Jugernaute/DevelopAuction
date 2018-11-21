@@ -119,13 +119,13 @@ public class TestRestController {
 
     }
 
-    @GetMapping("/deleteProduct")
-    public void deleteProduct(){
+//    @GetMapping("/deleteProduct")
+//    public void deleteProduct(){
 //        Scanner scan = new Scanner(System.in);
 //        System.out.println("asasa" + scan);
 //        int number = scan.nextInt();
 //        System.out.println(number);
-    }
+//    }
 
     ////////////////////////////////////////////////////////////////////////
     @PutMapping("/addCommonCategory")
@@ -168,7 +168,7 @@ public class TestRestController {
         Delivery delivery = deliveryDao.findOne(id_Delivery);
         Product product = productDao.findOne(id_Product);
         Payment payment = paymentDao.findOne(id_Payment);
-        lotService.addLot(lot.setPayment(payment).setProduct(product).setDelivery(delivery));
+        lotService.addLot(lot.setPayment(payment).setProduct(product));
 
     }
 //створення і заповнення корзини
@@ -191,7 +191,7 @@ public class TestRestController {
 
     @GetMapping("/updateLot")
     public void updateLot(@RequestParam int id_lot){
-        lotService.getLot(id_lot);
+        lotService.getLotById(id_lot);
     }
 
     @GetMapping("/allLot")

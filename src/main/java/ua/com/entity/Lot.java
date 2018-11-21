@@ -38,6 +38,7 @@ public class Lot {
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE/*.PERSIST,CascadeType.REMOVE*/})
     private List<LocationUser> location;
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
@@ -76,10 +77,6 @@ public class Lot {
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
         this.hotPrice = hotPrice;
-        this.currentPrice = currentPrice;
-        this.basket = basket;
-        this.listOfLotEnd = listOfLotEnd;
-        this.location = location;
         this.listLotBet = listLotBet;
         this.product = product;
         this.delivery = delivery;
