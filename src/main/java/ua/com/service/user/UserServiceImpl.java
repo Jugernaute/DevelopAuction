@@ -5,9 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.com.dao.UserDao;
+import ua.com.entity.Bet;
 import ua.com.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -61,4 +63,21 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
+
+    @Override
+    public User findUserByProductId(int idProduct) {
+        return userDao.findUserByProductId(idProduct);
+    }
+
+    @Override
+    public List<Object[]> listBetAndUserByLot_id(int id_lot) {
+
+        return userDao.listBetAndUserByLot_id(id_lot);
+    }
+
+    @Override
+    public String getUsernameFromBetById_Bet(int id_bet) {
+        return userDao.getUsernameFromBetById_Bet(id_bet);
+    }
+
 }

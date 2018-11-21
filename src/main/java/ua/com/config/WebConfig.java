@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,17 +25,14 @@ import java.util.Properties;
 @ComponentScan("ua.com.*")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-//    @Bean
-//    public StandardServletMultipartResolver resolver() {
-//        return new StandardServletMultipartResolver();
-//    }
     @Bean (name = "multipartResolver")
     public CommonsMultipartResolver filterMultipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-//        resolver.setDefaultEncoding("utf-8");
-//        resolver.setMaxUploadSize(10000);
+//        multipartResolver.setMaxUploadSize(10485760); // 10MB
+//        multipartResolver.setMaxUploadSizePerFile(1048576); // 1MB
         return resolver;
     }
+
 
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -73,21 +71,4 @@ public JavaMailSenderImpl javaMailSender(){
     return javaMailSender;
 }
 
-//    public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
-//        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        //Registering Hibernate4Module to support lazy objects
-//        mapper.registerModule(new Hibernate5Module());
-//
-//        messageConverter.setObjectMapper(mapper);
-//        return messageConverter;
-//    }
-//
-//    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        //Here we add our custom-configured HttpMessageConverter
-//        converters.add(jacksonMessageConverter());
-//        super.configureMessageConverters(converters);
-//    }
 }

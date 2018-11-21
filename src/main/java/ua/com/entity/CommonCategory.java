@@ -20,8 +20,8 @@ public class CommonCategory {
 
     @JsonIgnore
     @OneToMany(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,           // змінили з LAZY
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH},
             mappedBy = "commonCategory"
     )
     List<SubCategory> subCategoryList;

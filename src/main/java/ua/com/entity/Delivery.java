@@ -3,6 +3,7 @@ package ua.com.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,10 +14,9 @@ public class Delivery {
     private String methodDelivery;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,
-    mappedBy = "delivery")
-    private List<Lot> lotList;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.ALL/*, CascadeType.DETACH*/})
+    private List<Lot> lot = new ArrayList<>();
 
     public Delivery(String methodDelivery) {
         this.methodDelivery = methodDelivery;
@@ -25,9 +25,9 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Delivery(String methodDelivery, List<Lot> lotList) {
+    public Delivery(String methodDelivery,List<Lot> lot) {
         this.methodDelivery = methodDelivery;
-        this.lotList = lotList;
+        this.lot = lot;
     }
 
     public int getId_Delivery() {
@@ -48,12 +48,12 @@ public class Delivery {
         return this;
     }
 
-    public List<Lot> getLotList() {
-        return lotList;
+    public List<Lot> getLot() {
+        return lot;
     }
 
-    public Delivery setLotList(List<Lot> lotList) {
-        this.lotList = lotList;
+    public Delivery setLot(List<Lot> lot) {
+        this.lot = lot;
         return this;
     }
 
@@ -64,13 +64,13 @@ public class Delivery {
         Delivery delivery = (Delivery) o;
         return id_Delivery == delivery.id_Delivery &&
                 Objects.equals(methodDelivery, delivery.methodDelivery) &&
-                Objects.equals(lotList, delivery.lotList);
+                Objects.equals(lot, delivery.lot);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Delivery, methodDelivery, lotList);
+        return Objects.hash(id_Delivery, methodDelivery, lot);
     }
 
     @Override

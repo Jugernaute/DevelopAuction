@@ -5,7 +5,10 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.*;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
 public class WebInit implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -13,19 +16,11 @@ public class WebInit implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(WebConfig.class);
 
-        MultipartConfigElement configElement = new MultipartConfigElement(
-                "",
-                10000000,
-                10000000,
-                10000000
-        );
-
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
 
         ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcherServlet", dispatcherServlet);
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
-        registration.setMultipartConfig(configElement);
 
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");

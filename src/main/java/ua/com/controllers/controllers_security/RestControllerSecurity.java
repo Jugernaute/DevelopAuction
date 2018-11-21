@@ -32,6 +32,7 @@ public class RestControllerSecurity {
     public String save(User user,
             @RequestParam String psw_repeat,
              BindingResult result) {
+        System.out.println("regggggg-------------------------");
         User findUser = userService.findByUsername(user.getUsername());
         if (findUser!=null) {
             return environment.getProperty("test_login_InDB");
@@ -68,7 +69,7 @@ public class RestControllerSecurity {
         } else {
             return environment.getProperty("matchPassword_registrationForm");
         }
-        return "you are login";
+        return "Go to the registration link from your mail";
     }
 }
 

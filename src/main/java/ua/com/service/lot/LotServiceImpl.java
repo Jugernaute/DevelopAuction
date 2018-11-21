@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.LotDao;
-import ua.com.entity.Basket;
 import ua.com.entity.Lot;
 
 import java.util.List;
@@ -18,7 +17,9 @@ public class LotServiceImpl implements LotService {
 
     @Override
     public void addLot(Lot lot) {
+      if (lot != null){
                 lotDao.save(lot);
+    }
     }
 
     @Override
@@ -36,15 +37,19 @@ public class LotServiceImpl implements LotService {
         return lotDao.findOne(id_Lot);
     }
 
+
     @Override
     public List<Lot> findAllLot() {
         return lotDao.findAll();
     }
 
     @Override
-    public void getLot(int id_Lot) {
-        lotDao.findOne(id_Lot).getHotPrice();
-
+    public Lot findLotByProduct_Id(int idProduct) {
+        return lotDao.findLotByProduct_Id(idProduct);
     }
 
+    @Override
+    public Lot findLotByImageLink_Name(String nameImgLink) {
+        return lotDao.findLotByImageLink_Name(nameImgLink);
+    }
 }
