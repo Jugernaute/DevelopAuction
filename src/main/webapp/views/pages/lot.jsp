@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../style/lot_style.css">
     <script src="../js/main.js" defer></script>
     <script src="../js/lotstyle.js" defer></script>
+    <script src="../js/lot.js" defer></script>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -187,7 +188,9 @@
                     <label>
                         <input id="btn-bet" type="button" value="Bet">
                     </label>
-                        <input type="button" id="setCartToLot" value="Buy">
+                    <label>
+                        <input id="btn-buy" type="button" value="Buy">
+                    </label>
                     <label>
                         <input id="send-massege" type="button" value="Send Message">
                     </label>

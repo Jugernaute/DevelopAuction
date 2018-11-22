@@ -49,14 +49,14 @@ heart.on('click', function () {
     $('#heart-full').toggleClass('hidden')
 })
 
-$('#setCartToLot').on('click', function () {
-    // let item = sessionStorage.getItem('idLot');
-    let item = 1;
-    $.ajax({
-        url : '/setCartToLot',
-        type : 'post',
-        data : {item:item},
-        contentType : 'application/json',
-        dataType : 'json'
-    })
-})
+// $('#setCartToLot').on('click', function () {
+//     let item = 1;
+//
+//     $.ajax({
+//         url : '/setCartToLot',
+//         type : 'post',
+//         contentType : 'application/json',
+//         data : item,
+//
+//     })
+// })

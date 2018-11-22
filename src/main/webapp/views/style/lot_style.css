@@ -73,16 +73,13 @@
 .lot-info-price{
     width: 100%;
     display: flex;
-    /*justify-content: space-between;*/
+    justify-content: space-between;
     align-items: center;
 }
 .lot-info-price_bet{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.lot-info-price_bet label{
-    margin-right: 20px;
 }
 .lot-info-price_bet input{
     margin: 0 0 0 20px;
@@ -98,14 +95,13 @@
     align-items: center;
 
 }
-.lot-info-current-price p:first-child{
+.lot-info-current-price p{
     margin-right: 5px;
-    font-size: 11px;
+    font-size: 25px;
 }
 .lot-info-current-price span{
-    margin-right: 45px;
+    margin-right: 25px;
     font-size: 25px;
-    color: red;
 
 }
 .lot-info-price_button{
@@ -114,27 +110,19 @@
     justify-content: space-around;
 }
 .lot-info-price_button input{
-    height: 50px;
+    height: 30px;
     width: 100px;
     cursor: pointer;
 }
 .lot-info-price-timer{
     width: 92%;
-    /*display: flex;*/
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 }
 .lot-info-price-timer p{
     margin: 2px 0;
-    color: darkblue;
-}
-
-#price{
-    margin: 0 10px;
-    font-size: 25px;
-    color: red;
-    font-weight: bold;
 }
 .lot-about_options-list{
     width: 100%;
@@ -166,117 +154,7 @@
     border-bottom: 1px solid gray;
     padding: 20px 20px;
 }
-.lot-about_descr{
-    font-size: 20px;
-    color: brown;
-}
-
 #timer{
-    margin-left: 60px;
     font-size: 25px;
-    color: red;
-}
-#error-bet{
-    font-size: 15px;
-    color: red;
-}
-.red::placeholder {
-    color: red;
-}
-#bet-input{
-    -webkit-appearance: none;
-    color: black;
-    height: 40px;
-    width: 150px;
-    border-radius: 10px;
-    border: 1px solid black;
-    background: floralwhite;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.inp-style{
-    color: azure;
-    height: 50px;
-    border-radius: 10px;
-    outline: none;
-}
-#btn-bet{
-    background: green;
-}
-#btn-buy{
-    background: red;
-    height: 80px;
-    width: 100px;
-    padding-top: 5px
-
-}
-#send-massege{
-    background: blue;
-}
-.list-bet-out{
-    font-size: 14px;
-    color: blue;
-}
-.inline{
-    display: inline;
-}
-.bet-btn1{
-    width: 30px;
-    height: 30px;
-    background: greenyellow;
-    outline: none;
-    border-radius: 5px;
-    color: black;
-}
-.bet-btn2{
-    height: 30px;
-    background: greenyellow;
-    border-radius: 5px;
-    outline: none;
-    color: black;
-    min-width: 50px;
-}
-.bet-btn3{
-    height: 30px;
-    background: greenyellow;
-    border-radius: 5px;
-    outline: none;
-    color: black;
-    min-width: 50px;
-}
-/*.after-img:after{*/
-    /*display: block;*/
-    /*content: "";*/
-    /*width: 32px;*/
-    /*height: 32px;*/
-    /*background: transparent url('../img/refresh.png') no-repeat;*/
-/*}*/
-/*.inner-img{*/
-    /*display: inline-block;*/
-    /*width: 25px;*/
-    /*height: 25px;*/
-    /*background: transparent url('../img/refresh.png') no-repeat;*/
-/*}*/
-
-#qwe{
-    border: 1px solid black;
-}
-
-#hr-btn{
-    margin-bottom: 5px;
-    margin-top: 3px;
-}
-#p-btn{
-    /*font-size: 15px;*/
-    width: 87px;
-    margin-left: 5px;
-    background: white;
-    height: 40px;
-    padding-top: 12px;
-    border-radius: 5px;
-    color: black;
+    color: #55ACEE;
 }

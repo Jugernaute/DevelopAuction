@@ -121,6 +121,50 @@ public class MainController{
         model.addAttribute("hotPrice", hotPrice);
         return "lot&bet";
     }
+//////////////////////////////////////////////////////////////////
+@GetMapping("/goToLot")
+private String goToLot(){
+    return "lot";
+}
 
+    @GetMapping("/goToHome")
+    private String goToHome(){
+        return "home";
+    }
+
+    @GetMapping("/save")
+    public String home(Model model){
+        return "save";
+    }
+
+    @GetMapping("/delete")
+    public String delete(Model model){
+        return "delete";
+    }
+
+    @GetMapping("/restp")
+    public String restp(){
+        return "restp";
+    }
+
+    @ModelAttribute("userModel")
+    public User user(){
+        return new User();
+    }
+
+    @GetMapping("/cart")
+    public String goCart(){
+        return "cart";
+    }
+
+    @GetMapping("/aukcion")
+    public String goAukcion(){
+        return "aukcion";
+    }
+
+    @GetMapping("/lot")
+    public String goLot(){
+        return "lot";
+    }
 
 }
