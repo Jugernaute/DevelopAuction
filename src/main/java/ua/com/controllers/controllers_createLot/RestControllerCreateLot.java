@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
+import ua.com.method.error_log.Logs;
 import ua.com.service.bet.BetService;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
@@ -53,6 +54,8 @@ public class RestControllerCreateLot {
     private LocationLotService locationLotService;
     @Autowired
     private BetService betService;
+    @Autowired
+    private Logs logs;
 
     @PostMapping("upload")
     private String upload(@RequestParam("fileload") MultipartFile[] uploadfile){
@@ -116,27 +119,6 @@ public class RestControllerCreateLot {
     ) {
 
         Product product = new Product();
-//        Delivery delivery = new Delivery();
-//        Manufacturer manufacturer = new Manufacturer();
-
-
-//        System.out.println(nameProduct);
-//        System.out.println(manufacturerProduct);
-//        System.out.println(nameCommonCategory);
-//        System.out.println(nameSubCategory);
-//        System.out.println(stateProduct);
-//        System.out.println(descriptionProduct);
-//        System.out.println(modelProduct);
-//        System.out.println(typeSell);
-//        System.out.println(hotPrice);
-//        System.out.println(startPrice);
-//        System.out.println(dataStartLot);
-//        System.out.println(durationOfLot);
-//        System.out.println(Arrays.toString(methodDelivery));
-//        System.out.println("-------"+placeLot);
-//        System.out.println("-------"+regionLot);
-
-
 
         /*
          *  start working with product object
@@ -151,6 +133,7 @@ public class RestControllerCreateLot {
             product.setSubCategory(byNameSubCategory);
 
         } catch (Exception e) {
+            logs.logError(e);
             return "error in tree load link -> " + e.getMessage();
         }
 
@@ -190,20 +173,13 @@ public class RestControllerCreateLot {
                 }
             }
         } catch (Exception e) {
+            logs.logError(e);
             return "error with create product class -> " + e.getMessage();
         }
 
         // working with multipart file
         // Get the filename and build the local file path
-//        try {
-//            System.out.println(product.getTypeSell() + " type sell");
-//            System.out.println(product.getNameProduct() + " name prod");
-//            System.out.println(product.getUserOwner().getUsername() + " user");
-//            System.out.println(product.getSubCategory() + " subCateg");
-//            System.out.println(product.getManufacturer() + " manuf");
-//        } catch (Exception e) {
-////            return "error with product save -> " + e.getMessage()+ " "+e.getLocalizedMessage();
-//        }
+
         LocationLot locationLot = new LocationLot(regionLot, placeLot);
 
         productService.addProduct(product);
@@ -257,9 +233,11 @@ public class RestControllerCreateLot {
                    }while (countImg>uploadfile.length);                                    // only 4 img
                 }
             } catch (Exception e) {
+                logs.logError(e);
                 return "error with imageLink save -> " + e.getMessage();
             }
         } catch (Exception e) {
+            logs.logError(e);
             return "error in filePath -> " + e.getMessage();
         }
         Lot lot = new Lot();

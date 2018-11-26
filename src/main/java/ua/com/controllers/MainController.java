@@ -50,7 +50,7 @@ public class MainController{
             if (user.getRandomKey()!=null){
                 return  "/errorPage/activation_error";
             }
-            List list = allLotOnMainPage.loadAllLotOnMainPage();
+            List<ImageLink> list = allLotOnMainPage.loadAllLotOnMainPage();
 
             model.addAttribute("imgLinks", list);
             model.addAttribute("user",user);

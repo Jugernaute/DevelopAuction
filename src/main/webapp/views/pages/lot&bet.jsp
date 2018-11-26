@@ -174,6 +174,7 @@
                 </div>
 
                 <span id="error-bet"></span>
+                <%--<img src="../img/loadBet.gif" id="loadingBetUp">--%>
                 <div class="lot-info-price_button">
                     <label>
                         <input id="btn-bet" class="inp-style" type="button" value="Зробити ставку">

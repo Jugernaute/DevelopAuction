@@ -317,6 +317,7 @@ btn.on('click',function () {
     let srcImg=imgContainer.find('img').attr('src');
     let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
 
+
     $.ajax({
         url:'http://localhost:8080/lot/hotPrice',
         type: 'get',

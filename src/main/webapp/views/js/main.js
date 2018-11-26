@@ -114,13 +114,60 @@
 
 ///category list///////////
 
-    $('.products_list').on('click', () => {
-        $('.category-list').toggleClass('hidden')
+    // $('.products_list').on('click', () => {
+    //     $('.category-list').toggleClass('hidden')
+    // });
+    //
+    // $('.category-list-parent').on('mouseover', ()=> {
+    //    $(this).next().toggleClass('hidden')
+    // });
+
+    $('.households').on('click',function () {
+        let hotLot = $('.hot_lot');
+        let nameCategory = $(this).find('a').text();
+        // console.log(idCategory);
+        $.ajax({
+           url:'http://localhost:8080/category/'+nameCategory,
+           success: function (result) {
+
+               $.each(result, function(a, b) {
+                       // hotLot.empty();
+                       console.log(b);
+
+
+                       //===============================================================
+                       // '<li data-grid-id="' + item.CategoryId +
+                       // '"><a href="#">' + item.CategoryDescription +
+                       // '<span class="glyphicon glyphicon-chevron-right"></span></a></li>'
+                       // hotLot.append('<li><a href="#">'+y+'</a></li>')
+                       // ============================================================
+                       // '<div className="hot_lot_wrapper">' +
+                       //     '<div className="cont_img">' +
+                       //          '<a href="lot/'+y.id_Product+'" className="get-id"><img' +
+                       //          ' src="../img/product_Img/${img.getLinkOfImage()}" height="200" width="200"/></a></div>' +
+                       //         '<div className="container">' +
+                       //             '<h2 className="cont_titel"><b>' +
+                       //             '<c:out value="${nameProd}"/>' +
+                       //             '<c:out value="${modelProd}"/>' +
+                       //             '<' +
+                       //             '%--' +
+                       //             '<c:out value="${manufProd}"/>' +
+                       //             '--%></b></h2>' +
+                       //         '<p className="text-end">завершення :</p>' +
+                       //             '<div className="cont_timer">' +
+                       //             '<c:out value="${startLot}"/>' +
+                       //             '</div>' +
+                       //     '<h4 className="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>' +
+                       //     '</div>' +
+                       // '</div>'
+
+                   });
+
+               // });
+           }
+       })
     });
 
-    $('.category-list-parent').on('mouseover', ()=> {
-       $(this).next().toggleClass('hidden')
-    });
 
 $('.cont_img').on('click',function () {
     let message = $(this).find('a').attr('href');

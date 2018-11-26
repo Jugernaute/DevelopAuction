@@ -1,27 +1,33 @@
 package ua.com.controllers.controllers_bet;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import ua.com.dao.UserDao;
 import ua.com.entity.*;
+import ua.com.method.FindUserFromListOfBet;
 import ua.com.method.LiderAndSizeOfBets;
+import ua.com.method.error_log.Logs;
+import ua.com.method.subscribers.BetLot;
+import ua.com.method.subscribers.Subscribers;
 import ua.com.service.bet.BetService;
 import ua.com.service.imageLink.ImageLinkService;
 import ua.com.service.lot.LotService;
 import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 @RestController
 public class RestControllerBet {
+
+    @Autowired
+    private Logs logs;
     @Autowired
     private ImageLinkService imageLinkService;
     @Autowired
@@ -34,11 +40,15 @@ public class RestControllerBet {
     private UserService userService;
     @Autowired
     private LiderAndSizeOfBets liderAndSizeOfBets;
+    @Autowired
+    private Subscribers subscribers;
+    @Autowired
+    private FindUserFromListOfBet findUserFromListOfBet;
 
     @PostMapping("lot/betUp")
     private Map<String,String> betUp(
                             @RequestParam String betUps,
-                            @RequestParam String idProductSession){
+                            @RequestParam String idProductSession) throws IOException {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
         int id_product = productService.getProductById(Integer.parseInt(idProductSession)).getId_Product();
@@ -53,9 +63,9 @@ public class RestControllerBet {
 
         User createProductUser = userService.findUserByProductId(id_product);
         String userfromSession = SecurityContextHolder.getContext().getAuthentication().getName();
-        User byUsername = userService.findByUsername(userfromSession);
+        User userFromSession = userService.findByUsername(userfromSession);
 
-        if (userfromSession.equals("anonymousUser") || !byUsername.isEnabled()){
+        if (userfromSession.equals("anonymousUser") || !userFromSession.isEnabled()){
             map.put("registration","Ви повинні спочатку авторизуватися");
             return map;
         }
@@ -85,12 +95,35 @@ public class RestControllerBet {
         currentPrice = userBet;
 
             lot.setCurrentPrice(currentPrice);
-            lotService.addLot(lot);
+
+/*
+* subscribers method
+* */
+        List<User> userList = findUserFromListOfBet.userFromBet(id_lot, userfromSession);
+        subscribers.userlist.clear();
+        for (User user : userList) {
+            subscribers.userlist.add(user);
+            System.out.println(user.getUsername()+" "+ user.getEmail());
+        }
+
+        BetLot betLotMethod =new BetLot();
+        betLotMethod.addObserved(subscribers);
+        Product productById = productService.getProductById(id_product);
+        String nameProduct = productById.getNameProduct();
+        String modelProduct = productById.getModelProduct();
+        try {
+            betLotMethod.changeCurrentPrice(nameProduct, modelProduct, currentPrice);
+        } catch (InterruptedException e) {
+            logs.logError(e);
+        }
+
+
+        lotService.addLot(lot);
             nextStepBet = (int) Math.round((currentPrice) * 0.1);
             bet.setStepBet(nextStepBet);
             bet.setLot(lot);
             bet.setSum_of_the_bet(currentPrice);
-            bet.setUser(byUsername);
+            bet.setUser(userFromSession);
             betService.addBet(bet);
 
 

@@ -3,18 +3,17 @@ package ua.com.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
-import ua.com.entity.User;
-import ua.com.method.Mail;
-import ua.com.method.RandomStr;
+import ua.com.entity.*;
+import ua.com.method.LoadAllLotOnMainPage;
+import ua.com.service.commomCategory.CommonCategoryService;
+import ua.com.service.subcategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -29,6 +28,12 @@ public class RestMainController {
     private UserValidator userValidator;
     @Autowired
     private UserEditor userEditor;
+    @Autowired
+    private CommonCategoryService commonCategoryService;
+    @Autowired
+    private SubCategoryService subCategoryService;
+    @Autowired
+    private LoadAllLotOnMainPage allLotOnMainPage;
 
     @PostMapping("enterKey")
     private String lost_password_ok(
@@ -70,5 +75,31 @@ public class RestMainController {
         else{
             return property;
         }
+    }
+
+    @GetMapping("category/{nameCategory}")
+    private String [] categoryList(@PathVariable String nameCategory){
+        List<ImageLink> linkList = allLotOnMainPage.loadAllLotOnMainPage(nameCategory);
+
+        String idProduct = "";
+        String linkOfImg = "";
+        String nameProduct = "";
+        String modelProduct = "";
+        String dataStartLot = "";
+        String currentPrice = "";
+        String [] array = {
+                idProduct, linkOfImg, nameProduct, modelProduct, dataStartLot, currentPrice
+        };
+        for (ImageLink imageLink : linkList) {
+            Product product = imageLink.getProduct();
+            linkOfImg=imageLink.getLinkOfImage();
+            idProduct= String.valueOf(product.getId_Product());
+            nameProduct= product.getNameProduct();
+            modelProduct= product.getModelProduct();
+            dataStartLot = product.getLot().getDataStartLot().toString();
+            currentPrice= String.valueOf(product.getLot().getCurrentPrice());
+        }
+        Json
+        return array;
     }
 }

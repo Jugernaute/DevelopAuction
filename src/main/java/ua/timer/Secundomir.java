@@ -8,6 +8,10 @@ import java.util.*;
 public class Secundomir {
     public static void main(String[] args) {
 
+        System.out.println(System.getProperty("java.util.logging.config.file"));
+
+
+
 //        LocalDateTime now = LocalDateTime.now();
 //        LocalDateTime dateTime_future = LocalDateTime.of(2018, 11, 10, 9, 0, 0);
 //        Duration between = Duration.between(now, dateTime_future);
@@ -24,14 +28,64 @@ public class Secundomir {
 //                timerRun.setInterval();
 //            }
 //        }, 0, 1000);
+//=======================================================================================
+//        ONewsAgency observable = new ONewsAgency();
+//        ONewsChannel observer1 = new ONewsChannel();
+//        ONewsChannel observer2 = new ONewsChannel();
+//        ONewsChannel observer3 = new ONewsChannel();
+//
+//        observable.addObserver(observer1);
+//        observable.addObserver(observer2);
+//        observable.addObserver(observer3);
+//        observable.setNews("eeee");
+//        observable.setAsd("bb");
+////        observable.setNews("qwe");
+//
+////        Car car = new Car();
+////        System.out.println(car.getName());
+//
+//
+//    }
+//
+//    public static class ONewsChannel implements Observer {
+//
+////        private String s;
+//
+//        @Override
+//        public void update(Observable o, Object s) {
+////            this.setNews((String) s);
+////            int i = o.countObservers();
+//            System.out.println(s);
+//        }
+//
+////        public String getNews() {
+////            return s;
+////        }
+////
+////        public void setNews(String news) {
+////            this.s = s;
+////        }
+//
+//    }
+//
+//
+//    public static class ONewsAgency extends Observable {
+//        private String news;
+//        private String asd;
+//
+//        public void setNews(String news) {
+//            this.news = news;
+//            setChanged();
+//            notifyObservers(news);
+//        }
+//
+//        public void setAsd(String asd) {
+//            this.asd = asd;
+//            setChanged();
+//            notifyObservers(asd);
+//        }
 
 
-List<String> qwe = new ArrayList<>();
-qwe.add("q");
-qwe.add("a");
-List<String>asd =new ArrayList<>();
-        System.out.println(qwe.isEmpty());
-        System.out.println(asd.isEmpty());
 
     }
 
