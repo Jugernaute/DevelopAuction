@@ -22,8 +22,8 @@ public class Lot {
     private int currentPrice;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE)
     private Basket basket;
 
     @JsonIgnore

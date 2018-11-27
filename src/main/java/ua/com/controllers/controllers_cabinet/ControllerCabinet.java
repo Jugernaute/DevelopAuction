@@ -28,6 +28,4 @@ public class ControllerCabinet {
         model.addAttribute("user",user);
         return "createLot";
     }
-
-
 }

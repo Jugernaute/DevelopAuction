@@ -17,6 +17,8 @@ import ua.com.service.payment.PaymentService;
 import ua.com.service.product.ProductService;
 import ua.com.service.subCategory.SubCategoryService;
 import ua.com.service.user.UserService;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import javax.naming.Context;
@@ -171,23 +173,6 @@ public class TestRestController {
         lotService.addLot(lot.setPayment(payment).setProduct(product));
 
     }
-//створення і заповнення корзини
-    @PostMapping("/setCartToLot")
-    public void setCartToLot(){
-        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("username1 : " + user.getUsername());
-
-        if (user.getBasket() != null){
-            System.out.println("записуєм інфу");
-
-        }
-        else {
-            //створюєм корзину і закидуєм інформацію
-            Basket basket = new Basket();
-            basketService.addBasket(basket.setUser(user));
-        }
-
-    }
 
     @GetMapping("/updateLot")
     public void updateLot(@RequestParam int id_lot){
@@ -262,6 +247,7 @@ public class TestRestController {
 //            System.out.println("user : " + user + user.getUsername());
 //        }
 //        else {System.out.println("11111111");}
+
     }
 }
 

@@ -7,7 +7,7 @@
     <title>Auction | lot</title>
     <script src="https://use.fontawesome.com/a3f7924682.js"></script>
     <link rel="stylesheet" href="../style/main.css">
-    <link rel="stylesheet" href="../style/lot_Style.css">
+    <link rel="stylesheet" href="../style/lot_style.css">
     <script src="../js/main.js" defer></script>
     <script src="../js/lot.js" defer></script>
     <%--<script src="../js/bet.js" defer></script>--%>
@@ -95,7 +95,7 @@
                     <li class="view-user"><a href="/goToCabinet" class="for-remove-2">${userFromSession}</a></li>
                     <li class="sell"><a href="/goToSell">Продати</a></li>
                     <li class="favorites"><a href="#">Обрані</a></li>
-                    <li class="cart"><a href="#">Корзина</a></li>
+                    <li class="cart"><a href="/goToCart">Корзина</a></li>
                     <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>

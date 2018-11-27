@@ -62,6 +62,7 @@ public class MainController{
 
     }
 
+
     @GetMapping("/goLostPsw")
     private String goLostPsw(){
         return "lostpassword";
@@ -121,6 +122,7 @@ public class MainController{
         model.addAttribute("hotPrice", hotPrice);
         return "lot&bet";
     }
+
 //////////////////////////////////////////////////////////////////
 @GetMapping("/goToLot")
 private String goToLot(){
@@ -152,7 +154,7 @@ private String goToLot(){
         return new User();
     }
 
-    @GetMapping("/cart")
+    @GetMapping("/setCartToLot")
     public String goCart(){
         return "cart";
     }
@@ -166,5 +168,6 @@ private String goToLot(){
     public String goLot(){
         return "lot";
     }
+
 
 }

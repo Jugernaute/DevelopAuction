@@ -18,7 +18,7 @@ public class Basket {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE}
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH}
 //            , mappedBy = "basket"
     )
     private List<Lot> lotList;

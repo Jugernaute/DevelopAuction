@@ -14,5 +14,4 @@ public interface BasketService {
 
     Basket getBasketById(int idBasket);
 
-
 }

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +11,7 @@
     <script src="../js/main.js" defer></script>
 </head>
 <body>
+<div id="conversationDiv"></div>
 <div class="auction">
     <header>
         <div class="wrapper">
@@ -16,12 +19,11 @@
             <nav>
                 <input type="search" placeholder="ПОШУК ТОВАРІВ">
                 <ul class="menu">
-
-                    <li class="user-id"><a href="#">userID</a></li>
-                    <li class="sell"><a href="sell.html">Продати</a></li>
+                    <li class="user-id"><a href="goToCabinet">${user.getUsername()}</a></li>
+                    <li class="sell"><a href="/goToSell">Продати</a></li>
                     <li class="favorits"><a href="#">Обрані</a></li>
-                    <li class="cart"><a href="#">Корзина</a></li>
-                    <li class="exit"><a href="#">Вийти</a></li>
+                    <%--<li class="cart"><a href="#">Корзина</a></li>--%>
+                    <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>
         </div>
@@ -39,11 +41,12 @@
             </div>
             <div class="product-descrition">
                 <div class="product-seller">
-                    <p>Виробник</p>
-                    <p>Назва продукта</p>
+                    <p id="cartNameProduct">Виробник : ${product.NameProduct}</p>
+                    <p id="cartModelProduct">Назва продукта : ${product.modelProduct}</p>
                 </div>
-                <p>Name</p>
-                <p>Phone nomber</p>
+                <p id="userFirsName">Name</p>
+                <p id="userPhone">Phone nomber</p>
+                <p id="userEmail">Email</p>
             </div>
             <div class="product-price">
                 <p>4654</p>
@@ -51,8 +54,8 @@
         </div>
     </section>
     <div class="product-line"></div>
-    <input type="button" name="continue-bye" value="Продовжити покупки">
-    <button class="test">test</button>
+    <input id="nextBay" type="button" name="continue-bye" value="Продовжити покупки">
+    <button id="test" class="test">test</button>
 
 
     <footer>
