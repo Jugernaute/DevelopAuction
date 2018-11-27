@@ -49,7 +49,7 @@
                 <p id="userEmail">Email</p>
             </div>
             <div class="product-price">
-                <p>4654</p>
+                <p id="price">4654</p>
             </div>
         </div>
     </section>
