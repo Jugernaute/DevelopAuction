@@ -38,22 +38,35 @@
         </div>
     </section>
     <section class="product-cart">
-        <div class="product-container">
-            <div class="product-photo">
-            </div>
-            <div class="product-descrition">
-                <div class="product-seller">
-                    <p id="cartNameProduct">Виробник : ${product.NameProduct}</p>
-                    <p id="cartModelProduct">Назва продукта : ${product.modelProduct}</p>
+        <c:forEach items="${infoProd}" var="info">
+            <c:set var = "nameProduct" scope="session" value="${info.getProduct().getNameProduct()}"/>
+            <c:set var = "modelProduct" scope = "session" value = "${info.getProduct().getModelProduct()}"/>
+            <%--<c:set var = "manufProd" scope = "session" value = "${info.getProduct().getManufacturer()}"/>--%>
+            <c:set var = "curentPrice" scope = "session" value = "${info.getProduct().getLot().getCurrentPrice()}"/>
+            <%--<c:set var = "userName" scope="session" value="${info.getProduct().getUserOwner().getFirstNameUser()}"/>--%>
+            <%--<c:set var = "userPhone" scope="session" value="${info.getProduct().getUserOwner().getPhone()}"/>--%>
+            <%--<c:set var = "userEmail" scope="session" value="${info.getProduct().getUserOwner().getEmail()}"/>--%>
+
+            <div class="product-container">
+                <div class="product-photo">
+                    <a href="lot/${img.getProduct().getId_Product()}" class="get-id"><img src="../img/product_Img/${img.getLinkOfImage()}" height="130" width="130"/>
+                    </a>
                 </div>
-                <p id="userFirsName">Name</p>
-                <p id="userPhone">Phone nomber</p>
-                <p id="userEmail">Email</p>
+                <div class="product-descrition">
+                    <div class="product-seller">
+                        <p class="product-manufacturer">Назва : <c:out value="${nameProduct}"/></p>
+                        <p class="product-model">Модель : <c:out value="${modelProduct}"/></p>
+
+                    </div>
+                    <%--<p class="userName">Name : <c:out value="${userName}"/></p>--%>
+                    <p id="userPhone">Phone nomber</p>
+                    <p id="userEmail">Email</p>
+                </div>
+                <div class="product-price">
+                    <h4 class="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>
+                </div>
             </div>
-            <div class="product-price">
-                <p id="price">4654</p>
-            </div>
-        </div>
+        </c:forEach>
     </section>
     <div class="product-line"></div>
     <input id="nextBay" type="button" name="continue-bye" value="Продовжити покупки">

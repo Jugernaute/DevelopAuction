@@ -26,21 +26,22 @@ public class RestControllerCart {
     private BasketService basketService;
 
 
-    @GetMapping( "/allProductToCart" )
-    public List<Product> allProductToCart() {
-        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-
-        List<Lot> allLot = lotService.findAllLot();
-        List<Product> productList = new ArrayList<>();
-        for (Lot lot : allLot) {
-
-            if (lot.getBasket() != null){
-
-                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket());
-                Product product = lot.getProduct();
-                productList.add(product);
-            }
-        }
-        return productList;
-    }
+//    @GetMapping( "/allProductToCart" )
+//    public List<Lot> allLotToCart() {
+//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+//
+//        List<Lot> allLot = lotService.findAllLot();
+//        List<Lot> lotList = new ArrayList<>();
+//        for (Lot lot : allLot) {
+//
+//            if (lot.getBasket() != null){
+//
+//                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket());
+////                Product product = lot.getProduct();
+////                productList.add(product);
+//                lotList.add(lot);
+//            }
+//        }
+//        return lotList;
+//    }
 }

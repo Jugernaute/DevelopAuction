@@ -113,7 +113,6 @@
                 </div>
             </section>
             <section class="hot_lot">
-
                 <c:forEach items="${imgLinks}" var="img">
                 <c:set var = "nameProd" scope = "session" value = "${img.getProduct().getNameProduct()}"/>
                 <c:set var = "modelProd" scope = "session" value = "${img.getProduct().getModelProduct()}"/>
