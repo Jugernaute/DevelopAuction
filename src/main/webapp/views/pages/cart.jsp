@@ -38,28 +38,31 @@
     </section>
     <section class="product-cart">
         <c:forEach items="${infoProd}" var="info">
-            <c:set var = "nameProduct" scope="session" value="${info.getProduct().getNameProduct()}"/>
-            <c:set var = "modelProduct" scope = "session" value = "${info.getProduct().getModelProduct()}"/>
-            <%--<c:set var = "manufProd" scope = "session" value = "${info.getProduct().getManufacturer()}"/>--%>
-            <c:set var = "curentPrice" scope = "session" value = "${info.getProduct().getLot().getCurrentPrice()}"/>
-            <%--<c:set var = "userName" scope="session" value="${info.getProduct().getUserOwner().getFirstNameUser()}"/>--%>
-            <%--<c:set var = "userPhone" scope="session" value="${info.getProduct().getUserOwner().getPhone()}"/>--%>
-            <%--<c:set var = "userEmail" scope="session" value="${info.getProduct().getUserOwner().getEmail()}"/>--%>
+
+            <%--<p>${info.key} + ' ' + ${info.value.getProduct().getNameProduct()}</p>--%>
+            <c:set var = "nameProduct" scope="session" value="${info.value.getProduct().getNameProduct()}"/>
+            <c:set var = "modelProduct" scope = "session" value = "${info.value.getProduct().getModelProduct()}"/>
+            <%--<c:set var = "manufProd" scope = "session" value = "${info.value.getProduct().getManufacturer()}"/>--%>
+            <c:set var = "curentPrice" scope = "session" value = "${info.value.getProduct().getLot().getCurrentPrice()}"/>
+            <c:set var = "userName" scope="session" value="${info.key.getFirstNameUser()}"/>
+            <c:set var = "userPhone" scope="session" value="${info.key.getPhone()}"/>
+            <c:set var = "userEmail" scope="session" value="${info.key.getEmail()}"/>
 
             <div class="product-container">
                 <div class="product-photo">
-                    <a href="lot/${img.getProduct().getId_Product()}" class="get-id"><img src="../img/product_Img/${img.getLinkOfImage()}" height="130" width="130"/>
+                    <a class="getImg"><img src="../img/product_Img/${info.value.getProduct().getImageLinks().get(0).getLinkOfImage()}" height="100" width="100"/>
                     </a>
                 </div>
                 <div class="product-descrition">
                     <div class="product-seller">
-                        <p class="product-manufacturer">Назва : <c:out value="${nameProduct}"/></p>
+                        <%--<p class="manufProd">Назва : <c:out value="${manufProd}"/></p>--%>
+                        <p class="nameProduct">Назва : <c:out value="${nameProduct}"/></p>
                         <p class="product-model">Модель : <c:out value="${modelProduct}"/></p>
 
                     </div>
-                    <%--<p class="userName">Name : <c:out value="${userName}"/></p>--%>
-                    <p id="userPhone">Phone nomber</p>
-                    <p id="userEmail">Email</p>
+                    <p class="userName">Name : <c:out value="${userName}"/></p>
+                    <p id="userPhone">Phone nomber : <c:out value="${userPhone}"/></p>
+                    <p id="userEmail">Email : <c:out value="${userEmail}"/></p>
                 </div>
                 <div class="product-price">
                     <h4 class="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>

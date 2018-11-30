@@ -45,7 +45,7 @@ public class Product {
 
         @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+            cascade = CascadeType.MERGE)
         private User userOwner;
 
         @JsonIgnore

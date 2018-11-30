@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.ProductDao;
 import ua.com.entity.Product;
+import ua.com.entity.User;
 
 import java.util.List;
 
@@ -55,5 +56,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProductByImageLinks_Id(int idImgLink) {
         return productDao.findProductByImageLinks_Id(idImgLink);
+    }
+
+    @Override
+    public User findProductByUserOwnerId(int userId) {
+        return productDao.findProductByUserOwnerId(userId);
     }
 }
