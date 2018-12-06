@@ -26,7 +26,7 @@ CREATE TABLE `commoncategory` (
   `id_CommonCategory` int(11) NOT NULL AUTO_INCREMENT,
   `nameCommonCategory` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_CommonCategory`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `commoncategory` (
 
 LOCK TABLES `commoncategory` WRITE;
 /*!40000 ALTER TABLE `commoncategory` DISABLE KEYS */;
-INSERT INTO `commoncategory` VALUES (1,'Спорт'),(2,'Мода'),(3,'Авто'),(4,'Телефони');
+INSERT INTO `commoncategory` VALUES (1,'Авто, мото'),(2,'Телефони, смартфони'),(3,'Ноутбуки, ПК і планшети'),(4,'Техніка'),(5,'Спорт, Здоровя'),(6,'Мода красота'),(7,'Дитячі товари'),(8,'Колекції, раритети');
 /*!40000 ALTER TABLE `commoncategory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-21 16:01:21
+-- Dump completed on 2018-11-28 17:48:32

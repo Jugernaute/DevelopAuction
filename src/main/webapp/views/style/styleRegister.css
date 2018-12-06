@@ -14,8 +14,14 @@ body{
 li{
     list-style-type: none;
 }
+hr{
+    margin: 10px 0 10px 30px;
+    border: none; /* Убираем границу для браузера Firefox */
+    color: red; /* Цвет линии для остальных браузеров */
+    background-color: red; /* Цвет линии для браузера Firefox и Opera */
+    height: 2px;
+}
 .auction{
-
     width: 90%;
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
@@ -55,16 +61,15 @@ nav{
 }
 .menu li a{
     text-decoration: none;
-    color: black;
 }
 .menu li a:hover{
     border-bottom: 2px solid #EA6C25;
 }
 nav p{
-  margin-right: 10px;
+    margin-right: 10px;
     text-transform: uppercase;
 }
-nav input{
+nav p input{
     margin-right: 10px;
     border: none;
     border-radius: 2px;
@@ -82,11 +87,6 @@ nav input{
     width: 95%;
     display: flex;
     justify-content: center;
-    border: 1px solid rosybrown;
-    margin-top: 20px;
-    border-radius: 9px;
-    margin-bottom: 20px;
-    /*background: floralwhite;*/
 }
 .products_list{
     display: flex;
@@ -100,22 +100,10 @@ nav input{
 .products_list li a{
     text-transform: uppercase;
     text-decoration: none;
-    color: #141414;
-    font-weight: 600;
-    text-shadow: 1px 1px #e4b9b9;
 }
 .products_list li a:hover{
-    color: #0014ff;
-    /*border-bottom: 2px solid #EA6C25;*/
-}
-/******************nav-sort********************/
-.nav-sort{
-    display: flex;
-
-}
-.nav-sort select{
-    width: 200px;
-    height: 20px;
+    color: #fc5196;
+    font-weight: 500;
 }
 
 /*****************hot-lot*******************/
@@ -123,13 +111,15 @@ nav input{
 
 .hot_lot{
     padding: 30px;
-    display: flex;
+    /*display: flex;*/
     justify-content: space-between;
     flex-wrap: wrap;
+    width: 100%;
+    margin-left: auto;
 }
 .hot_lot_wrapper {
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 20px 0;
     cursor: pointer;
@@ -145,15 +135,57 @@ nav input{
 }
 .container{
     padding: 10px 15px 0 15px;
+    width: 300px;
+}
+.text-end {
+    text-align: center;
+    color: deeppink;
+    text-shadow: 1px 1px darkturquoise;
 }
 .cont_titel{
     font-size: 14px;
     margin: 5px 0 10px 0;
 }
+/*.cont_titel b{*/
+    /*display: flex;*/
+/*}*/
+.cont_timer{
+    text-align: center;
+    color: teal;
+    font-size: 18px;
+    text-shadow: 1px 1px darkred;
+}
+.cont_timer p{
+    font-size: 18px;
+}
 .cont_price{
     margin: 10px 0 5px 0;
+    text-align: center;
+    color: red;
+}
+.cont_price span{
+    font-size: 20px;
 }
 
+/*************footer*******************/
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    background: #CFCFCF;
+    height: 70px;
+}
+.social{
+    display: flex;
+    align-items: center;
+}
+.social img{
+    margin: 0 5px;
+    cursor: pointer;
+}
+.social img:active{
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+}
 
 /*******************Enter*******************/
 
@@ -206,7 +238,7 @@ nav input{
     margin: auto;
     padding: 0 50px;
 }
-button[type=submit] {
+input[type=submit] {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
@@ -219,8 +251,7 @@ button[type=submit] {
     border: 2px solid #ddd;
 }
 .close:hover,
-.close:focus,
-.text-decor-none{
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -263,7 +294,7 @@ button[type=submit] {
 .registration_form{
     max-width: 560px;
     display: none;
-    margin: 10px auto;
+    margin: 100px auto;
     z-index: 100;
     width: 89%;
     position: fixed;
@@ -274,6 +305,7 @@ button[type=submit] {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+
 }
 .reg_container {
     display: flex;
@@ -289,8 +321,8 @@ button[type=submit] {
 .reg_container form h1{
     font-size: 26px;
 }
-input[type=email], input[type=password], input[type=text], .country-select{
-    width: 50%;
+input[type=email], input[type=password]{
+    width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
@@ -326,37 +358,9 @@ hr {
     opacity:1;
 }
 
-/*************footer*******************/
 
-footer{
-    display: flex;
-    justify-content: space-between;
-    background: #CFCFCF;
-    height: 70px;
-}
-.social{
-    display: flex;
-    align-items: center;
-}
-#facebook,
-#google,
-#twitter,
-#linkedin{
-    height: 32px;
-    margin: 0 5px;
-    cursor: pointer;
-    overflow: hidden;
-}
-#facebook img,
-#google img,
-#twitter img,
-#linkedin img{
-    margin-top: -38px;
-}
 
-.social img:active{
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
-}
+
 
 
 
@@ -372,58 +376,133 @@ footer{
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
-.img-lot:first-child {
-    width: 450px;
-    height: 320px;
+
+.total-div{
+    display: flex;
 }
-.imgSrc{
-    width: 500px;
+.div1{
+    width: 30%;
+    height: auto;
+    border-right: solid 1px;
 }
-.need-regstr{
-    color: red;
-    margin-top: 50px;
-    font-size: 20px;
-    text-shadow: 2px -1px black;
-}
-.needH3{
-    margin-top: 20px
-}
-.success-login{
-    width: 600px;
-    height: 400px;
-}
-.resultRegistration{
-    display: none;
-    font-size: 30px;
+.div1 p{
+    margin-top: 10px;
     text-align: center;
-    margin-top: 160px;
+    font-size: 15px;
+    text-shadow: 1px 1px 3px #794558;
+}
+.sub-category-title{
+    display: flex;
+    margin-left: 70px;
+}
+.sub-category-title a{
+    margin-left: 10px;
+}
+.div1 select{
+    margin-top: 10px;
+    border-radius: 7px;
+    background-color: #ed143d03;
+    width: 201.990908px;
+    height: 41.990908px;
+    /*margin-left: 30px*/
+}
+.div1 h6{
+    color: blue;
+    text-shadow: 1px 1px snow;
+    margin: 10px 0 0 30px;
+}
+.div-input{
+    display: -webkit-box;
+    margin: 10px 0 0 40px;
+}
+.div-input input:first-child{
+    margin-right: 10px;
+}
+.filter-price-to{
+    margin-left: 10px;
+}
+.div1 input{
+    text-align: center;
+    border-radius: 7px;
+    width: 73.98182px;
+    height: 53.98182px;
+}
+.div2{
+    width: 70%;
+    margin-left: auto;
 }
 
-.resultRegistration{
-    text-shadow: 2px -2px 3px black;
+.sub-category{
+    margin: 20px 0 0 30px;
+}
+.sub-category li{
+    margin-bottom: 5px;
+    font-size: 14px;
+    border-bottom: dashed 1px;
+    width: 90%;
+    /*pointer-events: none;*/
+}
+.sub-product a.change::before,
+.type-lot li.change::before,
+.div-input.change::before,
+.div-region-lot.change::before,
+.filter-data-start.change::before,
+.filter-data-end.change::before{
+    content: 'X ';
     color: red;
-    font-size: 40px;
+    pointer-events: all;
+}
+#region-lot{
+    margin-left: 0px;
+}
+/*.div-region-lot{*/
+    /*margin-left: 40px;*/
+/*}*/
+
+.sub-category li:last-child{
+    border-bottom: none;
+}
+.sub-category li a{
+    text-decoration: none;
+}
+.sub-category li:hover, .type-lot li:hover{
+    background-color: #d5d4d4;
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+}
+.text-no-div{
+    margin-top: 20%;
+    font-size: 25px;
     text-align: center;
-    margin-top: 160px;
+    color: #a52a2a59;
+    text-shadow: 1px 1px lemonchiffon;
 }
-#img_loading{
-    display: none;
-    margin-top: 140px;
-    margin-left: 260px;
+.type-lot{
+    color: darkblue;
+    margin: 20px 0 20px 30px;
 }
-.view-user a, .user-id a{
-    color: #ff0000 !important;
-    text-shadow: 1px 1px #002cff;
+.type-lot li{
+    font-size: 15px;
+    margin: 10px 0 10px 10px;
+    cursor: pointer;
+    width: 90%;
 }
-#fileUploadForm{
-    width: 58%;
-    margin-top: 25px;
-    margin-right: 219px;
+.type-lot li:hover{
+    color: #0022ffc4;
 }
-.view-user{
-    display: none;
+.type-lot li a{
+    text-decoration: none;
+}
+.div-input button{
+    outline: none;
+    margin-left: 10px;
+    background-color: #d4dddf;
+    width: 30px;
+    height: 30px;
+}
+.filter-data-start, .filter-data-end, .div-region-lot{
+    margin-left: 40px;
+
 }
 
-.settings{
-    margin-left: 50px;
-}

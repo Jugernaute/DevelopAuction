@@ -114,7 +114,7 @@ public class RestControllerCabinet {
         }
     }
 
-    @GetMapping("/getCurrent_Email_Phone_Username")
+    @GetMapping("/allInfoAboutUser")
     public Map<String, String> getCurrentEmail(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User byUsername = userService.findByUsername(name);

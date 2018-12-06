@@ -147,9 +147,7 @@ public class RestControllerCreateLot {
         product.setManufacturer(byNameManufacturer);
 
         try {
-
             product.setNameProduct(nameProduct);
-
             if (modelProduct != null) {
                 product.setModelProduct(modelProduct);
             } else {
@@ -177,16 +175,19 @@ public class RestControllerCreateLot {
             return "error with create product class -> " + e.getMessage();
         }
 
-        // working with multipart file
-        // Get the filename and build the local file path
-
         LocationLot locationLot = new LocationLot(regionLot, placeLot);
 
-        productService.addProduct(product);
-        locationLot.setProducts(product);
-        locationLotService.addLocationLot(locationLot);
-//        locationLots.clear();
+        try {
+            productService.addProduct(product);
+            locationLot.setProducts(product);
+            locationLotService.addLocationLot(locationLot);
+        }catch(Exception e){
+            logs.logError(e);
+        }
 
+
+        // working with multipart file
+        // Get the filename and build the local file path
         try {
             String path = System.getProperty("user.home")
                     + File.separator
@@ -254,8 +255,6 @@ public class RestControllerCreateLot {
         // add int to date
         LocalDateTime dataEnd = dataStart.plusDays(durationLot);
 
-        //            working with delivery
-
 
         if (dataStart.isBefore(dateTimeNow)) {
             return "enter dataTime right!!!";
@@ -280,7 +279,7 @@ public class RestControllerCreateLot {
         bet.setUser(userFind);
         bet.setLot(lot);
         lotService.addLot(lot);
-        betService.addBet(bet);                         //set & save stepBet from startPrice
+//        betService.addBet(bet);                         //set & save stepBet from startPrice
         if (hotPrice.equals("null")) {
             System.out.println(hotPrice + " hotPrice1");
 //                lot.setHotPrice(Integer.parseInt(hotPrice));

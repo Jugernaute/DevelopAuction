@@ -1,5 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -103,45 +108,52 @@
                 <div class="wrapper_products">
                     <ul class="products_list">
                         <c:forEach items="${commonList}" var="list">
-
-                        <li class="households"><a href="#">${list.getNameCommonCategory()}</a></li>
-                        <%--<li class="computers"><a href="#">комп’ютери</a></li>--%>
-                        <%--<li class="photo"><a href="#">Фотоапарати</a></li>--%>
-                        <%--<li class="phone"><a href="#">Телефони</a></li>--%>
+                            <li class="households"><a href="#">${list.getNameCommonCategory()}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
             </section>
+            <div class="nav-sort">
+                <select size="" ></select>
+                <select size="" ></select>
+                <select size="" ></select>
+            </div>
             <section class="hot_lot">
 
                 <c:forEach items="${imgLinks}" var="img">
                 <c:set var = "nameProd" scope = "session" value = "${img.getProduct().getNameProduct()}"/>
                 <c:set var = "modelProd" scope = "session" value = "${img.getProduct().getModelProduct()}"/>
                 <c:set var = "manufProd" scope = "session" value = "${img.getProduct().getManufacturer()}"/>
-                <c:set var = "startLot" scope = "session" value = "${img.getProduct().getLot().getDataStartLot()}"/>
+                <c:set var = "endLot" scope = "session" value = "${img.getProduct().getLot().getDataEndLot()}"/>
                 <c:set var = "curentPrice" scope = "session" value = "${img.getProduct().getLot().getCurrentPrice()}"/>
-                    <%--<p>Today's date: <%= (new java.util.Date()).getTime()%></p>--%>
+                <c:set var = "dataNow" scope = "session" value = "${dataNow}"/>
                     <%--<%--%>
-<%----%>
-<%--//                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dddd HH:mm");--%>
-<%--//                        LocalDateTime dateTime = LocalDateTime.of();--%>
-<%--//                        String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"--%>
+                        <%--DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss");--%>
+                        <%--LocalDateTime dateTime = LocalDateTime.of(2018,11,25,3,35);--%>
+                        <%--String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"--%>
+                        <%--System.out.println(formattedDateTime);--%>
                     <%--%>--%>
-                    <%--<c:out value="${qwe}"//>--%>
-                    <div class="hot_lot_wrapper">
-                        <div class="cont_img" >
+                    <c:if test="${endLot>dataNow}">
+                        <div class="hot_lot_wrapper">
+                            <div class="cont_img" >
                                 <a href="lot/${img.getProduct().getId_Product()}" class="get-id"><img src="../img/product_Img/${img.getLinkOfImage()}" height="200" width="200"/>
-                                </a></div>
-                        <div class="container">
-                            <h2 class="cont_titel"><b><c:out value = "${nameProd}"/> <c:out value="${modelProd}"/></b></h2>
-
-                            <p class="text-end">завершення :</p>
-                            <div class="cont_timer"><c:out value="${startLot}"/></div>
-                            <h4 class="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>
+                                </a>
+                            </div>
+                            <div class="container">
+                                <h2 class="cont_titel"><b><c:out value = "${nameProd}"/> <c:out value="${modelProd}"/></b></h2>
+                                <p class="text-end">завершення :</p>
+                                <div class="cont_timer">
+                                    <fmt:parseDate value="${endLot}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+                                    <fmt:formatDate pattern="EEE, d MMM yyyy HH:mm" value="${ parsedDateTime }"/>
+                                </div>
+                                <h4 class="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>
+                            </div>
                         </div>
+                    </c:if>
+                    <%--<p>Today's date: <%= (new java.util.Date()).getTime()%></p>--%>
 
+                    <%--<c:out value="${}"//>--%>
 
-                    </div>
             </c:forEach>
             </section>
 
@@ -167,6 +179,7 @@
                 </div>
                 <div class="addres"></div>
             </footer>
+            <p style="text-align: center">Today's date: <%= (new java.util.Date().toLocaleString())%></p>
         </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

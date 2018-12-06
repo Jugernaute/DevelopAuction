@@ -1,5 +1,6 @@
 package ua.com.controllers;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -9,12 +10,18 @@ import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
 import ua.com.entity.*;
 import ua.com.method.LoadAllLotOnMainPage;
+import ua.com.method.LoadAllLotOnPageUsingRest;
+import ua.com.method.error_log.Logs;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.subcategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -31,9 +38,11 @@ public class RestMainController {
     @Autowired
     private CommonCategoryService commonCategoryService;
     @Autowired
-    private SubCategoryService subCategoryService;
+    private LoadAllLotOnPageUsingRest loadAllLotOnPageUsingRest;
     @Autowired
     private LoadAllLotOnMainPage allLotOnMainPage;
+    @Autowired
+    private Logs logs;
 
     @PostMapping("enterKey")
     private String lost_password_ok(
@@ -78,28 +87,8 @@ public class RestMainController {
     }
 
     @GetMapping("category/{nameCategory}")
-    private String [] categoryList(@PathVariable String nameCategory){
+    private Map categoryList(@PathVariable String nameCategory){
         List<ImageLink> linkList = allLotOnMainPage.loadAllLotOnMainPage(nameCategory);
-
-        String idProduct = "";
-        String linkOfImg = "";
-        String nameProduct = "";
-        String modelProduct = "";
-        String dataStartLot = "";
-        String currentPrice = "";
-        String [] array = {
-                idProduct, linkOfImg, nameProduct, modelProduct, dataStartLot, currentPrice
-        };
-        for (ImageLink imageLink : linkList) {
-            Product product = imageLink.getProduct();
-            linkOfImg=imageLink.getLinkOfImage();
-            idProduct= String.valueOf(product.getId_Product());
-            nameProduct= product.getNameProduct();
-            modelProduct= product.getModelProduct();
-            dataStartLot = product.getLot().getDataStartLot().toString();
-            currentPrice= String.valueOf(product.getLot().getCurrentPrice());
-        }
-        Json
-        return array;
+        return loadAllLotOnPageUsingRest.loadAllLotOnPageUsingRest(linkList);
     }
 }

@@ -8,7 +8,9 @@ import java.util.*;
 public class Secundomir {
     public static void main(String[] args) {
 
-        System.out.println(System.getProperty("java.util.logging.config.file"));
+        String fd = "12 x";
+        int qw = Integer.parseInt(fd);
+        System.out.println(qw);
 
 
 

@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import ua.com.entity.CommonCategory;
 import ua.com.entity.User;
+import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.user.UserService;
+
+import java.util.List;
 
 
 @Controller
@@ -17,6 +21,8 @@ public class ControllerCabinet {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommonCategoryService commonCategoryService;
 
     @GetMapping("/goToSell")
     public String goToSell(Model model){
@@ -25,6 +31,8 @@ public class ControllerCabinet {
         if (name.equals("anonymousUser") || !user.isEnabled()){
             return "needRegistration";
         }
+        List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
+        model.addAttribute("commonList", allCommonCategory);
         model.addAttribute("user",user);
         return "createLot";
     }

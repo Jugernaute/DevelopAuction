@@ -26,7 +26,7 @@ CREATE TABLE `manufacturer` (
   `id_Manufacturer` int(11) NOT NULL AUTO_INCREMENT,
   `nameManufacturer` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_Manufacturer`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
-INSERT INTO `manufacturer` VALUES (1,'sony'),(2,'lenovo'),(3,'hp'),(4,'siemencе'),(5,'gabana'),(6,'oreo');
+INSERT INTO `manufacturer` VALUES (1,'Lenovo'),(2,'Sony'),(3,'Apple'),(4,'Aser'),(5,'nokia'),(6,'Samsung'),(7,'LG'),(8,'Motorola'),(9,'Asus'),(10,'Meizu');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-21 16:01:22
+-- Dump completed on 2018-11-28 17:48:32

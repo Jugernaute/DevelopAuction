@@ -1,7 +1,7 @@
 package ua.com.method.error_log;
 
+import jdk.nashorn.internal.objects.Global;
 import org.springframework.stereotype.Component;
-import ua.com.controllers.controllers_bet.RestControllerBet;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 @Component
 public class Logs {
-    private static final Logger logger = Logger.getLogger(RestControllerBet.class.getName());
+    private static final Logger logger = Logger.getLogger(Global.class.getName());
 
     private FileHandler fileHandler;
 
@@ -32,13 +32,15 @@ public class Logs {
                         +File.separator
                         + "logError"
                         +File.separator
-                        +"log");
+                        +"log.log");
         } catch (IOException e) {
             logger.info(e.toString());
-
         }
     }
         logger.addHandler(fileHandler);
-        logger.log( Level.ALL, error.toString(), error );
+        logger.log( Level.INFO,error.getLocalizedMessage());
+        logger.log( Level.INFO,error.getMessage());
+        logger.log( Level.INFO,error.toString());
+//        logger.info( error.toString());
     }
 }

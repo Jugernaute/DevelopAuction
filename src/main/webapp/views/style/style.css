@@ -38,6 +38,10 @@ header{
 .logo{
     cursor: pointer;
 }
+.view-user a, .user-id a{
+    color: #ff0000 !important;
+    text-shadow: 1px 1px #002cff;
+}
 nav{
     display: flex;
     align-items: center;
@@ -93,30 +97,6 @@ nav p input{
 .products_list li a{
     text-transform: uppercase;
     text-decoration: none;
-}
-.products_list li a:hover{
-    border-bottom: 2px solid #EA6C25;
-}
-
-/*****************hot-lot*******************/
-
-
-.hot_lot{
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-.hot_lot_wrapper {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 20px 0;
-    cursor: pointer;
-}
-.hot_lot_wrapper:hover{
-    transform: scale(1.1);
-    transition: 100ms;
 }
 .cont_img{
     width: 100%;

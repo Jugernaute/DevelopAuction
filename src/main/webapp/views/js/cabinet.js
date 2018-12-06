@@ -1,6 +1,7 @@
 ///windows switch
     let optionList = $('.options-list li');
     let optionListShow = $('.slider');
+    $('.settings').toggleClass('hidden');
     optionList.on('click', function () {
         for (let i = 0; i < optionList.length; i++) {
             optionList[i].style.borderBottom = 1 +'px solid gray';
@@ -8,6 +9,9 @@
         $(this).css('border-bottom', 'none');
 
         for (let opt of optionListShow) {
+            if (opt.classList.contains("settings")){
+                console.log("popop");
+            }
             opt.classList.add('hidden')
         }
 
@@ -218,7 +222,7 @@ $saveChangeEmail.on('click',function (event) {
         $('.resultCity').empty();
         $('.resultState').empty();
         $.ajax({
-            url: 'http://localhost:8080/getCurrent_Email_Phone_Username',
+            url: 'http://localhost:8080/allInfoAboutUser',
             type: 'get',
             success: function (result) {
 

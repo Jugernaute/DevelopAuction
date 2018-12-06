@@ -8,4 +8,6 @@ import java.util.List;
 public interface ImageLinkDao extends JpaRepository<ImageLink, Integer> {
 
     ImageLink findByLinkOfImage(String imageLink);
+
+
 }

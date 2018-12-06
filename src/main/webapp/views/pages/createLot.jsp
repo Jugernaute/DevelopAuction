@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html >
 <head>
     <meta charset="UTF-8">
@@ -35,12 +35,11 @@
     </header>
     <section class="products">
         <div class="wrapper_products">
-            <ul class="products_list">
-                <li class="households"><a href="#">Побутова техніка</a></li>
-                <li class="computers"><a href="#">комп’ютери</a></li>
-                <li class="photo"><a href="#">Фотоапарати</a></li>
-                <li class="phone"><a href="#">Телефони</a></li>
-            </ul>
+            <%--<ul class="products_list">--%>
+                <%--<c:forEach items="${commonList}" var="list">--%>
+                    <%--<li class="households"><a href="#">${list.getNameCommonCategory()}</a></li>--%>
+                <%--</c:forEach>--%>
+            <%--</ul>--%>
         </div>
     </section>
     <div class="option-list-show">
@@ -50,7 +49,6 @@
                 <button class="btn-flex">Вибрати</button>
                 <div class="sell-item-list-wrapper">
                     <select class="sell-item-list-lvl1" size="6">
-
                     </select>
                     <select class="sell-item-list-lvl2" size="6">
                     </select>

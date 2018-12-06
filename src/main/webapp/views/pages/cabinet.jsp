@@ -46,13 +46,15 @@
     <div class="settings hidden slider">
         <h3>Налаштування облікового запису</h3>
         <ul>
-            <li>Логін(нік).............................<span class="resultUserName green"></span></li>
-            <li >Е-мейл................................<span class="userEmail green"></span></li>
-            <li>Телефон.............................<span class="resultUserPhone green"></span></li>
-            <li>Імя.......................................<span class="resultFirstName green"></span></li>
-            <li>Прізвище.............................<span class="resultSurName green"></span></li>
-            <li>Поштовий адрес.................<span class="resultCountry green"></span><span class="resultState green"></span>
-                <span class="resultCity green"></span><span class="resultPostAddress green"></span>
+            <li>Логін(нік).............................<span class="resultUserName green">${user.getUsername()}</span></li>
+            <li >Е-мейл................................<span class="userEmail green">${user.getEmail()}</span></li>
+            <li>Телефон.............................<span class="resultUserPhone green">${user.getPhone()}</span></li>
+            <li>Імя.......................................<span class="resultFirstName green">${user.getFirstNameUser()}</span></li>
+            <li>Прізвище.............................<span class="resultSurName green">${user.getSurNameUser()}</span></li>
+            <li>Поштовий адрес.................<span class="resultCountry green">${country}</span>
+                <span class="resultState green">${state}</span>
+                <span class="resultCity green">${city}</span>
+                <span class="resultPostAddress green">${address}</span>
                 </li>
         </ul>
         <br>
