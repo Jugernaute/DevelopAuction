@@ -308,8 +308,7 @@ public class RestControllerCreateLot {
             System.out.println(hotPrice + " hotPrice2");
             lot.setHotPrice(Integer.parseInt(hotPrice));
         }
-        lotService.addLot(lot);
-        betService.addBet(bet);       //set & save stepBet from startPrice
+       //set & save stepBet from startPrice
 //        List<Delivery> deliveryList = new ArrayList<>();
 //        for (String method : methodDelivery) {
 //            Delivery byMethodDelivery = deliveryService.findByMethodDelivery(method);
@@ -338,7 +337,8 @@ public class RestControllerCreateLot {
 //        System.out.println(lot + "lotId");
         // deliveryService.addDeliveries(deliveryList);
         //deliveryList.clear();
-
+        lotService.addLot(lot);
+        betService.addBet(bet);
 
         /*
          * end Lot object*/

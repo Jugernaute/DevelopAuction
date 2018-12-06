@@ -10,6 +10,7 @@ import ua.com.entity.Lot;
 import ua.com.entity.User;
 import ua.com.method.LoadLotToCart;
 import ua.com.service.lot.LotService;
+import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
 
 import java.util.HashMap;
@@ -23,6 +24,8 @@ public class ControllerCart {
     private UserService userService;
     @Autowired
     private LotService lotService;
+    @Autowired
+    private ProductService productService;
     @Autowired
     private LoadLotToCart loadLotToCart;
 
@@ -45,4 +48,25 @@ public class ControllerCart {
         model.addAttribute("user", username);
         return "cart";
     }
-}
+
+//    @GetMapping( "/clearUpCart" )
+//    public String allLotToCart() {
+//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+//        List<Lot> allLot = lotService.findAllLot();
+//        for (Lot lot : allLot) {
+
+//            if (lot.getBasket() != null){
+//                if (lot.getBasket().getIdBasket() == user.getBasket().getIdBasket())
+//                {
+
+//                    int id_product = lot.getProduct().getId_Product();
+//                    System.out.println("111111111111 : "  + id_product);
+//                    productService.deleteProductById(id_product);
+//                    lotService.deleteLotById(lot.getId_Lot());
+//                }
+            }
+//        }
+//        return "cart";
+//    }
+//}

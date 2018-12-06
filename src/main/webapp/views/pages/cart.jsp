@@ -72,7 +72,7 @@
     </section>
     <div class="product-line"></div>
     <input id="nextBay" type="button" name="continue-bye" value="Продовжити покупки">
-    <button id="test" class="test">test</button>
+    <button id="delete" class="delete">Очистити корзину</button>
 
 
     <footer>

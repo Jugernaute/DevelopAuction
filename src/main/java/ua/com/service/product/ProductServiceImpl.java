@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProductById(int id_Product) {
-        productDao.delete(id_Product);
+        productDao.delete(productDao.findOne(id_Product));
     }
 
     @Override
