@@ -17,7 +17,7 @@
 <div class="auction">
     <header>
         <div class="wrapper">
-            <div class="logo"><a href="index.html"><img src="../img/logo.png"></a></div>
+            <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
                 <input type="search" placeholder="ПОШУК ТОВАРІВ">
                 <ul class="menu">

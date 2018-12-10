@@ -1,4 +1,4 @@
-package ua.com.service.subCategory;
+package ua.com.service.sudcategory;
 
 import ua.com.entity.Product;
 import ua.com.entity.SubCategory;

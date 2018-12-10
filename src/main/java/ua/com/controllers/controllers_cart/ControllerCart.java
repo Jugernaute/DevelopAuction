@@ -29,7 +29,7 @@ public class ControllerCart {
     @Autowired
     private LoadLotToCart loadLotToCart;
 
-    @GetMapping("/goToCart")
+    @GetMapping( "/goToCart" )
     public String goToCart(Model model) {
         Map<User, Lot> userLot = new HashMap<>();
 
@@ -49,24 +49,26 @@ public class ControllerCart {
         return "cart";
     }
 
-//    @GetMapping( "/clearUpCart" )
-//    public String allLotToCart() {
-//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    @GetMapping( "/clearUpCart" )
+    public String allLotToCart() {
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
-//        List<Lot> allLot = lotService.findAllLot();
-//        for (Lot lot : allLot) {
+        List<Lot> allLot = lotService.findAllLot();
+        for (Lot lot : allLot) {
 
-//            if (lot.getBasket() != null){
-//                if (lot.getBasket().getIdBasket() == user.getBasket().getIdBasket())
-//                {
+            if (lot.getBasket() != null) {
+                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
 
-//                    int id_product = lot.getProduct().getId_Product();
-//                    System.out.println("111111111111 : "  + id_product);
-//                    productService.deleteProductById(id_product);
-//                    lotService.deleteLotById(lot.getId_Lot());
-//                }
+                    int id_product = lot.getProduct().getId_Product();
+                    int id_lot = lot.getId_Lot();
+                    lotService.deleteLotById(id_lot);
+                    productService.deleteProductById(id_product);
+
+                }
             }
-//        }
-//        return "cart";
-//    }
-//}
+
+        }
+        return "cart";
+    }
+
+}

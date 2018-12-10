@@ -50,7 +50,6 @@
                 <button class="btn-flex">Вибрати</button>
                 <div class="sell-item-list-wrapper">
                     <select class="sell-item-list-lvl1" size="6">
-
                     </select>
                     <select class="sell-item-list-lvl2" size="6">
                     </select>

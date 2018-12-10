@@ -24,7 +24,8 @@ public class LotServiceImpl implements LotService {
 
     @Override
     public void deleteLotById(int id_Lot) {
-        lotDao.delete(lotDao.findOne(id_Lot));
+        Lot one = lotDao.findOne(id_Lot);
+        lotDao.delete(one);
     }
 
     @Override

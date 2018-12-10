@@ -27,7 +27,7 @@
 <button id="deleteProduct">deleteProduct</button><br>
 
 <button id="alldelivery">alldelivery</button>
-<input type="" id="methodDelivery" placeholder="">
+<input type="text" id="methodDelivery" placeholder="">
 <button id="adddelivery">addDelivery</button><br>
 
 <button id="allbet">allbet</button>
@@ -94,17 +94,17 @@
 
         let $x = $('#firstNameUser');
         let firstNameUser = $x.val();
-        $x.val(' ');
+        $x.val('');
         let $x1 = $('#surNameUser');
         let surNameUser = $x1.val();
-        $x1.val(' ');
+        $x1.val('');
         let $x2 = $('#userBalance');
         let userBalance = $x2.val();
         console.log(userBalance);
-        $x2.val(' ');
+        $x2.val('');
         let $x3 = $('#userPostAddress');
         let userPostAddress = $x3.val();
-        $x3.val(' ');
+        $x3.val('');
 
         let user = JSON.stringify({firstNameUser, surNameUser, userBalance, userPostAddress});
         console.log(user);
@@ -144,25 +144,25 @@
 
         let $x = $('#dataStartLot');
         let dataStartLot = $x.val();
-        $x.val(' ');
+        $x.val('');
         let $x1 = $('#dataEndLot');
         let dataEndLot = $x1.val();
-        $x1.val(' ');
+        $x1.val('');
         let $x2 = $('#startPrice');
         let startPrice = $x2.val();
-        $x2.val(' ');
+        $x2.val('');
         let $x3 = $('#hotPrice');
         let hotPrice = $x3.val();
-        $x3.val(' ');
+        $x3.val('');
         let $x5 = $('#id_Payment');
         let id_Payment = $x5.val();
-        $x5.val(' ');
+        $x5.val('');
         let $x6 = $('#id_Product');
         let id_Product = $x6.val();
-        $x6.val(' ');
+        $x6.val('');
         let $x7 = $('#id_Delivery');
         let id_Delivery = $x7.val();
-        $x7.val(' ');
+        $x7.val('');
 
         let lot = JSON.stringify({dataStartLot, dataEndLot, startPrice, hotPrice, id_Payment, id_Product, id_Delivery});
         $.ajax({
@@ -239,7 +239,7 @@
 
         let $x = $('#methodPayment');
         let methodPayment = $x.val();
-        $x.val(' ');
+        $x.val('');
         let payment = JSON.stringify({methodPayment});
         $.ajax({
             url : '/addPayment',
@@ -280,7 +280,7 @@
 
         let $x = $("#nameManufacturer");
         let nameManufacturer = $x.val();
-        $x.val(' ');
+        $x.val('');
         let manufacturer = JSON.stringify({nameManufacturer});
         $.ajax({
             url : "/addManufacturer",
@@ -316,10 +316,10 @@
 
         let $x = $('#nameSubCategory');
         let nameSubCategory = $x.val();
-        $x.val(' ');
+        $x.val('');
         let $x1 = $('#id_CommonCategory');
         let id_CommonCategory = $x1.val();
-        $x1.val(' ');
+        $x1.val('');
         let subCategory = JSON.stringify({nameSubCategory});
         $.ajax({
             url : '/addSubCategory?id_CommonCategory='+id_CommonCategory,
@@ -354,7 +354,7 @@
 
         let $input = $('#nameCommonCategory');
         let nameCommonCategory = $input.val();
-        $input.val(' ');
+        $input.val('');
         let commonCategory = JSON.stringify({nameCommonCategory});
         $.ajax({
             url : '/addCommonCategory',
@@ -389,16 +389,16 @@
 
         let $input = $('#sum_of_the_bet');
         let sum_of_the_bet = $input.val();
-        $input.val(' ');
+        $input.val('');
         let $input1 = $('#stepBet');
         let stepBet = $input1.val();
-        $input1.val(' ');
+        $input1.val('');
         let $input2 = $('#id_Lot');
         let id_Lot = $input2.val();
-        $input2.val(' ');
+        $input2.val('');
         let $input3 = $('#userId1');
         let userId1 = $input3.val();
-        $input3.val(' ');
+        $input3.val('');
         let bet = JSON.stringify({sum_of_the_bet, stepBet, id_Lot, userId1});
         $.ajax({
             url : '/addBet?id_Lot=' + id_Lot + '&userId=' + userId1,
@@ -436,7 +436,7 @@
 
         let $x = $('#methodDelivery');
         let methodDelivery = $x.val();
-        $x.val(' ');
+        $x.val('');
         let delivery = JSON.stringify({methodDelivery});
         $.ajax({
             url: '/addDelivery',
@@ -486,14 +486,14 @@
 
         let $x = $("#nameProduct");
         let nameProduct = $x.val();
-        $x.val(' ');
+        $x.val('');
         let $x1 = $("#modelProduct");
         let modelProduct = $x1.val();
-        $x1.val(' ');
+        $x1.val('');
 
         let $x2 = $("linkOnImageProduct");
         let linkOnImageProduct = $x2.val();
-        $x2.val(' ');
+        $x2.val('');
         //
         // var files;
         // let $x2 = $('input[type=file]');
@@ -506,16 +506,16 @@
 
         let $x3 = $("#descriptionProduct");
         let descriptionProduct = $x3.val();
-        $x3.val(' ');
+        $x3.val('');
         let $x4 = $("#id_Manufacturer");
         let id_Manufacturer = $x4.val();
-        $x4.val(' ');
+        $x4.val('');
         let $x5 = $("#id_SubCategory");
         let id_SubCategory = $x5.val();
-        $x5.val(' ');
+        $x5.val('');
         let $x6 = $("#userId");
         let userId = $x6.val();
-        $x6.val(' ');
+        $x6.val('');
 
         let product = JSON.stringify({nameProduct, modelProduct, descriptionProduct, linkOnImageProduct, id_SubCategory, id_Manufacturer, userId});
         console.log(product);

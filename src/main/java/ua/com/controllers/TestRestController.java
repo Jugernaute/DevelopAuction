@@ -15,7 +15,7 @@ import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.payment.PaymentService;
 import ua.com.service.product.ProductService;
-import ua.com.service.subCategory.SubCategoryService;
+import ua.com.service.sudcategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import java.time.LocalDateTime;

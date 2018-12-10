@@ -16,7 +16,7 @@ import ua.com.service.locationLot.LocationLotService;
 import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.product.ProductService;
-import ua.com.service.subCategory.SubCategoryService;
+import ua.com.service.sudcategory.SubCategoryService;
 import ua.com.service.user.UserService;
 
 import java.io.BufferedOutputStream;
@@ -25,9 +25,7 @@ import java.io.FileOutputStream;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class RestControllerCreateLot {
@@ -40,7 +38,7 @@ public class RestControllerCreateLot {
     @Autowired
     private ManufacturerService manufacturerService;
     @Autowired
-    CommonCategoryService commonCategoryService;
+    private  CommonCategoryService commonCategoryService;
     @Autowired
     private DeliveryService deliveryService;
     @Autowired
@@ -308,7 +306,8 @@ public class RestControllerCreateLot {
             System.out.println(hotPrice + " hotPrice2");
             lot.setHotPrice(Integer.parseInt(hotPrice));
         }
-       //set & save stepBet from startPrice
+        lotService.addLot(lot);
+        betService.addBet(bet);       //set & save stepBet from startPrice
 //        List<Delivery> deliveryList = new ArrayList<>();
 //        for (String method : methodDelivery) {
 //            Delivery byMethodDelivery = deliveryService.findByMethodDelivery(method);
@@ -337,8 +336,7 @@ public class RestControllerCreateLot {
 //        System.out.println(lot + "lotId");
         // deliveryService.addDeliveries(deliveryList);
         //deliveryList.clear();
-        lotService.addLot(lot);
-        betService.addBet(bet);
+
 
         /*
          * end Lot object*/
