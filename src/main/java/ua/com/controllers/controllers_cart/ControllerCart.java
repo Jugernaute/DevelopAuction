@@ -49,7 +49,7 @@ public class ControllerCart {
         return "cart";
     }
 
-    @GetMapping( "/clearUpCart" )
+    @GetMapping("/clearUpCart" )
     public String allLotToCart() {
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
