@@ -185,8 +185,12 @@ public class  RestControllerBet {
         } else {
             //створюєм корзину і закидуєм інформацію
             Basket basket = new Basket();
+            System.out.println("створили корзину");
             basketService.addBasket(basket.setUser(user));
+            System.out.println("приєднали юзера до корзини");
+
             Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+            lotService.addLot(lotByImageLink_name.setBasket(basket));
             if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
                 return "Time is expired";
             }
