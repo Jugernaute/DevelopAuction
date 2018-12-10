@@ -127,8 +127,8 @@
         <hr>
         <p>ТИП ТОРГІВ</p>
         <ul class="type-lot">
-            <li class="type-lot-li">Простий Аукціон</li>
-            <li class="type-lot-li">Купити зараз</li>
+            <li class="type-lot-li" title="ORDINARY">Простий Аукціон</li>
+            <li class="type-lot-li" title="BLITZ">Купити зараз</li>
         </ul>
         <p>РЕГІОН</p>
         <div class="div-region-lot">

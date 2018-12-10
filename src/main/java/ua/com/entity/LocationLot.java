@@ -1,6 +1,7 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +23,10 @@ public class LocationLot {
     public LocationLot(String regionLot, String locationLot) {
         this.regionLot = regionLot;
         this.locationLot = locationLot;
+    }
+
+    public LocationLot(String regionLot) {
+        this.regionLot = regionLot;
     }
 
     public LocationLot() {

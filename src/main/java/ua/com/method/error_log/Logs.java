@@ -1,21 +1,22 @@
 package ua.com.method.error_log;
 
 import jdk.nashorn.internal.objects.Global;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 @Component
 public class Logs {
-    private static final Logger logger = Logger.getLogger(Global.class.getName());
+//    private static final Logger logger = Logger.getLogger(Global.class.getName());
 
     private FileHandler fileHandler;
 
-    public void logError (Exception error){
+    public void logError (Logger logger, Exception error){
     {
         try {
             fileHandler = new FileHandler("%h"
@@ -37,10 +38,10 @@ public class Logs {
             logger.info(e.toString());
         }
     }
-        logger.addHandler(fileHandler);
-        logger.log( Level.INFO,error.getLocalizedMessage());
-        logger.log( Level.INFO,error.getMessage());
-        logger.log( Level.INFO,error.toString());
+//        logger.addHandler(fileHandler);
+        logger.log( Level.ALL,"getLocalizedMessage",error);
+//        logger.log( Level.INFO,"getMessage",error.getMessage());
+//        logger.log( Level.INFO,"toString",error.toString());
 //        logger.info( error.toString());
     }
 }

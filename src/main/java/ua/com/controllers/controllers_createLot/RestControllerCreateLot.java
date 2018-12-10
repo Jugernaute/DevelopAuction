@@ -133,7 +133,7 @@ public class RestControllerCreateLot {
             product.setSubCategory(byNameSubCategory);
 
         } catch (Exception e) {
-            logs.logError(e);
+//            logs.logError(e);
             return "error in tree load link -> " + e.getMessage();
         }
 
@@ -171,7 +171,7 @@ public class RestControllerCreateLot {
                 }
             }
         } catch (Exception e) {
-            logs.logError(e);
+//            logs.logError(e);
             return "error with create product class -> " + e.getMessage();
         }
 
@@ -182,7 +182,7 @@ public class RestControllerCreateLot {
             locationLot.setProducts(product);
             locationLotService.addLocationLot(locationLot);
         }catch(Exception e){
-            logs.logError(e);
+//            logs.logError(e);
         }
 
 
@@ -234,11 +234,11 @@ public class RestControllerCreateLot {
                    }while (countImg>uploadfile.length);                                    // only 4 img
                 }
             } catch (Exception e) {
-                logs.logError(e);
+//                logs.logError(e);
                 return "error with imageLink save -> " + e.getMessage();
             }
         } catch (Exception e) {
-            logs.logError(e);
+//            logs.logError(e);
             return "error in filePath -> " + e.getMessage();
         }
         Lot lot = new Lot();

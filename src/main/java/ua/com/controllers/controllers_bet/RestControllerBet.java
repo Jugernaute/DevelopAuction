@@ -114,7 +114,7 @@ public class RestControllerBet {
         try {
             betLotMethod.changeCurrentPrice(nameProduct, modelProduct, currentPrice);
         } catch (InterruptedException e) {
-            logs.logError(e);
+//            logs.logError(e);
         }
 
 

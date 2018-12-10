@@ -11,17 +11,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.entity.*;
 import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.LoadAllLotOnMainPage;
+import ua.com.method.error_log.Logs;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @Controller
 @PropertySource("classpath:validation.properties")
+
     public class ControllerSecurity {
+
+    private static final Logger logger = Logger.getLogger(ControllerSecurity.class.getSimpleName());
+    private FileHandler fileHandler = new FileHandler();
+
+    @Autowired
+    private Logs logs;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -33,9 +46,21 @@ import java.util.*;
     @Autowired
     private FillFilter_CommonCategory_OnRegisterUserPage fillFilterCommonCategoryOnRegisterUserPage;
 
-    @GetMapping("/")
-        public String start (Model model){
+    public ControllerSecurity() throws IOException {
+    }
 
+    @GetMapping("/")
+        public String start (Model model) throws IOException {
+//        System.out.println(System.getProperty("java.util.logging.config.file"));
+        logger.addHandler(fileHandler);
+        try{
+            int a=1/0;
+            System.out.println(a);
+        }catch (Exception e){
+            System.out.println("==================================");
+            logger.log(Level.INFO,"error",e.getMessage());
+            System.out.println("==================================");
+        }
         List list = allLotOnMainPage.loadAllLotOnMainPage();
         DateTimeFormatter ru = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss").withLocale(new Locale("ru"));
 //        for (CommonCategory commonCategory : allCommonCategory) {

@@ -1,6 +1,7 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,9 +14,13 @@ public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Lot;
+
     @DateTimeFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
+//    @JsonProperty("dataStartLot")
     private LocalDateTime dataStartLot;
+
     @DateTimeFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
+//    @JsonProperty("dataEndLot")
     private LocalDateTime dataEndLot;
     private int startPrice;
     private int hotPrice;

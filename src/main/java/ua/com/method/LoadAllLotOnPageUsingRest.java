@@ -44,7 +44,7 @@ public Map<Integer,Map<String, String>> loadAllLotOnPageUsingRest(List<ImageLink
             try{
             list.put("dataEndLot",format);
         }catch (Exception e){
-            logs.logError(e);
+//            logs.logError(e);
         }
         list.put("currentPrice", String.valueOf(product.getLot().getCurrentPrice()));
         listMap.put(count, list);

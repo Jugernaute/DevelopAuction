@@ -1,23 +1,25 @@
 package ua.com.controllers.controllers_filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import ua.com.entity.CommonCategory;
-import ua.com.entity.ImageLink;
-import ua.com.entity.Product;
-import ua.com.entity.SubCategory;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import ua.com.entity.*;
 import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.FillFilter_SubCategory_OnRegisterUserPage;
 import ua.com.method.LoadAllLotOnMainPage;
 import ua.com.method.LoadAllLotOnPageUsingRest;
 import ua.com.service.commomCategory.CommonCategoryService;
-import ua.com.service.product.ProductService;
 import ua.com.service.subcategory.SubCategoryService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
+import java.io.IOException;
 import java.util.*;
+import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 
 @RestController
 public class RestControllerFilterProduct {
@@ -96,11 +98,27 @@ private Set<Map<Integer, Map<String, String>>> set = new LinkedHashSet<>();
         Map<Integer, Map<String, String>> mapMap = loadAllLotOnPageUsingRest.loadAllLotOnPageUsingRest(linkList);
 
         set.add(mapMap);
-        for (Map<Integer, Map<String, String>> next : set) {
-            System.out.println(next);
-            System.out.println("--------------------");
-        }
+//        for (Map<Integer, Map<String, String>> next : set) {
+//            System.out.println(next);
+//            System.out.println("--------------------");
+//        }
         /*return on filterProductHomeRegisterUser.js*/
         return mapMap;
+    }
+
+    @PostMapping(value = "filter/criteria", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    private String JsonCriteria(/*@RequestBody LocationLot regionLot,*/ HttpServletRequest request) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+//        LocationLot locationLot = objectMapper.readValue(regionLot, LocationLot.class);
+//        System.out.println(locationLot.toString());
+//        System.out.println(regionLot.toString());
+//        System.out.println(lot.toString());
+//        System.out.println(subCategory.toString());
+//        System.out.println(product.toString());
+
+
+        String params = IOUtils.toString( request.getInputStream(),"utf-8");
+            System.out.println(params);
+        return "ok";
     }
 }

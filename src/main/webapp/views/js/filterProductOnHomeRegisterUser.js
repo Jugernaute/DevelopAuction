@@ -6,6 +6,7 @@
 // //         }
 // //     });
 // // });
+let filter;
 
 let hotLot = $('.hot_lot');
 $('.comm-product-main').on('click', function () {
@@ -40,6 +41,7 @@ $('.sub-category').on('click','.sub-product',function () {
     $.ajax({
         url: 'http://localhost:8080/sub/'+nameSubProduct,
         success: function (result) {
+            filter = document.getElementsByClassName('change');
             hotLot.empty();
             el.toggleClass('change');
             $.each(result, function (a,b) {
@@ -50,13 +52,17 @@ $('.sub-category').on('click','.sub-product',function () {
                 hotLot.append('<h2 class="text-no-div">По Вашому запиту немає жодного результату</h2>')
             }
             // console.log(hotLot.has('div').length);
+            criteriaJsonFilter(filter);
         }
-    })
+    });
+
 });
 
 $('.type-lot li').on('click',function () {
     // let find = $(this).text();
     $(this).toggleClass('change');
+    filter = document.getElementsByClassName('change')
+    criteriaJsonFilter(filter);
 });
 
 $('#region-lot').on('change',function () {
@@ -67,6 +73,22 @@ $('#region-lot').on('change',function () {
     else if ($(this).find('option:selected').val() === '0') {
         $('.div-region-lot').removeClass('change');
     }
+    filter = document.getElementsByClassName('change');
+    let jsonFilter = criteriaJsonFilter(filter);
+    console.log(jsonFilter);
+    $.ajax({
+        url: 'http://localhost:8080/filter/criteria/',
+        type:"post",
+        contentType: "application/json;charset=utf-8",
+        data: jsonFilter, //Stringified Json Object
+        dataType: 'json',
+        // async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+        // cache: false,    //This will force requested pages not to be cached by the browser
+        // processData:false, //To avoid making query String instead of JSON
+        success:function (result) {
+            console.log(result);
+        }
+    });
 });
 
 $('.filter-price-btn').on('click',function () {
@@ -77,6 +99,8 @@ $('.filter-price-btn').on('click',function () {
     }else {
         $('.div-input').removeClass('change')
     }
+    filter = document.getElementsByClassName('change')
+    criteriaJsonFilter(filter);
 });
 
 $('.select-data-start').on('change',function () {
@@ -84,9 +108,13 @@ $('.select-data-start').on('change',function () {
     // console.log($select.text());
     if ($select.val()!=='0') {
         $('.filter-data-start').addClass('change');
+
+
     }else{
         $('.filter-data-start').removeClass('change');
     }
+    filter = document.getElementsByClassName('change');
+    criteriaJsonFilter(filter);
 });
 
 $('.select-data-end').on('change',function () {
@@ -94,22 +122,30 @@ $('.select-data-end').on('change',function () {
     // console.log($select.text());
     if ($select.val()!=='0') {
         $('.filter-data-end').addClass('change');
+
+        // console.log(asd);
     }else{
         $('.filter-data-end').removeClass('change');
+        //
     }
+    filter = document.getElementsByClassName('change');
+    // console.log(filter);
+    let jsonFilter = criteriaJsonFilter(filter);
+    // $.ajax({
+    //     url: 'http://localhost:8080/filter/criteria/',
+    //     type:"POST",
+    //     contentType: "application/json; charset=utf-8",
+    //     data: jsonFilter, //Stringified Json Object
+    //     // async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+    //     // cache: false,    //This will force requested pages not to be cached by the browser
+    //     processData:false, //To avoid making query String instead of JSON
+    //     success:function (result) {
+    //         console.log(result);
+    //     }
+    // });
 });
 
-let classes = [];
-// $('.div1').on('.click',function () {
-//     console.log("ok");
-//     console.log(document.getElementsByClassName('change'));
-//     for (let i = 0; i < classes.length; i++) {
-//         console.log(classes[i]);
-//     }
-// });
-$('.div1').find('*').each(function(){
-    console.log($(this));
-});
+
 
 
 
@@ -169,3 +205,79 @@ function parseListOfLotFromControllerOnView(b) {
         '</div>' +
         '</div>')
 }
+// function createJSON() {
+//     jsonObj = [];
+//     $("input[class=email]").each(function() {
+//
+//         var id = $(this).attr("title");
+//         var email = $(this).val();
+//
+//         item = {}
+//         item ["title"] = id;
+//         item ["email"] = email;
+//
+//         jsonObj.push(item);
+//     });
+function criteriaJsonFilter(HTMLCollection) {
+    let jsonObj = [];
+    let item = {};
+    let arraySub = [];
+    let arrayTypeLot = [];
+    let count=0;
+    for (let i = 0; i < HTMLCollection.length; i++) {
+        let filterElement = HTMLCollection[i];
+        // console.log(filterElement + " >> " + filterElement.className);
+        // console.log(HTMLCollection);
+        if (filterElement.tagName === 'A') {
+            let text = filterElement.innerHTML;
+            // console.log(text);
+            let message = text.indexOf("(");
+            arraySub[i]=text.substring(0, message);
+
+            item['nameSubCategory'] = arraySub;
+            // console.log(nameSubProduct);
+        }
+        else if (filterElement.tagName === 'LI') {
+            let nodes = Array.prototype.slice.call(HTMLCollection);
+            let liRef = document.getElementsByClassName('type-lot-li change')[0];
+            let indexOf = nodes.indexOf( liRef );
+
+            arrayTypeLot[i-indexOf]=filterElement.title;
+
+            item['typeSell'] = arrayTypeLot;
+        }
+        else if (filterElement.tagName === 'DIV') {
+            if (filterElement.className === 'filter-data-start change') {
+
+                item['dataStartLot'] = document.querySelector('.select-data-start').selectedOptions[0].value;// value -> hour
+                // console.log(optionStart);
+            }
+            else if (filterElement.className === 'filter-data-end change') {
+
+                item['dataEndLot'] = document.querySelector('.select-data-end').selectedOptions[0].value; // value -> hour
+                // console.log(optionEnd);
+            }
+            else if (filterElement.className === 'div-region-lot change') {
+                item['regionLot'] = document.querySelector('#region-lot').selectedOptions[0].innerHTML;
+                // console.log(optionRegionLot);
+            }
+            else if (filterElement.className === 'div-input change') {
+
+                let listChild = filterElement.children;
+                for (let j = 0; j < listChild.length; j++) {
+                    if (listChild[j].className === 'filter-price-from') {
+                        item['priceFrom'] = listChild[j].value;
+                    }
+                    if (listChild[j].className === 'filter-price-to') {
+                        item['priceTo'] = listChild[j].value;
+                    }
+                }
+            }
+        }
+    }
+    jsonObj.push(item);
+    let s = JSON.stringify(item);
+    console.log(s);
+    return s;
+}
+
