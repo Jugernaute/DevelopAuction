@@ -41,12 +41,19 @@ public class User implements UserDetails {
     @Column(name = "type")
     private Set<TypeUser> typeOfUser;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+    mappedBy = "user")
+    private Basket basket;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "userOwner")
     private List<Product> productListOfUser;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE},
             mappedBy = "user")
@@ -182,7 +189,14 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public Basket getBasket() {
+        return basket;
+    }
 
+    public User setBasket(Basket basket) {
+        this.basket = basket;
+        return this;
+    }
 
     public User() {
     }

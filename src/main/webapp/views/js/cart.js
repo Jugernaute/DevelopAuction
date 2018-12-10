@@ -17,24 +17,12 @@ $('.test').on('click', function () {
 });
 
 
-$('#test').click(function () {
+$('#delete').click(function () {
 
     $.ajax({
-        url: '/allProductToCart',
+        url: '/clearUpCart',
         type: 'get',
         contentType: 'application/json',
-        success: function (result) {
-            for (let obj of result) {
-                let product = $('<div/>', {text: obj.nameProduct});
-                let product1 = $('<div/>', {text: obj.modelProduct})
-                $('#cartNameProduct').append(product);
-                $('#cartModelProduct').append(product1);
-            }
-
-        },
-        error : function (error) {
-            console.log(error);
-        }
 
     })
 

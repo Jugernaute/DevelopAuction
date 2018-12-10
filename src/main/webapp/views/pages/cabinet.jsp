@@ -21,7 +21,7 @@
                     <li class="user-id"><a href="#">${user.getUsername()}</a></li>
                     <li class="sell"><a href="/goToSell" id="sell1">Продати</a></li>
                     <li class="favorits"><a href="#">Обрані</a></li>
-                    <li class="cart"><a href="#">Корзина</a></li>
+                    <li class="cart"><a href="/goToCart">Корзина</a></li>
                     <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>

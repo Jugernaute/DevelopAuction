@@ -27,6 +27,11 @@ public class Lot {
     private int currentPrice;
 
     @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE)
+    private Basket basket;
+
+    @JsonIgnore
     @OneToOne(
             fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST,
@@ -81,6 +86,24 @@ public class Lot {
         this.product = product;
         this.delivery = delivery;
         this.payment = payment;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public Lot setBasket(Basket basket) {
+        this.basket = basket;
+        return this;
+    }
+
+    public CompletedLot getListOfLotEnd() {
+        return listOfLotEnd;
+    }
+
+    public Lot setListOfLotEnd(CompletedLot listOfLotEnd) {
+        this.listOfLotEnd = listOfLotEnd;
+        return this;
     }
 
     public int getId_Lot() {
@@ -199,6 +222,8 @@ public class Lot {
                 currentPrice == lot.currentPrice &&
                 Objects.equals(dataStartLot, lot.dataStartLot) &&
                 Objects.equals(dataEndLot, lot.dataEndLot) &&
+                Objects.equals(basket, lot.basket) &&
+                Objects.equals(listOfLotEnd, lot.listOfLotEnd) &&
                 Objects.equals(location, lot.location) &&
                 Objects.equals(listLotBet, lot.listLotBet) &&
                 Objects.equals(product, lot.product) &&
@@ -209,7 +234,7 @@ public class Lot {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, currentPrice, location, listLotBet, product, delivery, payment);
+        return Objects.hash(id_Lot, dataStartLot, dataEndLot, startPrice, hotPrice, currentPrice, basket, listOfLotEnd, location, listLotBet, product, delivery, payment);
     }
 
     @Override

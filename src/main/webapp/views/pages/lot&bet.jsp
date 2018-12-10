@@ -95,7 +95,7 @@
                     <li class="view-user"><a href="/goToCabinet" class="for-remove-2">${userFromSession}</a></li>
                     <li class="sell"><a href="/goToSell">Продати</a></li>
                     <li class="favorites"><a href="#">Обрані</a></li>
-                    <li class="cart"><a href="#">Корзина</a></li>
+                    <li class="cart"><a href="/goToCart">Корзина</a></li>
                     <li class="exit"><a href="/logout">Вийти</a></li>
                 </ul>
             </nav>

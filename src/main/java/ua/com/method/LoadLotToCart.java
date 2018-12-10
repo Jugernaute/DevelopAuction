@@ -29,8 +29,6 @@ public class LoadLotToCart {
             if (lot.getBasket() != null){
 
                 if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket());
-//                Product product = lot.getProduct();
-//                productList.add(product);
                 lotList.add(lot);
             }
         }
