@@ -52,21 +52,16 @@ public class ControllerCart {
     @GetMapping("/clearUpCart" )
     public String allLotToCart() {
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-
         List<Lot> allLot = lotService.findAllLot();
         for (Lot lot : allLot) {
-
             if (lot.getBasket() != null) {
                 if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
-
                     int id_product = lot.getProduct().getId_Product();
                     int id_lot = lot.getId_Lot();
                     lotService.deleteLotById(id_lot);
                     productService.deleteProductById(id_product);
-
                 }
             }
-
         }
         return "cart";
     }

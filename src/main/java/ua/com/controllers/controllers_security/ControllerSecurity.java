@@ -97,6 +97,7 @@ public class ControllerSecurity {
                 if (user.getRandomKey()!=null){
                     return  "/errorPage/activation_error";
                 }
+
             List list = allLotOnMainPage.loadAllLotOnMainPage();
 
             model.addAttribute("imgLinks", list);

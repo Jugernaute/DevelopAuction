@@ -21,15 +21,17 @@ public class LoadAllLotOnMainPage {
         List<Product> allProduct = productService.findAllProduct();
         List<ImageLink> imgLink = new ArrayList<>();
                 for (Product product : allProduct) {
-            List<ImageLink> imageLinks = product.getImageLinks();
-    //            System.out.println("----"+imageLinks);
-            if (!(imageLinks.size() == 0)){
-                ImageLink imageLink = imageLinks.get(0);
-                imgLink.add(imageLink);
-            }else {
+                    List<ImageLink> imageLinks = product.getImageLinks();
+//                System.out.println("----"+imageLinks);
+                    if (!(imageLinks.size() == 0)) {
+                        ImageLink imageLink = imageLinks.get(0);
+                        if (imageLink.getProduct().getLot().getBasket() == null){
+                        imgLink.add(imageLink);
+                    } else {
 //                continue;
-            }
+                    }
                 }
-        return imgLink;
+                    }
+                    return imgLink;
     }
 }
