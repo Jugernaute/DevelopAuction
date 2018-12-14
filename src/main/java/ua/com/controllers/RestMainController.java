@@ -11,7 +11,6 @@ import ua.com.editor.UserValidator;
 import ua.com.entity.*;
 import ua.com.method.LoadAllLotOnMainPage;
 import ua.com.method.LoadAllLotOnPageUsingRest;
-import ua.com.method.error_log.Logs;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.subcategory.SubCategoryService;
 import ua.com.service.user.UserService;
@@ -41,14 +40,13 @@ public class RestMainController {
     private LoadAllLotOnPageUsingRest loadAllLotOnPageUsingRest;
     @Autowired
     private LoadAllLotOnMainPage allLotOnMainPage;
-    @Autowired
-    private Logs logs;
+
 
     @PostMapping("enterKey")
     private String lost_password_ok(
             @RequestParam String randomStr,
             @RequestParam String email){
-        System.out.println(randomStr + " " + email);
+//        System.out.println(randomStr + " " + email);
         User byEmail = userService.findByEmail(email);
         String randomKey = byEmail.getRandomKey();
         if(randomKey.equals(randomStr))
@@ -65,9 +63,9 @@ public class RestMainController {
             @RequestParam String email,
             @RequestParam String repeatPassword,
             BindingResult result){
-        System.out.println(password);
-        System.out.println(repeatPassword);
-        System.out.println(email);
+//        System.out.println(password);
+//        System.out.println(repeatPassword);
+//        System.out.println(email);
         User byEmail = userService.findByEmail(email);
         String property = environment.getProperty("message_pw.length.error");
 

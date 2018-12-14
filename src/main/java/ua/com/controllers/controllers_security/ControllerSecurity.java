@@ -1,5 +1,6 @@
 package ua.com.controllers.controllers_security;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.entity.*;
 import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.LoadAllLotOnMainPage;
-import ua.com.method.error_log.Logs;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
@@ -20,10 +20,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 @Controller
 @PropertySource("classpath:validation.properties")
@@ -31,10 +27,8 @@ import java.util.logging.Logger;
     public class ControllerSecurity {
 
     private static final Logger logger = Logger.getLogger(ControllerSecurity.class.getSimpleName());
-    private FileHandler fileHandler = new FileHandler();
+//    private FileHandler fileHandler = new FileHandler();
 
-    @Autowired
-    private Logs logs;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -52,20 +46,19 @@ import java.util.logging.Logger;
     @GetMapping("/")
         public String start (Model model) throws IOException {
 //        System.out.println(System.getProperty("java.util.logging.config.file"));
-        logger.addHandler(fileHandler);
+//        logger.addHandler(fileHandler);
+        logger.info("hello");
         try{
             int a=1/0;
-            System.out.println(a);
+//            System.out.println(a);
         }catch (Exception e){
-            System.out.println("==================================");
-            logger.log(Level.INFO,"error",e.getMessage());
-            System.out.println("==================================");
+//            System.out.println("==================================");
+            logger.error(e);
+//            System.out.println("==================================");
         }
         List list = allLotOnMainPage.loadAllLotOnMainPage();
         DateTimeFormatter ru = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss").withLocale(new Locale("ru"));
-//        for (CommonCategory commonCategory : allCommonCategory) {
-//            commonCategory.getId_CommonCategory()
-//        }
+
         List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
         model.addAttribute("commonList", allCommonCategory);
         model.addAttribute("dataNow", LocalDateTime.now());

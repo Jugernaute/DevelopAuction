@@ -52,7 +52,8 @@ $('.sub-category').on('click','.sub-product',function () {
                 hotLot.append('<h2 class="text-no-div">По Вашому запиту немає жодного результату</h2>')
             }
             // console.log(hotLot.has('div').length);
-            criteriaJsonFilter(filter);
+            let jsonFilter = criteriaJsonFilter(filter);
+            sendPostJsonCriteria(jsonFilter);
         }
     });
 
@@ -61,8 +62,10 @@ $('.sub-category').on('click','.sub-product',function () {
 $('.type-lot li').on('click',function () {
     // let find = $(this).text();
     $(this).toggleClass('change');
-    filter = document.getElementsByClassName('change')
-    criteriaJsonFilter(filter);
+    filter = document.getElementsByClassName('change');
+    let jsonFilter = criteriaJsonFilter(filter);
+    sendPostJsonCriteria(jsonFilter);
+
 });
 
 $('#region-lot').on('change',function () {
@@ -75,20 +78,7 @@ $('#region-lot').on('change',function () {
     }
     filter = document.getElementsByClassName('change');
     let jsonFilter = criteriaJsonFilter(filter);
-    console.log(jsonFilter);
-    $.ajax({
-        url: 'http://localhost:8080/filter/criteria/',
-        type:"post",
-        contentType: "application/json;charset=utf-8",
-        data: jsonFilter, //Stringified Json Object
-        dataType: 'json',
-        // async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-        // cache: false,    //This will force requested pages not to be cached by the browser
-        // processData:false, //To avoid making query String instead of JSON
-        success:function (result) {
-            console.log(result);
-        }
-    });
+    sendPostJsonCriteria(jsonFilter);
 });
 
 $('.filter-price-btn').on('click',function () {
@@ -100,7 +90,8 @@ $('.filter-price-btn').on('click',function () {
         $('.div-input').removeClass('change')
     }
     filter = document.getElementsByClassName('change')
-    criteriaJsonFilter(filter);
+    let jsonFilter = criteriaJsonFilter(filter);
+    sendPostJsonCriteria(jsonFilter);
 });
 
 $('.select-data-start').on('change',function () {
@@ -114,7 +105,8 @@ $('.select-data-start').on('change',function () {
         $('.filter-data-start').removeClass('change');
     }
     filter = document.getElementsByClassName('change');
-    criteriaJsonFilter(filter);
+    let jsonFilter = criteriaJsonFilter(filter);
+    sendPostJsonCriteria(jsonFilter);
 });
 
 $('.select-data-end').on('change',function () {
@@ -129,20 +121,8 @@ $('.select-data-end').on('change',function () {
         //
     }
     filter = document.getElementsByClassName('change');
-    // console.log(filter);
     let jsonFilter = criteriaJsonFilter(filter);
-    // $.ajax({
-    //     url: 'http://localhost:8080/filter/criteria/',
-    //     type:"POST",
-    //     contentType: "application/json; charset=utf-8",
-    //     data: jsonFilter, //Stringified Json Object
-    //     // async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-    //     // cache: false,    //This will force requested pages not to be cached by the browser
-    //     processData:false, //To avoid making query String instead of JSON
-    //     success:function (result) {
-    //         console.log(result);
-    //     }
-    // });
+    sendPostJsonCriteria(jsonFilter);
 });
 
 
@@ -279,5 +259,22 @@ function criteriaJsonFilter(HTMLCollection) {
     let s = JSON.stringify(item);
     console.log(s);
     return s;
+}
+
+
+function sendPostJsonCriteria(JSON) {
+    $.ajax({
+        url: 'http://localhost:8080/filter/criteria/',
+        type:"post",
+        contentType: "application/json;charset=utf-8",
+        data: JSON, //Stringified Json Object
+        dataType: 'json',
+        // async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+        // cache: false,    //This will force requested pages not to be cached by the browser
+        // processData:false, //To avoid making query String instead of JSON
+        success:function (result) {
+            console.log(result);
+        }
+    });
 }
 

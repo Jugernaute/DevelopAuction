@@ -1,11 +1,11 @@
 package ua.com.controllers.controllers_cart;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.entity.ImageLink;
 import ua.com.entity.Lot;
 import ua.com.entity.User;
 import ua.com.method.LoadLotToCart;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Controller
 public class ControllerCart {
-
+    private static final Logger logger = Logger.getLogger(ControllerCart.class.getSimpleName());
     @Autowired
     private UserService userService;
     @Autowired
@@ -58,15 +58,16 @@ public class ControllerCart {
 
             if (lot.getBasket() != null) {
                 if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
-
-                    int id_product = lot.getProduct().getId_Product();
-                    int id_lot = lot.getId_Lot();
-                    lotService.deleteLotById(id_lot);
-                    productService.deleteProductById(id_product);
-
+                    try{
+                        int id_product = lot.getProduct().getId_Product();
+                        int id_lot = lot.getId_Lot();
+                        lotService.deleteLotById(id_lot);
+                        productService.deleteProductById(id_product);
+                    }catch (Exception e){
+                        logger.error(e.getMessage());
+                    }
                 }
             }
-
         }
         return "cart";
     }

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.entity.ImageLink;
 import ua.com.entity.Product;
-import ua.com.method.error_log.Logs;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,8 +12,6 @@ import java.util.*;
 @Component
 public class LoadAllLotOnPageUsingRest {
 
-@Autowired
-private Logs logs;
 /*
 * this method oriented on rest query from ajax and return result as a map
 * with key---> count

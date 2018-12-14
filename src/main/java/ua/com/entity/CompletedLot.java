@@ -20,6 +20,9 @@ public class CompletedLot {
     )
     private Lot lot;
 
+    public CompletedLot() {
+    }
+
     public CompletedLot(LocalDateTime dateNow, Lot lot) {
         this.dateNow = dateNow;
         this.lot = lot;

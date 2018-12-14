@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.social.facebook.api.AgeRange;
 
 import javax.persistence.*;
 import java.util.*;
@@ -63,6 +64,11 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.REFRESH})
     private List<LocationUser> location;
+
+    private String userIdSocial; // social
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")//social
+    private List<UserConnection> userConnection = new ArrayList<>();//social
 
 
     public User(String firstNameUser, String surNameUser, int userBalance) {
@@ -215,6 +221,35 @@ public class User implements UserDetails {
         this.listUserBet = listUserBet;
     }
 
+    // social
+    public User(String userIdSocial, String username, String password, String email, Role role, UserConnection userConnection){
+        this.userIdSocial = userIdSocial;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.userConnection.add(userConnection);
+    }
+
+    //social
+    public String getUserIdSocial() {
+        return userIdSocial;
+    }
+
+    //social
+    public void setUserIdSocial(String userIdSocial) {
+        userIdSocial = userIdSocial;
+    }
+
+    //social
+    public List<UserConnection> getUserConnection() {
+        return userConnection;
+    }
+
+    //social
+    public void setUserConnection(List<UserConnection> userConnection) {
+        this.userConnection = userConnection;
+    }
 
     public String getFirstNameUser() {
         return firstNameUser;

@@ -46,7 +46,7 @@ CommonCategoryService commonCategoryService;
     private String fromLogoToHome(Model model){
         String userSession = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(userSession);
-        System.out.println(userSession);
+//        System.out.println(userSession);
         if (!userSession.equals("anonymousUser")){
             if (user.getRandomKey()!=null){
                 return  "/errorPage/activation_error";
@@ -126,5 +126,8 @@ CommonCategoryService commonCategoryService;
         return "lot&bet";
     }
 
-
+    @GetMapping("/goToFb")
+    private String goToFb(){
+        return "pagefb";
+    }
 }

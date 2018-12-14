@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ua.com.entity.*;
 import ua.com.method.FindUserFromListOfBet;
 import ua.com.method.LiderAndSizeOfBets;
-import ua.com.method.error_log.Logs;
 import ua.com.method.subscribers.BetLot;
 import ua.com.method.subscribers.Subscribers;
+import ua.com.service.basket.BasketService;
 import ua.com.service.bet.BetService;
 import ua.com.service.imageLink.ImageLinkService;
 import ua.com.service.lot.LotService;
@@ -27,8 +27,6 @@ import java.util.logging.Logger;
 public class RestControllerBet {
 
     @Autowired
-    private Logs logs;
-    @Autowired
     private ImageLinkService imageLinkService;
     @Autowired
     private ProductService productService;
@@ -40,6 +38,8 @@ public class RestControllerBet {
     private UserService userService;
     @Autowired
     private LiderAndSizeOfBets liderAndSizeOfBets;
+    @Autowired
+    private BasketService basketService;
     @Autowired
     private Subscribers subscribers;
     @Autowired
@@ -184,30 +184,61 @@ public class RestControllerBet {
     }
 
     @GetMapping("lot/hotPrice")
-    private String hotPrice(@RequestParam String linkImg){
+    private String hotPrice(@RequestParam String linkImg) {
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        String name = user.getUsername();
+        System.out.println("username1 : " + user.getUsername());
 
-        Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+        if (user.getBasket() != null) {
+            System.out.println("записуєм інфу");
+            Basket basket = user.getBasket();
 
-        if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())){
-            return "Time is expired";
+            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+            lotService.addLot(lotByImageLink_name.setBasket(basket));
+
+            if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
+                return "Time is expired";
+            }
+            int hotPrice;
+            if ((hotPrice = lotByImageLink_name.getHotPrice()) != 0 && !name.equals("anonymousUser")) {
+                lotByImageLink_name.setCurrentPrice(hotPrice);
+                lotService.addLot(lotByImageLink_name);
+
+                Bet bet = new Bet();
+                bet.setUser(user);
+                bet.setLot(lotByImageLink_name);
+                bet.setSum_of_the_bet(hotPrice);
+                betService.addBet(bet);
+                return "You buy product";
+            }
+            return "You must registration";
+        } else {
+            //створюєм корзину і закидуєм інформацію
+            Basket basket = new Basket();
+            basketService.addBasket(basket.setUser(user));
+            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+            lotService.addLot(lotByImageLink_name.setBasket(basket));
+            if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
+                return "Time is expired";
+            }
+            int hotPrice;
+//        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+
+            if ((hotPrice = lotByImageLink_name.getHotPrice()) != 0 && !name.equals("anonymousUser")) {
+                lotByImageLink_name.setCurrentPrice(hotPrice);
+                lotService.addLot(lotByImageLink_name);
+
+//            User user = userService.findByUsername(name);
+
+                Bet bet = new Bet();
+                bet.setUser(user);
+                bet.setLot(lotByImageLink_name);
+                bet.setSum_of_the_bet(hotPrice);
+                betService.addBet(bet);
+                return "You buy product";
+            }
+            return "You must registration";
         }
-        int hotPrice;
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        if ((hotPrice=lotByImageLink_name.getHotPrice())!=0 && !name.equals("anonymousUser")){
-            lotByImageLink_name.setCurrentPrice(hotPrice);
-            lotService.addLot(lotByImageLink_name);
-
-            User user = userService.findByUsername(name);
-
-            Bet bet = new Bet();
-            bet.setUser(user);
-            bet.setLot(lotByImageLink_name);
-            bet.setSum_of_the_bet(hotPrice);
-            betService.addBet(bet);
-            return "You buy product";
-        }
-        return "You must registration";
     }
 
     @GetMapping("lot/updatePage")

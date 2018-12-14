@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
-import ua.com.method.error_log.Logs;
 import ua.com.service.bet.BetService;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.delivery.DeliveryService;
@@ -54,8 +53,6 @@ public class RestControllerCreateLot {
     private LocationLotService locationLotService;
     @Autowired
     private BetService betService;
-    @Autowired
-    private Logs logs;
 
     @PostMapping("upload")
     private String upload(@RequestParam("fileload") MultipartFile[] uploadfile){
