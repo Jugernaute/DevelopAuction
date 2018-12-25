@@ -84,7 +84,7 @@ $('#region-lot').on('change',function () {
 $('.filter-price-btn').on('click',function () {
     let priceFrom = $('.filter-price-from').val();
     let priceTo = $('.filter-price-to').val();
-    if (priceFrom !=='' && priceTo!==''){
+    if (priceFrom !=='' || priceTo!==''){
         $('.div-input').addClass('change');
     }else {
         $('.div-input').removeClass('change')
@@ -200,22 +200,39 @@ function parseListOfLotFromControllerOnView(b) {
 //     });
 function criteriaJsonFilter(HTMLCollection) {
     let jsonObj = [];
-    let item = {};
+    let sub = {};
+    let dataStart = {};
+    let dataEnd = {};
+    let priceFrom = {};
+    let priceTo = {};
+    let region = {};
+    let typeSell = {};
     let arraySub = [];
     let arrayTypeLot = [];
     let count=0;
+    /*
+    *    static values:
+    *       comparison -> we get from enums in Comparison.class !!!    *
+    *       field -> equal field in entity, where we find
+    *       exmpl: sub['nameSubCategory'] -> value in array is field in Condition.class (for JSON serialization)
+    * */
     for (let i = 0; i < HTMLCollection.length; i++) {
         let filterElement = HTMLCollection[i];
         // console.log(filterElement + " >> " + filterElement.className);
-        // console.log(HTMLCollection);
+        console.log(HTMLCollection);
         if (filterElement.tagName === 'A') {
             let text = filterElement.innerHTML;
-            // console.log(text);
-            let message = text.indexOf("(");
-            arraySub[i]=text.substring(0, message);
+            ++count;
+            for (let j = 0; j < count; j++) {
+                let message = text.indexOf("(");
+                // arraySub[i]=text.substring(0, message);
 
-            item['nameSubCategory'] = arraySub;
-            // console.log(nameSubProduct);
+                sub['nameSubCategory'] = text.substring(0, message);
+                sub['comparison'] = "eq";
+                sub['field'] = "nameSubCategory";
+                console.log(sub);
+            }
+
         }
         else if (filterElement.tagName === 'LI') {
             let nodes = Array.prototype.slice.call(HTMLCollection);
@@ -224,56 +241,93 @@ function criteriaJsonFilter(HTMLCollection) {
 
             arrayTypeLot[i-indexOf]=filterElement.title;
 
-            item['typeSell'] = arrayTypeLot;
+            typeSell['typeSell'] = arrayTypeLot;
+            typeSell['comparison'] = "eq";
+            typeSell['field'] = "typeSell";
         }
         else if (filterElement.tagName === 'DIV') {
             if (filterElement.className === 'filter-data-start change') {
 
-                item['dataStartLot'] = document.querySelector('.select-data-start').selectedOptions[0].value;// value -> hour
-                // console.log(optionStart);
+                dataStart['dataStartLot'] = document.querySelector('.select-data-start').selectedOptions[0].value;// value -> hour
+                dataStart['comparison'] = "gt";
+                dataStart['field'] = "dataStartLot";
             }
             else if (filterElement.className === 'filter-data-end change') {
 
-                item['dataEndLot'] = document.querySelector('.select-data-end').selectedOptions[0].value; // value -> hour
-                // console.log(optionEnd);
+                dataEnd['dataEndLot'] = document.querySelector('.select-data-end').selectedOptions[0].value; // value -> hour
+                dataEnd['comparison'] = "lt";
+                dataEnd['field'] = "dataEndLot";
             }
             else if (filterElement.className === 'div-region-lot change') {
-                item['regionLot'] = document.querySelector('#region-lot').selectedOptions[0].innerHTML;
-                // console.log(optionRegionLot);
+                region['regionLot'] = document.querySelector('#region-lot').selectedOptions[0].innerHTML;
+                region['comparison'] = "eq";
+                region['field'] = "regionLot";
             }
             else if (filterElement.className === 'div-input change') {
 
                 let listChild = filterElement.children;
                 for (let j = 0; j < listChild.length; j++) {
-                    if (listChild[j].className === 'filter-price-from') {
-                        item['priceFrom'] = listChild[j].value;
+                    if (listChild[j].className === 'filter-price-from' && listChild[j].value!=="") {
+                        priceFrom['priceFrom'] = listChild[j].value;
+                        priceFrom['comparison'] = 'gt';
+                        priceFrom['field'] = "priceFrom";
                     }
-                    if (listChild[j].className === 'filter-price-to') {
-                        item['priceTo'] = listChild[j].value;
+                    if (listChild[j].className === 'filter-price-to' && listChild[j].value!=="") {
+                        priceTo['priceTo'] = listChild[j].value;
+                        priceTo['comparison'] = "lt";
+                        priceTo['field'] = "priceTo";
                     }
                 }
             }
         }
     }
-    jsonObj.push(item);
-    let s = JSON.stringify(item);
+
+/*
+*   push to jsonObj only filling object
+*
+*   */
+    if (Object.keys(sub).length>0) {
+        jsonObj.push(sub)
+    }
+    if (Object.keys(dataStart).length>0) {
+        jsonObj.push(dataStart)
+    }
+    if (Object.keys(dataEnd).length>0) {
+        jsonObj.push(dataEnd)
+    }
+    if (Object.keys(region).length>0) {
+        jsonObj.push(region)
+    }
+    if (Object.keys(typeSell).length>0) {
+        jsonObj.push(typeSell)
+    }
+    if (Object.keys(priceFrom).length>0) {
+        jsonObj.push(priceFrom)
+    }
+    if (Object.keys(priceTo).length>0) {
+        jsonObj.push(priceTo)
+    }
+   /*
+   * create association array
+   * */
+    let s = JSON.stringify(jsonObj);
     console.log(s);
     return s;
 }
 
 
 function sendPostJsonCriteria(JSON) {
+    /*
+    * send to RestControllerFilterProduct    *
+    * */
     $.ajax({
         url: 'http://localhost:8080/filter/criteria/',
         type:"post",
         contentType: "application/json;charset=utf-8",
         data: JSON, //Stringified Json Object
         dataType: 'json',
-        // async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-        // cache: false,    //This will force requested pages not to be cached by the browser
-        // processData:false, //To avoid making query String instead of JSON
         success:function (result) {
-            console.log(result);
+            console.log("ok");
         }
     });
 }

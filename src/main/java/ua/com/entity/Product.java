@@ -1,6 +1,7 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,16 +23,14 @@ public class Product {
     private TypeSell typeSell;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, //eager my
+    @OneToMany(fetch = FetchType.EAGER,
     cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
             mappedBy = "product"
     )
     private List<ImageLink> imageLinks;
 
     @JsonIgnore
-    @OneToOne(
-
-            fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "products"
     )
@@ -43,20 +42,21 @@ public class Product {
             cascade = {CascadeType.MERGE/*,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH*/})
     private SubCategory subCategory;
 
-@JsonIgnore
-        @ManyToOne(fetch = FetchType.LAZY,
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     private User userOwner;
 
-@JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
-    private Manufacturer manufacturer;
-@JsonIgnore
+                cascade = CascadeType.MERGE)
+        private Manufacturer manufacturer;
+
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-    cascade = {/*CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH,*/ CascadeType.REFRESH},
-    mappedBy = "product")
-    private Lot lot;
+        cascade = {/*CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH,*/ CascadeType.REFRESH},
+        mappedBy = "product")
+        private Lot lot;
 
     public Product() {
     }

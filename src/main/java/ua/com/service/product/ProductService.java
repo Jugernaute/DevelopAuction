@@ -1,7 +1,7 @@
 package ua.com.service.product;
 
-import org.springframework.data.repository.query.Param;
 import ua.com.entity.Product;
+import ua.com.method.filter.Filter;
 
 import java.util.List;
 
@@ -14,4 +14,5 @@ public interface ProductService {
     Product findByNameProduct(String product);
     Product findProductByLot_Id (int lot);
     Product findProductByImageLinks_Id(int idImgLink);
+    List<Product> findAllBySpecification(Filter filter);
 }

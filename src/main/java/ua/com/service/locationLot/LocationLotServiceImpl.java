@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.dao.LocationLotDao;
 import ua.com.entity.LocationLot;
+import ua.com.method.filter.Filter;
+
+import java.util.List;
 
 @Service
 public class LocationLotServiceImpl implements LocationLotService {
@@ -20,6 +23,11 @@ public class LocationLotServiceImpl implements LocationLotService {
     @Override
     public void addLocationLot(LocationLot locationLot) {
         locationLotDao.save(locationLot);
+    }
+
+    @Override
+    public List<LocationLot> findAllBySpecification(Filter filter) {
+        return locationLotDao.findAll(filter);
     }
 
 }

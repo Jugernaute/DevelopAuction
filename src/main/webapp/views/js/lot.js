@@ -63,6 +63,11 @@ heart.on('click', function () {
 /*
 * timer
 * */
+// Date.prototype.addHours = function(h) {
+//     this.setTime(this.getTime() + (h*60*60*1000));
+//     return this;
+// };
+
 let number = $('#test').text();
 let nowDate;
 let lotDateEnd;
@@ -72,7 +77,7 @@ let x = setInterval(function() {
     lotDateEnd = Date.parse(number.toString());
     let distance =lotDateEnd-nowDate;
 
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let days = Math.floor(distance / (1000 * 60 * 60 * 1));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((distance % (1000 * 60)) / 1000);

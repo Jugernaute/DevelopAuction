@@ -24,10 +24,7 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories({"ua.com.dao"})
 @EnableTransactionManagement
-//@PropertySource(value = { "classpath:application.properties" })
 public class DataConfig {
-//    @Autowired
-//    private Environment env;
 
     @Bean
     public DataSource dataSource() {
@@ -45,7 +42,7 @@ public class DataConfig {
     public JpaVendorAdapter vendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
-        adapter.setShowSql(true);
+//        adapter.setShowSql(true);
         return adapter;
     }
 

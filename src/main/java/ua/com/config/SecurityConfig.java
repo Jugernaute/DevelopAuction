@@ -1,11 +1,15 @@
 package ua.com.config;
 
 
+//import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+//import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+//import org.springframework.http.converter.json.SpringHandlerInstantiator;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -34,6 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public HandlerInstantiator handlerInstantiator(ApplicationContext applicationContext) {
+//        return new SpringHandlerInstantiator(applicationContext.getAutowireCapableBeanFactory());
+//    }
+//
+//    @Bean
+//    public Jackson2ObjectMapperBuilder objectMapperBuilder(HandlerInstantiator handlerInstantiator) {
+//        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+//        builder.handlerInstantiator(handlerInstantiator);
+//        return builder;
+//    }
+
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

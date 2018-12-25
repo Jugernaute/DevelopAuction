@@ -1,11 +1,10 @@
 package ua.com.service.subcategory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ua.com.dao.SubCategoryDao;
-import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
+import ua.com.method.filter.Filter;
 
 import java.util.List;
 
@@ -50,6 +49,11 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public SubCategory findById_Products(int idProduct) {
         return subCategoryDao.findSubCategoryByProducts(idProduct);
+    }
+
+    @Override
+    public List findAllSubCategoryBySpecification(Filter filter) {
+        return subCategoryDao.findAll(filter);
     }
 
 

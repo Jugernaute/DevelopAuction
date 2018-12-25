@@ -1,7 +1,7 @@
 package ua.com.service.subcategory;
 
-import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
+import ua.com.method.filter.Filter;
 
 import java.util.List;
 
@@ -14,4 +14,5 @@ public interface SubCategoryService {
     List<SubCategory> findAllSubCategory();
     SubCategory findByNameSubCategory (String nameSubCategory);
     SubCategory findById_Products (int idProduct);
+    List findAllSubCategoryBySpecification(Filter filter);
 }

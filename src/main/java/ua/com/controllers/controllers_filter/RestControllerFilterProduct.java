@@ -1,6 +1,7 @@
 package ua.com.controllers.controllers_filter;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -8,21 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ua.com.dao.LocationLotDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
 import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.FillFilter_SubCategory_OnRegisterUserPage;
 import ua.com.method.LoadAllLotOnMainPage;
 import ua.com.method.LoadAllLotOnPageUsingRest;
-import ua.com.method.filter.Comparison;
-import ua.com.method.filter.Condition;
-import ua.com.method.filter.Filter;
-import ua.com.method.filter.Filter2;
+import ua.com.method.filter.*;
+import ua.com.method.filter.test.ConditionRegionLot;
 import ua.com.service.commomCategory.CommonCategoryService;
+import ua.com.service.locationLot.LocationLotService;
+import ua.com.service.product.ProductService;
 import ua.com.service.subcategory.SubCategoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 
@@ -42,7 +45,9 @@ public class RestControllerFilterProduct {
     @Autowired
     private FillFilter_CommonCategory_OnRegisterUserPage fillFilter_commonCategory_onRegisterUserPage;
     @Autowired
-    private SubCategoryDao subCategoryDao;
+    private ProductService productService;
+    @Autowired
+    private LocationLotService locationLotService;
 
     @GetMapping("filter/{nameCommProduct}")
     private Map filterByCommCategory(@PathVariable String nameCommProduct){
@@ -106,44 +111,38 @@ private Set<Map<Integer, Map<String, String>>> set = new LinkedHashSet<>();
         Map<Integer, Map<String, String>> mapMap = loadAllLotOnPageUsingRest.loadAllLotOnPageUsingRest(linkList);
 
         set.add(mapMap);
-//        for (Map<Integer, Map<String, String>> next : set) {
-//            System.out.println(next);
-//            System.out.println("--------------------");
-//        }
-        /*return on filterProductHomeRegisterUser.js*/
         return mapMap;
+        /*return on filterProductHomeRegisterUser.js*/
     }
+
+//@Autowired
+//ConditionService conditionService;
 
 
     @PostMapping(value = "filter/criteria", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     private String JsonCriteria(HttpServletRequest request) throws IOException {
 
-//        try{
+
             String s = IOUtils.toString(request.getInputStream(),"utf-8");
-            System.out.println(s);
-            System.out.println("----------------");
-            ObjectMapper objectMapper = new ObjectMapper();
-        Condition condition = objectMapper.readValue(s, Condition.class);
-        List<String> nameSubCategory = condition.nameSubCategory;
-//        for (String s1 : nameSubCategory) {
-//            subCategoryDao.findAll(Filter2.products(s1))
-//                    .forEach(System.out::println);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Condition> condition = objectMapper.readValue(s, new TypeReference<List<Condition>>(){});
+//        for (Condition condition1 : condition) {
+//            System.out.println("condition -> "+condition1.toString());
 //        }
 
 
         Filter filter = new Filter();
         filter.addCondition(condition);
-        filter.addCondition((new Condition.Builder().setComparison().setNameSubCategory(nameSubCategory).build()));
-        List<SubCategory> all = subCategoryDao.findAll(filter);
-        for (SubCategory subCategory : all) {
-            System.out.println(subCategory);
+        System.out.println("filter -> "+filter.toString());
+        try{
+            List all =locationLotService.findAllBySpecification(filter);
+            for (Object o : all) {
+                System.out.println(o);
+            }
+        }catch (Exception e){
+            LOGGER.info(e.getMessage(),e.getCause());
         }
-
-
-//        }catch (Exception e){
-//            LOGGER.error(e.getMessage(),e.fillInStackTrace());
-//        }
-
         return "ok";
     }
 }
