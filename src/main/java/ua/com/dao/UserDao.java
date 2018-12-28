@@ -3,7 +3,6 @@ package ua.com.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ua.com.entity.Bet;
 import ua.com.entity.User;
 
 import java.util.List;
@@ -24,6 +23,8 @@ public interface UserDao extends JpaRepository<User,Integer> {
     List<Object[]> findUserNameAndSumBetByLot_AndUserId(@Param("id_lot") int id_lot);
     @Query(value = "select username from bet join user u on bet.user_userId = u.userId where id_Bet=:id_bet", nativeQuery = true)
     String getUsernameFromBetById_Bet (@Param("id_bet") int id_bet);
+    @Query(value = "select * from user join bet b on user.userId = b.user_userId where id_Bet=:id_bet", nativeQuery = true)
+    User getUserFromBetById_Bet (@Param("id_bet") int id_bet);
 
  }
 

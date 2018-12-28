@@ -270,7 +270,7 @@ public class RestControllerCreateLot {
         // duration lot
         long durationLot = Long.parseLong(durationOfLot);
         // add int to date
-        LocalDateTime dataEnd = dataStart.plusDays(durationLot);
+        LocalDateTime dataEnd = dataStart.plusMinutes(durationLot);
 
         //            working with delivery
 

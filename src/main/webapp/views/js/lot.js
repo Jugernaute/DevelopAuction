@@ -63,6 +63,8 @@ heart.on('click', function () {
 /*
 * timer
 * */
+
+
 let number = $('#test').text();
 let nowDate;
 let lotDateEnd;
@@ -87,6 +89,14 @@ let x = setInterval(function() {
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("timer").innerHTML = "EXPIRED";
+        $.ajax({
+            url: "/timerEnd",
+            type: "get",
+            data: {idProductSession},
+            success: function (result) {
+                console.log("success");
+            }
+        })
     }
 }, 1000);
 

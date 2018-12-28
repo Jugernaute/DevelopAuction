@@ -63,7 +63,7 @@ public class ControllerCart {
                 }
             }
         }
-        return "cart";
+        return "redirect:cart";
     }
 
 }

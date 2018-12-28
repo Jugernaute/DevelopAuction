@@ -21,6 +21,7 @@ public interface UserService extends UserDetailsService {
     User findByRandomKey(String randomKey);
     User findByEmail(String email);
     User findUserByProductId(int idProduct);
+    User getUserFromBetById_Bet(int id_bet);
     List<Object[]> listBetAndUserByLot_id(int id_lot);
     String getUsernameFromBetById_Bet (int bet);
 

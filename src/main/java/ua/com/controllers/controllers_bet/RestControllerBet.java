@@ -44,26 +44,28 @@ public class  RestControllerBet {
                             @RequestParam String idProductSession){
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        String name = user.getUsername();
         int id_product = productService.getProductById(Integer.parseInt(idProductSession)).getId_Product();
 
         Lot lot = lotService.findLotByProduct_Id(id_product);
         int id_lot = lot.getId_Lot();
-
+        Bet bet = new Bet();
         if (lot.getDataEndLot().isBefore(LocalDateTime.now())){
             map.put("endData","Аукціон по цьому товару вже закінчився");
-            return map;
+             return map;
         }
 
         User createProductUser = userService.findUserByProductId(id_product);
         String userfromSession = SecurityContextHolder.getContext().getAuthentication().getName();
-        User byUsername = userService.findByUsername(userfromSession);
 
+        User byUsername = userService.findByUsername(userfromSession);
         if (userfromSession.equals("anonymousUser") || !byUsername.isEnabled()){
             map.put("registration","Ви повинні спочатку авторизуватися");
             return map;
         }
 
-        Bet bet = new Bet();
+
 
         int userBet=0;
         int currentPrice = lot.getCurrentPrice();
@@ -146,6 +148,50 @@ public class  RestControllerBet {
         return stringMap;
     }
 
+    @GetMapping("/timerEnd")
+    private void timeEnd(String idProductSession){
+//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+//        String name = user.getUsername();
+        int id_product = productService.getProductById(Integer.parseInt(idProductSession)).getId_Product();
+
+        Lot lot = lotService.findLotByProduct_Id(id_product);
+        System.out.println("!!!!!!!!!!!!!11!!!!!!!!!!!" + lot);
+
+        int id_lot = lot.getId_Lot();
+        Bet bet = new Bet();
+        List<Bet> allBetByLot_id = betService.findAllBetByLot_id(id_lot);
+        bet = allBetByLot_id.get(allBetByLot_id.size()-1);
+
+        int id_bet = bet.getId_Bet();
+        User user1 = userService.getUserFromBetById_Bet(id_bet);
+
+        if (user1.getBasket() != null){
+            Basket basket = user1.getBasket();
+            Lot lotByProduct_id = lotService.findLotByProduct_Id(id_product);
+            lotService.addLot(lotByProduct_id.setBasket(basket));
+            int currentPrice = lotByProduct_id.getCurrentPrice();
+
+            lotService.addLot(lotByProduct_id);
+            bet.setUser(user1);
+            bet.setLot(lotByProduct_id);
+            bet.setSum_of_the_bet(currentPrice);
+            betService.addBet(bet);
+        }else {
+            Basket basket = new Basket();
+            basketService.addBasket(basket.setUser(user1));
+
+            Lot lotByProduct_id = lotService.findLotByProduct_Id(id_product);
+            lotService.addLot(lotByProduct_id.setBasket(basket));
+            int currentPrice = lotByProduct_id.getCurrentPrice();
+
+            lotService.addLot(lotByProduct_id);
+            bet.setUser(user1);
+            bet.setLot(lotByProduct_id);
+            bet.setSum_of_the_bet(currentPrice);
+            betService.addBet(bet);
+        }
+    }
+
     @GetMapping("lot/lotDescription")
     private String description(@RequestParam String linkImg){
         int id_imageLink = imageLinkService.findByImageLink(linkImg).getId_ImageLink();
@@ -158,14 +204,20 @@ public class  RestControllerBet {
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         String name = user.getUsername();
         System.out.println("username1 : " + user.getUsername());
+        Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+        int currentPrice = lotByImageLink_name.getCurrentPrice();
 
         if (user.getBasket() != null) {
             Basket basket = user.getBasket();
 
-            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
             lotService.addLot(lotByImageLink_name.setBasket(basket));
-
             if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
+                lotService.addLot(lotByImageLink_name);
+                Bet bet = new Bet();
+                bet.setUser(user);
+                bet.setLot(lotByImageLink_name);
+                bet.setSum_of_the_bet(currentPrice);
+                betService.addBet(bet);
                 return "Time is expired";
             }
             int hotPrice;
@@ -185,9 +237,15 @@ public class  RestControllerBet {
             //створюєм корзину і закидуєм інформацію
             Basket basket = new Basket();
             basketService.addBasket(basket.setUser(user));
-            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+//            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
             lotService.addLot(lotByImageLink_name.setBasket(basket));
             if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
+                lotService.addLot(lotByImageLink_name);
+                Bet bet = new Bet();
+                bet.setUser(user);
+                bet.setLot(lotByImageLink_name);
+                bet.setSum_of_the_bet(currentPrice);
+                betService.addBet(bet);
                 return "Time is expired";
             }
             int hotPrice;
