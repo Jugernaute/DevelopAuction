@@ -49,27 +49,27 @@ public class ControllerCart {
         return "cart";
     }
 
-//    @GetMapping("/clearUpCart" )
-//    public String allLotToCart() {
-//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//
-//        List<Lot> allLot = lotService.findAllLot();
-//        for (Lot lot : allLot) {
-//
-//            if (lot.getBasket() != null) {
-//                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
-//                    try{
-//                        int id_product = lot.getProduct().getId_Product();
-//                        int id_lot = lot.getId_Lot();
-//                        lotService.deleteLotById(id_lot);
-//                        productService.deleteProductById(id_product);
-//                    }catch (Exception e){
-//                        logger.error(e.getMessage());
-//                    }
-//                }
-//            }
-//        }
-//        return "cart";
-//    }
+    @GetMapping("/clearUpCart" )
+    public String allLotToCart() {
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        List<Lot> allLot = lotService.findAllLot();
+        for (Lot lot : allLot) {
+
+            if (lot.getBasket() != null) {
+                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
+                    try{
+                        int id_product = lot.getProduct().getId_Product();
+                        int id_lot = lot.getId_Lot();
+                        lotService.deleteLotById(id_lot);
+                        productService.deleteProductById(id_product);
+                    }catch (Exception e){
+                        logger.error(e.getMessage());
+                    }
+                }
+            }
+        }
+        return "cart";
+    }
 
 }
