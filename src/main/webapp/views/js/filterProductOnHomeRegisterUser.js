@@ -48,7 +48,6 @@ $('.sub-category').on('click','.sub-product',function () {
                 parseListOfLotFromControllerOnView(b);
             });
         if (hotLot.has('div').length===0) {
-                // console.log("ok");
                 hotLot.append('<h2 class="text-no-div">По Вашому запиту немає жодного результату</h2>')
             }
             // console.log(hotLot.has('div').length);
@@ -89,7 +88,7 @@ $('.filter-price-btn').on('click',function () {
     }else {
         $('.div-input').removeClass('change')
     }
-    filter = document.getElementsByClassName('change')
+    filter = document.getElementsByClassName('change');
     let jsonFilter = criteriaJsonFilter(filter);
     sendPostJsonCriteria(jsonFilter);
 });
@@ -201,13 +200,13 @@ function parseListOfLotFromControllerOnView(b) {
 function criteriaJsonFilter(HTMLCollection) {
     let jsonObj = [];
     let sub = {};
+    let arraySub = [];
     let dataStart = {};
     let dataEnd = {};
     let priceFrom = {};
     let priceTo = {};
     let region = {};
     let typeSell = {};
-    let arraySub = [];
     let arrayTypeLot = [];
     let count=0;
     /*
@@ -219,18 +218,17 @@ function criteriaJsonFilter(HTMLCollection) {
     for (let i = 0; i < HTMLCollection.length; i++) {
         let filterElement = HTMLCollection[i];
         // console.log(filterElement + " >> " + filterElement.className);
-        console.log(HTMLCollection);
+        // console.log(HTMLCollection);
         if (filterElement.tagName === 'A') {
             let text = filterElement.innerHTML;
             ++count;
             for (let j = 0; j < count; j++) {
                 let message = text.indexOf("(");
-                // arraySub[i]=text.substring(0, message);
-
-                sub['nameSubCategory'] = text.substring(0, message);
-                sub['comparison'] = "eq";
-                sub['field'] = "nameSubCategory";
-                console.log(sub);
+                arraySub[i]=text.substring(0, message);
+                sub['nameSubCategory'] = arraySub;
+                // sub['comparison'] = "eq";
+                // sub['field'] = "nameSubCategory";
+                // console.log(sub);
             }
 
         }
@@ -242,8 +240,8 @@ function criteriaJsonFilter(HTMLCollection) {
             arrayTypeLot[i-indexOf]=filterElement.title;
 
             typeSell['typeSell'] = arrayTypeLot;
-            typeSell['comparison'] = "eq";
-            typeSell['field'] = "typeSell";
+            // typeSell['comparison'] = "eq";
+            // typeSell['field'] = "typeSell";
         }
         else if (filterElement.tagName === 'DIV') {
             if (filterElement.className === 'filter-data-start change') {
@@ -259,9 +257,9 @@ function criteriaJsonFilter(HTMLCollection) {
                 dataEnd['field'] = "dataEndLot";
             }
             else if (filterElement.className === 'div-region-lot change') {
-                region['regionLot'] = document.querySelector('#region-lot').selectedOptions[0].innerHTML;
+                region['locationLots'] = document.querySelector('#region-lot').selectedOptions[0].innerHTML;
                 region['comparison'] = "eq";
-                region['field'] = "regionLot";
+                region['field'] = "locationLots";
             }
             else if (filterElement.className === 'div-input change') {
 
@@ -287,7 +285,14 @@ function criteriaJsonFilter(HTMLCollection) {
 *
 *   */
     if (Object.keys(sub).length>0) {
-        jsonObj.push(sub)
+        let arr = [];
+        for(let i=0;i<arraySub.length;i++){
+            arr [i]={};
+            arr[i]['subCategory']=arraySub[i];
+            arr[i]['comparison']="eq";
+            arr[i]['field'] = "nameSubCategory";
+            jsonObj.push(arr[i])
+        }
     }
     if (Object.keys(dataStart).length>0) {
         jsonObj.push(dataStart)
@@ -299,7 +304,14 @@ function criteriaJsonFilter(HTMLCollection) {
         jsonObj.push(region)
     }
     if (Object.keys(typeSell).length>0) {
-        jsonObj.push(typeSell)
+        let arr = [];
+        for(let i=0;i<arrayTypeLot.length;i++){
+            arr [i]={};
+            arr[i]['typeSell']=arrayTypeLot[i];
+            arr[i]['comparison']="eq";
+            arr[i]['field'] = "typeSell";
+            jsonObj.push(arr[i])
+        }
     }
     if (Object.keys(priceFrom).length>0) {
         jsonObj.push(priceFrom)

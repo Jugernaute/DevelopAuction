@@ -61,11 +61,11 @@ nav{
     border-bottom: 2px solid #EA6C25;
 }
 nav p{
-  margin-right: 10px;
+  /*margin-right: 10px;*/
     text-transform: uppercase;
 }
 nav input{
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     border: none;
     border-radius: 2px;
     height: 20px;
@@ -111,11 +111,24 @@ nav input{
 /******************nav-sort********************/
 .nav-sort{
     display: flex;
-
 }
+
+#sbm-srch{
+    padding: 0 3px 0 3px;
+    /*margin-top: 15px;*/
+}
+
+
+
 .nav-sort select{
-    width: 200px;
-    height: 20px;
+    width: 300px;
+    height: 40px;
+    border: 1px solid sienna;
+    border-radius: 10px;
+    background: ivory;
+    font-size: large;
+    margin-left: 65%;
+    margin-top: 10px;
 }
 
 /*****************hot-lot*******************/
@@ -427,3 +440,14 @@ footer{
 .settings{
     margin-left: 50px;
 }
+
+/*.filter-nav{*/
+    /*width: 250px;*/
+    /*height: 40px;*/
+    /*border: 1px solid sienna;*/
+    /*border-radius: 10px;*/
+    /*background: ivory;*/
+    /*font-size: large;*/
+    /*margin-left: 65%;*/
+    /*margin-top: 10px;*/
+/*}*/

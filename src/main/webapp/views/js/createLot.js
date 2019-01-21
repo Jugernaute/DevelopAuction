@@ -272,11 +272,11 @@ $('.add-product-sell').on('click',function (event) {
         cache: false,
         success: (data) => {
             $("#listFiles").text(data);
-            console.log("all ok - " +data)
+            // console.log("all ok - " +data)
         },
         error: (e) => {
             $("#listFiles").text(e.responseText);
-            console.log("error")
+            // console.log("error")
         }
     });
 
@@ -313,11 +313,6 @@ function handleFileSelect(evt) {
                     span.innerHTML = ['<img class="thumb" src="', e.target.result,
                         '" title="', theFile.name,'"/>'+['<span id="img-name">'+theFile.name+'</span>']+['<button id="del-image">delete</button>']].join("");
                     document.getElementById('listFiles').insertBefore(span, null);
-
-
-
-
-
                 }else{
                     $('#image-error').empty();
                     $('#image-error').append("Ви не можете загрузити більше 4 картинок");

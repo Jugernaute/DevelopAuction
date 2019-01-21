@@ -6,18 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ua.com.dao.LocationLotDao;
-import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
 import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.FillFilter_SubCategory_OnRegisterUserPage;
 import ua.com.method.LoadAllLotOnMainPage;
 import ua.com.method.LoadAllLotOnPageUsingRest;
 import ua.com.method.filter.*;
-import ua.com.method.filter.test.ConditionRegionLot;
 import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.locationLot.LocationLotService;
 import ua.com.service.product.ProductService;
@@ -25,7 +21,6 @@ import ua.com.service.subcategory.SubCategoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 
@@ -124,24 +119,25 @@ private Set<Map<Integer, Map<String, String>>> set = new LinkedHashSet<>();
 
 
             String s = IOUtils.toString(request.getInputStream(),"utf-8");
+        System.out.println(s);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Condition> condition = objectMapper.readValue(s, new TypeReference<List<Condition>>(){});
-//        for (Condition condition1 : condition) {
-//            System.out.println("condition -> "+condition1.toString());
-//        }
+        List<Product> products = objectMapper.readValue(s, new TypeReference<List<Product>>(){});
+        for (Product condition1 : products) {
+            System.out.println("condition -> "+condition1.toString());
+        }
 
 
         Filter filter = new Filter();
-        filter.addCondition(condition);
+        filter.addCondition(products);
         System.out.println("filter -> "+filter.toString());
         try{
-            List all =locationLotService.findAllBySpecification(filter);
+            List all = productService.findAllBySpecification(filter);
             for (Object o : all) {
-                System.out.println(o);
+                System.out.println(o.toString());
             }
         }catch (Exception e){
-            LOGGER.info(e.getMessage(),e.getCause());
+            LOGGER.info(e.getMessage(),e);
         }
         return "ok";
     }

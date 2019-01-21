@@ -15,4 +15,5 @@ public interface ProductService {
     Product findProductByLot_Id (int lot);
     Product findProductByImageLinks_Id(int idImgLink);
     List<Product> findAllBySpecification(Filter filter);
+    List<Product> findAllByNameProductContaining(String matches);
 }

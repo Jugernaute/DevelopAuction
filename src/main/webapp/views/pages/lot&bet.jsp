@@ -87,9 +87,6 @@
         <div class="wrapper">
             <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
-                <label>
-                    <input type="search">
-                </label>
                 <ul class="menu">
                     <li class="enter"><a href="#" class="for-remove-1">Вхід</a></li>
                     <li class="view-user"><a href="/goToCabinet" class="for-remove-2">${userFromSession}</a></li>

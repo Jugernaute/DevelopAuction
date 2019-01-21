@@ -93,7 +93,8 @@
                 <div class="wrapper">
                     <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
                     <nav>
-                        <p>Пошук: <input type="search"></p>
+                        <p>Пошук: <input id="srch" type="search"></p><br>
+                        <input type="submit" id="sbm-srch" value="найти">
                         <ul class="menu">
                             <li class="enter"><a href="#">Вхід</a></li>
                             <li class="registation"><a href="#">Реєстрація</a></li>
@@ -114,9 +115,16 @@
                 </div>
             </section>
             <div class="nav-sort">
-                <select size="" ></select>
-                <select size="" ></select>
-                <select size="" ></select>
+                <select class="filter-nav" size="" >
+                    <%--<option>Виберіть</option>--%>
+                        <option value="0">Виберіть</option>
+                        <option value="1">Всі аукціони</option>
+                        <option value="2">Аукціони, що вже тривають</option>
+                        <option value="3">Завершені аукціони</option>
+                        <option value="4">Ще не розпочаті аукціони</option>
+                </select>
+                <%--<select class="filter-nav" size="" ></select>--%>
+                <%--<select class="filter-nav" size="" ></select>--%>
             </div>
             <section class="hot_lot">
 
@@ -133,7 +141,7 @@
                         <%--String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"--%>
                         <%--System.out.println(formattedDateTime);--%>
                     <%--%>--%>
-                    <c:if test="${endLot>dataNow}">
+                    <c:if test="${endLot<dataNow}">
                         <div class="hot_lot_wrapper">
                             <div class="cont_img" >
                                 <a href="lot/${img.getProduct().getId_Product()}" class="get-id"><img src="../img/product_Img/${img.getLinkOfImage()}" height="200" width="200"/>

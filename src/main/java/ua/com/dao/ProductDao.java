@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ua.com.entity.Product;
 
+import java.util.List;
+
 public interface ProductDao  extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 
     Product findByNameProduct(String product);
@@ -15,5 +17,7 @@ public interface ProductDao  extends JpaRepository<Product, Integer>, JpaSpecifi
 
     @Query(value = "select * from product join imagelink i on product.id_Product = i.product_id_Product where id_ImageLink=:idImg", nativeQuery = true)
     Product findProductByImageLinks_Id(@Param("idImg") int idImgLink);
+
+    List<Product> findAllByNameProductContaining(String s);
 
 }

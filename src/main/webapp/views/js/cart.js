@@ -1,8 +1,5 @@
 charset='UTF-8';
 $('.test').on('click', function () {
-
-
-
     let productSeller = $('<div class="product-seller"><p>Виробник</p><p>Назва продукту</p></div>');
     let productDescription = $('<div class="product-descrition"></div>')
         .append(productSeller)
@@ -17,7 +14,7 @@ $('.test').on('click', function () {
 });
 
 
-$('#delete').click(function () {
+$('#delete').on('click', function () {
 
     $.ajax({
         url: '/clearUpCart',

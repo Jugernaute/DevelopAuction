@@ -63,14 +63,17 @@ nav{
     border-bottom: 2px solid #EA6C25;
 }
 nav p{
-  margin-right: 10px;
+  /*margin-right: 10px;*/
     text-transform: uppercase;
 }
 nav p input{
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     border: none;
     border-radius: 2px;
     height: 20px;
+}
+#sbm-srch{
+    margin-right: 10px;
 }
 
 /**********products***********/

@@ -19,7 +19,6 @@
         <div class="wrapper">
             <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
-                <input type="search" placeholder="ПОШУК ТОВАРІВ">
                 <ul class="menu">
                     <li class="user-id"><a href="goToCabinet">${user.getUsername()}</a></li>
                     <li class="sell"><a href="/goToSell">Продати</a></li>
@@ -29,13 +28,16 @@
             </nav>
         </div>
     </header>
-    <section class="products">
-        <div class="wrapper_products">
-            <ul class="products_list">
+    <%--<section class="products">--%>
+        <%--<div class="wrapper_products">--%>
+            <%--<ul class="products_list">--%>
 
-            </ul>
-        </div>
-    </section>
+            <%--</ul>--%>
+        <%--</div>--%>
+    <%--</section>--%>
+    <hr>
+    <h1 style="text-align: center; font-size: large; color: #002cff">К О Р З И Н А</h1>
+    <hr>
     <section class="product-cart">
         <c:forEach items="${infoProd}" var="info">
 
@@ -47,8 +49,11 @@
             <c:set var = "userName" scope="session" value="${info.key.getFirstNameUser()}"/>
             <c:set var = "userPhone" scope="session" value="${info.key.getPhone()}"/>
             <c:set var = "userEmail" scope="session" value="${info.key.getEmail()}"/>
-
+            <label>
         <div class="product-container">
+
+                <input type="checkbox" class="checbox">
+
             <div class="product-photo">
                     <a class="getImg"><img src="../img/product_Img/${info.value.getProduct().getImageLinks().get(0).getLinkOfImage()}" height="100" width="100"/>
                     </a>
@@ -68,6 +73,7 @@
                     <h4 class="cont_price">Ціна : <span>${curentPrice} грн.</span></h4>
             </div>
         </div>
+            </label>
         </c:forEach>
     </section>
     <div class="product-line"></div>

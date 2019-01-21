@@ -94,7 +94,7 @@
         <div class="wrapper">
             <div class="logo"><a href="/fromLogoToHome"><img src="../img/logo.png"></a></div>
             <nav>
-                <p>Пошук: <input type="search"></p>
+                <%--<p>Пошук: <input type="search"></p>--%>
                 <ul class="menu">
                     <li class="user-id"><a href="goToCabinet">${user.getUsername()}</a></li>
                     <li class="sell"><a href="goToSell">Продати</a></li>

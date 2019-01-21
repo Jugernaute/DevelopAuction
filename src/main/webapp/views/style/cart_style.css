@@ -6,9 +6,12 @@
     justify-content: flex-start;
 }
 .product-container{
+    background: floralwhite;
+    border: 1px solid darkgrey;
+    padding: 5px;
     display: flex;
     justify-content: space-between;
-    width: 98%;
+    width: 88%;
     height: 110px;
     margin: 10px;
 }
@@ -46,4 +49,9 @@ input[type=button]{
     height: 50px;
     margin-left: 10px;
     margin-bottom: 20px;
+}
+.checbox{
+    margin-top: 35px;
+    width: 20px;
+    height: 20px;
 }

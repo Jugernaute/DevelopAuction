@@ -32,7 +32,6 @@ public class RestControllerSecurity {
     public String save(User user,
             @RequestParam String psw_repeat,
              BindingResult result) {
-        System.out.println("regggggg-------------------------");
         User findUser = userService.findByUsername(user.getUsername());
         if (findUser!=null) {
             return environment.getProperty("test_login_InDB");
@@ -65,7 +64,9 @@ public class RestControllerSecurity {
                     + "'>Activate</a>";
             String subject = environment.getProperty("textForMailSender_String_subject");
             String email = user.getEmail();
-            mail.sendMail(email,subject,text);
+//            for (int i = 0; i < 50; i++) {
+                mail.sendMail(email,subject,text);
+//            }
         } else {
             return environment.getProperty("matchPassword_registrationForm");
         }

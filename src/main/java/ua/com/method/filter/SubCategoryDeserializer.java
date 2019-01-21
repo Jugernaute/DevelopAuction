@@ -17,31 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-//@Component
-public class SubCategoryDeserializer extends JsonDeserializer<List<SubCategory>> {
-    
-//    @Autowired
-//    private SubCategoryService subCategoryService;
+
+public class SubCategoryDeserializer extends JsonDeserializer<String> {
+
     private static final Logger logger = Logger.getLogger(SubCategoryDeserializer.class.getSimpleName());
 
-//    @Override
-    public List<SubCategory> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+@Override
+    public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode tree = jsonParser.getCodec().readTree(jsonParser);
-        List<SubCategory> subCategories = new ArrayList<>();
-        for (int i = 0; i < tree.size(); i++) {
+        String s = tree.get("subCategory").asText();
+        System.out.println("jsondeserial "+s);
 
-//            try{
-//                SubCategory byNameSubCategory = subCategoryService.findByNameSubCategory("Охота");
-//                System.out.println("sub "+byNameSubCategory);
-//                subCategories.add(byNameSubCategory);
-//            }catch (Exception e){
-//                logger.info(e.getMessage());
-//            }
 
-        }
-//        for (SubCategory subCategory : subCategories) {
-//            System.out.println(subCategory);
-//        }
-        return subCategories;
+        return s;
     }
 }

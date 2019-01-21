@@ -45,17 +45,6 @@ import java.util.*;
 
     @GetMapping("/")
         public String start (Model model) throws IOException {
-//        System.out.println(System.getProperty("java.util.logging.config.file"));
-//        logger.addHandler(fileHandler);
-        logger.info("hello");
-        try{
-            int a=1/0;
-//            System.out.println(a);
-        }catch (Exception e){
-//            System.out.println("==================================");
-            logger.error(e);
-//            System.out.println("==================================");
-        }
         List list = allLotOnMainPage.loadAllLotOnMainPage();
         DateTimeFormatter ru = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss").withLocale(new Locale("ru"));
 
@@ -112,10 +101,8 @@ import java.util.*;
                 if (user.getRandomKey()!=null){
                     return  "/errorPage/activation_error";
                 }
+
             List list = allLotOnMainPage.loadAllLotOnMainPage();
-            for (Object o : list) {
-                System.out.println(o.toString());
-            }
             List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
             for (CommonCategory commonCategory : allCommonCategory) {
                 System.out.println("name common category" +commonCategory.getNameCommonCategory());

@@ -18,6 +18,7 @@ import ua.com.service.user.UserService;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.FileHandler;
@@ -176,9 +177,10 @@ public class RestControllerBet {
         return stringMap;
     }
 
-    @GetMapping("lot/lotDescription")
+    @PostMapping("lot/lotDescription")
     private String description(@RequestParam String linkImg){
-        int id_imageLink = imageLinkService.findByImageLink(linkImg).getId_ImageLink();
+        System.out.println(linkImg.replace("%20", " "));
+        int id_imageLink = imageLinkService.findByImageLink(linkImg.replace("%20", " ")).getId_ImageLink();
         String descriptionProduct = productService.findProductByImageLinks_Id(id_imageLink).getDescriptionProduct();
         return descriptionProduct.replace("\n", "<br>");
     }
@@ -193,7 +195,7 @@ public class RestControllerBet {
             System.out.println("записуєм інфу");
             Basket basket = user.getBasket();
 
-            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg.replace("%20", " "));
             lotService.addLot(lotByImageLink_name.setBasket(basket));
 
             if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
@@ -216,7 +218,7 @@ public class RestControllerBet {
             //створюєм корзину і закидуєм інформацію
             Basket basket = new Basket();
             basketService.addBasket(basket.setUser(user));
-            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg);
+            Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg.replace("%20", " "));
             lotService.addLot(lotByImageLink_name.setBasket(basket));
             if (lotByImageLink_name.getDataEndLot().isBefore(LocalDateTime.now())) {
                 return "Time is expired";

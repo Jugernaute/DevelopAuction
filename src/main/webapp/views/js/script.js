@@ -1,12 +1,5 @@
 
-
-   // let loginForm = $('.enter_form');
-   // let regForm = $('.registration_form');
-   // let auction = $('.auction');
     let sendKey = $('.sendKey');
-
-
-
 
     $('.enter').on('click', function (e) {// animation for login form
         loginForm.css('display', 'block');
@@ -36,12 +29,6 @@
         regForm.css('display', 'block');
     });
 
-    // pasha change
-
-    // let forgot = $('.forgot_psw_css');
-    // let enterKey = $('.enterKeyfromEmail_inp');
-    // let enterKey_btn = $('.enterKeyfromEmail_btn');
-    //
     $('.forgot_div').on('click', function () { // for change password if forgot
         sendKey.toggleClass('sendKey')
     });
@@ -63,15 +50,7 @@
             event.preventDefault();
             $.ajax({
                 url: 'http://localhost:8080/sendKeys' ,
-                type: 'POST',
-                // data:
-
-                success: function(result){
-                    console.log(result)
-                },
-                error: function (error) {
-                    console.log("jjhk")
-                }
+                type: 'POST'
             });
 
         });

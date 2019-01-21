@@ -77,7 +77,7 @@ let x = setInterval(function() {
     lotDateEnd = Date.parse(number.toString());
     let distance =lotDateEnd-nowDate;
 
-    let days = Math.floor(distance / (1000 * 60 * 60 * 1));
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -215,12 +215,13 @@ let $lotDescript = $('.lot-about_descr');
 
 $descript.on('click',function () {
     let srcImg=imgContainer.find('img').attr('src');
-    let srcLink = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
+    let linkImg = srcImg.toString().replace("http://localhost:8080/img/product_Img/","");
 
     $.ajax({
         url:'http://localhost:8080/lot/lotDescription',
-        type: 'get',
-        data: {linkImg: srcLink},
+        type: 'post',
+        data: {linkImg},
+        // contentType: 'text',
 
         success: function (result) {
             $lotDescript.empty();

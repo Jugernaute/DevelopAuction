@@ -40,34 +40,34 @@ public class RestControllerCart {
 //            if (lot.getBasket() != null){
 //
 //                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket());
-////                Product product = lot.getProduct();
-////                productList.add(product);
+//                Product product = lot.getProduct();
+//                productList.add(product);
 //                lotList.add(lot);
 //            }
 //        }
 //        return lotList;
 //    }
+//
+    @GetMapping("/clearUpCart" )
+    public String allLotToCart() {
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
-//    @GetMapping("/clearUpCart" )
-//    public String allLotToCart() {
-//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//
-//        List<Lot> allLot = lotService.findAllLot();
-//        for (Lot lot : allLot) {
-//
-//            if (lot.getBasket() != null) {
-//                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
-//
-//                    int id_product = lot.getProduct().getId_Product();
-//                    int id_lot = lot.getId_Lot();
-//                    lotService.deleteLotById(id_lot);
-//                    System.out.println(id_product);
-//                    System.out.println();
-//                    productService.deleteProductById(id_product);
-//
-//                }
-//            }
-//        }
-//        return "delete";
-//    }
+        List<Lot> allLot = lotService.findAllLot();
+        for (Lot lot : allLot) {
+
+            if (lot.getBasket() != null) {
+                if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket()) {
+
+                    int id_product = lot.getProduct().getId_Product();
+                    int id_lot = lot.getId_Lot();
+                    lotService.deleteLotById(id_lot);
+                    System.out.println(id_product);
+                    System.out.println();
+                    productService.deleteProductById(id_product);
+
+                }
+            }
+        }
+        return "delete";
+    }
 }

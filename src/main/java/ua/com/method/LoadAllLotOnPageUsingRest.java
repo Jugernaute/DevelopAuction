@@ -21,7 +21,7 @@ public class LoadAllLotOnPageUsingRest {
       *       difference field, which will be displayed on view;
       *
       *       key(Integer) is just a number, that shows that value exists
-  *       */
+*/
 public Map<Integer,Map<String, String>> loadAllLotOnPageUsingRest(List<ImageLink> linkList){
 
     Map<Integer,Map<String, String>> listMap = new HashMap<>();
