@@ -18,19 +18,19 @@ function setConnected(connected) {
 
 function connect() {
     var socket = new SockJS('/gs-guide-websocket');
-    stompClient = Stomp.ower(socket);
+    stompClient = Stomp.over(socket);
     console.log("connect");
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content());
+            showGreeting(JSON.parse(greeting.body).content);
         });
     })
 }
 
 function disconnect() {
-    if (stompClient !== null){
+    if (stompClient != null){
         stompClient.disconnect();
     }
     setConnected(false);
@@ -44,7 +44,8 @@ function sendName() {
 }
 
 function showGreeting(message) {
-    $("#greeting").append("<tr><td>" + message + "</td></tr>");
+    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    console.log("44444444");
 }
 
 $(function () {
@@ -52,14 +53,12 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $("#connect").click(function () {
-        connect();
-    });
-    $("#disconnect").click(function () {
+    $( "#connect" ).click(function () { connect(); });
+    $( "#disconnect" ).click(function () {
         disconnect();
     });
-    $('#send').click(function () {
+    $( "#send"  ).click(function () {
         sendName();
     });
-})
+});
 

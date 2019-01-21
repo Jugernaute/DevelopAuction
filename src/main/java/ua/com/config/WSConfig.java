@@ -18,7 +18,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WSConfig implements WebSocketMessageBrokerConfigurer{
+public class WSConfig extends AbstractWebSocketMessageBrokerConfigurer{
 //    @Autowired
 //    ObjectMapper objectMapper;
 
@@ -33,42 +33,6 @@ public class WSConfig implements WebSocketMessageBrokerConfigurer{
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/gs-guide-websocket").withSockJS();
 
-    }
-
-    @Override
-    public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
-        registration.setSendTimeLimit( 15 * 1000 ).setSendBufferSizeLimit( 512 * 1024 );
-    }
-
-    @Override
-    public void configureClientInboundChannel(ChannelRegistration channelRegistration) {
-
-    }
-
-    @Override
-    public void configureClientOutboundChannel(ChannelRegistration registration) {
-        registration.taskExecutor().corePoolSize( 4 ).maxPoolSize( 10 );
-    }
-
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> list) {
-
-    }
-
-    @Override
-    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> list) {
-
-    }
-
-    @Override
-    public boolean configureMessageConverters(List<MessageConverter> list) {
-//        DefaultContentTypeResolver resolver = new DefaultContentTypeResolver();
-//        resolver.setDefaultMimeType(MimeTypeUtils.APPLICATION_JSON);
-//        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-//        converter.setObjectMapper(objectMapper);
-//        converter.setContentTypeResolver(resolver);
-//        list.add(converter);
-        return true;
     }
 
 }

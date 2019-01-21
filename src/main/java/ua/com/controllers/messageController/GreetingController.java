@@ -25,10 +25,11 @@ public class GreetingController {
     @MessageMapping("/helloPoint")
     @SendTo("/topic/greetings")
     public OutputMessage greeting(InputMessage inputMessage){
-        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         String messageName = inputMessage.getName();
-        OutputMessage responseMessage = new OutputMessage("hello" + messageName);
+        OutputMessage responseMessage = new OutputMessage("hello " + messageName);
+        System.out.println("dddddfffffff" + responseMessage);
         return responseMessage;
     }
 }
