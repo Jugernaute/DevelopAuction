@@ -46,4 +46,9 @@ public class MainController{
         return "pagefb";
     }
 
+    @GetMapping("/goToGoog")
+    private String goToGoog(){
+        return "googpage";
+    }
+
 }

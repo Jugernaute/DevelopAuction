@@ -197,7 +197,7 @@ public class User implements UserDetails {
 
     //social
     public void setUserIdSocial(String userIdSocial) {
-        userIdSocial = userIdSocial;
+        this.userIdSocial = userIdSocial;
     }
 
     //social

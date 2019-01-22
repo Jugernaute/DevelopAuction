@@ -1,12 +1,19 @@
 package ua.com.controllers;
 
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
@@ -24,10 +31,16 @@ import ua.com.service.userconnect.UserConnectService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
-@SessionAttributes("facebookToken")
-public class FbController {
+@SessionAttributes("googleToken")
+public class GoogleController {
+
     @Autowired
     Environment env;
     @Autowired
@@ -39,54 +52,64 @@ public class FbController {
     @Autowired
     UsersConnectionRepository repository;
 
-    @PostMapping("/fb/login")
-    public void fbLogin(HttpServletResponse response) throws IOException {
-        FacebookConnectionFactory factory = new FacebookConnectionFactory(
-                env.getProperty("facebook.app.id"),
-                env.getProperty("facebook.app.secret"),
-                env.getProperty("facebook.app.namespace")
+
+    @PostMapping("/goog/login")
+    public void googleLogin(HttpServletResponse response) throws IOException {
+        GoogleConnectionFactory factory = new GoogleConnectionFactory(
+                env.getProperty("google.app.id"),
+                env.getProperty("google.app.secret")
         );
+
+
+
         OAuth2Parameters parameters = new OAuth2Parameters();
-        parameters.setRedirectUri("http://localhost:8080/fb/callback");
-        parameters.setScope("public_profile, email");
+        parameters.setRedirectUri("http://localhost:8080/auth/google");
+        parameters.setScope("email");
+
         OAuth2Operations authOperations = factory.getOAuthOperations();
         String authorizeUrl = authOperations.buildAuthorizeUrl(parameters);
         response.sendRedirect(authorizeUrl);
+
+
+        System.out.println(authorizeUrl);
+        System.out.println("---------");
+        System.out.println(response.toString());
+
     }
 
-    @GetMapping("/fb/callback")
-    public String fbCallback(@RequestParam("code") String code, Model model, WebRequest request) throws IOException {
-        FacebookConnectionFactory factory = new FacebookConnectionFactory(
-                env.getProperty("facebook.app.id"),
-                env.getProperty("facebook.app.secret"),
-                env.getProperty("facebook.app.namespace")
-        );
+
+    @GetMapping("/auth/google")
+    public String googCallback(@RequestParam("code") String code, Model model, WebRequest request) throws IOException {
+        GoogleConnectionFactory factory = new GoogleConnectionFactory(
+                env.getProperty("google.app.id"),
+                env.getProperty("google.app.secret"));
+        User user = (User) request.getUserPrincipal();
         OAuth2Operations authOperations = factory.getOAuthOperations();
-        AccessGrant accessGrant = authOperations
-                .exchangeForAccess(code, "http://localhost:8080/fb/callback", null);
-        Connection<Facebook> connection = factory.createConnection(accessGrant);
+        AccessGrant accessGrant = authOperations.exchangeForAccess(code, "http://localhost:8080/auth/google", null);
+        Connection<Google> connection = factory.createConnection(accessGrant);
         String token = accessGrant.getAccessToken();
-        System.out.println(token);
-        Facebook facebook = connection.getApi();
-        if (facebook.isAuthorized()) {
-          String id = connectionSingUp.execute(connection);
+        Google google = connection.getApi();
+        if (google.isAuthorized()) {
+            String id = connectionSingUp.execute(connection);
 //         PagedList<Post> feed = facebook.feedOperations().getFeed();
 //            List<String> images = feed.stream().map(post -> post.getPicture()).collect(Collectors.toList());
 //            model.addAttribute("images", images);
 
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
-            User user = userService.findByUsername(name);
-            System.out.println(name);
-            System.out.println(id);
+            //User user = userService.findByUsername(name);
+            //System.out.println(name);
+            //System.out.println(id);
             return "cabinet";//login, ok,
         } else {
-            return "redirect:/fb/login";
+            return "redirect:/goog/login";
         }
     }
 
-    @PostMapping("/protected")
+    @PostMapping("/protected1")
     public String protect() {
         return "cabinet";
     }
 
 }
+
+

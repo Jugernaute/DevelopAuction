@@ -24,7 +24,7 @@ public class UserConnectionServiceImpl implements UserConnectService {
     }
 
     @Override
-    public UserConnection findByProviderUserId(String id) {
-        return userConnectionDao.findByProviderUserId(id);
+    public UserConnection findByProviderUserId(String providerUserId) {
+        return userConnectionDao.findByProviderUserId(providerUserId);
     }
 }

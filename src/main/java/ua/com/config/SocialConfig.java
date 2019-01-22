@@ -62,7 +62,7 @@ public class SocialConfig implements SocialConfigurer {
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(
                 dataSource,
                 connectionFactoryLocator, Encryptors.noOpText());
-       // repository.setConnectionSignUp(connectionSignUp); // change for social
+        repository.setConnectionSignUp(connectionSignUp); // change for social
         return repository;
     }
 

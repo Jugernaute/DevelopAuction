@@ -4,6 +4,7 @@ import org.springframework.social.connect.ConnectionData;
 
 import javax.persistence.*;
 
+
 @Entity
 public class UserConnection {
     @Id

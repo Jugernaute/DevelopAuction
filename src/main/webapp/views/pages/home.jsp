@@ -26,7 +26,7 @@
                     <a href="#" class="twitter btn">
                         <i class="fa fa-twitter fa-fw"></i> Увійти за допомогою Twitter
                     </a>
-                    <a href="#" class="google btn">
+                    <a href="/goToGoog" class="google btn">
                         <i class="fa fa-google fa-fw"></i> Увійти за допомогою Google+
                     </a>
                 </div>

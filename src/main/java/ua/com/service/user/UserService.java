@@ -26,7 +26,7 @@ public interface UserService extends UserDetailsService {
     @Override
     UserDetails loadUserByUsername(String s) throws UsernameNotFoundException;
 
-    SocialUserDetails loadUserByUserId(String userId);
+    SocialUserDetails loadUserByUserId(String userIdSocial);
 
     User findByUserConnectionIn(UserConnection userConnection);
 }
