@@ -16,7 +16,7 @@ import ua.com.service.locationLot.LocationLotService;
 import ua.com.service.lot.LotService;
 import ua.com.service.manufacturer.ManufacturerService;
 import ua.com.service.product.ProductService;
-import ua.com.service.subcategory.SubCategoryService;
+import ua.com.service.subcategory.SubcategoryService;
 import ua.com.service.user.UserService;
 
 import java.io.BufferedOutputStream;
@@ -34,7 +34,7 @@ public class RestControllerCreateLot {
     @Autowired
     private SubCategoryDao subCategoryDao;
     @Autowired
-    private SubCategoryService subCategoryService;
+    private SubcategoryService subCategoryService;
     @Autowired
     private ManufacturerService manufacturerService;
     @Autowired

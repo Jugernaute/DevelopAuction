@@ -13,15 +13,26 @@ import java.util.Map;
 public interface UserService extends UserDetailsService {
 
     void addUser(User user);
-    void deleteUserById(int userId);
-    void updateUser(User user);
-    User getUserById(int userId);
-    List<User> findAllUser();
-    User findByUsername(String username);
-    User findByRandomKey(String randomKey);
-    User findByEmail(String email);
-    User findUserByProductId(int idProduct);
-    List<Object[]> listBetAndUserByLot_id(int id_lot);
-    String getUsernameFromBetById_Bet (int bet);
 
-    }
+    void deleteUserById(int userId);
+
+    void updateUser(User user);
+
+    void lock(int userId);
+
+    User getUserById(int userId);
+
+    List<User> findAllUser();
+
+    User findByUsername(String username);
+
+    User findByRandomKey(String randomKey);
+
+    User findByEmail(String email);
+
+    User findUserByProductId(int idProduct);
+
+    List<Object[]> listBetAndUserByLot_id(int id_lot);
+
+    String getUsernameFromBetById_Bet(int bet);
+}

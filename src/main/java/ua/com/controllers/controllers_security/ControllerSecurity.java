@@ -89,20 +89,11 @@ import java.util.stream.Stream;
     }
 
 
-        @PostMapping("/ok")
-            public String ok (Model model){
-            String name = SecurityContextHolder.getContext().getAuthentication().getName();
-            User user = userService.findByUsername(name);
-
-                if (user.getRandomKey()!=null){
-                    return  "/errorPage/activation_error";
-                }
-            List list = allLotOnMainPage.loadAllLotOnMainPage();
-
-            model.addAttribute("imgLinks", list);
-            model.addAttribute("user",user);
-
-            return "homeregisterUser";
-            }
-
+    @PostMapping("/ok")
+    public String ok(User user) {
+        if (user.getUsername().equals("admin") && user.getPassword().equals("admin")) {
+            return "admin";
+        }
+        return "cabinet";
+    }
 }

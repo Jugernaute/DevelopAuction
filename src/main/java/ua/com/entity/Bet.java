@@ -21,7 +21,8 @@ public class Bet {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.MERGE)
+            cascade = CascadeType.MERGE
+    )
     private User user;
 
     public Bet() {

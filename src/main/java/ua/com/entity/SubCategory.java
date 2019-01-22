@@ -22,7 +22,6 @@ public class SubCategory {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,
-    cascade = {CascadeType.PERSIST,CascadeType.DETACH/*, CascadeType.MERGE,CascadeType.REFRESH*/},
     mappedBy = "subCategory")
     private List<Product>products;
 

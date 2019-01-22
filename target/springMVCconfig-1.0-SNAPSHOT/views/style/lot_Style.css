@@ -1,0 +1,282 @@
+.lot{
+    min-height: 800px;
+    width: 96%;
+    margin: 17px;
+}
+.lot-nav{
+    height: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.lot-nav_category{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.lot-nav-tree{
+    display: flex;
+}
+.lot-nav-tree li{
+    margin-right: 10px;
+}
+.lot-nav-add{
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+/*****************Slider section********************/
+
+.lot-wrapper{
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+}
+.lot-slider{
+    width: 50%;
+}
+.lot-slider-container img{
+    width: 100%;
+}
+
+/*galery*/
+
+.lot-slider-row{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+.lot-slider-column{
+    height: 79px;
+}
+.lot-slider-column img{
+    margin: 2px;
+    height: 100%;
+}
+.lot-slider-container{
+    overflow: hidden;
+}
+
+.lot-info{
+    width: 48%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.lot-info-name{
+    width: 100%;
+}
+.lot-info-price{
+    width: 100%;
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+}
+.lot-info-price_bet{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.lot-info-price_bet label{
+    margin-right: 20px;
+}
+.lot-info-price_bet input{
+    margin: 0 0 0 20px;
+    border: none;
+    background: snow;
+    height: 25px;
+    border-radius: 2px;
+    padding: 4px;
+}
+.lot-info-current-price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.lot-info-current-price p:first-child{
+    margin-right: 5px;
+    font-size: 11px;
+}
+.lot-info-current-price span{
+    margin-right: 45px;
+    font-size: 25px;
+    color: red;
+
+}
+.lot-info-price_button{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.lot-info-price_button input{
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+}
+.lot-info-price-timer{
+    width: 92%;
+    /*display: flex;*/
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.lot-info-price-timer p{
+    margin: 2px 0;
+    color: darkblue;
+}
+
+#price{
+    margin: 0 10px;
+    font-size: 25px;
+    color: red;
+    font-weight: bold;
+}
+.lot-about_options-list{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    border-left: 1px solid gray;
+}
+.lot-about_options-list li{
+    text-transform: uppercase;
+    height: 100%;
+    width: 100%;
+    border: 1px solid gray;
+    text-align: center;
+    padding-top: 18px;
+    cursor: pointer;
+    border-left: none;
+}
+.lot-about_options-list li:hover{
+    background: #b3b3b3;
+}
+.lot-about_option-list-show{
+    min-height: 400px;
+    width: 100%;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 20px 20px;
+}
+.lot-about_descr{
+    font-size: 20px;
+    color: brown;
+}
+
+#timer{
+    margin-left: 60px;
+    font-size: 25px;
+    color: red;
+}
+#error-bet{
+    font-size: 15px;
+    color: red;
+}
+.red::placeholder {
+    color: red;
+}
+#bet-input{
+    -webkit-appearance: none;
+    color: black;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background: floralwhite;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.inp-style{
+    color: azure;
+    height: 50px;
+    border-radius: 10px;
+    outline: none;
+}
+#btn-bet{
+    background: green;
+}
+#btn-buy{
+    background: red;
+    height: 80px;
+    width: 100px;
+    padding-top: 5px
+
+}
+#send-massege{
+    background: blue;
+}
+.list-bet-out{
+    font-size: 14px;
+    color: blue;
+}
+.inline{
+    display: inline;
+}
+.bet-btn1{
+    width: 30px;
+    height: 30px;
+    background: greenyellow;
+    outline: none;
+    border-radius: 5px;
+    color: black;
+}
+.bet-btn2{
+    height: 30px;
+    background: greenyellow;
+    border-radius: 5px;
+    outline: none;
+    color: black;
+    min-width: 50px;
+}
+.bet-btn3{
+    height: 30px;
+    background: greenyellow;
+    border-radius: 5px;
+    outline: none;
+    color: black;
+    min-width: 50px;
+}
+/*.after-img:after{*/
+    /*display: block;*/
+    /*content: "";*/
+    /*width: 32px;*/
+    /*height: 32px;*/
+    /*background: transparent url('../img/refresh.png') no-repeat;*/
+/*}*/
+/*.inner-img{*/
+    /*display: inline-block;*/
+    /*width: 25px;*/
+    /*height: 25px;*/
+    /*background: transparent url('../img/refresh.png') no-repeat;*/
+/*}*/
+
+#qwe{
+    border: 1px solid black;
+}
+
+#hr-btn{
+    margin-bottom: 5px;
+    margin-top: 3px;
+}
+#p-btn{
+    /*font-size: 15px;*/
+    width: 87px;
+    margin-left: 5px;
+    background: white;
+    height: 40px;
+    padding-top: 12px;
+    border-radius: 5px;
+    color: black;
+}

@@ -52,7 +52,8 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.REFRESH})
+            cascade = {CascadeType.REFRESH}
+            )
     private List<LocationUser> location;
 
 

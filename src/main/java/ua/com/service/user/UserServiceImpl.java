@@ -14,6 +14,7 @@ import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
 
@@ -25,8 +26,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         if (user != null) {
-        userDao.save(user);
-    }
+            userDao.save(user);
+        }
     }
 
     @Override
@@ -36,6 +37,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        userDao.save(user);
+    }
+
+    @Override
+    public void lock(int userId) {
+        User user = userDao.findOne(userId);
+        user.setAccountNonLocked(false);
+        user.setEnabled(false);
         userDao.save(user);
     }
 
@@ -79,5 +88,4 @@ public class UserServiceImpl implements UserService {
     public String getUsernameFromBetById_Bet(int id_bet) {
         return userDao.getUsernameFromBetById_Bet(id_bet);
     }
-
 }
