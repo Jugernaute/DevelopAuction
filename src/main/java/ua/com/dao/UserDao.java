@@ -31,6 +31,9 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     User findByUserConnectionIn(UserConnection userConnection);
 
+    @Query(value = "select * from user join bet b on user.userId = b.user_userId where id_Bet=:id_bet", nativeQuery = true)
+    User getUserFromBetById_Bet (@Param("id_bet") int id_bet);
+
 
 
 }

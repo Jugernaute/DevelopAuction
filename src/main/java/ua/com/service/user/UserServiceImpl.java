@@ -86,6 +86,11 @@ public class UserServiceImpl implements UserService, SocialUserDetailsService {
     }
 
     @Override
+    public User getUserFromBetById_Bet(int id_bet) {
+        return userDao.getUserFromBetById_Bet(id_bet);
+    }
+
+    @Override
     public List<Object[]> listBetAndUserByLot_id(int id_lot) {
 
         return userDao.listBetAndUserByLot_id(id_lot);

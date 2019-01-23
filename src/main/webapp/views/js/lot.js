@@ -92,6 +92,14 @@ let x = setInterval(function() {
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("timer").innerHTML = "EXPIRED";
+        $.ajax({
+            url: "/timerEnd",
+            type: "get",
+            data: {idProductSession},
+            success: function (result) {
+                console.log("success");
+            }
+        })
     }
 }, 1000);
 

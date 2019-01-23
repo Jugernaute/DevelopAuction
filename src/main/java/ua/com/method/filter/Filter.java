@@ -1,21 +1,11 @@
 package ua.com.method.filter;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
+
 import org.springframework.data.jpa.domain.Specification;
 import ua.com.entity.Product;
-import ua.com.entity.SubCategory;
-import ua.com.entity.TypeSell;
 
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
-import java.io.IOException;
-import java.security.acl.Owner;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

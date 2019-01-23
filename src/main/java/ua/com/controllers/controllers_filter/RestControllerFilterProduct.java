@@ -123,9 +123,9 @@ private Set<Map<Integer, Map<String, String>>> set = new LinkedHashSet<>();
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<Product> products = objectMapper.readValue(s, new TypeReference<List<Product>>(){});
-        for (Product condition1 : products) {
-            System.out.println("condition -> "+condition1.toString());
-        }
+//        for (Product condition1 : products) {
+//            System.out.println("condition -> "+condition1.toString());
+//        }
 
 
         Filter filter = new Filter();

@@ -177,6 +177,50 @@ public class RestControllerBet {
         return stringMap;
     }
 
+    @GetMapping("/timerEnd")
+    private void timeEnd(String idProductSession){
+//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+//        String name = user.getUsername();
+        int id_product = productService.getProductById(Integer.parseInt(idProductSession)).getId_Product();
+
+        Lot lot = lotService.findLotByProduct_Id(id_product);
+        System.out.println("!!!!!!!!!!!!!11!!!!!!!!!!!" + lot);
+
+        int id_lot = lot.getId_Lot();
+        Bet bet = new Bet();
+        List<Bet> allBetByLot_id = betService.findAllBetByLot_id(id_lot);
+        bet = allBetByLot_id.get(allBetByLot_id.size()-1);
+
+        int id_bet = bet.getId_Bet();
+        User user1 = userService.getUserFromBetById_Bet(id_bet);
+
+        if (user1.getBasket() != null){
+            Basket basket = user1.getBasket();
+            Lot lotByProduct_id = lotService.findLotByProduct_Id(id_product);
+            lotService.addLot(lotByProduct_id.setBasket(basket));
+            int currentPrice = lotByProduct_id.getCurrentPrice();
+
+            lotService.addLot(lotByProduct_id);
+            bet.setUser(user1);
+            bet.setLot(lotByProduct_id);
+            bet.setSum_of_the_bet(currentPrice);
+            betService.addBet(bet);
+        }else {
+            Basket basket = new Basket();
+            basketService.addBasket(basket.setUser(user1));
+
+            Lot lotByProduct_id = lotService.findLotByProduct_Id(id_product);
+            lotService.addLot(lotByProduct_id.setBasket(basket));
+            int currentPrice = lotByProduct_id.getCurrentPrice();
+
+            lotService.addLot(lotByProduct_id);
+            bet.setUser(user1);
+            bet.setLot(lotByProduct_id);
+            bet.setSum_of_the_bet(currentPrice);
+            betService.addBet(bet);
+        }
+    }
+
     @PostMapping("lot/lotDescription")
     private String description(@RequestParam String linkImg){
         System.out.println(linkImg.replace("%20", " "));
