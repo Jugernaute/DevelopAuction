@@ -24,6 +24,7 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/greetings', function (greeting) {
+            console.log(greeting);
             showGreeting(JSON.parse(greeting.body).content);
         });
     })
@@ -44,6 +45,7 @@ function sendName() {
 }
 
 function showGreeting(message) {
+    console.log(message);
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
     console.log("44444444");
 }

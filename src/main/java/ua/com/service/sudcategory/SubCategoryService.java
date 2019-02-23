@@ -5,7 +5,7 @@ import ua.com.entity.SubCategory;
 
 import java.util.List;
 
-public interface SubCategoryService {
+public interface  SubCategoryService {
 
     void addSubCategory(SubCategory subCategory);
     void deleteSubCategoryById(int id_SubCategory);

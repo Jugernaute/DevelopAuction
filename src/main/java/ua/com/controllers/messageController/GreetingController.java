@@ -29,7 +29,7 @@ public class GreetingController {
 
         String messageName = inputMessage.getName();
         OutputMessage responseMessage = new OutputMessage("hello " + messageName);
-        System.out.println("dddddfffffff" + responseMessage);
+        System.out.println("dddddfffffff" + responseMessage );
         return responseMessage;
     }
 }

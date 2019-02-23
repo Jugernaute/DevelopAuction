@@ -116,37 +116,8 @@ public class RestControllerCreateLot {
     ) {
 
         Product product = new Product();
-//        Delivery delivery = new Delivery();
-//        Manufacturer manufacturer = new Manufacturer();
 
-
-//        System.out.println(nameProduct);
-//        System.out.println(manufacturerProduct);
-//        System.out.println(nameCommonCategory);
-//        System.out.println(nameSubCategory);
-//        System.out.println(stateProduct);
-//        System.out.println(descriptionProduct);
-//        System.out.println(modelProduct);
-//        System.out.println(typeSell);
-//        System.out.println(hotPrice);
-//        System.out.println(startPrice);
-//        System.out.println(dataStartLot);
-//        System.out.println(durationOfLot);
-//        System.out.println(Arrays.toString(methodDelivery));
-//        System.out.println("-------"+placeLot);
-//        System.out.println("-------"+regionLot);
-
-
-
-        /*
-         *  start working with product object
-         *
-         *  */
         try {
-            /*
-             * for tree load link
-             * */
-
             SubCategory byNameSubCategory = subCategoryService.findByNameSubCategory(nameSubCategory);
             product.setSubCategory(byNameSubCategory);
 
@@ -193,17 +164,6 @@ public class RestControllerCreateLot {
             return "error with create product class -> " + e.getMessage();
         }
 
-        // working with multipart file
-        // Get the filename and build the local file path
-//        try {
-//            System.out.println(product.getTypeSell() + " type sell");
-//            System.out.println(product.getNameProduct() + " name prod");
-//            System.out.println(product.getUserOwner().getUsername() + " user");
-//            System.out.println(product.getSubCategory() + " subCateg");
-//            System.out.println(product.getManufacturer() + " manuf");
-//        } catch (Exception e) {
-////            return "error with product save -> " + e.getMessage()+ " "+e.getLocalizedMessage();
-//        }
         LocationLot locationLot = new LocationLot(regionLot, placeLot);
 
         productService.addProduct(product);
@@ -249,7 +209,6 @@ public class RestControllerCreateLot {
                     imageLinkService.addImageLink(link);                      // Save the file locally
                     stream.write(file.getBytes());
                     stream.close();
-//                       System.out.println("==> countcountImg "+countImg);
                    }while (countImg>uploadfile.length);                                    // only 4 img
                 }
             } catch (Exception e) {
@@ -308,46 +267,6 @@ public class RestControllerCreateLot {
         }
         lotService.addLot(lot);
         betService.addBet(bet);       //set & save stepBet from startPrice
-//        List<Delivery> deliveryList = new ArrayList<>();
-//        for (String method : methodDelivery) {
-//            Delivery byMethodDelivery = deliveryService.findByMethodDelivery(method);
-//            deliveryList.add(byMethodDelivery);
-//            System.out.println(lot);
-//            //byMethodDelivery.setLot(Collections.singletonList(lot));
-//
-////                System.out.println(byMethodDelivery.getLot()+"getLot");
-////                System.out.println(byMethodDelivery+ "method");
-////                System.out.println(lotByID + "lotID");
-//        }
-//        System.out.println(deliveryList);
-//        lot.setDelivery(deliveryList);
-
-
-//        lot.setDelivery(deliveryList);
-//        lotService.addLot(lot);
-//        for (Delivery delivery1 : deliveryList) {
-//            delivery1.getLot().add(lotService.getLotById(lot.getId_Lot()));
-//            deliveryService.addDelivery(delivery1);
-//        }
-//        System.out.println("------" +lot.getDelivery());
-
-        //lotService.getLotById(lot.getId_Lot());
-        // System.out.println(deliveryList + "delList");
-//        System.out.println(lot + "lotId");
-        // deliveryService.addDeliveries(deliveryList);
-        //deliveryList.clear();
-
-
-        /*
-         * end Lot object*/
-//        }catch (Exception e){
-//            return "error with Lot object -> " + e.getMessage();
-//        }
-
-        /*
-         * working with delivery
-         * */
-
 
         userFind.setTypeOfUser(Collections.singleton(TypeUser.SELLER));
         userService.addUser(userFind);
