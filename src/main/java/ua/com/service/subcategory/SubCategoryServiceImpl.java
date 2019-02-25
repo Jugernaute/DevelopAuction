@@ -1,7 +1,11 @@
 package ua.com.service.subcategory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.SubCategory;
 import ua.com.method.filter.Filter;
@@ -9,14 +13,17 @@ import ua.com.method.filter.Filter;
 import java.util.List;
 
 @Service
+@Transactional
 public class SubCategoryServiceImpl implements SubCategoryService {
     @Autowired
     private SubCategoryDao subCategoryDao;
 
+    public SubCategoryServiceImpl() {
+    }
 
     @Override
     public void addSubCategory(SubCategory subCategory) {
-        if (subCategory !=null){
+        if (subCategory != null) {
             subCategoryDao.save(subCategory);
         }
     }
@@ -54,6 +61,11 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public List findAllSubCategoryBySpecification(Filter filter) {
         return subCategoryDao.findAll(filter);
+    }
+
+    @Override
+    public Page<SubCategory> findAllPage(int page,int size) {
+        return subCategoryDao.findAll(new PageRequest(page, size));
     }
 
 

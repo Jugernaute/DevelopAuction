@@ -114,19 +114,23 @@ private Set<Map<Integer, Map<String, String>>> set = new LinkedHashSet<>();
 //ConditionService conditionService;
 
 
-    @PostMapping(value = "filter/criteria", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/filter/criteria", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     private String JsonCriteria(HttpServletRequest request) throws IOException {
 
 
             String s = IOUtils.toString(request.getInputStream(),"utf-8");
-        System.out.println(s);
-
+        System.out.println("json "+ s);
+        SubCategory byNameSubCategory = subCategoryService.findByNameSubCategory("foto");
+        System.out.println("---> " + byNameSubCategory);
         ObjectMapper objectMapper = new ObjectMapper();
         List<Product> products = objectMapper.readValue(s, new TypeReference<List<Product>>(){});
-//        for (Product condition1 : products) {
-//            System.out.println("condition -> "+condition1.toString());
-//        }
 
+        for (Product condition1 : products) {
+            System.out.println("condition -> "+condition1.toString());
+        }
+
+//        List<Condition> conditions = objectMapper.readValue(s, new TypeReference<List<Condition>>() {
+//        });
 
         Filter filter = new Filter();
         filter.addCondition(products);

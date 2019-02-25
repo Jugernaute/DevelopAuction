@@ -2,6 +2,7 @@ package ua.com.controllers.controllers_createLot;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +33,6 @@ public class RestControllerCreateLot {
     @Autowired
     private CommonCategoryDao commonCategoryDao;
     @Autowired
-    private SubCategoryDao subCategoryDao;
-    @Autowired
     private SubCategoryService subCategoryService;
     @Autowired
     private ManufacturerService manufacturerService;
@@ -56,9 +55,9 @@ public class RestControllerCreateLot {
 
     @PostMapping("upload")
     private String upload(@RequestParam("fileload") MultipartFile[] uploadfile){
-        for (MultipartFile multipartFile : uploadfile) {
-            System.out.println(">>>"+multipartFile.getOriginalFilename());
-        }
+//        for (MultipartFile multipartFile : uploadfile) {
+//            System.out.println(">>>"+multipartFile.getOriginalFilename());
+//        }
         return "ok";
     }
 
@@ -117,6 +116,21 @@ public class RestControllerCreateLot {
 
         Product product = new Product();
 
+        /*
+        working with data time properties
+        */
+
+        String replace = dataStartLot.replace("T", " ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        // duration lot
+        long durationLot = Long.parseLong(durationOfLot);
+        // add int to date
+        LocalDateTime dataEnd = dataStart.minusMinutes(durationLot);
+        if (dataStart.isBefore(dateTimeNow)) {
+            return "enter dataTime right!!!";
+        }
         /*
          *  start working with product object
          *
@@ -232,7 +246,8 @@ public class RestControllerCreateLot {
                 }
             } catch (Exception e) {
 //                logs.logError(e);
-                return "error with imageLink save -> " + e.getMessage();
+//                System.out.println(e);
+                return "error with imageLink save -> " + e;
             }
         } catch (Exception e) {
 //            logs.logError(e);
@@ -243,22 +258,7 @@ public class RestControllerCreateLot {
         /*
          * Working with Lot object*/
 
-        String replace = dataStartLot.replace("T", " ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-        // duration lot
-        long durationLot = Long.parseLong(durationOfLot);
-        // add int to date
-        LocalDateTime dataEnd = dataStart.minusMinutes(durationLot);
-
-
-        if (dataStart.isBefore(dateTimeNow)) {
-            return "enter dataTime right!!!";
-        } else {
-            lot.setDataStartLot(dataStart);
-        }
-
+        lot.setDataStartLot(dataStart);
         lot.setProduct(product);
         lot.setDataEndLot(dataEnd);
         Bet bet = new Bet();
@@ -277,11 +277,7 @@ public class RestControllerCreateLot {
         bet.setLot(lot);
 
 
-        if (hotPrice.equals("null")) {
-            System.out.println(hotPrice + " hotPrice1");
-//                lot.setHotPrice(Integer.parseInt(hotPrice));
-        } else {
-            System.out.println(hotPrice + " hotPrice2");
+        if (!hotPrice.equals("null")) {
             lot.setHotPrice(Integer.parseInt(hotPrice));
         }
         lotService.addLot(lot);

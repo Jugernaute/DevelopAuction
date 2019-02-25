@@ -217,7 +217,7 @@
             </div>
             <input class="add-product-sell" type="submit" name="addProduct" value="Створити">
             <span id="error-form-enter"></span>
-            <input class="add-product-sell2" type="submit" name="addProduct" value="Створити2">
+            <%--<input class="add-product-sell2" type="submit" name="addProduct" value="Створити2">--%>
         </div>
     </div>
 

@@ -39,19 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public HandlerInstantiator handlerInstantiator(ApplicationContext applicationContext) {
-//        return new SpringHandlerInstantiator(applicationContext.getAutowireCapableBeanFactory());
-//    }
-//
-//    @Bean
-//    public Jackson2ObjectMapperBuilder objectMapperBuilder(HandlerInstantiator handlerInstantiator) {
-//        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-//        builder.handlerInstantiator(handlerInstantiator);
-//        return builder;
-//    }
-
-
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -86,9 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/protected").authenticated()//social
                 .and()
                 .formLogin()

@@ -84,7 +84,7 @@ $('.sell-item-list-lvl2').on('click',function () {
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 //---------------------------------Вибір товару з третьої колонки---------------
-$('.sell-item-list-lvl3').on('dblclick',function () {
+$('.sell-item-list-lvl3').on('click',function () {
     $spanError.addClass('hidden');
     $errorFormEnter.addClass('hidden');
 });

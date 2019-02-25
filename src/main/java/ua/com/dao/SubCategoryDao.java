@@ -2,10 +2,12 @@ package ua.com.dao;
 
 
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import ua.com.entity.Product;
 import ua.com.entity.SubCategory;
@@ -13,7 +15,6 @@ import ua.com.entity.SubCategory;
 public interface SubCategoryDao extends JpaRepository<SubCategory, Integer>,
         JpaSpecificationExecutor<SubCategory> {
 
-    SubCategory findBy(String name);
     SubCategory findByNameSubCategory(String nameSubCategory);
 
 //    @Modifying

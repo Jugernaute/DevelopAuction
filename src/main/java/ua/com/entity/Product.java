@@ -33,7 +33,7 @@ public class Product {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,
-    cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
             mappedBy = "product"
     )
     private List<ImageLink> imageLinks;
@@ -45,12 +45,13 @@ public class Product {
     )
     private LocationLot locationLots;
 
-
+    @JsonDeserialize(using = SubCategoryDeserializer.class)
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE/*,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH*/})
-    @JsonDeserialize(using = SubCategoryDeserializer.class)
+            cascade = {CascadeType.MERGE})
+
     private SubCategory subCategory;
+
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
@@ -59,14 +60,14 @@ public class Product {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
-                cascade = CascadeType.MERGE)
-        private Manufacturer manufacturer;
+            cascade = CascadeType.MERGE)
+    private Manufacturer manufacturer;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
-        cascade = {/*CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH,*/ CascadeType.REFRESH},
-        mappedBy = "product")
-        private Lot lot;
+            cascade = {CascadeType.REFRESH},
+            mappedBy = "product")
+    private Lot lot;
 
     public Product() {
     }

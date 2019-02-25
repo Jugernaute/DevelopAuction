@@ -12,7 +12,13 @@ import ua.com.method.Mail;
 import ua.com.method.RandomStr;
 import ua.com.service.user.UserService;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 public class RestControllerSecurity {
@@ -36,6 +42,25 @@ public class RestControllerSecurity {
         if (findUser!=null) {
             return environment.getProperty("test_login_InDB");
         }
+
+        // validation email
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String email = user.getEmail();
+//        try {
+//            email = br.readLine();
+//        } catch (IOException e) {
+//            System.out.println(Arrays.toString(e.getStackTrace()));
+//        }
+//        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+//        Matcher m = pattern.matcher(email) ;
+//
+//        if(m.matches()) {
+//            System.out.println(m.group());
+//        }else {
+//            return "wrong email";
+//        }
+        // end validation email
+
 
         //  відключив цей метод на період тестування!!!!!!
 
@@ -64,7 +89,7 @@ public class RestControllerSecurity {
                     + "'>Activate</a>";
             String subject = environment.getProperty("textForMailSender_String_subject");
             String email = user.getEmail();
-//            for (int i = 0; i < 50; i++) {
+//            for (int i = 0; i < 2; i++) {
                 mail.sendMail(email,subject,text);
 //            }
         } else {

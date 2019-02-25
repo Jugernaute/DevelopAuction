@@ -56,6 +56,22 @@ public class UserServiceImpl implements UserService, SocialUserDetailsService {
     }
 
     @Override
+    public void lock(int userId) {
+        User user = userDao.findOne(userId);
+        user.setAccountNonLocked(false);
+        user.setEnabled(false);
+        userDao.save(user);
+    }
+
+    @Override
+    public void unlock(int userId) {
+        User user = userDao.findOne(userId);
+        user.setAccountNonLocked(true);
+        user.setEnabled(true);
+        userDao.save(user);
+    }
+
+    @Override
     public User getUserById(int userId) {
         return userDao.findOne(userId);
     }

@@ -2,6 +2,7 @@ package ua.com.method.filter;
 
 
 import org.springframework.data.jpa.domain.Specification;
+import ua.com.entity.LocationLot;
 import ua.com.entity.Product;
 
 import javax.persistence.criteria.*;
@@ -67,9 +68,9 @@ public class Filter implements Specification {
         switch (product.field) {
 
             case "locationLots":
-                Root<Product> from = criteriaQuery.from(Product.class);
-                EntityType<Product> Product_1 = from.getModel();
-                criteriaBuilders.add(criteriaBuilder.equal(root.get(product.field), Product_1.getSet("locationLots")));
+                Root from = criteriaQuery.from(Product.class);
+                EntityType Product_1 = from.getModel();
+                criteriaBuilders.add(criteriaBuilder.equal(root.get("Сумская"), Product_1.getSet("locationLots")));
                 return criteriaBuilders;
 
             case "nameSubCategory":
@@ -78,7 +79,7 @@ public class Filter implements Specification {
 //                    }
 //                    criteriaBuilders.add(criteriaBuilder.or(orPredicate.toArray(new Predicate[0])));
 
-                criteriaBuilders.add(criteriaBuilder.equal(root.get(product.field),product.getSubCategory().getNameSubCategory()));
+                criteriaBuilders.add(criteriaBuilder.equal(root.get("Спортінвентар"),product.getSubCategory().getNameSubCategory()));
                 return criteriaBuilders;
 
             case "typeSell":

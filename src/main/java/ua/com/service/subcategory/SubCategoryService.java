@@ -1,9 +1,11 @@
 package ua.com.service.subcategory;
 
+import org.springframework.data.domain.Page;
 import ua.com.entity.SubCategory;
 import ua.com.method.filter.Filter;
 
 import java.util.List;
+
 
 public interface SubCategoryService {
 
@@ -15,4 +17,5 @@ public interface SubCategoryService {
     SubCategory findByNameSubCategory (String nameSubCategory);
     SubCategory findById_Products (int idProduct);
     List findAllSubCategoryBySpecification(Filter filter);
+    Page<SubCategory> findAllPage(int page, int size);
 }

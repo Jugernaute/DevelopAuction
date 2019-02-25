@@ -18,6 +18,9 @@ public interface UserService extends UserDetailsService {
     void addUser(User user);
     void deleteUserById(int userId);
     void updateUser(User user);
+
+    void lock(int userId);
+    void unlock(int userId);
     User getUserById(int userId);
     List<User> findAllUser();
     User findByUsername(String username);

@@ -60,9 +60,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllBySpecification(Filter filter) {
+    public List findAllBySpecification(Filter filter) {
         return productDao.findAll(filter);
-    }
+}
 
     @Override
     public List<Product> findAllByNameProductContaining(String matches) {

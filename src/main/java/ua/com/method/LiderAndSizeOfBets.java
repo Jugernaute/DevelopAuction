@@ -23,6 +23,7 @@ public class LiderAndSizeOfBets {
         List<Bet> listLotBet = betService.findAllBetByLot_id(id_lot);
          HashMap<String,String> map = new HashMap<>();
          int lotSize = listLotBet.size();
+//         System.out.println(lotSize);
         if (lotSize >1){
             List<String> collect = listLotBet.stream()
                     .skip(lotSize - 1)
@@ -30,9 +31,9 @@ public class LiderAndSizeOfBets {
                     .collect(Collectors.toList());
             String userLider = collect.get(0);
             map.put("userLider", userLider);
-            map.put("countOfBet", String.valueOf(lotSize));
+            map.put("countOfBet", String.valueOf(lotSize-1));
             return map;
-        }else if (lotSize ==1){
+        }/*else if (lotSize ==1){
             Optional<String> lider = listLotBet.stream()
                     .findFirst()
                     .map(bet -> userService.getUsernameFromBetById_Bet(bet.getId_Bet()));
@@ -40,10 +41,10 @@ public class LiderAndSizeOfBets {
             map.put("userLider", userLider);
             map.put("countOfBet", String.valueOf(lotSize));
             return map;
-        }
+        }*/
         else{
             map.put("userLider", "Жодного");
-            map.put("countOfBet", String.valueOf(lotSize));
+            map.put("countOfBet", String.valueOf(lotSize-1));
             return map;
         }
     }

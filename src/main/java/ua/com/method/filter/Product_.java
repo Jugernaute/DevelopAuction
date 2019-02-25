@@ -1,5 +1,6 @@
 package ua.com.method.filter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import ua.com.entity.*;
 
 import javax.annotation.Generated;
@@ -17,7 +18,8 @@ public class Product_ {
     public  static  volatile  SetAttribute < Product , TypeSell> typeSell;
     public  static  volatile  SetAttribute < Product , Comparison > comparison;
     public  static  volatile  SingularAttribute < Product , String > field;
-    public  static  volatile  SetAttribute < Product , LocationLot > locationLots;
+    public  static  volatile  SingularAttribute < Product , LocationLot > locationLot;
+//    @JsonDeserialize(using = SubCategoryDeserializer.class)
     public  static  volatile  SetAttribute < Product , SubCategory> subCategory;
 
 

@@ -11,10 +11,8 @@ import java.util.List;
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true) /*necessarily for deserialization Json*/
 public class Condition {
-//   @Autowired
-//   private  SubCategoryDeserializer subCategoryDeserializer;
 
-//    @JsonDeserialize(using = SubCategoryDeserializer.class)
+    @JsonDeserialize(using = SubCategoryDeserializer.class)
     public List<SubCategory> nameSubCategory;
     @JsonDeserialize(using = LocalDataTimeDeserializer.class)
     public String dataEndLot;
@@ -44,67 +42,6 @@ public class Condition {
         this.comparison = comparison;
         this.field = field;
     }
-
-    //    public static class Builder {
-//        public List<String> nameSubCategory;
-//        public String dataEndLot;
-//        public String dataStartLot;
-//        public String priceFrom;
-//        public String priceTo;
-//        public List<TypeSell> typeSell;
-//        public Comparison comparison;
-//        public LocationLot regionLot;
-//        public String field;
-
-//        public Builder setNameSubCategory(List<String> nameSubCategory) {
-//            this.nameSubCategory = nameSubCategory;
-//            return this;
-//        }
-//
-//        public Builder setDataEndLot(String dataEndLot) {
-//            this.dataEndLot = dataEndLot;
-//            return this;
-//        }
-//
-//        public Builder setDataStartLot(String dataStartLot) {
-//            this.dataStartLot = dataStartLot;
-//            return this;
-//        }
-//
-//        public Builder setPriceFrom(String priceFrom) {
-//            this.priceFrom = priceFrom;
-//            return this;
-//        }
-//
-//        public Builder setPriceTo(String priceTo) {
-//            this.priceTo = priceTo;
-//            return this;
-//        }
-//
-//        public Builder setRegionLot(LocationLot regionLot) {
-//            this.regionLot = regionLot;
-//            return this;
-//        }
-//
-//        public Builder setTypeSell(List<TypeSell> typeSell) {
-//            this.typeSell = typeSell;
-//            return this;
-//        }
-//
-//        public Builder setComparison(Comparison comparison) {
-//            this.comparison = comparison;
-//            return this;
-//        }
-//
-//        public Builder setField(String field) {
-//            this.field = field;
-//            return this;
-//        }
-//
-//        public Condition build() {
-//            return new Condition(nameSubCategory, dataEndLot, dataStartLot, priceFrom, priceTo, regionLot, typeSell, comparison, field);
-//        }
-//    }
 
 
     @Override

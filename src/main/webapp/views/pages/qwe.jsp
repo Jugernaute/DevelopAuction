@@ -51,6 +51,13 @@
     <input type="submit" value="save User">
 </form>
 
+<h3>Create Admin</h3>
+<form action="/saveAdmin" method="post">
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="password" placeholder="password">
+    <input type="submit" value="save Admin">
+</form>
+
 
 <h3>Create Product</h3>
 <form action="/saveProduct" method="post">

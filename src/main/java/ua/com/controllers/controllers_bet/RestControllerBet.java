@@ -52,6 +52,7 @@ public class RestControllerBet {
                             @RequestParam String idProductSession) throws IOException {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
+        System.out.println("id prod from session" + idProductSession);
         int id_product = productService.getProductById(Integer.parseInt(idProductSession)).getId_Product();
 
         Lot lot = lotService.findLotByProduct_Id(id_product);
@@ -100,12 +101,12 @@ public class RestControllerBet {
 /*
 * subscribers method
 * */
+        System.out.println("id lot " + id_lot);
+        System.out.println("user from session " + userfromSession);
         List<User> userList = findUserFromListOfBet.userFromBet(id_lot, userfromSession);
         subscribers.userlist.clear();
-        for (User user : userList) {
-            subscribers.userlist.add(user);
-            System.out.println(user.getUsername()+" "+ user.getEmail());
-        }
+        //            System.out.println(user.getUsername()+" "+ user.getEmail());
+        subscribers.userlist.addAll(userList);
 
         BetLot betLotMethod =new BetLot();
         betLotMethod.addObserved(subscribers);
@@ -131,9 +132,8 @@ public class RestControllerBet {
 
         List<Bet> listLotBet = betService.findAllBetByLot_id(id_lot);
         int betsLot = listLotBet.size();
-//        System.out.println(">>>>"+betsLot);
 
-        String userCreateProduct = createProductUser.getUsername();
+//        String userCreateProduct = createProductUser.getUsername();
         int nextCurrentPrice;
         if(userBet<=10){
             nextCurrentPrice = userBet+1;
@@ -170,7 +170,7 @@ public class RestControllerBet {
             * object[14] -> key; -> sumOfBet
             * object[17] -> value -> user equals sumOfBet
             * */
-            stringMap.put(object[17].toString(), object[14].toString());
+            stringMap.put(object[18].toString(), object[15].toString());
 //        System.out.println(" -> "+ object[14]+" <-> "+object[17]);
         }
         stringMap.remove("0");
@@ -179,8 +179,6 @@ public class RestControllerBet {
 
     @GetMapping("/timerEnd")
     private void timeEnd(String idProductSession){
-//        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//        String name = user.getUsername();
         int id_product = productService.getProductById(Integer.parseInt(idProductSession)).getId_Product();
 
         Lot lot = lotService.findLotByProduct_Id(id_product);
@@ -223,7 +221,6 @@ public class RestControllerBet {
 
     @PostMapping("lot/lotDescription")
     private String description(@RequestParam String linkImg){
-        System.out.println(linkImg.replace("%20", " "));
         int id_imageLink = imageLinkService.findByImageLink(linkImg.replace("%20", " ")).getId_ImageLink();
         String descriptionProduct = productService.findProductByImageLinks_Id(id_imageLink).getDescriptionProduct();
         return descriptionProduct.replace("\n", "<br>");
@@ -233,10 +230,8 @@ public class RestControllerBet {
     private String hotPrice(@RequestParam String linkImg) {
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         String name = user.getUsername();
-        System.out.println("username1 : " + user.getUsername());
 
         if (user.getBasket() != null) {
-            System.out.println("записуєм інфу");
             Basket basket = user.getBasket();
 
             Lot lotByImageLink_name = lotService.findLotByImageLink_Name(linkImg.replace("%20", " "));

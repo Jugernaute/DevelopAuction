@@ -16,8 +16,7 @@
     <%--<script src="../js/lot.js" defer></script>--%>
 </head>
 <body>
-<a href="qwe">regina</a><br>
-<a href="goToSell">fast-start</a><br>
+<%--<a href="qwe">regina</a><br>--%>
     <div class="enter_form">
         <div class="modal-content">
             <div class="close_cont">

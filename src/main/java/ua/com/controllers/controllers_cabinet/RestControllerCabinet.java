@@ -96,6 +96,7 @@ public class RestControllerCabinet {
 
         if(name.equals("anonymousUser") && email!=null)
         {
+//            System.out.println("eq && not null");
             User byEmail = userService.findByEmail(email);
             if(byEmail==null)
             {
@@ -110,6 +111,10 @@ public class RestControllerCabinet {
 //            User user = userService.findByUsername(name);
 //            user.setRandomKey(s);
 //            String userEmail = user.getEmail();
+//            System.out.println("not eq && not null");
+            User byEmail = userService.findByEmail(email);
+            byEmail.setRandomKey(s);
+            userService.addUser(byEmail);
             mail.sendMail(email,subjectForgotPassword,text);
         }
     }

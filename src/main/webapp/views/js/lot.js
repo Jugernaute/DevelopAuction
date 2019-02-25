@@ -157,7 +157,7 @@ $('#btn-bet').on('click',function () {
                 }
                 if (key ==="sizeLot"){
                     bet1.empty();
-                    bet1.append(value)
+                    bet1.append(value-1)
                 }
                 if (key ==="userFromSession"){
                     bet2.empty();

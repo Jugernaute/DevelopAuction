@@ -22,14 +22,26 @@ public List<User> userFromBet (int id_Lot, String userFromSession){
         /*
         * take all unique username from bet
         * */
+    Object[] objects1 = objects.get(0);
     List<String> collect = objects.stream()
-            .map(objects1 -> (String) objects1[14])
+            .map(objects2 -> (String) objects2[15])
             .distinct()
             .collect(Collectors.toList());
-
-/*
+//    Object[] objects1 = objects.get(0);
+//    System.out.println(objects1.length);
+//    for (Object o : objects1) {
+//    System.out.println("length " + objects1.length);
+//        System.out.println(objects1[15]+" >> "+objects1[18]);
+//    for (Object o : objects1) {
+//        System.out.println("-> " + o);
+//    }
+//    }
+    /*
 * delete username witch is in session
 * */
+//    for (String s : collect) {
+//        System.out.println(">>>> "+ s);
+//    }
     List<String> list = collect.stream()
             .filter(n -> !n.equals(userFromSession))
             .collect(Collectors.toList());

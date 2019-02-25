@@ -38,7 +38,7 @@ public class ControllerCart {
         List<Lot> lots = loadLotToCart.allLotToCart();
 
         for (Lot lot : lots) {
-            User userByProductId = userService.findUserByProductId(lot.getProduct().getId_Product());
+            User userByProductId =userService.findUserByProductId(lot.getProduct().getId_Product());
             if (userSession.equals(lot.getBasket().getUser().getUsername())) {
                 userLot.put(userByProductId, lot);
             }

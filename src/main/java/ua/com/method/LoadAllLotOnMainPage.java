@@ -32,6 +32,7 @@ public class LoadAllLotOnMainPage extends ListImageLinks {
     public List<ImageLink> loadAllLotOnMainPage(String nameCommonCategory){
         CommonCategory byNameCommonCategory = commonCategoryService.findByNameCommonCategory(nameCommonCategory);
         List<SubCategory> subCategoryList = byNameCommonCategory.getSubCategoryList();
+
         List<List<Product>> collect = subCategoryList.stream()
                 .map(SubCategory::getProducts)
                 .filter(products -> products.size() > 0)

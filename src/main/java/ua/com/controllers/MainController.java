@@ -106,7 +106,7 @@ CommonCategoryService commonCategoryService;
         for (Map.Entry<String, String> next : entries) {
             /*
             * return for key -> betsLot
-            * return for key -> userLider*/
+            * return for value -> userLieder*/
             model.addAttribute(next.getKey(), next.getValue());
         }
 

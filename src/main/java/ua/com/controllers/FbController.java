@@ -17,13 +17,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
+import ua.com.entity.CommonCategory;
 import ua.com.entity.User;
+import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
+import ua.com.method.LoadAllLotOnMainPage;
+import ua.com.service.commomCategory.CommonCategoryService;
 import ua.com.service.user.UserService;
 import ua.com.service.userconnect.ConnectionSingUpImpl;
 import ua.com.service.userconnect.UserConnectService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @SessionAttributes("facebookToken")
@@ -38,6 +44,13 @@ public class FbController {
     ConnectionSingUpImpl connectionSingUp;
     @Autowired
     UsersConnectionRepository repository;
+    @Autowired
+    LoadAllLotOnMainPage loadAllLotOnMainPage;
+    @Autowired
+    CommonCategoryService commonCategoryService;
+    @Autowired
+    private FillFilter_CommonCategory_OnRegisterUserPage fillFilterCommonCategoryOnRegisterUserPage;
+
 
     @PostMapping("/fb/login")
     public void fbLogin(HttpServletResponse response) throws IOException {
@@ -55,7 +68,9 @@ public class FbController {
     }
 
     @GetMapping("/fb/callback")
-    public String fbCallback(@RequestParam("code") String code, Model model, WebRequest request) throws IOException {
+    public String fbCallback(@RequestParam("code") String code,
+                             Model model,
+                             WebRequest request) throws IOException {
         FacebookConnectionFactory factory = new FacebookConnectionFactory(
                 env.getProperty("facebook.app.id"),
                 env.getProperty("facebook.app.secret"),
@@ -65,8 +80,8 @@ public class FbController {
         AccessGrant accessGrant = authOperations
                 .exchangeForAccess(code, "http://localhost:8080/fb/callback", null);
         Connection<Facebook> connection = factory.createConnection(accessGrant);
-        String token = accessGrant.getAccessToken();
-        System.out.println(token);
+//        String token = accessGrant.getAccessToken();
+//        System.out.println(token);
         Facebook facebook = connection.getApi();
         if (facebook.isAuthorized()) {
           String id = connectionSingUp.execute(connection);
@@ -76,9 +91,18 @@ public class FbController {
 
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
-            System.out.println(name);
-            System.out.println(id);
-            return "cabinet";//login, ok,
+
+            List list = loadAllLotOnMainPage.loadAllLotOnMainPage();
+            List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
+
+            Map map = fillFilterCommonCategoryOnRegisterUserPage.fillFilterOnRegisterUserPage(allCommonCategory);
+
+            model.addAttribute("commonList", allCommonCategory);
+            model.addAttribute("commonMap", map);
+            model.addAttribute("imgLinks", list);
+            model.addAttribute("user",user);
+
+            return "homeregisterUser";//login, ok,
         } else {
             return "redirect:/fb/login";
         }

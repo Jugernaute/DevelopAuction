@@ -15,7 +15,7 @@ public interface ProductService {
     Product findByNameProduct(String product);
     Product findProductByLot_Id (int lot);
     Product findProductByImageLinks_Id(int idImgLink);
-    List<Product> findAllBySpecification(Filter filter);
+    List findAllBySpecification(Filter filter);
     List<Product> findAllByNameProductContaining(String matches);
     User findProductByUserOwnerId(int userId);
 }

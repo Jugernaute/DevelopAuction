@@ -440,6 +440,9 @@ footer{
 .settings{
     margin-left: 50px;
 }
+.red::placeholder {
+    color: red;
+}
 
 /*.filter-nav{*/
     /*width: 250px;*/

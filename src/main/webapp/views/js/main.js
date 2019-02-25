@@ -42,14 +42,16 @@
         loginForm.css('display', 'none');
         regForm.css('display', 'block');
     });
-    
+
     $('.signupbtn').on('click', function (event) {      //password validation
         // debugger;
         let psw = $(this).parent().parent().find('input[name="psw"]');
         let password = $('.enterPassword').val();
         let psw_repeat = $('.enterRepeatPassword').val();
+        let email = $email.val();
         let pswRepeat = $(this).parent().parent().find('input[name="psw-repeat"]');
         let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}$/;
+        let emailRegs = /^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$/;
         if ($username.val().length<3){
             $username.focus();
         }
@@ -71,7 +73,9 @@
         $('.registration_form').addClass('success-login');
         $('#img_loading').css('display','block');
         let username = $username.val();
-        let email = $email.val();
+
+
+
         event.preventDefault();
             $.ajax({
                 url: 'http://localhost:8080/registrationUser',
