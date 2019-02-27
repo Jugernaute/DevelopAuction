@@ -56,7 +56,7 @@
     </div>
     <div class="registration_form ">
         <p class="resultRegistration"></p>
-        <img src="../img/ajax-loader.gif" id="img_loading">
+        <img src="../img/ajax-loader.jpg" id="img_loading">
         <div class=" reg_container">
             <form class="reg_form" <%--action="registration"  method="post"--%>>
                 <div class=" close_cont">
