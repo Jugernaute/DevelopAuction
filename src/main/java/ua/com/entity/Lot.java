@@ -1,6 +1,7 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -72,7 +73,7 @@ public class Lot {
         this.hotPrice = hotPrice;
     }
 
-    public Lot(LocalDateTime dataStartLot, LocalDateTime dataEndLot, int startPrice, int hotPrice, int currentPrice, Basket basket, CompletedLot listOfLotEnd, List<LocationUser> location, List<Bet> listLotBet, Product product, List<Delivery> delivery, Payment payment) {
+    public Lot(LocalDateTime dataStartLot, LocalDateTime dataEndLot, int startPrice, int hotPrice, List<Bet> listLotBet, Product product, List<Delivery> delivery, Payment payment) {
         this.dataStartLot = dataStartLot;
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;

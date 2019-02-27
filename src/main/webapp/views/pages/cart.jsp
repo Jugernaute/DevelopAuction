@@ -49,6 +49,9 @@
             <c:set var = "userEmail" scope="session" value="${info.key.getEmail()}"/>
 
             <div class="product-container">
+
+                <input type="checkbox" class="checbox">
+
                 <div class="product-photo">
                     <a class="getImg"><img src="../img/product_Img/${info.value.getProduct().getImageLinks().get(0).getLinkOfImage()}" height="100" width="100"/>
                     </a>

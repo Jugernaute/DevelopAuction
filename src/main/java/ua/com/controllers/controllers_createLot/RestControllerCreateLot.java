@@ -135,9 +135,7 @@ public class RestControllerCreateLot {
         product.setManufacturer(byNameManufacturer);
 
         try {
-
             product.setNameProduct(nameProduct);
-
             if (modelProduct != null) {
                 product.setModelProduct(modelProduct);
             } else {
@@ -166,13 +164,20 @@ public class RestControllerCreateLot {
 
         LocationLot locationLot = new LocationLot(regionLot, placeLot);
 
+        try {
         productService.addProduct(product);
         locationLot.setProducts(product);
         locationLotService.addLocationLot(locationLot);
-//        locationLots.clear();
+        }catch(Exception e){
+//            logs.logError(e);
+        }
 
         try {
-            String path ="E:\\DevelopAuction"
+            String path = System.getProperty("user.home")
+                    + File.separator
+                    + "IdeaProjects"
+                    + File.separator
+                    + "DevelopAuction1"
                     + File.separator
                     + "src"
                     + File.separator
@@ -229,9 +234,7 @@ public class RestControllerCreateLot {
         // duration lot
         long durationLot = Long.parseLong(durationOfLot);
         // add int to date
-        LocalDateTime dataEnd = dataStart.plusMinutes(durationLot);
-
-        //            working with delivery
+        LocalDateTime dataEnd = dataStart.minusMinutes(durationLot);
 
 
         if (dataStart.isBefore(dateTimeNow)) {

@@ -10,6 +10,7 @@ import ua.com.entity.Product;
 import ua.com.entity.User;
 import ua.com.service.basket.BasketService;
 import ua.com.service.lot.LotService;
+import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class RestControllerCart {
     private LotService lotService;
     @Autowired
     private BasketService basketService;
+    @Autowired
+    private ProductService productService;
 
 
 //    @GetMapping( "/allProductToCart" )

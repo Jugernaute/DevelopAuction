@@ -114,8 +114,33 @@
 
 ///category list///////////
 
-    $('.products_list').on('click', () => {
-        $('.category-list').toggleClass('hidden')
+    // $('.products_list').on('click', () => {
+    //     $('.category-list').toggleClass('hidden')
+    // });
+    //
+    // $('.category-list-parent').on('mouseover', ()=> {
+    //    $(this).next().toggleClass('hidden')
+    // });
+
+    $('.households').on('click',function () {
+        let nameCategory = $(this).find('a').text();
+        // console.log(nameCategory);
+        $.ajax({
+           url:'http://localhost:8080/category/'+nameCategory,
+           success: function (result) {
+               // debugger;
+               $('.hot_lot').empty();
+               $('select option[value="0"]').attr('selected',true); // <- change select 'filter-nav' on default value "0"
+                                                                   // if selected another value
+                $.each(result, function(a, b) {
+                   appendResultMapFromController(b)
+                   });
+                if ($('.hot_lot').has('div').length===0){
+                   // console.log("ddddd");
+                   $('.hot_lot').append('<h2 class="text-no-div">По Вашому запиту немає жодного результату</h2>')
+               }
+           }
+       })
     });
 
     $('.category-list-parent').on('mouseover', ()=> {
@@ -128,6 +153,69 @@ $('.cont_img').on('click',function () {
     sessionStorage.setItem("idLot",idProductInSession);
 });
 
+/*main filter for non-register user*/
+
+$('.filter-nav').on('change', function () {
+    let select = $(this).val();
+    /* @select="0" Виберіть
+       @select="1" Всі аукціони
+       @select="2" Аукціони, що вже тривають
+       @select="3" Завершені аукціони
+       @select="4" Ще не розпочаті аукціони
+       */
+    $('select option[value="0"]').attr('selected',false); // return for default   !!!
+    $.ajax({
+        /*
+        * send to RestMainController
+        */
+        // $('select option[value="0"]').attr('selected',true);
+        url: 'http://localhost:8080/main/select',
+        type: 'post',
+        data: {select},
+        success: function (result) {
+            $('.hot_lot').empty();
+            $.each(result, function(a, b) {
+                appendResultMapFromController(b);
+            });
+        }
+    })
+});
+
+    $('#sbm-srch').on('click', function () {
+        let search_text = $('#srch').val();
+        $.ajax({
+            url: 'http://localhost:8080/main/search',
+            type: 'post',
+            data: {search_text},
+            success: function (result) {
+                $('.hot_lot').empty();
+                $.each(result, function(a, b) {
+                    appendResultMapFromController(b)
+                });
+            }
+        })
+
+    });
 
 
+
+
+function appendResultMapFromController(b) {
+    $('.hot_lot').append('<div class="hot_lot_wrapper">' +
+    '<div class="cont_img">' +
+    '<a href="lot/'+b.idProduct+'" class="get-id"><img' +
+    ' src="../img/product_Img/'+b.imgLink+'" height="200" width="200"/></a></div>' +
+    '<div class="container">' +
+    '<h2 class="cont_titel"><b>' +
+    '<p>'+b.nameProduct +'</p>' +
+    '<p>'+b.modelProduct+'</p>' +
+    '</b></h2>' +
+    '<p class="text-end">завершення :</p>' +
+    '<div class="cont_timer">' +
+    '<p>'+b.dataEndLot+'</p>' +
+    '</div>' +
+    '<h4 class="cont_price">Ціна : <span>'+b.currentPrice +' грн.</span></h4>' +
+    '</div>' +
+    '</div>')
+}
 

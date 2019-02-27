@@ -32,7 +32,6 @@ public class RestControllerSecurity {
     public String save(User user,
             @RequestParam String psw_repeat,
              BindingResult result) {
-        System.out.println("regggggg-------------------------");
         User findUser = userService.findByUsername(user.getUsername());
         if (findUser!=null) {
             return environment.getProperty("test_login_InDB");

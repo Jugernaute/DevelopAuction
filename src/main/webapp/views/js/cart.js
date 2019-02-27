@@ -17,13 +17,17 @@ $('.test').on('click', function () {
 });
 
 
-$('#delete').click(function () {
+$('#delete').on('click', function () {
 
     $.ajax({
         url: '/clearUpCart',
         type: 'get',
         contentType: 'application/json',
-
+        success: function (result) {
+            if (result === 'delete') {
+                $('.product-cart').empty()
+            }
+        }
     })
 
 })

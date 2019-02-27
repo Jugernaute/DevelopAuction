@@ -1,38 +1,22 @@
 package ua.timer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.*;
 
 public class Secundomir {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        List<String> s = new ArrayList<>();
+        s.add("asd");
+        s.add("s");
+        s.add("zz");
 
-//        LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime dateTime_future = LocalDateTime.of(2018, 11, 10, 9, 0, 0);
-//        Duration between = Duration.between(now, dateTime_future);
-//        long seconds = between.getSeconds();
-//        Timer timer=new Timer();
-//
-//
-//        TimerRun timerRun = new TimerRun();
-//        timerRun.calculateTime(seconds);
-//
-//
-//        timer.scheduleAtFixedRate(new TimerTask() {
-//            public void run() {
-//                timerRun.setInterval();
-//            }
-//        }, 0, 1000);
-
-
-List<String> qwe = new ArrayList<>();
-qwe.add("q");
-qwe.add("a");
-List<String>asd =new ArrayList<>();
-        System.out.println(qwe.isEmpty());
-        System.out.println(asd.isEmpty());
-
+        String[] strings = s.toArray(new String[0]);
+        System.out.println(s.toArray().getClass().getSimpleName());
     }
 
 }
