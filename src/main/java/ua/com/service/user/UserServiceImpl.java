@@ -3,19 +3,20 @@ package ua.com.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.UserDao;
-import ua.com.entity.Bet;
 import ua.com.entity.User;
+import ua.com.entity.UserConnection;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, SocialUserDetailsService {
     @Autowired
     private UserDao userDao;
 
@@ -23,6 +24,19 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userDao.findByUsername(username);
     }
+
+    // social
+    //---------------------------------------
+    @Override
+    public SocialUserDetails loadUserByUserId(String userIdSocial) {
+        return userDao.loadUserByUserId(userIdSocial);
+    }
+
+    @Override
+    public User findByUserConnectionIn(UserConnection userConnection) {
+        return userDao.findByUserConnectionIn(userConnection);
+    }
+  //------------------------------------------
 
     @Override
     public void addUser(User user) {
@@ -38,6 +52,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        userDao.save(user);
+    }
+
+    @Override
+    public void lock(int userId) {
+        User user = userDao.findOne(userId);
+        user.setAccountNonLocked(false);
+        user.setEnabled(false);
+        userDao.save(user);
+    }
+
+    @Override
+    public void unlock(int userId) {
+        User user = userDao.findOne(userId);
+        user.setAccountNonLocked(true);
+        user.setEnabled(true);
         userDao.save(user);
     }
 

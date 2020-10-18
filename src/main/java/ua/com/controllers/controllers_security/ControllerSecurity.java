@@ -1,53 +1,64 @@
 package ua.com.controllers.controllers_security;
 
-import org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionCreator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.core.Authentication;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ua.com.dao.AuctionItemsDao;
-import ua.com.entity.ImageLink;
-import ua.com.entity.Lot;
-import ua.com.entity.Product;
-import ua.com.entity.User;
+import ua.com.entity.*;
+import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.LoadAllLotOnMainPage;
-import ua.com.service.imageLink.ImageLinkService;
-import ua.com.service.lot.LotService;
+import ua.com.method.Mail;
+import ua.com.service.commonCategory.CommonCategoryService;
 import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
 
-import javax.management.Query;
-import javax.naming.Context;
-import java.sql.*;
-import java.time.Duration;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 @PropertySource("classpath:validation.properties")
+
 public class ControllerSecurity {
+
+    private static final Logger logger = Logger.getLogger(ControllerSecurity.class.getSimpleName());
+//    private FileHandler fileHandler = new FileHandler();
+
+    @Autowired
+    private Environment environment;
+    @Autowired
+    private Mail mail;
     @Autowired
     private ProductService productService;
     @Autowired
     private UserService userService;
     @Autowired
     private LoadAllLotOnMainPage allLotOnMainPage;
+    @Autowired
+    private CommonCategoryService commonCategoryService;
+    @Autowired
+    private FillFilter_CommonCategory_OnRegisterUserPage fillFilterCommonCategoryOnRegisterUserPage;
+
+    public ControllerSecurity() throws IOException {
+    }
 
     @GetMapping("/")
-        public String start (Model model){
-
+        public String start (Model model) throws IOException {
         List list = allLotOnMainPage.loadAllLotOnMainPage();
         DateTimeFormatter ru = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss").withLocale(new Locale("ru"));
-//        System.out.println(ru.format(dataEndLot));
+
+        List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
+        model.addAttribute("commonList", allCommonCategory);
+        model.addAttribute("dataNow", LocalDateTime.now());
+
         model.addAttribute("imgLinks", list);
         return "main" ;
         }
@@ -74,8 +85,8 @@ public class ControllerSecurity {
     }
 
     @GetMapping("/activate/{key}")
-    public String activate(@PathVariable String key,
-                           Model model) {
+    public String activate(@PathVariable String key/*,
+                           Model model*/) {
         User user = userService.findByRandomKey(key);
         if(!(user ==null)&&!(user.getRandomKey()==null)){
             user.setRandomKey(null);
@@ -84,13 +95,14 @@ public class ControllerSecurity {
         }else{
             return "/errorPage/registration_error";
         }
-        model.addAttribute("user", user);
-        return "homeregisterUser";
+//        model.addAttribute("user", user);
+        return "main";
     }
 
 
         @PostMapping("/ok")
-            public String ok (Model model){
+            public String ok (HttpServletRequest httpServletRequest,
+                              Model model){
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.findByUsername(name);
 
@@ -98,12 +110,23 @@ public class ControllerSecurity {
                     return  "/errorPage/activation_error";
                 }
 
+            if(user.getRole().equals(Role.ROLE_ADMIN)) {
+                return "admin";
+            }
+            else if(user.getRole().equals(Role.ROLE_USER)) {
             List list = allLotOnMainPage.loadAllLotOnMainPage();
+                List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
 
+                Map map = fillFilterCommonCategoryOnRegisterUserPage.fillFilterOnRegisterUserPage(allCommonCategory);
+
+                model.addAttribute("commonList", allCommonCategory);
+                model.addAttribute("commonMap", map);
             model.addAttribute("imgLinks", list);
             model.addAttribute("user",user);
-
             return "homeregisterUser";
+            }
+
+            return "/errorPage/role_error";
             }
 
 }

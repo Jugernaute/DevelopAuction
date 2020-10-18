@@ -1,7 +1,8 @@
 package ua.com.service.sudcategory;
 
-import ua.com.entity.Product;
+import org.springframework.data.domain.Page;
 import ua.com.entity.SubCategory;
+import ua.com.method.filter.Filter;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface  SubCategoryService {
     List<SubCategory> findAllSubCategory();
     SubCategory findByNameSubCategory (String nameSubCategory);
     SubCategory findById_Products (int idProduct);
+    List findAllSubCategoryBySpecification(Filter filter);
+    Page<SubCategory> findAllPage(int page, int size);
 }

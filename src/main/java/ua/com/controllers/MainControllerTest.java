@@ -80,6 +80,19 @@ public class MainControllerTest {
         return "qwe";
     }
 
+    @PostMapping("/saveAdmin")
+    public String saveAdmin (@RequestParam String username,
+                             @RequestParam String password
+                             ) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setRole(Role.ROLE_ADMIN);
+        userService.addUser(user);
+        return "qwe";
+    }
+
+
     @PostMapping("/saveUser1")
     public String createUser(@RequestParam String username,
                              @RequestParam int userBalance) {

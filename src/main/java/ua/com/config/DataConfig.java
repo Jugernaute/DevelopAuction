@@ -24,20 +24,16 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories({"ua.com.dao"})
 @EnableTransactionManagement
-//@PropertySource(value = { "classpath:application.properties" })
 public class DataConfig {
-//    @Autowired
-//    private Environment env;
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUsername("root");
-        dataSource.setPassword("Andreus110576");
+        dataSource.setPassword("");
         dataSource.setUrl("jdbc:mysql://localhost:3306/auction?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8");
         return dataSource;
-
     }
 
 
@@ -63,13 +59,11 @@ public class DataConfig {
         return factory;
     }
 
-
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory factory) {
-
-
         return new JpaTransactionManager(factory);
-
     }
+
+
 
 }

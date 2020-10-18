@@ -18,5 +18,4 @@ public class Secundomir {
         String[] strings = s.toArray(new String[0]);
         System.out.println(s.toArray().getClass().getSimpleName());
     }
-
 }

@@ -2,6 +2,7 @@ package ua.com.service.product;
 
 import ua.com.entity.Product;
 import ua.com.entity.User;
+import ua.com.method.filter.Filter;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface ProductService {
     Product findByNameProduct(String product);
     Product findProductByLot_Id (int lot);
     Product findProductByImageLinks_Id(int idImgLink);
+    List findAllBySpecification(Filter filter);
+    List<Product> findAllByNameProductContaining(String matches);
     User findProductByUserOwnerId(int userId);
 }

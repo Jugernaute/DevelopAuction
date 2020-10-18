@@ -1,6 +1,10 @@
 package ua.com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import ua.com.method.filter.Comparison;
+import ua.com.method.filter.SubCategoryDeserializer;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +12,7 @@ import java.util.Objects;
 
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true) /*necessarily for deserialization Json*/
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +26,11 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private TypeSell typeSell;
 
+    @Transient
+    public Comparison comparison;
+    @Transient
+    public String field;
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, //eager my
     cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
@@ -29,19 +39,19 @@ public class Product {
     private List<ImageLink> imageLinks;
 
     @JsonIgnore
-    @OneToOne(
-
-            fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "products"
     )
     private LocationLot locationLots;
 
-
+    @JsonDeserialize(using = SubCategoryDeserializer.class)
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE/*,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH*/})
+            cascade = {CascadeType.MERGE})
+
         private SubCategory subCategory;
+
 
         @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY,
@@ -211,11 +221,12 @@ public class Product {
                 ", nameProduct='" + nameProduct + '\'' +
                 ", modelProduct='" + modelProduct + '\'' +
                 ", descriptionProduct='" + descriptionProduct + '\'' +
-//                ", linkOnImageProduct='" + linkOnImageProduct + '\'' +
-//                ", stateProduct=" + stateProduct +
-//                ", userOwner=" + userOwner +
-//                ", manufacturer=" + manufacturer +
-//                ", lot=" + lot +
+                ", stateProduct=" + stateProduct +
+                ", typeSell=" + typeSell +
+                ", comparison=" + comparison +
+                ", field='" + field + '\'' +
+                ", locationLots=" + locationLots +
+//                ", subCategory=" + subCategory +
                 '}';
     }
 }

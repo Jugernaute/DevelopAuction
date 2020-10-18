@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ua.com.entity.ImageLink;
 import ua.com.entity.Lot;
 import ua.com.entity.User;
 import ua.com.method.LoadLotToCart;

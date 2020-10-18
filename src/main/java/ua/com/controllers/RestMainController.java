@@ -3,24 +3,22 @@ package ua.com.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ua.com.editor.UserEditor;
 import ua.com.editor.UserValidator;
-import ua.com.entity.User;
-import ua.com.method.Mail;
-import ua.com.method.RandomStr;
+import ua.com.entity.*;
+import ua.com.method.LoadAllLotOnMainPage;
+import ua.com.method.LoadAllLotOnPageUsingRest;
+import ua.com.method.abstracts.ListImageLinks;
 import ua.com.service.user.UserService;
 
-import java.util.List;
+import java.util.*;
 
 
 @RestController
 @PropertySource("classpath:validation.properties")
-public class RestMainController {
+public class RestMainController extends ListImageLinks {
     @Autowired
     private UserService userService;
     @Autowired
@@ -29,6 +27,11 @@ public class RestMainController {
     private UserValidator userValidator;
     @Autowired
     private UserEditor userEditor;
+    @Autowired
+    private LoadAllLotOnPageUsingRest loadAllLotOnPageUsingRest;
+    @Autowired
+    private LoadAllLotOnMainPage allLotOnMainPage;
+
 
     @PostMapping("enterKey")
     private String lost_password_ok(
@@ -51,9 +54,6 @@ public class RestMainController {
             @RequestParam String email,
             @RequestParam String repeatPassword,
             BindingResult result){
-        System.out.println(password);
-        System.out.println(repeatPassword);
-        System.out.println(email);
         User byEmail = userService.findByEmail(email);
         String property = environment.getProperty("message_pw.length.error");
 
@@ -70,5 +70,38 @@ public class RestMainController {
         else{
             return property;
         }
+    }
+
+    @GetMapping("category/{nameCategory}")
+    private Map categoryList(@PathVariable String nameCategory){
+        List<ImageLink> linkList = allLotOnMainPage.loadAllLotOnMainPage(nameCategory);
+        return loadAllLotOnPageUsingRest.loadAllLotOnPageUsingRest(linkList);
+    }
+
+    /*from main.js*/
+    @PostMapping("main/select")
+    private Map mainSelect(@RequestParam String select){
+        /*
+       @select="0" Виберіть
+       @select="1" Всі аукціони
+       @select="2" Аукціони, що вже тривають
+       @select="3" Завершені аукціони
+       @select="4" Ще не розпочаті аукціони*/
+        try{
+            int option = Integer.parseInt(select);
+            List<ImageLink> imageLinks = allLotOnMainPage.loadAllLotOnMainPage(option);
+            return loadAllLotOnPageUsingRest.loadAllLotOnPageUsingRest(imageLinks);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return new HashMap();
+        /*return on main.js*/
+    }
+
+    /*from main.js*/
+    @PostMapping("main/search")
+    private Map<Integer, Map<String,String>> search (@RequestParam String search_text){
+        List<ImageLink> imageLinkList = imageLinks(search_text);
+        return loadAllLotOnPageUsingRest.loadAllLotOnPageUsingRest(imageLinkList);
     }
 }

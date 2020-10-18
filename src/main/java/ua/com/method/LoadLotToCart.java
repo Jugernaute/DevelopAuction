@@ -27,7 +27,6 @@ public class LoadLotToCart {
         for (Lot lot : allLot) {
 
             if (lot.getBasket() != null){
-
                 if (user.getBasket().getIdBasket() == lot.getBasket().getIdBasket());
                 lotList.add(lot);
             }

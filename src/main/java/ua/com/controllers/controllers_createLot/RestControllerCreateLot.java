@@ -2,6 +2,7 @@ package ua.com.controllers.controllers_createLot;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -117,6 +118,25 @@ public class RestControllerCreateLot {
 
         Product product = new Product();
 
+        /*
+        working with data time properties
+        */
+
+        String replace = dataStartLot.replace("T", " ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        // duration lot
+        long durationLot = Long.parseLong(durationOfLot);
+        // add int to date
+        LocalDateTime dataEnd = dataStart.minusMinutes(durationLot);
+        if (dataStart.isBefore(dateTimeNow)) {
+            return "enter dataTime right!!!";
+        }
+        /*
+         *  start working with product object
+         *
+         *  */
         try {
             SubCategory byNameSubCategory = subCategoryService.findByNameSubCategory(nameSubCategory);
             product.setSubCategory(byNameSubCategory);
@@ -173,11 +193,7 @@ public class RestControllerCreateLot {
         }
 
         try {
-            String path = System.getProperty("user.home")
-                    + File.separator
-                    + "IdeaProjects"
-                    + File.separator
-                    + "DevelopAuction1"
+            String path ="E:\\DevelopAuction"
                     + File.separator
                     + "src"
                     + File.separator
@@ -227,22 +243,7 @@ public class RestControllerCreateLot {
         /*
          * Working with Lot object*/
 
-        String replace = dataStartLot.replace("T", " ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dataStart = LocalDateTime.parse(replace, formatter);
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-        // duration lot
-        long durationLot = Long.parseLong(durationOfLot);
-        // add int to date
-        LocalDateTime dataEnd = dataStart.minusMinutes(durationLot);
-
-
-        if (dataStart.isBefore(dateTimeNow)) {
-            return "enter dataTime right!!!";
-        } else {
             lot.setDataStartLot(dataStart);
-        }
-
         lot.setProduct(product);
         lot.setDataEndLot(dataEnd);
         Bet bet = new Bet();
@@ -261,11 +262,7 @@ public class RestControllerCreateLot {
         bet.setLot(lot);
 
 
-        if (hotPrice.equals("null")) {
-            System.out.println(hotPrice + " hotPrice1");
-//                lot.setHotPrice(Integer.parseInt(hotPrice));
-        } else {
-            System.out.println(hotPrice + " hotPrice2");
+        if (!hotPrice.equals("null")) {
             lot.setHotPrice(Integer.parseInt(hotPrice));
         }
         lotService.addLot(lot);

@@ -30,7 +30,7 @@ public class LiderAndSizeOfBets {
                     .collect(Collectors.toList());
             String userLider = collect.get(0);
             map.put("userLider", userLider);
-            map.put("countOfBet", String.valueOf(lotSize));
+            map.put("countOfBet", String.valueOf(lotSize-1));
             return map;
         }else if (lotSize ==1){
             Optional<String> lider = listLotBet.stream()
@@ -43,7 +43,7 @@ public class LiderAndSizeOfBets {
         }
         else{
             map.put("userLider", "Жодного");
-            map.put("countOfBet", String.valueOf(lotSize));
+            map.put("countOfBet", String.valueOf(lotSize-1));
             return map;
         }
     }

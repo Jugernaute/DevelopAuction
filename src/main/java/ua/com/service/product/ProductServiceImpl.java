@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.dao.ProductDao;
 import ua.com.entity.Product;
 import ua.com.entity.User;
+import ua.com.method.filter.Filter;
 
 import java.util.List;
 
@@ -56,6 +57,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProductByImageLinks_Id(int idImgLink) {
         return productDao.findProductByImageLinks_Id(idImgLink);
+    }
+
+    @Override
+    public List findAllBySpecification(Filter filter) {
+        return productDao.findAll(filter);
+}
+
+    @Override
+    public List<Product> findAllByNameProductContaining(String matches) {
+        return productDao.findAllByNameProductContaining(matches);
     }
 
     @Override

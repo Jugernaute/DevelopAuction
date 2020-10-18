@@ -5,13 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.com.controllers.controllers_security.ControllerSecurity;
-import ua.com.dao.CommonCategoryDao;
 import ua.com.dao.SubCategoryDao;
 import ua.com.entity.*;
+import ua.com.method.FillFilter_CommonCategory_OnRegisterUserPage;
 import ua.com.method.LiderAndSizeOfBets;
 import ua.com.method.LoadAllLotOnMainPage;
-import ua.com.service.bet.BetService;
+import ua.com.service.commonCategory.CommonCategoryService;
 import ua.com.service.product.ProductService;
 import ua.com.service.user.UserService;
 import java.time.*;
@@ -20,7 +19,7 @@ import java.util.*;
 @Controller
 public class MainController{
 @Autowired
-    CommonCategoryDao commonCategoryDao;
+CommonCategoryService commonCategoryService;
 @Autowired
     SubCategoryDao subCategoryDao;
 @Autowired
@@ -31,6 +30,8 @@ public class MainController{
     private UserService userService;
     @Autowired
     private LiderAndSizeOfBets liderAndSizeOfBets;
+    @Autowired
+    private FillFilter_CommonCategory_OnRegisterUserPage fillFilterCommonCategoryOnRegisterUserPage;
 
 
     @GetMapping("/goToCabinet")
@@ -50,8 +51,11 @@ public class MainController{
             if (user.getRandomKey()!=null){
                 return  "/errorPage/activation_error";
             }
-            List list = allLotOnMainPage.loadAllLotOnMainPage();
-
+            List<ImageLink> list = allLotOnMainPage.loadAllLotOnMainPage();
+            List<CommonCategory> allCommonCategory = commonCategoryService.findAllCommonCategory();
+            Map map = fillFilterCommonCategoryOnRegisterUserPage.fillFilterOnRegisterUserPage(allCommonCategory);
+            model.addAttribute("commonList", allCommonCategory);
+            model.addAttribute("commonMap", map);
             model.addAttribute("imgLinks", list);
             model.addAttribute("user",user);
 
@@ -61,7 +65,6 @@ public class MainController{
         }
 
     }
-
 
     @GetMapping("/goLostPsw")
     private String goLostPsw(){
@@ -82,7 +85,7 @@ public class MainController{
 
         String nameSubcategory = subCategoryDao.findSubCategoryByProducts(id).getNameSubCategory();
 
-        String nameCommonCategory = commonCategoryDao.findCommonCategoriesBySubCategory(nameSubcategory).getNameCommonCategory();
+        String nameCommonCategory = commonCategoryService.findCommonCategoriesBySubCategory(nameSubcategory).getNameCommonCategory();
 
         LocationLot locationLots = productById.getLocationLots();
 

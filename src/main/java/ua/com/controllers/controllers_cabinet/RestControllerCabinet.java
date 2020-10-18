@@ -110,11 +110,15 @@ public class RestControllerCabinet {
 //            User user = userService.findByUsername(name);
 //            user.setRandomKey(s);
 //            String userEmail = user.getEmail();
+//            System.out.println("not eq && not null");
+            User byEmail = userService.findByEmail(email);
+            byEmail.setRandomKey(s);
+            userService.addUser(byEmail);
             mail.sendMail(email,subjectForgotPassword,text);
         }
     }
 
-    @GetMapping("/getCurrent_Email_Phone_Username")
+    @GetMapping("/allInfoAboutUser")
     public Map<String, String> getCurrentEmail(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User byUsername = userService.findByUsername(name);

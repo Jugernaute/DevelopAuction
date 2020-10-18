@@ -8,7 +8,7 @@ import ua.com.entity.CommonCategory;
 
 public interface CommonCategoryDao extends JpaRepository<CommonCategory, Integer> {
 
+    CommonCategory findByNameCommonCategory(String name);
     @Query(value = "select * from commoncategory join subcategory s on commoncategory.id_CommonCategory = s.commonCategory_id_CommonCategory where nameSubCategory=:id_Sub", nativeQuery = true)
     CommonCategory findCommonCategoriesBySubCategory(@Param("id_Sub") String subCategory);
-    CommonCategory findByNameCommonCategory(String name);
 }

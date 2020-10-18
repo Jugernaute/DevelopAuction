@@ -27,6 +27,8 @@ public class Lot {
             cascade = CascadeType.MERGE)
     private Basket basket;
 
+
+
     @JsonIgnore
     @OneToOne(
             fetch = FetchType.LAZY,
@@ -78,10 +80,6 @@ public class Lot {
         this.dataEndLot = dataEndLot;
         this.startPrice = startPrice;
         this.hotPrice = hotPrice;
-        this.currentPrice = currentPrice;
-        this.basket = basket;
-        this.listOfLotEnd = listOfLotEnd;
-        this.location = location;
         this.listLotBet = listLotBet;
         this.product = product;
         this.delivery = delivery;
